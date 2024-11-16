@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* تخصيص شريط التمرير العمودي */
+::-webkit-scrollbar {
+    width: 12px;  /* عرض شريط التمرير */
+}
+
+/* تخصيص شريط التمرير الأفقي */
+::-webkit-scrollbar {
+    height: 2px; /* ارتفاع شريط التمرير */
+}
+
+/* تخصيص يد التمرير */
+::-webkit-scrollbar-thumb {
+    background-color: #1D4ED8;
+    border-radius: 10px;
+}
+
+/* تخصيص خلفية شريط التمرير */
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+}
+
+/* تخصيص شريط التمرير عند التمرير عليه */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+@keyframes moving-circle {
+    0% { left: 0; }
+    100% { left: 100%; }
+  }
+  
+  .animate-moving-circle {
+    animation: moving-circle 2.5s infinite ease-in-out alternate;
+  }
+  
+  .text-main {
+    color: #1D4ED8; /* مثال على لون مخصص */
+  }
+  
+  .bg-main {
+    background-color: #1D4ED8; /* مثال على لون مخصص */
+  }
+  
+
+  @keyframes pulse-icon {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes shake-icon {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    75% {
+      transform: translateX(-5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-shake-icon {
+    animation: shake-icon 0.8s infinite;
+  }
+  
+
+  .arrow::after{
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #ddd;
+    border-radius: 100%;
+    bottom: -32px;
+  }
+
+
+  .arrow::before{
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 2px;
+    height: 40px;
+    border-left: 2px dashed #ddd;
+    border-radius: 100%;
+    bottom: -74px;
+  }
+
+.priceOne{
+  position: relative;
+}
+
+  .priceOne::before{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    content: "";
+    background: url('/Frontend/src/assets/call-action-bg.jpg');
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: auto;
+    z-index: -1;
+
+  }
