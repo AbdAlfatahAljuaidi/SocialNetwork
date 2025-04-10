@@ -4,19 +4,18 @@ import ProcessImg from '../../assets/Process.png';
 
 const Process = () => {
   return (
-    <div className="pt-32 pb-16 px-5 bg-gray-50">
+    <div className="pt-32 pb-16 px-5 bg-gray-50" id='Approach'>
       
       {/* عنوان القسم */}
       <div className="text-center mb-16">
-  <h1 className="text-2xl font-semibold text-blue-500 uppercase tracking-wider">Our Approach</h1>
-  <h1 className="text-5xl font-extrabold text-gray-800 mt-4">
-    <span className="text-blue-500">Step-by-Step</span> Process
-  </h1>
-  <p className="text-gray-600 mt-4 max-w-xl mx-auto text-lg">
-    We follow a clear and structured process to deliver the best results for your needs.
-  </p>
-</div>
-
+        <h1 className="text-2xl font-semibold text-blue-500 uppercase tracking-wider">Our Approach</h1>
+        <h1 className="text-5xl font-extrabold text-gray-800 mt-4">
+          <span className="text-blue-500">Step-by-Step</span> Process
+        </h1>
+        <p className="text-gray-600 mt-4 max-w-xl mx-auto text-lg">
+          At Ask AAU, we follow a clear and structured process to connect students and enhance learning.
+        </p>
+      </div>
 
       {/* الخط مع الدائرة المتحركة */}
       <div className="flex justify-center items-center mt-8 relative">
@@ -32,19 +31,18 @@ const Process = () => {
           <div className="flex justify-center items-center bg-main h-24 w-24 rounded-full shadow-lg relative">
             <FaLightbulb className="text-white text-4xl" />
           </div>
-          <h2 className="mt-10 font-bold text-xl text-gray-800">Select A Project</h2>
+          <h2 className="mt-10 font-bold text-xl text-gray-800">Post Your Question</h2>
           <p className="mt-4 text-gray-600">
-            We have the technology and industry expertise to develop solutions
-            that can connect people and businesses across various mobile devices.
+            Students can post their academic questions on the platform, ensuring a space for collaborative learning.
           </p>
         </div>
 
         {/* الخطوة الثانية */}
         <div className="flex flex-col items-center text-center max-w-sm mx-auto">
           <img src={ProcessImg} alt="Process Step" className="w-48 h-auto mb-6" />
-          <h2 className="font-bold text-xl text-gray-800">Plan & Strategize</h2>
+          <h2 className="font-bold text-xl text-gray-800">Collaborate & Learn</h2>
           <p className="mt-4 text-gray-600">
-            Collaborate with our team to outline the steps needed to achieve your project goals effectively.
+            Engage with other students' questions, share knowledge, and help others solve academic challenges.
           </p>
         </div>
 
@@ -53,9 +51,9 @@ const Process = () => {
           <div className="flex justify-center items-center bg-main h-24 w-24 rounded-full shadow-lg relative">
             <FaLightbulb className="text-white text-4xl" />
           </div>
-          <h2 className="mt-10 font-bold text-xl text-gray-800">Deliver Excellence</h2>
+          <h2 className="mt-10 font-bold text-xl text-gray-800">Gain Knowledge</h2>
           <p className="mt-4 text-gray-600">
-            We ensure a seamless delivery of high-quality solutions tailored to your needs.
+            Access valuable insights from your peers, enriching your academic journey with practical answers.
           </p>
         </div>
       </div>

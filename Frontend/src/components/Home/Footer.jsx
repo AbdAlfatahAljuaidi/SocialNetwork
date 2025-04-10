@@ -1,70 +1,130 @@
-import React from 'react';
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import React from "react";
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedin,
+  FaPhoneAlt,
+} from "react-icons/fa";
+import { FaArrowRight, FaLocationDot } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
+import crypto from "../../assets/crypto.jpg";
+import foot from "../../assets/footer.jpg";
 
 const Footer = () => {
   return (
-    <div className='bg-main text-white py-12'>
-      <div className='max-w-7xl mx-auto px-6'>
-        
-        {/* القسم العلوي: روابط الشركة */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12'>
-          {/* روابط حول الشركة */}
-          <div>
-            <h2 className='text-xl font-semibold mb-4'>About Us</h2>
-            <ul className='space-y-2'>
-              <li><a href="#" className='hover:text-blue-400'>Our Story</a></li>
-              <li><a href="#" className='hover:text-blue-400'>Mission & Vision</a></li>
-              <li><a href="#" className='hover:text-blue-400'>Careers</a></li>
-            </ul>
+    <div
+      className="p-10 text-white"
+      style={{
+        backgroundImage: `url(${foot})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 max-w-screen-xl mx-auto" id="Contact">
+        {/* Column 1: MRERROR */}
+        <div>
+          <h1 className="text-2xl font-bold mb-4">MRERROR</h1>
+          <p className="mb-6 text-gray-300">
+            Completely strategize client-centric solutions. Phosfluorescently
+            iterate efficient internal or organic strategies.
+          </p>
+          <h2 className="text-xl font-semibold mb-3">Follow Us</h2>
+          <div className="flex space-x-4">
+            <FaFacebook className="text-xl cursor-pointer hover:text-blue-500" />
+            <FaTwitter className="text-xl cursor-pointer hover:text-blue-400" />
+            <FaInstagram className="text-xl cursor-pointer hover:text-pink-500" />
+            <FaLinkedin className="text-xl cursor-pointer hover:text-blue-700" />
           </div>
+        </div>
 
-          {/* خدمات */}
-          <div>
-            <h2 className='text-xl font-semibold mb-4'>Services</h2>
-            <ul className='space-y-2'>
-              <li><a href="#" className='hover:text-blue-400'>Web Development</a></li>
-              <li><a href="#" className='hover:text-blue-400'>Mobile Apps</a></li>
-              <li><a href="#" className='hover:text-blue-400'>Consulting</a></li>
-            </ul>
+        {/* Column 2: Quick Links */}
+        <div>
+          <h1 className="text-2xl font-bold mb-4">Quick Links</h1>
+          <ul className="space-y-3">
+            {["Home", "About Us", "Contact Us", "Services", "Our Team"].map(
+              (link) => (
+                <li key={link} className="flex items-center space-x-2">
+                  <FaArrowRight className="text-gray-400" />
+                  <h4 className="text-gray-300 hover:text-white cursor-pointer">
+                    {link}
+                  </h4>
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+
+        {/* Column 3: Popular Post */}
+        <div>
+          <h1 className="text-2xl font-bold mb-4">Popular Post</h1>
+          <div className="space-y-6">
+            {[crypto, crypto].map((img, index) => (
+              <div key={index} className="flex items-center space-x-4">
+                <img
+                  src={img}
+                  alt="Post"
+                  className="w-16 h-16 object-cover rounded-md"
+                />
+                <div>
+                  <h1 className="text-gray-300 text-sm">
+                    Content strategy can help engage customers.
+                  </h1>
+                  <p className="text-gray-400 text-xs">October 29, 2023</p>
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
 
-          {/* روابط التواصل */}
-          <div>
-            <h2 className='text-xl font-semibold mb-4'>Connect</h2>
-            <ul className='space-y-2'>
-              <li><a href="#" className='hover:text-blue-400'>Contact Us</a></li>
-              <li><a href="#" className='hover:text-blue-400'>Support</a></li>
-              <li><a href="#" className='hover:text-blue-400'>FAQs</a></li>
-            </ul>
-          </div>
-
-          {/* التواصل الاجتماعي */}
-          <div>
-            <h2 className='text-xl font-semibold mb-4'>Follow Us</h2>
-            <div className='flex space-x-4'>
-              <a href="#" className='text-2xl hover:text-blue-400'>
-                <FaFacebook />
-              </a>
-              <a href="#" className='text-2xl hover:text-blue-400'>
-                <FaTwitter />
-              </a>
-              <a href="#" className='text-2xl hover:text-blue-400'>
-                <FaInstagram />
-              </a>
-              <a href="#" className='text-2xl hover:text-blue-400'>
-                <FaLinkedin />
-              </a>
+        {/* Column 4: Contact Info */}
+        <div>
+          <h1 className="text-2xl font-bold mb-4">Contact Info</h1>
+          <div className="space-y-6">
+            <div className="flex items-center space-x-4">
+              <FaLocationDot className="text-xl" />
+              <div>
+                <h1 className="text-gray-300">Location</h1>
+                <p className="text-gray-400 text-sm">
+                  55 Main Street, New York.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <MdEmail className="text-xl" />
+              <div>
+                <h1 className="text-gray-300">Email</h1>
+                <p className="text-gray-400 text-sm">example@gmail.com</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <FaPhoneAlt className="text-xl" />
+              <div>
+                <h1 className="text-gray-300">Phone</h1>
+                <p className="text-gray-400 text-sm">+962 78-89-658-98</p>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* القسم السفلي: حقوق الطبع والنشر */}
-        <div className='border-t border-white pt-8'>
-          <p className='text-center text-sm text-white'>
-            © 2024 MrError. All Rights Reserved.
-          </p>
+      {/* Horizontal Line */}
+      <div className="h-[1px] w-[75%] m-auto bg-main mt-7"></div>
+
+      {/* Footer Bottom Section */}
+      <div className="flex flex-col sm:flex-row items-center justify-evenly mt-6">
+        <div className="text-center sm:text-left">
+          <h1>© 2022 All Rights Reserved.</h1>
+        </div>
+        <div className="flex flex-wrap items-center justify-center sm:justify-end gap-5 mt-3 sm:mt-0">
+          <h1 className="cursor-pointer hover:text-white">Privacy Policy</h1>
+          <h1 className="cursor-pointer hover:text-white">Terms & Conditions</h1>
+          <h1 className="cursor-pointer hover:text-white">Contact Us</h1>
         </div>
       </div>
+
+  
     </div>
   );
 };

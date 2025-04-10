@@ -3,6 +3,20 @@
 @tailwind utilities;
 
 
+:root {
+  --main-color: #1D4ED8; /* اللون الأزرق الافتراضي */
+}
+
+
+
+
+
+html{
+   scroll-behavior: smooth;
+  
+}
+
+
 /* تخصيص شريط التمرير العمودي */
 ::-webkit-scrollbar {
     width: 12px;  /* عرض شريط التمرير */
@@ -15,7 +29,7 @@
 
 /* تخصيص يد التمرير */
 ::-webkit-scrollbar-thumb {
-    background-color: #1D4ED8;
+    background-color: #000;
     border-radius: 10px;
 }
 
@@ -128,3 +142,11 @@
     z-index: -1;
 
   }
+
+
+  .swiper-pagination {
+    display: none; /* إخفاء النقاط */
+  }
+
+
+  

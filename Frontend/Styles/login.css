@@ -1,0 +1,66 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  
+  }
+  
+  .back{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url("../src/assets/Register.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+  
+  }
+  
+  .custom-bg{
+    border : 2px solid rgba(255,255,255,.1);
+  }
+  
+  
+  label input {
+    accent-color: #fff;
+  }
+  
+  
+  
+  .wrapper{
+    transition: height .2s ease;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,.1);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+  }
+  
+  .wrapper.active{
+  height: 520px;
+  }
+  
+  .wrapper.active .login{
+    transition: .18s ease;
+    translate:-400px;
+  }
+  
+  
+  
+  .wrapper .login{
+    transition: .18s ease;
+    
+  }
+  
+  
+  .wrapper.active .register{
+    transition: .18s ease;
+    translate:0;
+  }
+  
+  @media (max-width:425px){
+    .wrapper{
+      width: 350px;
+    }
+  }
+  
+

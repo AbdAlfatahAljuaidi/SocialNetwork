@@ -14,8 +14,8 @@ const Contact = () => {
 
       {/* Section Title */}
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-semibold uppercase tracking-wider">Make Appointment</h1>
-        <h1 className="text-5xl font-extrabold text-white mt-4">Visit Us For Appointment</h1>
+        <h1 className="text-2xl font-semibold uppercase tracking-wider">For complaints and suggestions</h1>
+        <h1 className="text-5xl font-extrabold text-white mt-4">You can contact us through</h1>
       </div>
 
       {/* Line with animated circle */}
@@ -26,7 +26,7 @@ const Contact = () => {
       </div>
       
       <p className="text-white mt-4 max-w-xl mx-auto text-lg text-center">
-        We follow a clear and structured process to deliver the best results for your needs.
+      We always listen to your suggestions, and if you have any complaints, we will definitely work on resolving them because your opinion matters to us.
       </p>
 
       {/* Contact Info Section */}
@@ -50,7 +50,7 @@ const Contact = () => {
           </div>
           <div className="ml-4">
             <h1 className="text-black font-semibold">Email Address</h1>
-            <h2 className="text-gray-500">abdalfatah.aljuaidi@gmail.com</h2>
+            <h2 className="text-gray-500">aljuaidi@gmail.com</h2>
           </div>
         </div>
 

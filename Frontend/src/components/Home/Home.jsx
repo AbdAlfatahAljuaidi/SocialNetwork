@@ -10,8 +10,12 @@ import Pricing from "./Pricing";
 import Contact from "./Contact";
 import Form from "./Form";
 import Footer from "./Footer";
+import Opinion from "./Opinion";
+
+
 
 const Home = () => {
+  
   return (
     <div>
       <Header />
@@ -22,9 +26,11 @@ const Home = () => {
       <Info />
       <Process />
       <Pricing />
+      <Opinion />
       <Contact />
       <Form />
       <Footer />
+      
     </div>
   );
 };

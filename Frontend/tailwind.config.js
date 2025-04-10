@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class', 
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,9 +8,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        main: '#1D4ED8', // تخصيص اللون الأزرق المخصص
+        main: "1D4ED8", // استخدام متغير CSS
       },
     },
   },
   plugins: [],
-}
+};

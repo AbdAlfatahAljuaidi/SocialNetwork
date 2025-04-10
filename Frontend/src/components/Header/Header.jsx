@@ -5,8 +5,9 @@ import { FaPhoneAlt ,FaFacebookF,FaInstagram ,FaTwitter ,FaTiktok   } from "reac
 import { BsThreads } from "react-icons/bs";
 
 const Header = () => {
+  
   return (
-    <div className='flex justify-around bg-main p-4 hidden md:flex'>
+    <div className='flex justify-around bg-main p-4 hidden md:flex ' id='Home'>
         <div className='flex justify-center'>
           
             <h6 className='flex items-center text-white text-sm'><MdEmail className='mr-1 text-base' />abdalfatah.aljuaidi@gmail.com</h6>

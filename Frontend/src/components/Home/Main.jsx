@@ -31,12 +31,14 @@ const Main = () => {
                     <img className="object-cover w-full h-full" src={Main1} alt="Slide 1" />
                     <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
                         <div className='text-center'>
-                            <h1 className="text-white text-xl">SECURE IT SOLUTION SERVICE.</h1>
-                            <h2 className='text-white text-5xl font-bold mt-3'>Collaboration enhances knowledge</h2>
-                            <h1 className="text-white text-xl mt-6">We provide the best collaborate for university</h1>
+                        <h1 className="text-white text-xl">ASK AAU PLATFORM.</h1>
+<h2 className='text-white text-5xl font-bold mt-3'>Collaboration empowers students</h2>
+<h1 className="text-white text-xl mt-6">We provide the best platform for university discussions</h1>
+<a href="#About">
                             <button className='mt-4 bg-main text-white rounded-lg px-9 py-3 hover:bg-blue-600 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300'>
-                                Learn More
+                               Learn More
                             </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -46,13 +48,15 @@ const Main = () => {
                     <img className="object-cover w-full h-full" src={Main2} alt="Slide 2" />
                     <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
                         <div className='text-center'>
-                            <h1 className="text-white text-xl">SECURE IT SOLUTION SERVICE.</h1>
-                            <h2 className='text-white text-5xl font-bold mt-3'>Collaboration enhances knowledge</h2>
-                            <h1 className="text-white text-xl mt-6">We provide the best collaborate for university</h1>
-                        
+                        <h1 className="text-white text-xl">ASK AAU COMMUNITY.</h1>
+<h2 className='text-white text-5xl font-bold mt-3'>Engage, Learn, and Grow</h2>
+<h1 className="text-white text-xl mt-6">A platform for students to share and gain knowledge</h1>
+
+<a href="#About">
                             <button className='mt-4 bg-main text-white rounded-lg px-9 py-3 hover:bg-main hover:border-main focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300'>
                                 Learn More
                             </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -62,12 +66,14 @@ const Main = () => {
                     <img className="object-cover w-full h-full" src={Main3} alt="Slide 3" />
                     <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
                         <div className='text-center'>
-                            <h1 className="text-white text-xl">SECURE IT SOLUTION SERVICE.</h1>
-                            <h2 className='text-white text-5xl font-bold mt-3'>Collaboration enhances knowledge</h2>
-                            <h1 className="text-white text-xl mt-6">We provide the best collaborate for university</h1>
+                        <h1 className="text-white text-xl">ASK AAU NETWORK.</h1>
+<h2 className='text-white text-5xl font-bold mt-3'>Connect, Ask, Succeed</h2>
+<h1 className="text-white text-xl mt-6">Your gateway to student collaboration and insights</h1>
+<a href="#About">
                             <button className='mt-4 bg-main text-white rounded-lg px-9 py-3 hover:bg-main hover:border-main focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300'>
                                 Learn More
                             </button>
+                            </a>
                         </div>
                     </div>
                 </div>
