@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Nav from '../Index/Nav';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Analytics = () => {
   const [posts, setPosts] = useState([]);
@@ -13,7 +14,7 @@ const Analytics = () => {
     const fetchUserPosts = async () => {
       try {
         // استبدال الـ userId بالـ ID الحقيقي للمستخدم
-        const response = await axios.post('http://localhost:4000/getUserPosts', { userId: user._id });
+        const response = await axios.post(`${apiUrl}/getUserPosts`, { userId: user._id });
 
         if (response.data.error) {
           setError(response.data.message);

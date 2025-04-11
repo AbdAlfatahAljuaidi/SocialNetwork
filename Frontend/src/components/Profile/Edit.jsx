@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
  
 
 const Edit = () => {
@@ -28,7 +29,7 @@ const Edit = () => {
      
         
         const { data } = await axios.get(
-          `http://localhost:4000/GetDataProfile/${params.id}`,
+          `${apiUrl}/${params.id}`,
           {
             headers: {
               Authorization: `Bearer ${user.token}`,
@@ -69,7 +70,7 @@ const Edit = () => {
         
     
         const { data } = await axios.put(
-          `http://localhost:4000/SetDataProfile/${params.id}`,
+          `${apiUrl}/SetDataProfile/${params.id}`,
           formData,
           {
             headers: {

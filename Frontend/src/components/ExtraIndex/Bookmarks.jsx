@@ -5,6 +5,7 @@ import axios from 'axios';
 import { FaTrash } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
 import Menu from '../Index/Menu';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Bookmarks = () => {
   const [bookmarks, setBookmarks] = useState([]);
@@ -17,7 +18,7 @@ const Bookmarks = () => {
     const fetchBookmarks = async () => {
       try {
        // استبدلها بـ userId الحقيقي
-        const response = await axios.post('http://localhost:4000/showBookmarks', { userId:user._id });
+        const response = await axios.post(`${apiUrl}/showBookmarks`, { userId:user._id });
 
         if (response.data.error) {
           setError(response.data.message);
@@ -39,7 +40,7 @@ const Bookmarks = () => {
   const removeBookmark = async (postId) => {
     try {
       // إرسال طلب حذف البوست إلى السيرفر
-      const response = await axios.post('http://localhost:4000/removeBookmark', {
+      const response = await axios.post(`${apiUrl}/removeBookmark`, {
        userId: user._id, postId
       });
 

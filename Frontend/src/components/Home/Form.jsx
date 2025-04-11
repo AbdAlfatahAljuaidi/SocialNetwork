@@ -3,6 +3,7 @@ import sendMessage from '../../assets/sendMessage.jpg';
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export const UserContext = createContext();
 
@@ -18,7 +19,7 @@ const Form = () => {
 
   const submitForm = async () => {
     try {
-      const { data } = await axios.post("http://localhost:4000/User/Home", {
+      const { data } = await axios.post(`${apiUrl}/User/Home`, {
         Name,
         Email,
         Phone,

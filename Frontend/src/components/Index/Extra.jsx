@@ -3,6 +3,7 @@ import { FiMessageCircle, FiSearch } from "react-icons/fi";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaUserFriends } from 'react-icons/fa';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Extra = () => {
   const [profile, setProfile] = useState(null);
@@ -13,7 +14,7 @@ const Extra = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const { data } = await axios.post("http://localhost:4000/show_active", {
+        const { data } = await axios.post(`${apiUrl}/show_active`, {
           userID: user._id
         });
 

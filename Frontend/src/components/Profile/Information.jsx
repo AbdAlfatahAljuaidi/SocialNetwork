@@ -9,6 +9,7 @@ import { BsCalendar2DateFill } from "react-icons/bs";
 import Person from '../../assets/person.jpg';
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 
 const Information = () => {
@@ -23,7 +24,7 @@ const Information = () => {
     async function sendReq() {
       try {
       
-        const { data } = await axios.get("http://localhost:4000/User/GetProfile", {
+        const { data } = await axios.get(`${apiUrl}/User/GetProfile`, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
 

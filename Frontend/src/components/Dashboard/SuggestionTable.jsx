@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const SuggestionTable = () => {
   const [suggestions, setSuggestions] = useState([]);
@@ -15,7 +16,7 @@ const SuggestionTable = () => {
   useEffect(() => {
     async function fetchSuggestions() {
       try {
-        const { data } = await axios.get("http://localhost:4000/getSuggestions");
+        const { data } = await axios.get(`${apiUrl}/getSuggestions`);
         setSuggestions(data);
       } catch (error) {
         console.error("Error fetching suggestions", error);
@@ -28,7 +29,7 @@ const SuggestionTable = () => {
 
   const deleteSuggestion = async (id) => {
     try {
-      const { data } = await axios.delete(`http://localhost:4000/deleteSuggestion/${id}`);
+      const { data } = await axios.delete(`${apiUrl}/deleteSuggestion/${id}`);
       if (data.success) {
         setSuggestions(prev => prev.filter(s => s._id !== id));
         toast.success(data.message);

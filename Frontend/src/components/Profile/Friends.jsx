@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 
 
@@ -18,7 +19,7 @@ const Friends = () => {
 useEffect(() => {
   async function sendReq() {
     try {
-      const { data } = await axios.get(`http://localhost:4000/getUserInfo/${user.Name}`);
+      const { data } = await axios.get(`${apiUrl}/getUserInfo/${user.Name}`);
       setProfile(data.personalInfo);
       setFriends(data.personalInfo.friends || []);
     } catch (error) {

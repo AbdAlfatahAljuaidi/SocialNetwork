@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const PostsTable = () => {
   const [posts, setPosts] = useState([]);
@@ -15,7 +16,7 @@ const PostsTable = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/posts');
+        const response = await axios.get(`${apiUrl}/api/posts`);
         setPosts(response.data);
       } catch (error) {
         console.error('حدث خطأ أثناء جلب البوستات:', error);
@@ -52,7 +53,7 @@ const PostsTable = () => {
 
   const deletePost = async (postid) => {
     try {
-      const { data } = await axios.post("http://localhost:4000/deletePost", { postid });
+      const { data } = await axios.post(`${apiUrl}/deletePost`, { postid });
       setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postid));
       toast.success(data.message);
     } catch (error) {

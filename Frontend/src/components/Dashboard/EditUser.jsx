@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const EditUser = () => {
   const [name, setName] = useState('');
@@ -12,7 +13,7 @@ const EditUser = () => {
   // دالة لجلب بيانات المستخدم
   const fetchUserData = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:4000/showUser/${id}`);
+      const { data } = await axios.get(`${apiUrl}/showUser/${id}`);
       
       if (!data.error) { // التأكد من عدم وجود خطأ
         setName(data.user.Name || ''); // ضبط الاسم
@@ -34,7 +35,7 @@ const EditUser = () => {
 const Update = async () => {
 
   try {
-    const { data } = await axios.put(`http://localhost:4000/editUser/${id}`, {
+    const { data } = await axios.put(`${apiUrl}/editUser/${id}`, {
       Name: name,  // ضع الاسم الجديد هنا
       Email: email, // ضع الإيميل الجديد هنا
     });

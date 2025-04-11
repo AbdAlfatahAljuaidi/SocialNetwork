@@ -4,6 +4,7 @@ import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 
 const SignUp = ({ switchToLogin }) => {
@@ -18,7 +19,7 @@ const SignUp = ({ switchToLogin }) => {
     const submitForm = async () => {
 
         try{
-            const {data} = await axios.post("http://localhost:4000/User/SignUp",{
+            const {data} = await axios.post(`${apiUrl}/User/SignUp`,{
                 Name ,
                 Email,
                 Password

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Nav from '../Index/Nav'
 import axios from 'axios';
 import { toast } from 'react-toastify';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Help = () => {
     const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
@@ -15,7 +16,7 @@ const Help = () => {
 
        const Suggest = async () => {
         try {
-          const { data } = await axios.post("http://localhost:4000/submitSuggestion", {
+          const { data } = await axios.post(`${apiUrl}/submitSuggestion`, {
             type,
             details,
             name: user.Name,

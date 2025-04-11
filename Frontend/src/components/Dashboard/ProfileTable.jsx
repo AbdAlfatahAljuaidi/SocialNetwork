@@ -5,6 +5,7 @@ import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { toast } from 'react-toastify';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const ProfileTable = () => {
   const [allProfile, setAllProfile] = useState([]);
@@ -15,7 +16,7 @@ const ProfileTable = () => {
   useEffect(() => {
     async function sendReq() {
       try {
-        const { data } = await axios.get("http://localhost:4000/getAllProfile");
+        const { data } = await axios.get(`${apiUrl}/getAllProfile`);
         setAllProfile(data.usersProfile);
       } catch (error) {
         console.log("Error fetching profiles:", error);
@@ -26,7 +27,7 @@ const ProfileTable = () => {
 
   const deleteProfile = async (profileId) => {
     try {
-      const { data } = await axios.post("http://localhost:4000/deleteProfile", {
+      const { data } = await axios.post(`${apiUrl}/deleteProfile`, {
         profileId,
       });
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Nav from "../Index/Nav";
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const SearchComponent = () => {
     const [posts, setPosts] = useState([]);
@@ -21,7 +22,7 @@ const SearchComponent = () => {
 
                 console.log("البحث عن:", params.username);
 
-                const { data } = await axios.post(`http://localhost:4000/search/${params.username}`);
+                const { data } = await axios.post(`${apiUrl}/search/${params.username}`);
 
                 console.log("النتائج:", data);
                 setPosts(data);

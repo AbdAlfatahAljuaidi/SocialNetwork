@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import  {toast}  from "react-toastify";
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
+
 
 const Active = () => {
   const { token } = useParams();
@@ -15,7 +17,7 @@ const Active = () => {
   const activateAccount = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:4000/activeAccount/${token}`
+        `${apiUrl}/activeAccount/${token}`
       );
       setMessage(response.data.message);
       if(message==""){

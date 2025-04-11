@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FaHome, FaCompass, FaBell, FaEnvelope, FaBookmark, FaChartBar, FaPalette, FaBars, FaTimes, FaHandsHelping } from 'react-icons/fa';
 import { CiViewTable } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Menu = ({ menuOpen, setMenuOpen }) => {
   const [userName, setUserName] = useState('');
@@ -25,7 +26,7 @@ const Menu = ({ menuOpen, setMenuOpen }) => {
     async function sendReq() {
       if (!userName?.token) return; // تأكد أن `userName.token` موجود
       try {
-        const { data } = await axios.get("http://localhost:4000/User/GetProfile", {
+        const { data } = await axios.get(`${apiUrl}/User/GetProfile`, {
           headers: { Authorization: `Bearer ${userName.token}` },
         });
 

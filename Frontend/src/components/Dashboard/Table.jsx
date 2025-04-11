@@ -6,6 +6,7 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Table = () => {
   const [users, setUsers] = useState([]);
@@ -16,7 +17,7 @@ const Table = () => {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const { data } = await axios.get("http://localhost:4000/Index/Users");
+        const { data } = await axios.get(`${apiUrl}/Index/Users`);
         setUsers(data.users);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -27,7 +28,7 @@ const Table = () => {
 
   const deleteUser = async (id) => {
     try {
-      const { data } = await axios.delete(`http://localhost:4000/Index/Users/Delete/${id}`);
+      const { data } = await axios.delete(`${apiUrl}/Index/Users/Delete/${id}`);
       if (data.success) {
         setUsers((prev) => prev.filter((u) => u._id !== id));
         toast.success(data.message);

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { SlOptionsVertical } from "react-icons/sl";
 import { toast } from 'react-toastify';
 import { FaTrash } from "react-icons/fa";
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Post = () => {
   const [postText, setPostText] = useState("");
@@ -39,7 +40,7 @@ const Post = () => {
     const fetchPosts = async () => {
       try {
 
-        axios.get("http://localhost:4000/api/posts", { maxRedirects: 0 })
+        axios.get(`${apiUrl}/api/posts`, { maxRedirects: 0 })
         .then(res => console.log("✅ Response:", res))
         .catch(err => {
           if (err.response?.status === 302 || err.response?.status === 301) {
@@ -49,7 +50,7 @@ const Post = () => {
 
 
 
-        const { data } = await axios.get("http://localhost:4000/api/posts");
+        const { data } = await axios.get(`${apiUrl}/api/posts`);
        
         
         setPosts(data);
@@ -81,7 +82,7 @@ const Post = () => {
   
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/upload",
+        `${apiUrl}/api/upload`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -110,7 +111,7 @@ const Post = () => {
   const handleCommentSubmit = async (postId) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:4000/comment/${postId}`,
+        `${apiUrl}/comment/${postId}`,
         {
           content: commentText[postId] || "",
           userId: user.Name,
@@ -141,7 +142,7 @@ const Post = () => {
   const handleLike = async (postId) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:4000/Like/${postId}`,
+        `${apiUrl}/Like/${postId}`,
         {
           userId: user._id,
         }
@@ -164,7 +165,7 @@ const Post = () => {
     try{
     
       
-const {data} = await axios.post("http://localhost:4000/deletePost",{
+const {data} = await axios.post(`${apiUrl}/deletePost`,{
   postid:  postid , })
 
 
@@ -187,7 +188,7 @@ const {data} = await axios.post("http://localhost:4000/deletePost",{
     try {
    
       
-      const {data} = await axios.post("http://localhost:4000/savePost",{
+      const {data} = await axios.post(`${apiUrl}/savePost`,{
         postId:postid,
         userId:user._id
       })
@@ -204,7 +205,7 @@ const {data} = await axios.post("http://localhost:4000/deletePost",{
 
   const removeComment = async (postId, commentId) => {
     try {
-      const response = await axios.post(`http://localhost:4000/deleteComment/${postId}/${commentId}`);
+      const response = await axios.post(`${apiUrl}/deleteComment/${postId}/${commentId}`);
    
   
       // تحديث التعليقات بإزالة التعليق المحذوف

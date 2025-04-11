@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 import { toast } from 'react-toastify';
 
 const Settings = () => {
@@ -28,7 +28,7 @@ const Settings = () => {
 
   const deleteUser = async ()=> {
    try{
-    const {data} = await axios.post("http://localhost:4000/deleteAccount",{
+    const {data} = await axios.post(`${apiUrl}/deleteAccount`,{
       userId:user._id
     })
 
@@ -48,7 +48,7 @@ const Settings = () => {
   useEffect(() => {
     async function sendReq() {
       try {
-        const { data } = await axios.get("http://localhost:4000/User/GetProfile", {
+        const { data } = await axios.get(`${apiUrl}/User/GetProfile`, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
 

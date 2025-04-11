@@ -5,13 +5,14 @@ import { toast } from 'react-toastify';
 import '../../../Styles/login.css';
 import back from '../../assets/Register.jpg';
 import { Link } from 'react-router-dom';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
 
   const handleSubmit = async () => {
     try {
-      const { data } = await axios.post("http://localhost:4000/forgetPassword", {
+      const { data } = await axios.post(`${apiUrl}/forgetPassword`, {
       email
       });
 

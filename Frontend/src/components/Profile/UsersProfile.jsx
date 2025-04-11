@@ -8,6 +8,7 @@ import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 import Nav from '../Index/Nav';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const UsersProfile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -24,7 +25,7 @@ const UsersProfile = () => {
   useEffect(() => {
     async function sendReq() {
       try {
-        const { data } = await axios.get(`http://localhost:4000/getUserInfo/${params.username}`);
+        const { data } = await axios.get(`${apiUrl}/getUserInfo/${params.username}`);
         setProfile(data.personalInfo);
         setFriends(data.personalInfo.friends || []);
       } catch (error) {
@@ -42,7 +43,7 @@ const UsersProfile = () => {
 
   const addFriend = async () => {
     try {
-      const { data } = await axios.post(`http://localhost:4000/follow/${params.username}`, {
+      const { data } = await axios.post(`${apiUrl}/follow/${params.username}`, {
         Name: user.Name
       });
 

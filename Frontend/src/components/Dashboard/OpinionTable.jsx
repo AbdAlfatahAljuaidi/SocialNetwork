@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const OpinionTable = () => {
   const [allOpinions, setAllOpinions] = useState([]);
@@ -15,7 +16,7 @@ const OpinionTable = () => {
   useEffect(() => {
     async function fetchOpinions() {
       try {
-        const { data } = await axios.get("http://localhost:4000/User/Show");
+        const { data } = await axios.get(`${apiUrl}/User/Show`);
         setAllOpinions(data.Opinions);
       } catch (error) {
         console.log("Error fetching Opinions", error);
@@ -26,7 +27,7 @@ const OpinionTable = () => {
 
   const deleteUser = async (id) => {
     try {
-      const { data } = await axios.delete(`http://localhost:4000/deleteOpinion/${id}`);
+      const { data } = await axios.delete(`${apiUrl}/deleteOpinion/${id}`);
       if (data.success) {
         const updated = allOpinions.filter(op => op._id !== id);
         setAllOpinions(updated);

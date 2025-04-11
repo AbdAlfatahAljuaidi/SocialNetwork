@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { FaUser, FaLock } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 
 
@@ -21,7 +22,7 @@ const Login = ({ switchToRegister, setUser }) => {
      try{
         console.log("start");
         
-        const {data} = await axios.post("http://localhost:4000/User/Login",{
+        const {data} = await axios.post(`${apiUrl}/User/Login`,{
             Email,
             Password,
         })

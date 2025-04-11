@@ -7,6 +7,7 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Autoplay } from 'swiper';
 import { UserContext } from './Form';
 import {useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Opinion = () => {   
   const [Allopinions, setAllOpinions] = useState([]);
@@ -17,7 +18,7 @@ const Opinion = () => {
   useEffect(() => {
     async function sendReq() {
       try {
-        const { data } = await axios.get("http://localhost:4000/User/Show");
+        const { data } = await axios.get(`${apiUrl}/User/Show`);
         setAllOpinions(data.Opinions);
         console.log("test", {opinion});
        

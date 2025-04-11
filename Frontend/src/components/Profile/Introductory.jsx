@@ -3,6 +3,7 @@ import Nav from '../Index/Nav';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaCheck } from 'react-icons/fa6';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Introductory = () => {
   const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
@@ -13,7 +14,7 @@ const Introductory = () => {
   useEffect(() => {
     async function sendReq() {
       try {
-        const { data } = await axios.get("http://localhost:4000/User/GetProfile", {
+        const { data } = await axios.get(`${apiUrl}/User/GetProfile`, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
 

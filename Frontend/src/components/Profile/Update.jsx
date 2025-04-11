@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Update = () => {
 
@@ -38,7 +39,7 @@ const Update = () => {
   
 
 
-const {data} = await axios.post("http://localhost:4000/User/Profile", formData, {
+const {data} = await axios.post(`${apiUrl}/User/Profile`, formData, {
   headers: { "Content-Type": "multipart/form-data" },
 });
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const ResetPassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -26,7 +27,7 @@ const ResetPassword = () => {
 
     try {
       const { data } = await axios.put(
-        `http://localhost:4000/Index/Users/Reset/${params.id}`,
+        `${apiUrl}/Index/Users/Reset/${params.id}`,
         { oldPassword, newPassword: password, confirmPass: confirmPassword }, // إرسال البيانات بالشكل الصحيح
         {
           headers: {
