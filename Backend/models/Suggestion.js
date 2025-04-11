@@ -1,6 +1,6 @@
 // models/Suggestion.js
 const mongoose = require('mongoose');
-const Joi = require('Joi')
+const Joi = require('joi')
 
 const suggestionSchema = new mongoose.Schema({
   type: {
