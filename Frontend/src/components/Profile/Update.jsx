@@ -53,7 +53,6 @@ if (data.error === false) {
   localStorage.setItem('user', JSON.stringify(userData));
 
 
-  toast.success("The data added successfully");
   navigate('/Index/Profile');
 }
 

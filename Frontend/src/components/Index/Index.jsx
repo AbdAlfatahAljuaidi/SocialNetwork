@@ -16,7 +16,7 @@ const Index = () => {
         <Post  /> 
        <Extra /> 
       </div> 
-      heloo
+     
     </div>
   )
 }

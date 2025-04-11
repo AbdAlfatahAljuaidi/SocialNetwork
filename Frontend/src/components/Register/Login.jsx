@@ -92,7 +92,7 @@ catch(error){
 
                 <div className='flex justify-between text-sm mt-5 mr-0 ml-4'>
                     <label><input className='mr-1' type='checkbox' />Remember me</label>
-                    <a className='text-white hover:underline' href='#'>Forgot Password?</a>
+                  <Link to={"/ForgetPassword"}>  <a className='text-white hover:underline'>Forgot Password?</a></Link>
                 </div>
 
                 <button className='w-full h-11 bg-white border-none outline-none rounded-[40px] font-bold cursor-pointer text-black shadow-sm mt-4' onClick={submitForm}>Login</button>

@@ -125,7 +125,7 @@ const Post = () => {
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
           post._id === postId
-            ? { ...post, comments: [{ user: user.Name, content: commentText[postId],imageUser:userData.profileImage,createdAt:new Date().toISOString() }, ...post.comments] }
+            ? { ...post, comments: [{ user: user.Name, content: commentText[postId],imageUser:user.profileImage,createdAt:new Date().toISOString() }, ...post.comments] }
             : post
         )
       );
@@ -331,7 +331,6 @@ onClick={()=> deletePost(post._id)}
 
             {/* زر الإعجاب */}
             <div className="flex items-center space-x-2 mt-3">
-            <h1>{post._id}</h1>
               <button
                 onClick={() => handleLike(post._id)}
                 className={`px-4 py-2 rounded-lg transition-all duration-300 ${

@@ -16,11 +16,8 @@ const Header = () => {
         
         </div>
         <div className='flex justify-around text-white'>
-            <FaFacebookF className='cursor-pointer' />
-            <FaInstagram className='ml-3 cursor-pointer'  />
-            <FaTwitter className='ml-3 cursor-pointer'  />
-            <FaTiktok  className='ml-3 cursor-pointer' />
-            <BsThreads className='ml-3 cursor-pointer'  />
+           <a target='_blank' href="https://www.instagram.com/ab00d_aljaidi?igsh=NHgyZWhtYno3ZGV0"><FaInstagram className='ml-3 cursor-pointer'  /></a> 
+        
 
         </div>
         

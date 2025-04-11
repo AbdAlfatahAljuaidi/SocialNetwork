@@ -9,30 +9,30 @@ const Help = () => {
     const [type,setType] = useState("")
     const [details,setDetails] = useState("")
 
-      const [userData, setuserData] = useState(JSON.parse(localStorage.getItem("userData")));
+     
+       const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
 
-const Suggest = async () => {
-try {
-  const {data} = await axios.post("http://localhost:4000/submitSuggestion",{
-    type,
-    details,
-    name:userData.Name,
-    email:userData.Email
-  })
-  
-  if (data?.error === false) {
-    toast.success(`Your ${type} has been submitted successfully`);
-  } 
-} catch (error) {
-  console.log(error);
-  toast.error(error.response.data.message)
-  
-}
-
-
-}
-
+       const Suggest = async () => {
+        try {
+          const { data } = await axios.post("http://localhost:4000/submitSuggestion", {
+            type,
+            details,
+            name: user.Name,
+            email: user.Email
+          });
+      
+          if (data?.error === false) {
+            toast.success(`Your ${type} has been submitted successfully`);
+            setType("");      // تفريغ الحقول بعد الإرسال
+            setDetails("");
+          }
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.message);
+        }
+      };
+      
 
   return (
     <div>
@@ -47,6 +47,7 @@ try {
               id="type"
               name="type"
               onChange={(e) => setType(e.target.value)}
+              value={type}
               className="w-full p-3 border rounded"
               required
             >
@@ -62,6 +63,7 @@ try {
             <textarea
               id="details"
               name="details"
+              value={details}
             onChange={(e)=> setDetails(e.target.value)}
               className="w-full p-3 border rounded"
               rows="4"

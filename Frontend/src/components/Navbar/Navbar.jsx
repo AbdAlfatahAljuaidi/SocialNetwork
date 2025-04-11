@@ -43,9 +43,11 @@ const Navbar = () => {
 
       {/* زر الـ Register للـ Desktop */}
       <div className="hidden lg:flex">
+      <Link to="/Home/Registration">
         <button className="bg-main rounded-lg text-white px-8 py-2 hover:bg-main hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
-          <Link to="/Home/Registration">Register</Link>
+         Register
         </button>
+        </Link>
       </div>
 
       {/* زر الـ Hamburger للـ Mobile */}

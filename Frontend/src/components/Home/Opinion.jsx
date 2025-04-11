@@ -44,7 +44,7 @@ const Opinion = () => {
           Client Reviews
         </h1>
         <h1 className="text-5xl font-extrabold text-gray-800 mt-4">
-          <span className="text-blue-600">What People & Clients </span>
+          <span className="text-blue-600">What Students </span>
           Think About Us
         </h1>
       </div>
@@ -58,7 +58,7 @@ const Opinion = () => {
 
       {/* الوصف النصي */}
       <p className="text-gray-600 text-center mt-6 max-w-2xl mx-auto text-lg leading-relaxed">
-        "Explore our clients' honest opinions about the services we offer. Your satisfaction is our priority!"
+        "Explore our Students' honest opinions about the services we offer. Your satisfaction is our priority!"
       </p>
 
       {/* سلايدر المراجعات */}

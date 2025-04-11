@@ -26,6 +26,9 @@ import SuggestionTable from "./components/Dashboard/SuggestionTable";
 import Notifications from './components/Profile/Notifications'
 import Friends from "./components/Profile/Friends";
 import Settings from "./components/Profile/Settings";
+import PrivacyPolicy from "./components/Home/PrivacyPolicy";
+import TermsConditions from "./components/Home/TermsConditions";
+import ForgetPassword from "./components/Register/ForgetPassword";
 
 
 function App() {
@@ -65,6 +68,9 @@ function App() {
         <Route path="/Settings" element = {user ? <Settings /> : <Navigate to="/Home/Registration" /> }/>
         
         <Route path="/activeAccount/:token" element ={<Active />}  />
+        <Route path="/PrivacyPolicy" element ={<PrivacyPolicy />}  />
+        <Route path="/Terms & Conditions" element ={<TermsConditions />}  />
+        <Route path="/ForgetPassword" element ={<ForgetPassword />}  />
       
       </Routes>
     </BrowserRouter>

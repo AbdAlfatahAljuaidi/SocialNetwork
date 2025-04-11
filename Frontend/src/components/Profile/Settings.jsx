@@ -34,6 +34,7 @@ const Settings = () => {
 
     if(data.error == false){
       localStorage.clear();
+      toast.success(data.message)
       navigate("/Home/Registration");
     }
    }

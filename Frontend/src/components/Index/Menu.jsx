@@ -57,10 +57,10 @@ const Menu = ({ menuOpen, setMenuOpen }) => {
       </button>
 
       {/* معلومات المستخدم */}
-      <div className='flex items-center mb-6'>
-        <div className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center  font-bold text-2xl" style={{color: color}}>
+      <div className='md:flex items-center mb-6'>
+        <div className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center m-auto font-bold text-2xl" style={{color: color}}>
           {Profile && Profile.imageUrl ? (
-            <img src={Profile.imageUrl} alt="" className="w-full h-full rounded-full object-cover" />
+            <img src={Profile.imageUrl} alt="" className="w-full h-full rounded-full object-cover " />
           ) : (
             userName?.Name?.charAt(0)?.toUpperCase() || "U"
           )}

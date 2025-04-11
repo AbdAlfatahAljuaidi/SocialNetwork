@@ -12,6 +12,7 @@ const Edit = () => {
     const [Gender, setGender] = useState("");
     const [postImage, setPostImage] = useState("");
     const [major, setMajor] = useState("");
+    const [username, setUsername] = useState("");
 
  
     const navigate = useNavigate()
@@ -43,6 +44,7 @@ const Edit = () => {
         setPhone(data.personalInfo.Phone);
         setGender(data.personalInfo.Gender);
         setMajor(data.personalInfo.major);
+        setUsername(user.Name);
      
     
       
@@ -59,6 +61,7 @@ const Edit = () => {
         formData.append("Address", Address);
         formData.append("Phone", Phone);
         formData.append("Gender", Gender);
+        formData.append("username", username);
         formData.append("major", major);
         formData.append("file", postImage); // تأكد أن "file" هو الاسم المستخدم في `multer.single("file")`
 

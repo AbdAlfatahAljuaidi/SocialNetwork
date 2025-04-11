@@ -17,23 +17,26 @@ const menuItems = [
   { id: "SuggestionTable", label: "Suggestion", icon: <FaChartBar /> },
 ];
 
+
+
+
 const SideMenu = ({ setSelectedComponent }) => {
   const [active, setActive] = useState("Users");
 
 
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   
-    const [userData, setuserData] = useState(JSON.parse(localStorage.getItem("userData")));
   return (
     <div className="ml-2 md:w-64 bg-white h-[80vh] my-9 rounded-2xl shadow-2xl flex flex-col justify-between p-6">
       {/* البروفايل */}
       <div className="flex flex-col items-center mb-8">
         <img
-          src={userData.profileImage} // صورة افتراضية
+          src={user.profileImage} // صورة افتراضية
           alt="Profile"
           className="w-20 h-20 rounded-full mb-2 shadow-md"
         />
-        <h2 className="text-lg font-semibold text-main">Welcome, {userData.Name}</h2>
+        <h2 className="text-lg font-semibold text-main">Welcome, {user.Name}</h2>
       </div>
 
       {/* عناصر القائمة */}
@@ -50,7 +53,7 @@ const SideMenu = ({ setSelectedComponent }) => {
                 ${
                   active === item.id
                     ? "bg-main text-white shadow-md scale-105"
-                    : "text-gray-700 hover:bg-main hover:text-white"
+                    : "text-gray-700 hover:bg-main "
                 }`}
             >
               {/* مؤشر جانبي للعنصر النشط */}

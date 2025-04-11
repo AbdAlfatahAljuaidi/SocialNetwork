@@ -42,14 +42,19 @@ const Introductory = () => {
         <div className="bg-white p-8 rounded-2xl shadow">
           <div className="flex justify-between items-center border-b pb-4 mb-4">
             <h1 className="text-3xl font-bold text-gray-800">My Profile</h1>
-            <Link
-              to={`/Index/Profile/Edit/${Profile._id}`}
-              className="flex items-center text-white px-4 py-2 text-sm rounded-lg shadow"
-              style={{ background: color }}
-            >
-              <FaCheck className="mr-2" />
-              Edit
-            </Link>
+            {Profile && Profile.length > 0 ? (
+  Profile.map((profile, index) => (
+    <Link
+      key={profile._id} // إضافة مفتاح فريد لكل عنصر
+      to={`/Index/Profile/Edit/${profile._id}`}
+      className="flex items-center text-white px-4 py-2 text-sm rounded-lg shadow"
+      style={{ background: color }}
+    >
+      <FaCheck className="mr-2" />
+      Edit
+    </Link>
+  ))
+) : null}
           </div>
 
           {Profile && Profile.length > 0 ? (

@@ -10,7 +10,7 @@ const ProfileTable = () => {
   const [allProfile, setAllProfile] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [profilesPerPage] = useState(5); // عدد العناصر في كل صفحة
+  const [profilesPerPage] = useState(8); // عدد العناصر في كل صفحة
 
   useEffect(() => {
     async function sendReq() {
