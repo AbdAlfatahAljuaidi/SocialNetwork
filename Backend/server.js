@@ -20,12 +20,6 @@ app.get('/', function(req,res){
 
 
 
-app.use(express.static(path.join(__dirname, "client/build")));
-
-// Catch-all route: ترجع index.html لأي رابط ما عدا API
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
-});
 
 
 
