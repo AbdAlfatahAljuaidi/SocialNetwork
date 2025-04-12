@@ -11,7 +11,7 @@ const multer = require("multer");
 const i18n = require('i18n');
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
-const path = require("path");
+
 
 
 app.get('/', function(req,res){
@@ -36,15 +36,6 @@ http.listen(5173)
 app.use(cors())
 
 app.use(express.json())
-
-app.use(express.static(path.join(__dirname, "client/build")));
-
-// API routes هنا إذا عندك
-
-// fallback: serve React app for any unknown route
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
-});
 
 
 app.use('/api', router);
