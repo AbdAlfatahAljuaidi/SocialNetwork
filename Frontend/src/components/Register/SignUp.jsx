@@ -12,8 +12,27 @@ const SignUp = ({ switchToLogin }) => {
     const [Name,setName] = useState("")
     const [Email,setEmail] = useState("")
     const [Password,setPassword] = useState("")
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
 
     const navigate =useNavigate()
+
+
+
+    const submit = async () => {
+        if (isSubmitting) return; // منع الضغط أكثر من مرة
+      
+        setIsSubmitting(true);
+        try {
+          // Send form data to backend here
+        } catch (error) {
+          console.error("Error submitting form:", error);
+          toast.error(error)
+        } finally {
+          setIsSubmitting(false);
+        }
+      };
+      
 
 
     const submitForm = async () => {
@@ -89,7 +108,18 @@ const SignUp = ({ switchToLogin }) => {
                     <label><input className='mr-1' type='checkbox' />Are you a student in Amman Arab University?</label>
                 </div>
 
-                <button className='w-full h-11 bg-white border-none outline-none rounded-[40px] font-bold cursor-pointer text-black shadow-sm mt-4' onClick={submitForm}>Register</button>
+                <button
+  className='w-full h-11 bg-white border-none outline-none rounded-[40px] font-bold cursor-pointer text-black shadow-sm mt-4 disabled:opacity-50 disabled:cursor-not-allowed'
+  onClick={() => {
+    submitForm();
+    submit();
+  }}
+  
+  disabled={isSubmitting}
+>
+  {isSubmitting ? "Registering..." : "Register"}
+</button>
+
 
                 <div className='text-sm text-center mt-5 mr-0 ml-4'>
                     <p>Already have an account? <a className='text-white font-semibold hover:underline' href='#' onClick={switchToLogin}>Login</a></p>

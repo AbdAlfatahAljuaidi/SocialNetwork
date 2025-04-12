@@ -55,17 +55,18 @@ app.use(express.json());
 // ✅ API لتحميل صورة ونشر بوست
 const uploadImage = async (req, res) => {
     try {
-        if (!req.file) {
-            return res.status(400).json({ message: "لم يتم تحميل أي ملف" });
-        }
-
+        let imageUrl = null 
+        if (req.file) {
+            const result = await cloudinary.uploader.upload(req.file.path);
+            imageUrl = result.secure_url;
+          }
+      
         // رفع الصورة إلى Cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path);
 
         // إنشاء وحفظ المنشور في قاعدة البيانات
         let newPost = new Post({
             text: req.body.text || 'بدون نص', // نص المنشور (اختياري)
-            imageUrl: result.secure_url, // رابط الصورة من Cloudinary
+            imageUrl: imageUrl, // رابط الصورة من Cloudinary
             likes: 0,
             username:req.body.username,
             ProfileImage: req.body.ProfileImage, // معرف المستخدم
@@ -81,7 +82,7 @@ const uploadImage = async (req, res) => {
         // broadcastNewPost(newPost); // ✅ إرسال الإشعار عبر WebSocket
 
         res.status(201).json({
-            message: 'Image uploaded and post saved successfully!',
+            message: ' Post saved successfully!',
             post: newPost,
         });
     } catch (error) {

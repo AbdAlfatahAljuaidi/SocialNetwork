@@ -62,7 +62,8 @@ const Introductory = () => {
             Profile.map((profile, index) => (
               <div
                 key={index}
-                className="flex items-center gap-6 bg-gray-50 p-6 rounded-xl shadow-inner"
+                    className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 bg-gray-50 p-4 md:p-6 rounded-xl shadow-inner w-full mb-4"
+
               >
                 <div>
                   {profile.imageUrl ? (
@@ -78,10 +79,11 @@ const Introductory = () => {
                   )}
                 </div>
                 <div className="space-y-1">
-                  <p className="text-2xl font-bold text-gray-800">{profile.username}</p>
-                  <p className="text-gray-600">{profile.major}</p>
-                  <p className="text-gray-500">{profile.Address}</p>
+                  <p className="text-2xl font-bold text-gray-800 text-center md:text-left">{profile.username}</p>
+                  <p className="text-gray-600 text-center md:text-left">{profile.major}</p>
+                  <p className="text-gray-500 text-center md:text-left">{profile.Address}</p>
                 </div>
+              
               </div>
             ))
           ) : (
@@ -111,6 +113,10 @@ const Introductory = () => {
                 <div>
                   <p className="text-sm text-gray-400">Age</p>
                   <p className="text-lg text-gray-800 font-medium">{profile.Age}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">First Year</p>
+                  <p className="text-lg text-gray-800 font-medium">{profile.year}</p>
                 </div>
               </div>
             ))

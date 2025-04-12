@@ -180,15 +180,15 @@ const SignUpUser = async (req, res) => {
 
 
 
-await sendEmail(
-  Email,
-  SignUp.Name,
-  token,
-  "Active Acoount",
-  "activeAccount",
+// await sendEmail(
+//   Email,
+//   SignUp.Name,
+//   token,
+//   "Active Acoount",
+//   "activeAccount",
 
 
-)
+// )
 
 
 
@@ -267,8 +267,8 @@ if(user.active==0){
 const ProfileInfo = async (req, res) => {
   try {
     // التحقق من البيانات النصية
-    const { userID, Age, Address, Phone, Gender,major ,username } = req.body;
-    if (!userID || !Age || !Address || !Phone || !Gender || !major || !username) {
+    const { userID, Age, Address, Phone, Gender,major ,username, year } = req.body;
+    if (!userID || !Age || !Address || !Phone || !Gender || !major || !username || !year) {
       return res
         .status(400)
         .json({ error: true, message: "All Fields Required" });
@@ -296,6 +296,7 @@ console.log("done");
       imageUrl: result.secure_url,
       major,
       username,
+      year,
     });
 
 
@@ -396,13 +397,21 @@ const editProfile = async (req, res) => {
       return res.status(403).json({ message: "You are not authorized" });
     }
 
-    // التحقق من رفع الملف
-    if (!req.file) {
-      return res.status(400).json({ message: "لم يتم تحميل أي ملف" });
+
+    
+
+
+    let imageUrl = profile.imageUrl; // احتفظ بالصورة القديمة
+    let result = null;
+    
+    // إذا تم رفع ملف، ارفعه إلى Cloudinary
+    if (req.file) {
+      result = await cloudinary.uploader.upload(req.file.path);
+      imageUrl = result.secure_url;
     }
 
-    // رفع الصورة إلى Cloudinary
-    const result = await cloudinary.uploader.upload(req.file.path);
+
+
 
     // تحديث الملف الشخصي
     const updateProfile = await Profile.findByIdAndUpdate(
@@ -414,31 +423,27 @@ const editProfile = async (req, res) => {
         Phone: req.body.Phone,
         Gender: req.body.Gender,
         major: req.body.major,
-        imageUrl: result.secure_url,
+        imageUrl: imageUrl,
+        year:req.body.year,
       },
       { new: true }
     );
 
 
+    let updatedUser = null;
+    if (result) {
+      updatedUser = await SignUp.findOneAndUpdate(
+        { _id: profile.userID },
+        { profileImage: imageUrl },
+        { new: true }
+      );
     
-    const updatedUser = await SignUp.findOneAndUpdate(
-      { _id: profile.userID }, // البحث عن المستخدم عن طريق `userID`
-      { profileImage: result.secure_url }, // تحديث الصورة في `SignUp`
-      { new: true } // إرجاع البيانات بعد التحديث
-    );
-
-
-
-const getUser = await SignUp.findById(user.id)
-
-console.log("getUser",getUser);
-
-
-await Post.updateMany(
-  { username: getUser.Name },
-  { $set: { ProfileImage: result.secure_url } }
-);
-
+      const getUser = await SignUp.findById(user.id);
+      await Post.updateMany(
+        { username: getUser.Name },
+        { $set: { ProfileImage: imageUrl } }
+      );
+    }
 
 
 

@@ -61,11 +61,11 @@ const Post = () => {
     fetchPosts();
   }, []);
   const handleFileUpload = async () => {
-    if (!postImage) {
-      console.error("No file selected.");
-      toast.error("No file selected")
-      return;
-    }
+    // if (!postImage) {
+    //   console.error("No file selected.");
+    //   toast.error("No file selected")
+    //   return;
+    // }
   
     // التأكد من أن المستخدم لديه صورة للبروفايل
     if (!user || !user.profileImage) {

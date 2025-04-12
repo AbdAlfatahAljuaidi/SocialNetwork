@@ -78,18 +78,18 @@ const UsersProfile = () => {
 
         {Profile ? (
           <div className="flex flex-wrap items-center justify-between pb-8 mt-9 shadow-md p-6 rounded-lg bg-gray-50">
-            <div className="flex items-center space-x-8">
+            <div className="flex flex-col md:flex-row items-center space-x-8 mx-auto md:mx-0">
               <img 
                 src={Profile.imageUrl || "https://via.placeholder.com/150"} 
                 alt="Person" 
                 className="w-36 h-36 rounded-full border-4 border-blue-500 shadow-xl" 
               />
               <div>
-                <h1 className="text-4xl font-extrabold text-gray-800">{Profile.username || "Unknown"}</h1>
+                <h1 className="text-4xl font-extrabold text-gray-800 text-center md:text-left">{Profile.username || "Unknown"}</h1>
                 <p className="flex items-center text-lg text-gray-600 mt-2">
-                  <FaLocationDot className="mr-2 text-blue-500" /> {Profile.Address || "Not specified"}
+                  <FaLocationDot className="mr-2 text-blue-500 text-center md:text-left" /> {Profile.Address || "Not specified"}
                 </p>
-                <h2 className="font-medium text-lg mt-2" style={{ color: color }}>
+                <h2 className="font-medium text-lg mt-2 text-center md:text-left" style={{ color: color }}>
                   {Profile.major || "Software Engineer"}
                 </h2>
               </div>
@@ -118,6 +118,11 @@ const UsersProfile = () => {
                 <BsCalendar2DateFill className="mr-3 text-blue-500" size={24} />
                 <span className="font-medium text-gray-700 w-24">Age:</span>
                 <span className="text-gray-600">{Profile.Age}</span>
+              </div>
+              <div className="flex items-center">
+                <BsCalendar2DateFill className="mr-3 text-blue-500" size={24} />
+                <span className="font-medium text-gray-700 w-24">First Year:</span>
+                <span className="text-gray-600">{Profile.year}</span>
               </div>
               <div className="flex items-center">
                 <FaTransgender className="mr-3 text-blue-500" size={24} />

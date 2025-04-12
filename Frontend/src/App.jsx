@@ -56,7 +56,7 @@ function App() {
         <Route path="/EditUser/:id" element = {user ? <EditUser /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/index/profile/:username/:Name" element = {user ? <UsersProfile /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Test" element = {user ? <Test /> : <Navigate to="/Home/Registration" /> }/>
-        <Route path="/" element = {user ? <Socket /> : <Navigate to="/Home/Registration" /> }/>
+        <Route path="/" element = {user ? <Home /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Testt" element = {user ? <Testt /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Bookmarks" element = {user ? <Bookmarks /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Analytics" element = {user ? <Analytics /> : <Navigate to="/Home/Registration" /> }/>

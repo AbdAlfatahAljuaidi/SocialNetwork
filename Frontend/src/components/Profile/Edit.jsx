@@ -14,6 +14,7 @@ const Edit = () => {
     const [postImage, setPostImage] = useState("");
     const [major, setMajor] = useState("");
     const [username, setUsername] = useState("");
+    const [year, setYear] = useState();
 
  
     const navigate = useNavigate()
@@ -46,6 +47,7 @@ const Edit = () => {
         setGender(data.personalInfo.Gender);
         setMajor(data.personalInfo.major);
         setUsername(user.Name);
+        setYear(data.personalInfo.year);
      
     
       
@@ -64,6 +66,7 @@ const Edit = () => {
         formData.append("Gender", Gender);
         formData.append("username", username);
         formData.append("major", major);
+        formData.append("year", year);
         formData.append("file", postImage); // تأكد أن "file" هو الاسم المستخدم في `multer.single("file")`
 
         console.log(postImage);
@@ -81,6 +84,7 @@ const Edit = () => {
         );
     
         if (data.message === "Update Data Successfully") {
+       console.log("year",year);
        
           console.log("dsfssfs",data.updateProfile.imageUrl
           );
@@ -178,7 +182,19 @@ const Edit = () => {
           </div>
 
        
-
+          <div>
+            <label htmlFor="faculty" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              First Year
+            </label>
+            <input
+              type="number"
+              onChange={(e) => setYear(e.target.value)}
+              name="year"
+              value={year}   
+            placeholder='2025'
+              className="mt-1 block w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            /> 
+          </div>
 
 
 

@@ -12,6 +12,7 @@ const Update = () => {
     const [Gender, setGender] = useState("");
     const [major, setMajor] = useState("");
       const [postImage, setPostImage] = useState(null);
+      const [year, setYear] = useState();
     
  
     const navigate = useNavigate()
@@ -35,6 +36,7 @@ const Update = () => {
       formData.append("Gender", Gender);
       formData.append("major", major);
       formData.append("username", user.Name);
+      formData.append("year", year);
       formData.append("file", postImage); // الصورة
   
 
@@ -135,6 +137,20 @@ if (data.error === false) {
               onChange={(e) => setPhone(e.target.value)}
               name="Phone"
             placeholder='+123 344 676'
+              className="mt-1 block w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
+
+          <div>
+            <label htmlFor="faculty" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              First Year
+            </label>
+            <input
+              type="number"
+              onChange={(e) => setYear(e.target.value)}
+              name="Year"
+            placeholder='2025'
               className="mt-1 block w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>

@@ -44,8 +44,14 @@ const ProfileSchema = new mongoose.Schema({
 username:{
   type:String,
   required: true,
+},
+
+year:{
+  type:Number,
+  required:true,
 }
   
+
 
 } ,{ timestamps: true });
 
@@ -63,6 +69,7 @@ function ProfileValidation(object) {
     Gender: Joi.string().required(),
     major: Joi.string().required(),
     username: Joi.string().required(),
+    year: Joi.number().required(),
   });
   return schema.validate(object);
 }
