@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -86,6 +86,13 @@ const Navbar = () => {
               <li className="py-2 hover:text-blue-700">
                 <a href="#Contact" onClick={toggleMenu}>Contact</a>
               </li>
+              <li className="py-2 hover:text-blue-700">
+                <Link to={"/index"}> 
+                <a  onClick={toggleMenu}>Register</a>
+                </Link>
+              </li>
+           
+              
             </ul>
           </div>
         </div>

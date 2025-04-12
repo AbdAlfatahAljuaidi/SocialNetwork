@@ -68,8 +68,8 @@ const Menu = ({ menuOpen, setMenuOpen }) => {
         </div>
 
         <div className='ml-3'>
-          <h1 className='font-semibold text-lg'><Link to={'/Index/Profile'}>{userName.Name || 'Username'}</Link></h1>
-          <span className='text-gray-400'>{userName.Email || 'username'}</span>
+          <h1 className='font-semibold text-lg text-center md:text-left'><Link to={'/Index/Profile'}>{userName.Name || 'Username'}</Link></h1>
+          <span className='text-gray-400 text-center md:text-left'>{userName.Email || 'username'}</span>
         </div>
       </div>
 

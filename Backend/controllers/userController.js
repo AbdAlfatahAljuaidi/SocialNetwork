@@ -357,8 +357,7 @@ const getinfo = async (req, res) => {
       userID: user.id,
       _id: req.params.id,
     });
-    console.log(personalInfo);
-    console.log("personalInfo");
+
     res.status(200).json({ personalInfo });
   } catch (error) {
     res.json({ error: true });
@@ -420,12 +419,40 @@ const editProfile = async (req, res) => {
       { new: true }
     );
 
+
+    
+    const updatedUser = await SignUp.findOneAndUpdate(
+      { _id: profile.userID }, // البحث عن المستخدم عن طريق `userID`
+      { profileImage: result.secure_url }, // تحديث الصورة في `SignUp`
+      { new: true } // إرجاع البيانات بعد التحديث
+    );
+
+
+
+const getUser = await SignUp.findById(user.id)
+
+console.log("getUser",getUser);
+
+
+await Post.updateMany(
+  { username: getUser.Name },
+  { $set: { ProfileImage: result.secure_url } }
+);
+
+
+
+
+
+
+
+
     res
       .status(200)
       .json({
         error: "false",
         message: "Update Data Successfully",
         updateProfile,
+        updatedUser,
       });
   } catch (err) {
     console.error("Error updating profile:", err);

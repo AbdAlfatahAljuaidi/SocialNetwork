@@ -7,6 +7,7 @@ import {
   FaArrowLeft,
   FaUniversity,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
   
   const terms = [
     {
@@ -100,6 +101,7 @@ import {
   
         {/* Back Button */}
         <div className="flex justify-center mt-12">
+            <Link to={"/home"}>
           <a
             href="/home"
             className="inline-flex items-center px-5 py-3 bg-indigo-600 text-white rounded-xl shadow-md hover:bg-indigo-700 transition"
@@ -107,6 +109,7 @@ import {
             <FaArrowLeft className="mr-2" />
             Back to Home
           </a>
+          </Link>
         </div>
       </div>
     );

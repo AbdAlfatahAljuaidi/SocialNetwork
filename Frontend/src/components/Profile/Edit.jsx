@@ -29,7 +29,7 @@ const Edit = () => {
      
         
         const { data } = await axios.get(
-          `${apiUrl}/${params.id}`,
+          `${apiUrl}/GetDataProfile/${params.id}`,
           {
             headers: {
               Authorization: `Bearer ${user.token}`,
@@ -81,9 +81,23 @@ const Edit = () => {
         );
     
         if (data.message === "Update Data Successfully") {
-          toast.success(data.message);
+       
+          console.log("dsfssfs",data.updateProfile.imageUrl
+          );
+          
+  let userData = user || {};
+  userData.profileImage = data.updateProfile.imageUrl;
+  
+  localStorage.setItem('user', JSON.stringify(userData));
+  toast.success(data.message);
           navigate(`/Index/Profile`);
         }
+
+
+        
+
+
+
       } catch (error) {
         console.error("Error:", error);
         toast.error(error.response?.data?.message || "حدث خطأ غير متوقع");
