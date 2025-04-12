@@ -18,6 +18,12 @@ app.get('/', function(req,res){
 
 })
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
+
+
+
 io.on('connection', function(socket){
   console.log('new client connected');
   io.emit('new', 'hello from server');
