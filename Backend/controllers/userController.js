@@ -180,15 +180,15 @@ const SignUpUser = async (req, res) => {
 
 
 
-// await sendEmail(
-//   Email,
-//   SignUp.Name,
-//   token,
-//   "Active Acoount",
-//   "activeAccount",
+await sendEmail(
+  Email,
+  SignUp.Name,
+  token,
+  "Active Acoount",
+  "activeAccount",
 
 
-// )
+)
 
 
 
