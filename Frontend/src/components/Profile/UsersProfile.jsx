@@ -82,13 +82,18 @@ const UsersProfile = () => {
               <img 
                 src={Profile.imageUrl || "https://via.placeholder.com/150"} 
                 alt="Person" 
-                className="w-36 h-36 rounded-full border-4 border-blue-500 shadow-xl" 
+                className="w-36 h-36 rounded-full border-4 shadow-xl" 
+                style={{
+                  border:  `1px solid ${color}`
+                }}
               />
               <div>
                 <h1 className="text-4xl font-extrabold text-gray-800 text-center md:text-left">{Profile.username || "Unknown"}</h1>
-                <p className="flex items-center text-lg text-gray-600 mt-2">
-                  <FaLocationDot className="mr-2 text-blue-500 text-center md:text-left" /> {Profile.Address || "Not specified"}
-                </p>
+                <p className="flex items-center justify-center text-lg text-gray-600 mt-2 w-fit mx-auto md:mx-0">
+  <FaLocationDot className="mr-2 " style={{color:color}} />
+  {Profile.Address || "Not specified"}
+</p>
+
                 <h2 className="font-medium text-lg mt-2 text-center md:text-left" style={{ color: color }}>
                   {Profile.major || "Software Engineer"}
                 </h2>
@@ -104,28 +109,28 @@ const UsersProfile = () => {
             <h2 className="text-2xl font-bold text-gray-700 border-b pb-4">Personal Info</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 mt-6 text-lg">
               <div className="flex items-center">
-                <FaPhone className="mr-3 text-blue-500" size={24} />
+                <FaPhone className="mr-3 "  style={{color:color}} size={24} />
                 <span className="text-gray-700 w-24 font-medium">Phone:</span>
                 <span className="text-gray-600">{Profile.Phone}</span>
               </div>
           
               <div className="flex items-center">
-                <FaLocationDot className="mr-3 text-blue-500" size={24} />
+                <FaLocationDot className="mr-3"  style={{color:color}} size={24} />
                 <span className="font-medium text-gray-700 w-24">Address:</span>
                 <span className="text-gray-600">{Profile.Address}</span>
               </div>
               <div className="flex items-center">
-                <BsCalendar2DateFill className="mr-3 text-blue-500" size={24} />
+                <BsCalendar2DateFill className="mr-3"  style={{color:color}} size={24} />
                 <span className="font-medium text-gray-700 w-24">Age:</span>
                 <span className="text-gray-600">{Profile.Age}</span>
               </div>
               <div className="flex items-center">
-                <BsCalendar2DateFill className="mr-3 text-blue-500" size={24} />
+                <BsCalendar2DateFill className="mr-3"  style={{color:color}} size={24} />
                 <span className="font-medium text-gray-700 w-24">First Year:</span>
                 <span className="text-gray-600">{Profile.year}</span>
               </div>
               <div className="flex items-center">
-                <FaTransgender className="mr-3 text-blue-500" size={24} />
+                <FaTransgender className="mr-3"  style={{color:color}} size={24} />
                 <span className="font-medium text-gray-700 w-24">Gender:</span>
                 <span className="text-gray-600">{Profile.Gender}</span>
               </div>

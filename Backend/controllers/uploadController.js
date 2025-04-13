@@ -60,6 +60,10 @@ const uploadImage = async (req, res) => {
             const result = await cloudinary.uploader.upload(req.file.path);
             imageUrl = result.secure_url;
           }
+
+          if(!req.body.text){
+           return  res.status(500).json({ message: 'A question must be added' });
+          }
       
         // رفع الصورة إلى Cloudinary
 

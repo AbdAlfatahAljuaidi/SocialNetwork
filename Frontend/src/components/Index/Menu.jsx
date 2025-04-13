@@ -69,7 +69,7 @@ const Menu = ({ menuOpen, setMenuOpen }) => {
 
         <div className='ml-3'>
           <h1 className='font-semibold text-lg text-center md:text-left'><Link to={'/Index/Profile'}>{userName.Name || 'Username'}</Link></h1>
-          <span className='text-gray-400 text-center md:text-left'>{userName.Email || 'username'}</span>
+          <span className='text-gray-400 block w-fit mx-auto md:mx-0'>{userName.Email || 'username'}</span>
         </div>
       </div>
 
@@ -137,9 +137,9 @@ const Menu = ({ menuOpen, setMenuOpen }) => {
       </nav>
 
       {/* زر القائمة */}
-      <div className='flex items-center space-x-2 text-gray-600 hover:text-white px-4 py-2 rounded-lg cursor-pointer transition duration-200'
+      <div className='flex items-center space-x-2 text-white hover:text-white px-4 py-2 rounded-lg cursor-pointer transition duration-200'
         style={{
-          background: isHovered ? color : "initial", // تغيير اللون فقط للعنصر
+          background: color, // تغيير اللون فقط للعنصر
         }}
         onMouseEnter={() => setIsHovered(true)}  // تفعيل الـ hover
         onMouseLeave={() => setIsHovered(false)} // إلغاء التفعيل عند الخروج

@@ -78,7 +78,11 @@ const Bookmarks = () => {
                   
                 <div className="flex items-center mb-4">
                   <img src={post.ProfileImage || 'https://via.placeholder.com/50'} alt={post.author} className="w-12 h-12 rounded-full mr-3" />
-                  <h2 className="text-lg font-semibold text-gray-700">{post.username}</h2>
+                  <div>
+                  <h2 className="text-lg font-bold text-gray-700">{post.username}</h2>
+                  <p className='text-gray-400 '>{post.text}</p>
+                  </div>
+                 
                 </div>
                 <button onClick={() => removeBookmark(post._id)} className="text-red-500 hover:text-red-700">
                     <FaTrash />
