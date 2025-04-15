@@ -8,6 +8,8 @@ const SearchComponent = () => {
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState("");
     const params = useParams();
+    
+      const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -35,8 +37,10 @@ const SearchComponent = () => {
     }, [params.username]);
 
     return (
-        <div className="p-6 max-w-3xl mx-auto bg-white  rounded-lg">
+        <div className="  mx-auto bg-white  rounded-lg">
             <Nav  />
+            <div className="max-w-3xl mx-auto">
+                
             <h2 className="text-2xl font-bold text-gray-800 text-center mt-10 mb-4">Search About User Posts    </h2>
 
             {error && <p className="text-red-500 text-center mt-2">{error}</p>}
@@ -46,7 +50,7 @@ const SearchComponent = () => {
                     <div className="grid gap-4">
                         {posts.map((post) => (
                             <div key={post._id} className="border rounded-lg p-4 shadow-md bg-gray-50 hover:shadow-lg transition">
-                                <h3 className="font-semibold text-lg text-blue-600">{post.username}</h3>
+                                <h3 className="font-semibold text-lg" style={{color:color}}>{post.username}</h3>
                                 <p className="text-gray-700">{post.text}</p>
                                 {post.imageUrl && (
                                     <img className="w-full h-52 object-cover rounded-md mt-2" src={post.imageUrl} alt="Post" />
@@ -57,6 +61,8 @@ const SearchComponent = () => {
                 ) : (
                     !error && <p className="text-gray-500 text-center">🚀 لا توجد منشورات لعرضها</p>
                 )}
+            </div>
+            
             </div>
         </div>
     );

@@ -23,6 +23,7 @@ const menuItems = [
 const SideMenu = ({ setSelectedComponent }) => {
   const [active, setActive] = useState("Users");
 
+  const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
@@ -36,7 +37,7 @@ const SideMenu = ({ setSelectedComponent }) => {
           alt="Profile"
           className="w-20 h-20 rounded-full mb-2 shadow-md"
         />
-        <h2 className="text-lg font-semibold text-main">Welcome, {user.Name}</h2>
+        <h2 className="text-lg font-semibold " style={{color:color}}>Welcome, {user.Name}</h2>
       </div>
 
       {/* عناصر القائمة */}
@@ -58,7 +59,7 @@ const SideMenu = ({ setSelectedComponent }) => {
             >
               {/* مؤشر جانبي للعنصر النشط */}
               {active === item.id && (
-                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-main rounded-full"></span>
+                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 zzrounded-full"></span>
               )}
               <span className="text-xl">{item.icon}</span>
               <span>{item.label}</span>

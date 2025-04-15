@@ -51,7 +51,7 @@ const Menu = ({ menuOpen, setMenuOpen }) => {
       
       {/* زر الإغلاق (X) */}
       <button 
-        className="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition duration-200 text-2xl"
+        className="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition duration-200 text-2xl flex  md:hidden"
         onClick={() => setMenuOpen(false)}
       >
         <FaTimes />

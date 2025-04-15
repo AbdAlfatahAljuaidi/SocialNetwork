@@ -65,7 +65,7 @@ catch(error){
 
 
     return (
-        <div className='w-full p-10 login'>
+        <div className='w-full p-3 md:p-10 login'>
             <div>
                 <h1 className='text-4xl text-center font-extrabold'>Login</h1>
                 <div className='relative w-full my-8 mx-0 h-12'>

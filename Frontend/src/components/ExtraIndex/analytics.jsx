@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Nav from '../Index/Nav';
+import { FaComment, FaHeart } from 'react-icons/fa';
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Analytics = () => {
@@ -59,14 +60,16 @@ const Analytics = () => {
                 </div>
                 <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover rounded-lg mb-4 shadow-sm" />
                
-                <div className="flex items-center justify-between text-gray-600">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-red-500">{post.likes}</span> Likes
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-blue-500">{post.comments.length}</span> Comments
-                  </div>
-                </div>
+              <div className="flex items-center justify-between text-gray-600">
+                                <div className="flex items-center space-x-2">
+                                  <FaHeart className="text-red-500 text-lg" />
+                                  <span>{post.likes}</span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <FaComment className="text-blue-500 text-lg" />
+                                  <span>{post.comments.length}</span>
+                                </div>
+                              </div>
               </div>
             ))}
           </div>

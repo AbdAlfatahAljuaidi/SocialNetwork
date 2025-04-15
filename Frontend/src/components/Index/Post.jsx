@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { SlOptionsVertical } from "react-icons/sl";
 import { toast } from 'react-toastify';
 import { FaTrash } from "react-icons/fa";
+import Testt from "../Testt";
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Post = () => {
@@ -16,6 +17,7 @@ const Post = () => {
   const [userData, setuserData] = useState(JSON.parse(localStorage.getItem("userData")));
   const [showOptions, setShowOptions] = useState(false);
   const optionsRef = useRef(null);
+  const [note,setNote] =useState([])
 
 
     const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
@@ -226,6 +228,50 @@ const {data} = await axios.post(`${apiUrl}/deletePost`,{
       console.error("Failed to delete comment:", error.response?.data?.message || error.message);
     }
   };
+
+  let socket;
+  
+
+  useEffect(() => {
+      console.log("🔗 محاولة الاتصال بـ WebSocket...");
+      socket = new WebSocket("ws://localhost:60002");
+
+      socket.onopen = () => {
+          console.log("✅ WebSocket متصل بنجاح!");
+      };
+
+      socket.onmessage = (event) => {
+          console.log("📩 رسالة مستقبلة عبر WebSocket:", event.data);
+
+          try {
+              const data = JSON.parse(event.data);
+              if (data.type === "NEW_POST") {
+                  alert("🆕 تم نشر بوست جديد!");
+                  setNote((prevPosts) => [data.post, ...prevPosts]);
+              }
+          } catch (error) {
+              console.error("❌ خطأ في استقبال البيانات:", error);
+          }
+      };
+
+      socket.onclose = (event) => {
+          console.log("❌ تم قطع الاتصال بـ WebSocket، السبب:", event.reason);
+          setTimeout(() => {
+              console.log("🔄 إعادة محاولة الاتصال بـ WebSocket...");
+              Testt(); // إعادة الاتصال تلقائيًا
+          }, 3000);
+      };
+
+      socket.onerror = (error) => {
+          console.error("⚠️ خطأ في WebSocket:", error);
+      };
+
+      return () => {
+          console.log("⛔ إغلاق WebSocket قبل إزالة المكون");
+          socket.close();
+      };
+  }, []);
+
   
   
   return (
@@ -251,6 +297,18 @@ const {data} = await axios.post(`${apiUrl}/deletePost`,{
           Post
         </button>
       </div>
+
+      {/* <div>
+            <h1>📢 المنشورات</h1>
+            {note.length === 0 && <p>لا توجد منشورات بعد...</p>}
+            {note.map((post, index) => (
+                <div key={index} style={{ border: "1px solid #ddd", padding: "10px", marginBottom: "10px" }}>
+                    <h3>{post.username}</h3>
+                    <p>{post.text}</p>
+                    {post.imageUrl && <img src={post.imageUrl} alt="Post" style={{ maxWidth: "100%", height: "auto" }} />}
+                </div>
+            ))}
+        </div> */}
 
       {/* عرض البوستات */}
       <div className="space-y-4">
