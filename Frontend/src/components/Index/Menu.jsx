@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { FaHome, FaCompass, FaBell, FaEnvelope, FaBookmark, FaChartBar, FaPalette, FaBars, FaTimes, FaHandsHelping } from 'react-icons/fa';
 import { CiViewTable } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
+import { BsFillSignpostSplitFill } from 'react-icons/bs';
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
-const Menu = ({ menuOpen, setMenuOpen }) => {
+const Menu = ({ menuOpen, setMenuOpen, setActiveSection  }) => {
   const [userName, setUserName] = useState('');
   const [Profile, setProfile] = useState();
   const navigate = useNavigate();
@@ -82,6 +83,19 @@ const Menu = ({ menuOpen, setMenuOpen }) => {
               <span>Home</span>
             </li>
           </Link>
+
+
+          <li  onClick={() => setActiveSection('posts')} className='flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200'>
+              <div className='text-xl'><BsFillSignpostSplitFill /></div>
+              <span>Posts</span>
+            </li>
+
+       
+            <li  onClick={() => setActiveSection('official')} className='flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200'>
+              <div className='text-xl'><BsFillSignpostSplitFill /></div>
+              <span>Official Posts</span>
+            </li>
+       
 
           {/* <Link to="/Bookmarks">
             <li className='flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200'>

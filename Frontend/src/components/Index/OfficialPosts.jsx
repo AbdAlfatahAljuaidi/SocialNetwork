@@ -9,7 +9,7 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'; // مهم لستايل التحميل
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
-const Post = () => {
+const OfficialPosts = () => {
   const [postText, setPostText] = useState("");
   const [postImage, setPostImage] = useState(null);
   const [posts, setPosts] = useState([]);
@@ -20,6 +20,7 @@ const Post = () => {
   const [showOptions, setShowOptions] = useState(false);
   const optionsRef = useRef(null);
   const [note,setNote] =useState([])
+  const [fromAdmin,setFromAdmin] =useState(true)
   
 
 
@@ -46,7 +47,7 @@ const Post = () => {
         const res = await axios.get(`${apiUrl}/api/posts`, { maxRedirects: 0 });
   
         // فلترة البوستات حسب fromAdmin
-        const adminPosts = res.data.filter(post => post.fromAdmin === false);
+        const adminPosts = res.data.filter(post => post.fromAdmin === true);
   
         setPosts(adminPosts);
       } catch (error) {
@@ -75,6 +76,7 @@ const Post = () => {
     formData.append("text", postText);
     formData.append("likes", 0);
     formData.append("username", user.Name);
+    formData.append("fromAdmin", fromAdmin);
     formData.append("ProfileImage", user.profileImage);
   
     try {
@@ -285,28 +287,29 @@ const {data} = await axios.post(`${apiUrl}/deletePost`,{
   
   return (
     <div className="w-full mx-auto p-4">
-      {/* إدخال بوست جديد */}
-      <div className="bg-white shadow-md rounded-lg p-4 mb-4">
-        <textarea
-          className="w-full p-2 border rounded mb-2"
-          placeholder="What's on your mind?"
-          value={postText}
-          onChange={(e) => setPostText(e.target.value)}
-        />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setPostImage(e.target.files[0])}
-          className="mb-2"
-        />
-        <button
-          onClick={handleFileUpload}
-          className=" text-white px-4 py-2 rounded " style={{background:color}}
-        >
-          Post
-        </button>
-      </div>
-
+     {user?.admin && (
+  <div className="bg-white shadow-md rounded-lg p-4 mb-4">
+    <textarea
+      className="w-full p-2 border rounded mb-2"
+      placeholder="What's on your mind?"
+      value={postText}
+      onChange={(e) => setPostText(e.target.value)}
+    />
+    <input
+      type="file"
+      accept="image/*"
+      onChange={(e) => setPostImage(e.target.files[0])}
+      className="mb-2"
+    />
+    <button
+      onClick={handleFileUpload}
+      className="text-white px-4 py-2 rounded"
+      style={{ background: color }}
+    >
+      Post
+    </button>
+  </div>
+)}
       {/* <div>
             <h1>📢 المنشورات</h1>
             {note.length === 0 && <p>لا توجد منشورات بعد...</p>}
@@ -503,4 +506,4 @@ onClick={()=> deletePost(post._id)}
   );
 };
 
-export default Post;
+export default OfficialPosts;

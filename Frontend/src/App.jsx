@@ -29,6 +29,7 @@ import Settings from "./components/Profile/Settings";
 import PrivacyPolicy from "./components/Home/PrivacyPolicy";
 import TermsConditions from "./components/Home/TermsConditions";
 import ForgetPassword from "./components/Register/ForgetPassword";
+import OfficialPosts from "./components/Index/OfficialPosts";
 
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
         <Route path="/Notifications" element = {user ? <Notifications /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Friends" element = {user ? <Friends /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Settings" element = {user ? <Settings /> : <Navigate to="/Home/Registration" /> }/>
+        <Route path="/OfficialPosts" element = {user ? <OfficialPosts /> : <Navigate to="/Home/Registration" /> }/>
         
         <Route path="/activeAccount/:token" element ={<Active />}  />
         <Route path="/PrivacyPolicy" element ={<PrivacyPolicy />}  />

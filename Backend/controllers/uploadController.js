@@ -73,6 +73,7 @@ const uploadImage = async (req, res) => {
             imageUrl: imageUrl, // رابط الصورة من Cloudinary
             likes: 0,
             username:req.body.username,
+            fromAdmin:req.body.fromAdmin,
             ProfileImage: req.body.ProfileImage, // معرف المستخدم
         });
 
