@@ -83,7 +83,7 @@ const Menu = ({ menuOpen, setMenuOpen }) => {
             </li>
           </Link>
 
-          <Link to="/Bookmarks">
+          {/* <Link to="/Bookmarks">
             <li className='flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200'>
               <div className='text-xl'><FaBell /></div>
               <span>Notification</span>
@@ -95,7 +95,7 @@ const Menu = ({ menuOpen, setMenuOpen }) => {
               <div className='text-xl'><FaEnvelope /></div>
               <span>Message</span>
             </li>
-          </Link>
+          </Link> */}
 
           <Link to="/Bookmarks">
             <li className='flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200'>

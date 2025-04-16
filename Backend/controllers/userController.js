@@ -274,6 +274,19 @@ const ProfileInfo = async (req, res) => {
         .json({ error: true, message: "All Fields Required" });
     }
 
+    if (isNaN(Phone)) {
+      return res.status(400).json({
+        error: true,
+        message: "Phone must be a number",
+      });
+    }
+
+    if (isNaN(year)) {
+      return res.status(400).json({
+        error: true,
+        message: "First year must be a number",
+      });
+    }
     
 
     // التحقق من وجود الملف

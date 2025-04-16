@@ -6,9 +6,9 @@ import { toast } from 'react-toastify';
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Update = () => {
-  const [Age, setAge] = useState("");
+  const [Age, setAge] = useState();
   const [Address, setAddress] = useState("");
-  const [Phone, setPhone] = useState("");
+  const [Phone, setPhone] = useState();
   const [Gender, setGender] = useState("");
   const [major, setMajor] = useState("");
   const [postImage, setPostImage] = useState(null);
@@ -22,6 +22,14 @@ const Update = () => {
   const AddInfo = async () => {
     if (isSubmitting) return;
     setIsSubmitting(true); // ✅ بداية الإرسال
+
+
+    const ageNumber = parseInt(Age);
+    if (isNaN(ageNumber) || ageNumber < 10 || ageNumber > 99) {
+      toast.error("Age must be between 10 and 99");
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const formData = new FormData();
@@ -38,6 +46,8 @@ const Update = () => {
       const { data } = await axios.post(`${apiUrl}/User/Profile`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+
+
 
       if (data.error === false) {
         let userData = JSON.parse(localStorage.getItem('user')) || {};

@@ -19,7 +19,7 @@ const ProfileSchema = new mongoose.Schema({
   },
 
   Phone: {
-    type: String,
+    type: Number,
     required: true,
   },
 
@@ -65,7 +65,7 @@ function ProfileValidation(object) {
     userID: Joi.string(),
     Age: Joi.number().min(1).max(99).required(),
     Address: Joi.string().min(3).max(40).required(),
-    Phone: Joi.string().min(3).max(40).required(),
+    Phone: Joi.number().min(3).max(40).required(),
     Gender: Joi.string().required(),
     major: Joi.string().required(),
     username: Joi.string().required(),
