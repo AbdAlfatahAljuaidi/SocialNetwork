@@ -10,7 +10,7 @@ const ProfileSchema = new mongoose.Schema({
   },
 
   Age: {
-    type: String,
+    type: Number,
     required: true,
   },
   Address: {
@@ -63,7 +63,7 @@ const Profile = mongoose.model("Profile", ProfileSchema);
 function ProfileValidation(object) {
   const schema = Joi.object({
     userID: Joi.string(),
-    Age: Joi.string().min(1).max(2).required(),
+    Age: Joi.number().min(1).max(99).required(),
     Address: Joi.string().min(3).max(40).required(),
     Phone: Joi.string().min(3).max(40).required(),
     Gender: Joi.string().required(),

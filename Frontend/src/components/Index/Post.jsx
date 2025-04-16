@@ -378,7 +378,7 @@ onClick={()=> deletePost(post._id)}
 
             </div>
            
-              <p className="text-gray-400 mt-3">{post.text}</p>
+              <p className="text-black mt-3">{post.text}</p>
               {post.imageUrl && (
                 <img
                   src={post.imageUrl}
@@ -437,6 +437,7 @@ onClick={()=> deletePost(post._id)}
 
                   <div className="flex justify-between items-center">
                   <div className="flex gap-4 items-center">
+                    
                   <img src={comment.imageUser} className="w-12 h-12 rounded-full" alt="" />
 <div>
 <h1 >{comment.user}</h1>
@@ -468,7 +469,7 @@ onClick={()=> deletePost(post._id)}
                   </div>
                 
                 
-                  <p className="mt-3">{comment.content}</p>
+                  <p className="mt-3 ">{comment.content}</p>
                 </div>
               ))}
               {post.comments.length > 2 && (

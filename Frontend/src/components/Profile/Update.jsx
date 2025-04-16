@@ -89,7 +89,7 @@ if (data.error === false) {
               className="w-full p-3 border rounded"
               required
             >
-              <option value="">Select Gender</option>
+              <option value="">Select Major</option>
               <option value="Software Engineer">Software Engineer</option>
               <option value="Law">Law</option>
             </select>
