@@ -43,6 +43,13 @@ const UsersProfile = () => {
 
   const addFriend = async () => {
     try {
+
+ if (!user || !user.profileImage) {
+      toast.error("You cannot publish the post before creating your own profile.");
+      return;
+    }
+
+
       const { data } = await axios.post(`${apiUrl}/follow/${params.username}`, {
         Name: user.Name
       });

@@ -47,7 +47,7 @@ const Menu = ({ menuOpen, setMenuOpen }) => {
   const isDashboardVisible = user?.admin === true;
 
   return (
-    <div className={`bg-white w-72 sm:w-96 mt-5 ml-5 py-4 px-5 rounded-xl shadow-lg h-full sm:h-[80vh] sm:flex flex-col justify-between ${menuOpen ? "block" : "hidden"} relative`}>
+    <div className={`bg-white sticky top-24 w-72 sm:w-96 mt-5 ml-5 py-4 px-5 rounded-xl shadow-lg h-full sm:h-[80vh] sm:flex flex-col justify-between ${menuOpen ? "block" : "hidden"} relative`}>
       
       {/* زر الإغلاق (X) */}
       <button 

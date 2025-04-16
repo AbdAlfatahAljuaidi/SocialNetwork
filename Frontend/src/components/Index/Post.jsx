@@ -5,6 +5,8 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { toast } from 'react-toastify';
 import { FaTrash } from "react-icons/fa";
 import Testt from "../Testt";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'; // مهم لستايل التحميل
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Post = () => {
@@ -18,6 +20,7 @@ const Post = () => {
   const [showOptions, setShowOptions] = useState(false);
   const optionsRef = useRef(null);
   const [note,setNote] =useState([])
+  
 
 
     const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
@@ -112,6 +115,13 @@ const Post = () => {
 
   const handleCommentSubmit = async (postId) => {
     try {
+
+      if (!user || !user.profileImage) {
+        toast.error("You cannot publish the post before creating your own profile.");
+        return;
+      }
+
+
       const { data } = await axios.post(
         `${apiUrl}/comment/${postId}`,
         {
@@ -143,6 +153,13 @@ const Post = () => {
 
   const handleLike = async (postId) => {
     try {
+
+      if (!user || !user.profileImage) {
+        toast.error("You cannot publish the post before creating your own profile.");
+        return;
+      }
+
+
       const { data } = await axios.post(
         `${apiUrl}/Like/${postId}`,
         {
@@ -309,6 +326,8 @@ const {data} = await axios.post(`${apiUrl}/deletePost`,{
                 </div>
             ))}
         </div> */}
+
+        
 
       {/* عرض البوستات */}
       <div className="space-y-4">

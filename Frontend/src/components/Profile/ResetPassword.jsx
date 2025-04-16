@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const ResetPassword = () => {
@@ -37,8 +38,8 @@ const ResetPassword = () => {
       );
 
       if (data.success) {
-        setSuccess("Password updated successfully!");
         setError("");
+        toast.success("Password updated successfully!")
         setTimeout(() => navigate("/Index/Profile"), 2000); // إعادة التوجيه بعد النجاح
       }
     } catch (error) {

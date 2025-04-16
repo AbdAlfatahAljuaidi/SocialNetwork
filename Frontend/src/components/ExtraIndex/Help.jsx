@@ -2,38 +2,42 @@ import React, { useState } from 'react'
 import Nav from '../Index/Nav'
 import axios from 'axios';
 import { toast } from 'react-toastify';
+
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Help = () => {
-    const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
+  const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
 
-    const [type,setType] = useState("")
-    const [details,setDetails] = useState("")
+  const [type, setType] = useState("");
+  const [details, setDetails] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // ✅ حالة جديدة
 
-     
-       const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
+  const Suggest = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true); // ✅ بداية الإرسال
 
-       const Suggest = async () => {
-        try {
-          const { data } = await axios.post(`${apiUrl}/submitSuggestion`, {
-            type,
-            details,
-            name: user.Name,
-            email: user.Email
-          });
-      
-          if (data?.error === false) {
-            toast.success(`Your ${type} has been submitted successfully`);
-            setType("");      // تفريغ الحقول بعد الإرسال
-            setDetails("");
-          }
-        } catch (error) {
-          console.log(error);
-          toast.error(error.response.data.message);
-        }
-      };
-      
+    try {
+      const { data } = await axios.post(`${apiUrl}/submitSuggestion`, {
+        type,
+        details,
+        name: user.Name,
+        email: user.Email
+      });
+
+      if (data?.error === false) {
+        toast.success(`Your ${type} has been submitted successfully`);
+        setType("");
+        setDetails("");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
+      setIsSubmitting(false); // ✅ نهاية الإرسال
+    }
+  };
 
   return (
     <div>
@@ -65,7 +69,7 @@ const Help = () => {
               id="details"
               name="details"
               value={details}
-            onChange={(e)=> setDetails(e.target.value)}
+              onChange={(e) => setDetails(e.target.value)}
               className="w-full p-3 border rounded"
               rows="4"
               placeholder="Enter your details here..."
@@ -75,16 +79,20 @@ const Help = () => {
 
           {/* Submit button */}
           <div>
-            <button type="submit" className="px-6 py-3  text-white rounded-lg" onClick={()=>Suggest()} style={{
-                background:color
-              }}>
-              Submit
+            <button
+              type="submit"
+              onClick={Suggest}
+              disabled={isSubmitting}
+              className="px-6 py-3 text-white rounded-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{ background: color }}
+            >
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Help
+export default Help;

@@ -17,53 +17,31 @@ const SignUp = ({ switchToLogin }) => {
 
     const navigate =useNavigate()
 
-
-
-    const submit = async () => {
-        if (isSubmitting) return; // منع الضغط أكثر من مرة
+    const submitForm = async () => {
+        if (isSubmitting) return; // منع الضغط المتكرر
       
         setIsSubmitting(true);
         try {
-          // Send form data to backend here
+          const { data } = await axios.post(`${apiUrl}/User/SignUp`, {
+            Name,
+            Email,
+            Password
+          });
+      
+          if (
+            data.message ===
+            "new user created now you should go to your email to activate it"
+          ) {
+            console.log("user signup success");
+            toast.success("New user created now you should go to your email to activate it");
+          }
         } catch (error) {
-          console.error("Error submitting form:", error);
-          toast.error(error)
+          console.log(error.response);
+          toast.error(error.response?.data?.message || "فشل في إنشاء الحساب");
         } finally {
           setIsSubmitting(false);
         }
       };
-      
-
-
-    const submitForm = async () => {
-
-        try{
-            const {data} = await axios.post(`${apiUrl}/User/SignUp`,{
-                Name ,
-                Email,
-                Password
-            })
-
-            if (data.message == "new user created now you should go to your email to activate it"){
-           console.log("user signup success");
-           toast.success("new user created now you should go to your email to activate it");
-           
-         
-           
-            }
-        }
-        catch(error){
-            console.log(error.response);
-            toast.error(error.response.data.message);
-            
-        }
-     
-
-
-
-
-    }
-
 
 
     
@@ -110,15 +88,12 @@ const SignUp = ({ switchToLogin }) => {
 
                 <button
   className='w-full h-11 bg-white border-none outline-none rounded-[40px] font-bold cursor-pointer text-black shadow-sm mt-4 disabled:opacity-50 disabled:cursor-not-allowed'
-  onClick={() => {
-    submitForm();
-    submit();
-  }}
-  
+  onClick={submitForm}
   disabled={isSubmitting}
 >
   {isSubmitting ? "Registering..." : "Register"}
 </button>
+
 
 
                 <div className='text-sm text-center mt-5 mr-0 ml-4'>
