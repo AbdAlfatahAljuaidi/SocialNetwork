@@ -49,8 +49,8 @@ const SignUp = ({ switchToLogin }) => {
     return (
         <div className='w-full p-10'>
             <div>
-                <h1 className='text-3xl text-center font-extrabold'>Create Your Account on Ask AAU</h1>
-                <div className='relative w-full my-8 mx-0 h-12'>
+                <h1 className='text-3xl text-center font-extrabold '>Create Your Account on Ask AAU</h1>
+                <div className='relative w-full my-4 md:my-8 mx-0 h-12'>
                     <input
                         className='w-full h-full bg-transparent border-none outline-none placeholder:text-white custom-bg rounded-[40px] text-lg text-white py-5 pr-11 pl-5'
                         name="Name"
@@ -61,7 +61,7 @@ const SignUp = ({ switchToLogin }) => {
                     <FaUser className='absolute right-[20px] top-1/3 text-lg' />
                 </div>
 
-                <div className='relative w-full my-8 mx-0 h-12'>
+                <div className='relative w-full my-4 md:my-8 mx-0 h-12'>
                     <input
                         className='w-full h-full bg-transparent border-none outline-none placeholder:text-white custom-bg rounded-[40px] text-lg text-white py-5 pr-11 pl-5'
                         name="Email"
@@ -72,7 +72,7 @@ const SignUp = ({ switchToLogin }) => {
                     <FaEnvelope className='absolute right-[20px] top-1/3 text-lg' />
                 </div>
 
-                <div className='relative w-full my-8 mx-0 h-12'>
+                <div className='relative w-full my-4 md:my-8 mx-0 h-12'>
                     <input
                         className='w-full h-full bg-transparent border-none outline-none placeholder:text-white custom-bg rounded-[40px] text-lg text-white py-5 pr-11 pl-5'
                         name="Password"
@@ -87,7 +87,7 @@ const SignUp = ({ switchToLogin }) => {
   <div
     onMouseEnter={() => setShowText(true)}
     onMouseLeave={() => setShowText(false)}
-    className="cursor-pointer flex items-center gap-2"
+    className="cursor-pointer flex items-center gap-1"
   >
     <input
       className="mr-1"
@@ -98,7 +98,7 @@ const SignUp = ({ switchToLogin }) => {
   </div>
 
   {showText && (
-    <div className="absolute left-0 top-full mt-2 bg-gray-100 border border-gray-300 p-2 rounded shadow text-black w-[300px]">
+    <div className="absolute left-0 top-full mt-2 bg-gray-100 border border-gray-300  rounded shadow text-black w-[300px]">
       Select if you're an Amman Arab University student to earn points form posts, comments, and likes. Points can be redeemed for benefits from the university.
     </div>
   )}
@@ -116,7 +116,7 @@ const SignUp = ({ switchToLogin }) => {
 
 
 
-                <div className='text-sm text-center mt-5 mr-0 ml-4'>
+                <div className='text-sm text-center mt-5 mr-0 ml-4 pb-2'>
                     <p>Already have an account? <a className='text-white font-semibold hover:underline' href='#' onClick={switchToLogin}>Login</a></p>
                 </div>
             </div>

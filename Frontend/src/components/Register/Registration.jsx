@@ -12,7 +12,7 @@ const Registration = ({setUser}) => {
 
     return (
         <div className='back bg-main'>
-            <div className={`wrapper relative w-[420px] font-abc h-[500px]  bg-transparent rounded-lg text-white flex items-center ${isRegister ? 'active' : ''}`}>
+            <div className={`wrapper relative w-[420px] font-abc h-[450px] bg-transparent rounded-lg text-white flex items-center ${isRegister ? 'active' : ''}`}>
                 {isRegister ? (
                     <SignUp switchToLogin={switchToLogin} />
                 ) : (
