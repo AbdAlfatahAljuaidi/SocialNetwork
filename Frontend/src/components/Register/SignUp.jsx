@@ -98,7 +98,7 @@ const SignUp = ({ switchToLogin }) => {
   </div>
 
   {showText && (
-    <div className="absolute left-0 top-full mt-2 bg-gray-100 border border-gray-300  rounded shadow text-black w-[300px]">
+    <div className="absolute left-0 top-full mt-2 bg-gray-100 border border-gray-300 p-3  rounded shadow text-black w-[300px]">
       Select if you're an Amman Arab University student to earn points form posts, comments, and likes. Points can be redeemed for benefits from the university.
     </div>
   )}
