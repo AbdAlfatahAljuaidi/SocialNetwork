@@ -84,25 +84,26 @@ const SignUp = ({ switchToLogin }) => {
                 </div>
 
                 <div className="flex justify-between text-sm mt-5 mr-0 ml-4 relative">
-      <label
-        onMouseEnter={() => setShowText(true)}
-        onMouseLeave={() => setShowText(false)}
-        className="cursor-pointer"
-      >
-        <input
-          className="mr-1"
-          type="checkbox"
-          onClick={() => setShowText(!showText)}
-        />
-        Are you a student in Amman Arab University?
-      </label>
+  <div
+    onMouseEnter={() => setShowText(true)}
+    onMouseLeave={() => setShowText(false)}
+    className="cursor-pointer flex items-center gap-2"
+  >
+    <input
+      className="mr-1"
+      type="checkbox"
+      onClick={() => setShowText(!showText)}
+    />
+    <span>Are you a student in Amman Arab University?</span>
+  </div>
 
-      {showText && (
-        <div className="absolute left-0 top-full mt-2 bg-gray-100 border border-gray-300 p-2 rounded shadow text-black w-[300px]">
-         Select this if you're an Amman Arab University student to earn points for posts, comments, and likes. Points can be redeemed for discounts and benefits from the university.
-        </div>
-      )}
+  {showText && (
+    <div className="absolute left-0 top-full mt-2 bg-gray-100 border border-gray-300 p-2 rounded shadow text-black w-[300px]">
+      Select if you're an Amman Arab University student to earn points form posts, comments, and likes. Points can be redeemed for benefits from the university.
     </div>
+  )}
+</div>
+
   
 
                 <button
