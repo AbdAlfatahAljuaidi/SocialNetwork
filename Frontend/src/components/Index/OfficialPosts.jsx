@@ -21,6 +21,7 @@ const OfficialPosts = () => {
   const optionsRef = useRef(null);
   const [note,setNote] =useState([])
   const [fromAdmin,setFromAdmin] =useState(true)
+  const [loading, setLoading] = useState(true);
   
 
 
@@ -28,6 +29,20 @@ const OfficialPosts = () => {
 
 
 
+    useEffect(() => {
+      const fetchPosts = async () => {
+        setLoading(true);
+        try {
+          const { data } = await axios.get(`${apiUrl}/api/posts`);
+          setPosts(data);
+        } catch (error) {
+          console.error("حدث خطأ أثناء جلب البوستات:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchPosts();
+    }, []);
 
 
   useEffect(() => {
@@ -326,7 +341,8 @@ const {data} = await axios.post(`${apiUrl}/deletePost`,{
 
       {/* عرض البوستات */}
       <div className="space-y-4">
-        {posts.map((post) => (
+      {posts && posts.length > 0 ? (
+  posts.map((post) => (
           <div key={post._id} className="bg-white shadow-md rounded-lg p-4">
          
             <div className="flex justify-between">
@@ -500,7 +516,30 @@ onClick={()=> deletePost(post._id)}
               )}
             </div>
           </div>
-        ))}
+        ))) : (
+          <>
+           {loading && (
+  <div className="mt-6 space-y-6 animate-pulse">
+    {/* شريط تحميل علوي */}
+    <div className="h-2 w-1/4 bg-blue-300 rounded-full mx-auto"></div>
+
+    {/* بوست وهمي رقم 1 */}
+    <div className="bg-white p-5 rounded-xl shadow-md space-y-3">
+      <div className="h-4 w-1/2 bg-gray-300 rounded"></div>
+      <div className="h-3 w-full bg-gray-200 rounded"></div>
+      <div className="h-3 w-5/6 bg-gray-200 rounded"></div>
+    </div>
+
+    {/* بوست وهمي رقم 2 */}
+    <div className="bg-white p-5 rounded-xl shadow-md space-y-3">
+      <div className="h-4 w-2/3 bg-gray-300 rounded"></div>
+      <div className="h-3 w-full bg-gray-200 rounded"></div>
+      <div className="h-3 w-4/5 bg-gray-200 rounded"></div>
+    </div>
+  </div>
+)}
+          </>
+        )}
       </div>
     </div>
   );
