@@ -49,7 +49,7 @@ const Nav = () => {
         <div className="relative w-full sm:w-auto mb-4 sm:mb-0">
           <input
             type="text"
-            placeholder="Search for persons"
+            placeholder="Search by poster's name"
             onChange={(e)=> setUsername(e.target.value)}
             className="w-full sm:w-80 px-4 py-2 pl-12 text-gray-700 bg-gray-100 border border-gray-300 rounded-full "
           />
