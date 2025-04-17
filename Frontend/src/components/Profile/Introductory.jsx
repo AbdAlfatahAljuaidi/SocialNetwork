@@ -88,7 +88,7 @@ const Introductory = () => {
             ))
           ) : (
             <p className="text-gray-500">Loading profile...</p>
-          )}
+          ) }
         </div>
 
         {/* Personal Info Section */}

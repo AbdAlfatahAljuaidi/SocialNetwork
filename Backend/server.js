@@ -14,23 +14,23 @@ const io = require('socket.io')(http)
 
 
 
-app.get('/', function(req,res){
-  res.sendFile(__dirname + '/Testt.jsx');
+// app.get('/', function(req,res){
+//   res.sendFile(__dirname + '/Testt.jsx');
 
-})
-
-
+// })
 
 
 
 
-io.on('connection', function(socket){
-  console.log('new client connected');
-  io.emit('new', 'hello from server');
-});
 
 
-http.listen(5173)
+// io.on('connection', function(socket){
+//   console.log('new client connected');
+//   io.emit('new', 'hello from server');
+// });
+
+
+// http.listen(5173)
 
 
 app.use(cors())

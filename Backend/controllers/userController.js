@@ -561,7 +561,7 @@ const editUser = async (req, res) => {
   try {
     const { id } = req.params; 
   
-    const { Name, Email } = req.body;
+    const { Name, Email,admin } = req.body;
   
     if(!Name || !Email){
       return res.status(400).json({error:true, message:"All fields are required"})
@@ -570,7 +570,8 @@ const editUser = async (req, res) => {
     const updateUser = await SignUp.findByIdAndUpdate(id,
       {
         Name ,
-        Email
+        Email,
+        admin
       },
       {new:true}
     )

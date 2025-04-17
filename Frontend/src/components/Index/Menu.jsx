@@ -151,7 +151,7 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection  }) => {
       </nav>
 
       {/* زر القائمة */}
-      <div className='flex items-center space-x-2 text-white hover:text-white px-4 py-2 rounded-lg cursor-pointer transition duration-200'
+      <div className='flex items-center space-x-2 text-white hover:text-white px-4 py-2 rounded-lg  transition duration-200'
         style={{
           background: color, // تغيير اللون فقط للعنصر
         }}

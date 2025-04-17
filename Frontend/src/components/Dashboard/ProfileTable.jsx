@@ -97,6 +97,7 @@ const ProfileTable = () => {
       <table className='min-w-full border border-gray-300 shadow-md rounded-lg overflow-hidden'>
         <thead className='bg-gray-100'>
           <tr>
+            <th className='px-4 py-2 border'>username</th>
             <th className='px-4 py-2 border'>Age</th>
             <th className='px-4 py-2 border'>Address</th>
             <th className='px-4 py-2 border'>Phone</th>
@@ -108,6 +109,7 @@ const ProfileTable = () => {
           {currentProfiles.length > 0 ? (
             currentProfiles.map((profile) => (
               <tr key={profile._id} className='text-center hover:bg-gray-50'>
+                <td className='px-4 py-2 border'>{profile.username}</td>
                 <td className='px-4 py-2 border'>{profile.Age}</td>
                 <td className='px-4 py-2 border'>{profile.Address}</td>
                 <td className='px-4 py-2 border'>{profile.Phone}</td>

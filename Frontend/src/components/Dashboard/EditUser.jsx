@@ -7,6 +7,7 @@ const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 const EditUser = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [admin, setAdmin] = useState();
   const { id } = useParams(); // استخراج ID المستخدم من الرابط
   const navigate = useNavigate(); // استخراج ID المستخدم من الرابط
 
@@ -18,6 +19,7 @@ const EditUser = () => {
       if (!data.error) { // التأكد من عدم وجود خطأ
         setName(data.user.Name || ''); // ضبط الاسم
         setEmail(data.user.Email || ''); // ضبط البريد الإلكتروني
+        setAdmin(data.user.admin || ''); 
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -38,6 +40,7 @@ const Update = async () => {
     const { data } = await axios.put(`${apiUrl}/editUser/${id}`, {
       Name: name,  // ضع الاسم الجديد هنا
       Email: email, // ضع الإيميل الجديد هنا
+      admin:admin, // ضع الإيميل الجديد هنا
     });
 
     console.log("User updated:", data);
@@ -83,6 +86,17 @@ const Update = async () => {
             required
           />
         </div>
+
+        <div className="flex items-center space-x-3">
+  <input
+    id="admin"
+    type="checkbox"
+    checked={admin}
+    onChange={(e) => setAdmin(e.target.checked)}
+    className="h-5 w-5"
+  />
+  <label htmlFor="admin" className="text-lg font-medium">Admin</label>
+</div>
 
         {/* زر الحفظ */}
         <button

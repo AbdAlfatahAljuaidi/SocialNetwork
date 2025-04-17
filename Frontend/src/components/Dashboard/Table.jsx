@@ -97,6 +97,7 @@ const Table = () => {
           <tr>
             <th className="px-4 py-2 border">Name</th>
             <th className="px-4 py-2 border">Email</th>
+            <th className="px-4 py-2 border">Admin</th>
             <th className="px-4 py-2 border">Action</th>
           </tr>
         </thead>
@@ -106,6 +107,7 @@ const Table = () => {
               <tr key={user._id} className="text-center hover:bg-gray-50">
                 <td className="px-4 py-2 border">{user.Name}</td>
                 <td className="px-4 py-2 border">{user.Email}</td>
+                <td className="px-4 py-2 border">{user.admin ? "Yes" : "No"}</td>
                 <td className="px-4 py-2 border">
                   <button
                     className="bg-red-500 text-white px-3 ml-3 py-1 w-20 rounded hover:bg-red-600"
