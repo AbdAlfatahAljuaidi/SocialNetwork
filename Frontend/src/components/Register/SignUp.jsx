@@ -13,6 +13,7 @@ const SignUp = ({ switchToLogin }) => {
     const [Email,setEmail] = useState("")
     const [Password,setPassword] = useState("")
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showText, setShowText] = useState(false);
 
 
     const navigate =useNavigate()
@@ -48,7 +49,7 @@ const SignUp = ({ switchToLogin }) => {
     return (
         <div className='w-full p-10'>
             <div>
-                <h1 className='text-4xl text-center font-extrabold'>Register</h1>
+                <h1 className='text-3xl text-center font-extrabold'>Create Your Account on Ask AAU</h1>
                 <div className='relative w-full my-8 mx-0 h-12'>
                     <input
                         className='w-full h-full bg-transparent border-none outline-none placeholder:text-white custom-bg rounded-[40px] text-lg text-white py-5 pr-11 pl-5'
@@ -82,9 +83,27 @@ const SignUp = ({ switchToLogin }) => {
                     <FaLock className='absolute right-[20px] top-1/3 text-lg' />
                 </div>
 
-                <div className='flex justify-between text-sm mt-5 mr-0 ml-4'>
-                    <label><input className='mr-1' type='checkbox' />Are you a student in Amman Arab University?</label>
-                </div>
+                <div className="flex justify-between text-sm mt-5 mr-0 ml-4 relative">
+      <label
+        onMouseEnter={() => setShowText(true)}
+        onMouseLeave={() => setShowText(false)}
+        className="cursor-pointer"
+      >
+        <input
+          className="mr-1"
+          type="checkbox"
+          onClick={() => setShowText(!showText)}
+        />
+        Are you a student in Amman Arab University?
+      </label>
+
+      {showText && (
+        <div className="absolute left-0 top-full mt-2 bg-gray-100 border border-gray-300 p-2 rounded shadow text-black w-[300px]">
+         Select this if you're an Amman Arab University student to earn points for posts, comments, and likes. Points can be redeemed for discounts and benefits from the university.
+        </div>
+      )}
+    </div>
+  
 
                 <button
   className='w-full h-11 bg-white border-none outline-none rounded-[40px] font-bold cursor-pointer text-black shadow-sm mt-4 disabled:opacity-50 disabled:cursor-not-allowed'
