@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const Menu = ({ activePage, setActivePage, color }) => {
   const menuItems = [
     { name: 'Introductory', label: 'My Profile' },
-    { name: 'Notifications', label: 'Notification' },
+    { name: 'Notifications', label: 'Suggestions' },
     { name: 'Friends', label: 'Friends' },
     { name: 'Settings', label: 'Settings' },
     // يمكنك إضافة صفحات إضافية هنا

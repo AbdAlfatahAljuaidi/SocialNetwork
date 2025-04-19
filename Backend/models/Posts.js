@@ -21,4 +21,4 @@ const postSchema = new mongoose.Schema({
    fromAdmin:{type:Boolean,default: 0},
   }, { timestamps: true });
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model('Post', postSchema );

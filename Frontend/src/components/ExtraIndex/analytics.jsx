@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Nav from '../Index/Nav';
 import { FaComment, FaHeart } from 'react-icons/fa';
+import Menu from '../Index/Menu';
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Analytics = () => {
@@ -46,18 +47,30 @@ const Analytics = () => {
           <div className="space-y-6">
             {posts.map((post, index) => (
               <div key={index} className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                <div className="flex items-center mb-4">
+                <div className="flex items-center mb-2">
                 
                       
-                <div className="flex items-center mb-4">
+                <div className="flex items-center mb-2">
                   <img src={post.ProfileImage || 'https://via.placeholder.com/50'} alt={post.author} className="w-12 h-12 rounded-full mr-3" />
                   <div>
                   <h2 className="text-lg font-bold text-gray-700">{post.username}</h2>
-                  <p className='text-gray-400 '>{post.text}</p>
+                  <p className="text-sm text-gray-500">
+                    {new Date(post.createdAt).toLocaleString("EG", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      hour12: true,
+                    })}
+                  </p>
+                  
                   </div>
                  
                 </div>
                 </div>
+                  <p>{post.text}</p>
                 <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover rounded-lg mb-4 shadow-sm" />
                
               <div className="flex items-center justify-between text-gray-600">

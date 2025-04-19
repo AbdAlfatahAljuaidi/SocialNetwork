@@ -20,6 +20,11 @@ const suggestionSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+
+  state:{
+    type:String,
+    
+  },
   
   createdAt: {
     type: Date,
@@ -38,6 +43,7 @@ function SuggestValidation(object) {
         details: Joi.string().required(),
         name: Joi.string().required(),
         email: Joi.string().required(),
+        state:Joi.string(),
       
      
     });

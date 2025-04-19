@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Nav from "../Index/Nav";
+import { Link } from "react-router-dom";
 
 export default function Theme() {
   const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
@@ -39,12 +40,14 @@ export default function Theme() {
           </p>
 
           {/* ✅ زر بلون متغير */}
+          <Link to="/index">
           <button
             style={{ backgroundColor: color }}
             className="mt-8 px-6 py-3 rounded-lg text-white text-lg font-semibold shadow-md hover:opacity-80 transition"
           >
           Custom color button
           </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ const Help = () => {
 
   const [type, setType] = useState("");
   const [details, setDetails] = useState("");
+  const [state, setstate] = useState("Pending ");
   const [isSubmitting, setIsSubmitting] = useState(false); // ✅ حالة جديدة
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -23,7 +24,8 @@ const Help = () => {
         type,
         details,
         name: user.Name,
-        email: user.Email
+        email: user.Email,
+        state,
       });
 
       if (data?.error === false) {

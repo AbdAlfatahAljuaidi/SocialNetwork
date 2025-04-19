@@ -652,10 +652,23 @@ const Comment =  async (req, res) => {
       const post = await Post.findById(id);
       if (!post) return res.status(404).json({ message: 'Post not found' });
 
-      post.comments.push({ content, user: userId , imageUser:imageUser });
+
+
+     const getComment = post.comments.push({ content, user: userId , imageUser:imageUser });
+
+     console.log("comment=", getComment);
+     
+
+      
+
       await post.save();
 
-      res.status(201).json({error:false, post});
+      const comment = post.comments[getComment-1]
+
+      console.log(comment);
+      
+
+      res.status(201).json({error:false, post,comment});
   } catch (error) {
       res.status(500).json({ message: error.message });
   }
@@ -1048,9 +1061,9 @@ const submitSuggestion = async (req, res) => {
       return res.status(400).json({ message: error.details[0].message });
     }
 
-    const { type, details ,name,email } = req.body;
+    const { type, details ,name,email,state } = req.body;
 
-    const newSuggestion = new Suggest({ type, details ,name,email});
+    const newSuggestion = new Suggest({ type, details ,name,email,state});
     await newSuggestion.save();
 
     res.status(201).json({ message: "Suggestion submitted successfully.", error:false });
@@ -1069,6 +1082,24 @@ const getSuggestions = async (req, res) => {
     res.status(500).json({ message: "Internal server error." });
   }
 };
+
+
+
+
+const getSuggestionsForUser = async (req, res) => {
+  try {
+    const {name} = req.body
+    const suggestions = await Suggest.find({name}).sort({ createdAt: -1 });
+    res.json(suggestions);
+  } catch (err) {
+    console.error("Error fetching suggestions:", err);
+    res.status(500).json({ message: "Internal server error." });
+  }
+};
+
+
+
+
 
 
 
@@ -1272,6 +1303,7 @@ module.exports = {
   deleteComment,
   submitSuggestion,
   getSuggestions,
+  getSuggestionsForUser,
   deleteSuggestion,
   showFriends,
   show_active,

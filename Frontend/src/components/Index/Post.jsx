@@ -23,6 +23,7 @@ const Post = () => {
   const optionsRef = useRef(null);
   const [note, setNote] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [color, setColor] = useState(
     localStorage.getItem("mainColor") || "#1D4ED8"
@@ -81,7 +82,7 @@ const Post = () => {
     // التأكد من أن المستخدم لديه صورة للبروفايل
     if (!user || !user.profileImage) {
       toast.error(
-        "You cannot publish the post before creating your own profile."
+        "You cannot publish a post before creating your own profile."
       );
       return;
     }
@@ -117,10 +118,21 @@ const Post = () => {
 
   const handleCommentSubmit = async (postId) => {
     try {
+
+      setIsSubmitting(true)
+
+      if (!commentText[postId]) {
+        toast.error("Comment cannot be empty");
+        setIsSubmitting(false)
+        return;
+      }
+
+
       if (!user || !user.profileImage) {
         toast.error(
-          "You cannot publish the post before creating your own profile."
+          "You cannot comment before creating your own profile"
         );
+        setIsSubmitting(false)
         return;
       }
 
@@ -129,6 +141,9 @@ const Post = () => {
         userId: user.Name,
         imageUser: user.profileImage,
       });
+
+      console.log(data);
+      
 
       // تأكد من أن البيانات التي تستقبلها تحتوي على user و content
 
@@ -139,12 +154,7 @@ const Post = () => {
             ? {
                 ...post,
                 comments: [
-                  {
-                    user: user.Name,
-                    content: commentText[postId],
-                    imageUser: user.profileImage,
-                    createdAt: new Date().toISOString(),
-                  },
+                data.comment,
                   ...post.comments,
                 ],
               }
@@ -154,6 +164,8 @@ const Post = () => {
 
       // مسح محتوى التعليق بعد الإرسال
       setCommentText((prev) => ({ ...prev, [postId]: "" }));
+
+      setIsSubmitting(false)
     } catch (error) {
       console.log(error);
     }
@@ -163,7 +175,7 @@ const Post = () => {
     try {
       if (!user || !user.profileImage) {
         toast.error(
-          "You cannot publish the post before creating your own profile."
+         " Please create your profile before liking posts"
         );
         return;
       }
@@ -185,19 +197,22 @@ const Post = () => {
   };
 
   const deletePost = async (postid) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+    if (!confirmDelete) return;
+  
     try {
       const { data } = await axios.post(`${apiUrl}/deletePost`, {
         postid: postid,
       });
-
+  
       toast.success(data.message);
       setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postid));
     } catch (error) {
-      console.log(error.reponse);
-      toast.error(error.response);
+      console.log(error.response);
+      toast.error("Failed to delete post");
     }
   };
-
+  
   const savePost = async (postid) => {
     try {
       const { data } = await axios.post(`${apiUrl}/savePost`, {
@@ -214,6 +229,9 @@ const Post = () => {
 
   const removeComment = async (postId, commentId) => {
     try {
+      const confirmDelete = window.confirm("Are you sure you want to delete this comment?");
+      if (!confirmDelete) return;
+    
       const response = await axios.post(
         `${apiUrl}/deleteComment/${postId}/${commentId}`
       );
@@ -412,8 +430,7 @@ const Post = () => {
 
             {/* إدخال التعليق */}
             <div className="mt-4">
-              <input
-                type="text"
+              <textarea
                 placeholder="Write a Comment..."
                 value={commentText[post._id] || ""}
                 onChange={(e) =>
@@ -422,13 +439,14 @@ const Post = () => {
                 className="w-full p-2 border rounded"
               />
               <button
+              disabled={isSubmitting}
                 onClick={() => handleCommentSubmit(post._id)}
                 className="mt-2  text-white px-4 py-1 rounded"
                 style={{
                   background: color,
                 }}
               >
-                Comment
+                {isSubmitting ? "Commenting..." : "Comment"}
               </button>
             </div>
 

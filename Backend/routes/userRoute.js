@@ -1,6 +1,6 @@
 const express = require('express');
 const routerUser =require("express").Router()
-const {UserOpinion,ShowOpinions ,SignUpUser, Login ,ProfileInfo,setProfile,getinfo,editProfile,getUser,deleteUser,ResetPassword,showUser,editUser,deleteOpinion,Comment,Like,getAllProfile,search,getUserInfo,follow,activeAccount,deletePost,savePost,showBookmarks,removeBookmark,getUserPosts,deleteComment,submitSuggestion,getSuggestions,deleteSuggestion,showFriends,show_active,deleteProfile,deleteAccount,forgetPassword} = require("../controllers/userController")
+const {UserOpinion,ShowOpinions ,SignUpUser, Login ,ProfileInfo,setProfile,getinfo,editProfile,getUser,deleteUser,ResetPassword,showUser,editUser,deleteOpinion,Comment,Like,getAllProfile,search,getUserInfo,follow,activeAccount,deletePost,savePost,showBookmarks,removeBookmark,getUserPosts,deleteComment,submitSuggestion,getSuggestions,getSuggestionsForUser,deleteSuggestion,showFriends,show_active,deleteProfile,deleteAccount,forgetPassword} = require("../controllers/userController")
 const multer = require('multer');
 
 
@@ -36,6 +36,7 @@ routerUser.post("/getUserPosts",getUserPosts)
 routerUser.post("/deleteComment/:postId/:commentId",deleteComment)
 routerUser.post("/submitSuggestion",submitSuggestion)
 routerUser.get("/getSuggestions",getSuggestions)
+routerUser.post("/getSuggestionsForUser",getSuggestionsForUser)
 routerUser.delete("/deleteSuggestion/:id",deleteSuggestion)
 routerUser.post("/showFriends",showFriends)
 routerUser.post("/show_active",show_active)

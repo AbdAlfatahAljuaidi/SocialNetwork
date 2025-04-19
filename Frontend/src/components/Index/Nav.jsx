@@ -7,7 +7,7 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 
-const Nav = () => {
+const Nav = ({setActive}) => {
   const [userName, setUserName] = useState('');
   const [username, setUsername] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,7 +31,7 @@ const Nav = () => {
 
   return (
     <>
-      <div className="sticky top-0 z-50 flex justify-between items-center py-4 px-8 bg-white shadow-md flex-wrap sm:flex-nowrap">
+      <div className="sticky top-0 z-50 flex justify-between  items-center py-4 px-8 bg-white shadow-md flex-wrap sm:flex-nowrap">
         {/* زر القائمة (يظهر فقط عند الشاشات الصغيرة) */}
         <button 
           className="text-2xl text-gray-700 sm:hidden"
@@ -66,19 +66,19 @@ const Nav = () => {
 
 
 
-
-          <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center  font-bold text-xl"  style={{color:color}}>
           <Link to={'/Index/Profile'}> 
+          <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center  font-bold text-xl"  style={{color:color}}>
+          
           
             {userName && userName.Name ? userName.Name[0].toUpperCase() : 'U'}
-           </Link> 
           </div>
+           </Link> 
         </div>
       </div>
 
       {/* القائمة الجانبية */}
       <div className={`fixed top-0 left-0 w-72 h-full bg-white shadow-xl z-50 transform ${menuOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 sm:hidden`}>
-        <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} setActiveSection={setActive}  />
       </div>
 
       {/* Overlay عند فتح القائمة الجانبية */}

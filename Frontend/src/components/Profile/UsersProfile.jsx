@@ -45,7 +45,7 @@ const UsersProfile = () => {
     try {
 
  if (!user || !user.profileImage) {
-      toast.error("You cannot publish the post before creating your own profile.");
+      toast.error("You cannot follow users before creating your own profile");
       return;
     }
 
@@ -155,30 +155,45 @@ const UsersProfile = () => {
               style={{ background: color }}
             >
               <FaUserPlus className="mr-3" />
-              {isFriend ? 'Unfriend' : 'Add Friend'}
+              {isFriend ? 'Unfollow' : 'Follow'}
             </button>
           </div>
         )}
 
-        <div className="mt-10">
-          <h2 className="text-xl font-semibold text-gray-700 border-b pb-4">Friends</h2>
-          {friends.length > 0 ? (
-            <ul className="mt-6 space-y-4">
-              {friends.map((friend, index) => (
-                <div key={index} className="bg-gray-100 flex items-center gap-4 p-4 rounded-lg shadow-md hover:bg-gray-200 transition">
-                  <img
-                    className="w-16 h-16 rounded-full object-cover"
-                    src={friend.image}
-                    alt={friend.name}
-                  />
-                  <li className="text-gray-700 font-medium">{friend.name}</li>
-                </div>
-              ))}
-            </ul>
-          ) : (
-            <p className="mt-6 text-gray-500">No friends yet.</p>
-          )}
+<div className="mt-10">
+  <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 border-b pb-3">
+    Friends
+  </h2>
+
+  {friends.length > 0 ? (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {friends.map((friend, index) => (
+        <div
+          key={index}
+          className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 flex flex-col items-center text-center shadow-sm hover:shadow-md transition"
+        >
+          <img
+            src={friend.image}
+            alt={friend.name}
+            className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-gray-200 dark:border-gray-600"
+          />
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{friend.name}</h3>
+          <Link to={`/index/profile/${friend.name}/${user.Name}`}>
+          <button
+            className="mt-4 px-6 text-lg py-1 bg-blue-600 text-white rounded-md text-sm transition" style={{background:color}}
+         
+          >
+            View Profile
+          </button>
+          </Link>
         </div>
+      ))}
+    </div>
+  ) : (
+    <p className="text-gray-500 dark:text-gray-400 mt-4">No friends yet.</p>
+  )}
+</div>
+
       </div>
     </div>
   );

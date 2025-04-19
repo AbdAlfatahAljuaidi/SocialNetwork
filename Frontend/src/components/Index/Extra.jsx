@@ -65,26 +65,30 @@ const Extra = () => {
       </div>
 
       <div className='mt-4 space-y-3 max-h-64 overflow-y-auto pr-2'>
-  {filteredFriends.length > 0 ? (
-    filteredFriends.map((friend, index) => (
-      <div
-        key={friend._id || index}
-        className='flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 cursor-pointer transition duration-200'
-      >
-        <Link to={`/index/profile/${friend.name}/${user.Name}`}>
-          <img src={friend.image} alt='Profile' className='w-10 h-10 rounded-full object-cover' />
-        </Link>
+      {filteredFriends.length > 0 ? (
+  filteredFriends.map((friend, index) => (
+    <Link
+      key={friend._id || index}
+      to={`/index/profile/${friend.name}/${user.Name}`}
+      className="block"
+    >
+      <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200">
+        <img
+          src={friend.image}
+          alt="Profile"
+          className="w-12 h-12 rounded-full object-cover border border-gray-300"
+        />
         <div>
-          <Link to={`/index/profile/${friend.name}/${user.Name}`}>
-            <h1 className='font-medium text-gray-800'>{friend.name}</h1>
-          </Link>
-          <span className='text-sm text-gray-500'>In your circle</span>
+          <h1 className="font-semibold text-gray-800 dark:text-white">{friend.name}</h1>
+          <span className="text-sm text-gray-500 dark:text-gray-400">In your circle</span>
         </div>
       </div>
-    ))
-  ) : (
-    <p className='text-sm text-gray-500'>No friends yet</p>
-  )}
+    </Link>
+  ))
+) : (
+  <p className="text-sm text-gray-500 dark:text-gray-400">No friends yet</p>
+)}
+
 </div>  </div>
   );
 };

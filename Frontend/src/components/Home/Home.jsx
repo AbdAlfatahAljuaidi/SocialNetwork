@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import Main from "./Main";
@@ -15,6 +15,11 @@ import Opinion from "./Opinion";
 
 
 const Home = () => {
+
+  useEffect(()=>{
+    window.scroll(0,0)
+
+  },[])
   
   return (
     <div>

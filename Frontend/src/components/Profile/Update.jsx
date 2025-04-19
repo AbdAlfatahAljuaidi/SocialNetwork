@@ -13,7 +13,7 @@ const Update = () => {
   const [major, setMajor] = useState("");
   const [postImage, setPostImage] = useState(null);
   const [year, setYear] = useState();
-  const [isSubmitting, setIsSubmitting] = useState(false); // ✅ حالة جديدة
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
@@ -21,8 +21,7 @@ const Update = () => {
 
   const AddInfo = async () => {
     if (isSubmitting) return;
-    setIsSubmitting(true); // ✅ بداية الإرسال
-
+    setIsSubmitting(true);
 
     const ageNumber = parseInt(Age);
     if (isNaN(ageNumber) || ageNumber < 10 || ageNumber > 99) {
@@ -47,8 +46,6 @@ const Update = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-
-
       if (data.error === false) {
         let userData = JSON.parse(localStorage.getItem('user')) || {};
         userData.profileImage = data.profileImage;
@@ -60,23 +57,31 @@ const Update = () => {
       console.error(error);
       toast.error(error.response?.data?.message || "Something went wrong");
     } finally {
-      setIsSubmitting(false); // ✅ نهاية الإرسال
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-      <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-3xl">
-        <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">Update Profile</h2>
-        <div className="space-y-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4 py-10">
+      <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl w-full max-w-3xl space-y-6">
+        <div className="flex flex-col items-center">
+          {user?.profileImage && (
+            <img
+              src={user.profileImage}
+              alt="Profile"
+              className="w-32 h-32 rounded-full object-cover border-4 border-blue-500 mb-4 shadow-lg"
+            />
+          )}
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Update Profile</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           <div>
-            <label htmlFor="type" className="block text-lg font-medium">Major</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Major</label>
             <select
-              id="major"
-              name="major"
               onChange={(e) => setMajor(e.target.value)}
-              className="w-full p-3 border rounded"
+              className="w-full p-3 border rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               required
             >
               <option value="">Select Major</option>
@@ -86,56 +91,50 @@ const Update = () => {
           </div>
 
           <div>
-            <label htmlFor="age" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Age</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Age</label>
             <input
               type="number"
               onChange={(e) => setAge(e.target.value)}
-              name="Age"
-              placeholder='25'
-              className="mt-1 block w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              placeholder="25"
+              className="w-full p-3 border rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             />
           </div>
 
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
             <input
               type="text"
               onChange={(e) => setAddress(e.target.value)}
-              name="Address"
-              placeholder='New York'
-              className="mt-1 block w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              placeholder="New York"
+              className="w-full p-3 border rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             />
           </div>
 
           <div>
-            <label htmlFor="faculty" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone</label>
             <input
               type="text"
               onChange={(e) => setPhone(e.target.value)}
-              name="Phone"
-              placeholder='+123 344 676'
-              className="mt-1 block w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              placeholder="+123 344 676"
+              className="w-full p-3 border rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             />
           </div>
 
           <div>
-            <label htmlFor="faculty" className="block text-sm font-medium text-gray-700 dark:text-gray-300">First Year</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">First Year</label>
             <input
               type="number"
               onChange={(e) => setYear(e.target.value)}
-              name="Year"
-              placeholder='2025'
-              className="mt-1 block w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              placeholder="2025"
+              className="w-full p-3 border rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             />
           </div>
 
           <div>
-            <label htmlFor="type" className="block text-lg font-medium">Gender</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Gender</label>
             <select
-              id="type"
-              name="type"
               onChange={(e) => setGender(e.target.value)}
-              className="w-full p-3 border rounded"
+              className="w-full p-3 border rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               required
             >
               <option value="">Select Gender</option>
@@ -144,7 +143,8 @@ const Update = () => {
             </select>
           </div>
 
-          <div>
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Upload New Profile Image</label>
             <input
               type="file"
               accept="image/*"
@@ -152,21 +152,20 @@ const Update = () => {
                 const file = e.target.files[0];
                 setPostImage(file);
               }}
-              className="mb-2"
+              className="w-full"
             />
           </div>
+        </div>
 
-          <div className="flex justify-end">
-            <button
-              onClick={AddInfo}
-              disabled={isSubmitting}
-              className="px-6 py-2 text-white rounded-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{ background: color }}
-            >
-              {isSubmitting ? "Saving..." : "Save Changes"}
-            </button>
-          </div>
-
+        <div className="flex justify-end pt-4">
+          <button
+            onClick={AddInfo}
+            disabled={isSubmitting}
+            className="px-8 py-3 font-semibold text-white rounded-lg shadow-lg hover:opacity-90 disabled:opacity-50"
+            style={{ backgroundColor: color }}
+          >
+            {isSubmitting ? "Saving..." : "Save Changes"}
+          </button>
         </div>
       </div>
     </div>
