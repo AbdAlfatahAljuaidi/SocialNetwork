@@ -13,9 +13,9 @@ const Index = () => {
     <div className='bg-slate-50'>
       <Nav setActive={setActiveSection} />
       <div className='flex justify-center'>
-        <Menu isSticky={true} />
-        <Post />
-       
+        <Menu setActiveSection={setActiveSection} isSticky={true} />
+        {activeSection === 'posts' && <Post />}
+        {activeSection === 'official' && <OfficialPosts />}
         <Extra />
       </div>
     </div>
