@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Nav from './Nav';
+import Nav from '../Index/Nav';
 import Menu from './Menu';
 import Post from './Post';
 import Extra from './Extra';
