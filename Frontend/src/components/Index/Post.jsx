@@ -110,7 +110,7 @@ const Post = () => {
 
       setPostText(""); // إعادة تعيين النص
       setPostImage(null); // إعادة تعيين الصورة
-      toast.success(data.message);
+      toast.success("Post added successfully");
     } catch (error) {
       console.error("حدث خطأ أثناء تحميل الصورة:", error);
       toast.error(error.response.data.message);

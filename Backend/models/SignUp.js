@@ -38,8 +38,11 @@ function SignUpValidation(object) {
     const schema = Joi.object({
         Name: Joi.string().min(3).max(30).required(),
         Email: Joi.string().email().min(3).max(40).required(),
-        Password: Joi.string().min(3).max(40).required(),
-        profileImage:Joi.string(),
+        Password:Joi.string()
+        .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$'))
+        .messages({
+          'string.pattern.base': 'fails to match the required pattern',
+        })
      
     });
 

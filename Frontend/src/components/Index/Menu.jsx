@@ -115,9 +115,8 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
               <span>Home</span>
             </li>
           </Link>
-
+<Link to={"/index"}>
           <li
-            onClick={() => setActiveSection("posts")}
             className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200"
           >
             <div className="text-xl">
@@ -125,9 +124,11 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
             </div>
             <span>Posts</span>
           </li>
+          </Link>
 
+<Link to={"/OfficialPosts"}>
           <li
-            onClick={() => setActiveSection("official")}
+         
             className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200"
           >
             <div className="text-xl">
@@ -135,7 +136,7 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
             </div>
             <span>Official Posts</span>
           </li>
-
+          </Link>
           {/* <Link to="/Bookmarks">
             <li className='flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200'>
               <div className='text-xl'><FaBell /></div>

@@ -38,7 +38,14 @@ const SignUp = ({ switchToLogin }) => {
           }
         } catch (error) {
           console.log(error.response);
-          toast.error(error.response?.data?.message || "فشل في إنشاء الحساب");
+          if (
+            error.response?.data?.message.includes("fails to match the required pattern")
+          ) {
+            toast.error(
+              "Password must include uppercase and lowercase letters, numbers, and symbols."
+            );
+          }
+          
         } finally {
           setIsSubmitting(false);
         }
