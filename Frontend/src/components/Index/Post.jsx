@@ -24,6 +24,7 @@ const Post = () => {
   const [note, setNote] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [openPostOptionsId, setOpenPostOptionsId] = useState(null);
 
   const [color, setColor] = useState(
     localStorage.getItem("mainColor") || "#1D4ED8"
@@ -252,6 +253,7 @@ const Post = () => {
 
       // مسح نص التعليق (ما إلها علاقة بالحذف، لكن بنخليها لو كان فيه input مفتوح)
       setCommentText((prev) => ({ ...prev, [postId]: "" }));
+      toast.success("Comment has been delete successfully")
     } catch (error) {
       console.error(
         "Failed to delete comment:",
@@ -374,31 +376,34 @@ const Post = () => {
               <div className="relative">
                 {/* أيقونة القائمة */}
                 <div
-                  onClick={() => setShowOptions(!showOptions)}
+                 onClick={() =>
+                  setOpenPostOptionsId(openPostOptionsId === post._id ? null : post._id)
+                }
                   className="cursor-pointer p-2 hover:bg-gray-200 rounded"
                 >
                   <SlOptionsVertical />
                 </div>
 
                 {/* قائمة الخيارات */}
-                {showOptions && (
-                  <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded border p-2">
-                    <button
-                      onClick={() => savePost(post._id)}
-                      className="block w-full text-left p-2 hover:bg-gray-100"
-                    >
-                      Save Post
-                    </button>
-                    <button
-                      className={`${
-                        user.Name === post.username ? "block" : "hidden"
-                      } w-full text-left p-2 text-red-500 hover:bg-red-100`}
-                      onClick={() => deletePost(post._id)}
-                    >
-                      Delete Post
-                    </button>
-                  </div>
-                )}
+                {openPostOptionsId === post._id && (
+  <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded border p-2">
+    <button
+      onClick={() => savePost(post._id)}
+      className="block w-full text-left p-2 hover:bg-gray-100"
+    >
+      Save Post
+    </button>
+    <button
+      className={`${
+        user.Name === post.username ? "block" : "hidden"
+      } w-full text-left p-2 text-red-500 hover:bg-red-100`}
+      onClick={() => deletePost(post._id)}
+    >
+      Delete Post
+    </button>
+  </div>
+)}
+
               </div>
             </div>
 
