@@ -17,7 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsFillSignpostSplitFill } from "react-icons/bs";
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
-const Menu = ({ menuOpen, setMenuOpen, isSticky  }) => {
+const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
   const [userName, setUserName] = useState("");
   const [Profile, setProfile] = useState();
   const navigate = useNavigate();

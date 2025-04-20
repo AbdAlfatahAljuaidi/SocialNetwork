@@ -30,7 +30,7 @@ import PrivacyPolicy from "./components/Home/PrivacyPolicy";
 import TermsConditions from "./components/Home/TermsConditions";
 import ForgetPassword from "./components/Register/ForgetPassword";
 import OfficialPosts from "./components/Index/OfficialPosts";
-import IndexTwo from "./components/Index/indexTwo";
+import IndexTwo from "./components/Index/IndexTwo"
 
 
 function App() {
@@ -69,7 +69,7 @@ function App() {
         <Route path="/Friends" element = {user ? <Friends /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Settings" element = {user ? <Settings /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Official" element = {user ? <OfficialPosts /> : <Navigate to="/Home/Registration" /> }/>
-        <Route path="/OfficialPosts" element = {user ? <IndexTwo /> : <Navigate to="/Home/Registration" /> }/>
+        <Route path="/Official" element = {user ? <IndexTwo /> : <Navigate to="/Home/Registration" /> }/>
         
         <Route path="/activeAccount/:token" element ={<Active />}  />
         <Route path="/PrivacyPolicy" element ={<PrivacyPolicy />}  />
