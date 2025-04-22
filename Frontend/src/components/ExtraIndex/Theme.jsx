@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Nav from "../Index/Nav";
 import { Link } from "react-router-dom";
+import Menu from "../Index/Menu";
 
 export default function Theme() {
   const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
@@ -19,13 +20,19 @@ export default function Theme() {
       {/* ✅ شريط التنقل في الأعلى */}
       <Nav />
 
+      <div className='flex gap-4 px-6 py-10  mx-auto w-full '>
+      <div className=''>
+          <Menu className="w-1/5 min-h-screen border-r border-gray-200" />
+        </div>
+
+
       {/* ✅ عرض المحتوى على كامل الشاشة */}
-      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] px-4">
-        <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl text-center">
-          <h2 className="text-3xl font-semibold mb-6" style={{ color: color }}>
-          Choose a color to change the site theme.
-          </h2>
-          
+      <div className="flex-1 flex items-center justify-center px-6 py-12">
+          <div className="bg-white shadow-lg rounded-2xl p-10 w-full max-w-3xl">
+            <h2 className="text-3xl font-bold text-center mb-8" style={{ color }}>
+              Customize Your Theme
+            </h2>
+            <div className="flex justify-center ">
           {/* ✅ اختيار اللون */}
           <input
             type="color"
@@ -33,22 +40,30 @@ export default function Theme() {
             onChange={handleChange}
             className="w-20 h-20 border-4 border-gray-300 rounded-full cursor-pointer"
           />
+          </div>
 
           {/* ✅ النص المتغير */}
-          <p className="mt-6 text-lg font-medium" style={{ color: color }}>
+          <p className="mt-3 text-lg font-medium text-center" style={{ color: color }}>
           The text will change depending on the selected color.
           </p>
 
           {/* ✅ زر بلون متغير */}
           <Link to="/index">
-          <button
-            style={{ backgroundColor: color }}
-            className="mt-8 px-6 py-3 rounded-lg text-white text-lg font-semibold shadow-md hover:opacity-80 transition"
-          >
-          Custom color button
-          </button>
+          <div className="flex justify-center mt-3">
+  <button
+    style={{ backgroundColor: color }}
+    className="px-6 py-3 rounded-lg text-white text-lg font-semibold shadow-md hover:opacity-80 transition"
+  >
+  Go Back with Style
+  </button>
+</div>
+
           </Link>
         </div>
+      </div>
+
+
+
       </div>
     </div>
   );

@@ -253,7 +253,7 @@ const Post = () => {
 
       // مسح نص التعليق (ما إلها علاقة بالحذف، لكن بنخليها لو كان فيه input مفتوح)
       setCommentText((prev) => ({ ...prev, [postId]: "" }));
-      toast.success("Comment has been delete successfully")
+      toast.success("Comment has been deleted successfully")
     } catch (error) {
       console.error(
         "Failed to delete comment:",

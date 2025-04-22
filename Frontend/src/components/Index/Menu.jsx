@@ -62,7 +62,7 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
 
   return (
     <div
-      className={`bg-white sticky top-24 w-72 sm:w-96 mt-5 ml-5 py-4 px-5 rounded-xl shadow-lg h-full sm:h-[80vh] sm:flex flex-col justify-between ${
+      className={`bg-white sticky top-24 mt-5 ml-5 py-4 pr-14 pl-5 rounded-xl shadow-lg h-full sm:h-[80vh] sm:flex flex-col justify-between ${
         menuOpen ? "block" : "hidden"
       } relative`}
     >
@@ -76,10 +76,10 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
 
       {/* معلومات المستخدم */}
       <Link to={"/Index/Profile"}>
-      <div className="md:flex items-center mb-6">
+      <div className="md:flex   items-center mb-3">
     
         <div
-          className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center m-auto font-bold text-2xl"
+          className="w-14 h-14 bg-blue-50 rounded-full flex items-center  font-bold text-2xl"
           style={{ color: color }}
         >
           {Profile && Profile.imageUrl ? (

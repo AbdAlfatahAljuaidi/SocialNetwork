@@ -62,7 +62,11 @@ const Bookmarks = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Nav />
-      <div className="max-w-3xl mx-auto p-6">
+      <div className='flex gap-4 px-6 py-10  mx-auto '>
+        <div className=''>
+          <Menu className="w-2 " />
+        </div>
+        <div className="max-w-3xl mx-auto p-6">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Saved Bookmarks</h1>
 
         {loading ? (
@@ -80,15 +84,27 @@ const Bookmarks = () => {
                   <img src={post.ProfileImage || 'https://via.placeholder.com/50'} alt={post.author} className="w-12 h-12 rounded-full mr-3" />
                   <div>
                   <h2 className="text-lg font-bold text-gray-700">{post.username}</h2>
-                  <p className='text-gray-400 '>{post.text}</p>
+                  <p className="text-sm text-gray-500">
+                    {new Date(post.createdAt).toLocaleString("EG", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      hour12: true,
+                    })}
+                  </p>
+                
                   </div>
                  
                 </div>
+             
                 <button onClick={() => removeBookmark(post._id)} className="text-red-500 hover:text-red-700">
                     <FaTrash />
                   </button>
                 </div>
-               
+                <p className='text-gray-400 pb-2 '>{post.text}</p>
                 <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover rounded-lg mb-4 shadow-sm" />
                 <h2 className="text-2xl font-semibold text-gray-900 mb-2">{post.title}</h2>
                 <p className="text-gray-700 mb-4">{post.content}</p>
@@ -109,7 +125,10 @@ const Bookmarks = () => {
           <div className="text-center text-gray-600 text-lg font-semibold mt-10">No bookmarks saved yet.</div>
         )}
       </div>
-    </div>
+
+
+      </div>
+        </div>
   );
 };
 
