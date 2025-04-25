@@ -10,6 +10,8 @@ const EditUser = () => {
   const [admin, setAdmin] = useState();
   const { id } = useParams(); // استخراج ID المستخدم من الرابط
   const navigate = useNavigate(); // استخراج ID المستخدم من الرابط
+  
+  const color = localStorage.getItem("mainColor") || "#1D4ED8";
 
   // دالة لجلب بيانات المستخدم
   const fetchUserData = async () => {
@@ -101,7 +103,7 @@ const Update = async () => {
         {/* زر الحفظ */}
         <button
         onClick={Update}
-          className="w-full p-3 bg-blue-600 text-white rounded-lg mt-4 hover:bg-blue-700 transition duration-200"
+          className="w-full p-3  text-white rounded-lg mt-4 transition duration-200" style={{background:color}}
         >
           Save Changes
         </button>

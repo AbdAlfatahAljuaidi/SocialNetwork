@@ -10,6 +10,7 @@ const Help = () => {
 
   const [type, setType] = useState("");
   const [details, setDetails] = useState("");
+  const [title, setTitle] = useState("");
   const [state, setstate] = useState("Pending ");
   const [isSubmitting, setIsSubmitting] = useState(false); // ✅ حالة جديدة
 
@@ -26,12 +27,14 @@ const Help = () => {
         name: user.Name,
         email: user.Email,
         state,
+        title,
       });
 
       if (data?.error === false) {
         toast.success(`Your ${type} has been submitted successfully`);
         setType("");
         setDetails("");
+        setTitle("");
       }
     } catch (error) {
       console.log(error);
@@ -62,6 +65,22 @@ const Help = () => {
               <option value="Suggestion">Suggestion</option>
               <option value="Complaint">Complaint</option>
             </select>
+          </div>
+
+             {/* Title */}
+             <div>
+            <label htmlFor="details" className="block text-lg font-medium">Title</label>
+            <input
+              id="title"
+              type='text'
+              name="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full p-3 border rounded"
+              rows="4"
+              placeholder="Enter your details here..."
+              required
+            ></input>
           </div>
 
           {/* Details */}

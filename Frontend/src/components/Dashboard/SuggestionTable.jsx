@@ -5,13 +5,14 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { Link } from 'react-router-dom';
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const SuggestionTable = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [suggestionsPerPage] = useState(5); // عدد العناصر في كل صفحة
+  const [suggestionsPerPage] = useState(4); // عدد العناصر في كل صفحة
 
   useEffect(() => {
     async function fetchSuggestions() {
@@ -42,6 +43,10 @@ const SuggestionTable = () => {
     }
   };
 
+
+
+
+
   const filteredSuggestions = suggestions.filter(s =>
     s.name?.toLowerCase().includes(search.toLowerCase()) ||
     s.email?.toLowerCase().includes(search.toLowerCase()) ||
@@ -69,6 +74,9 @@ const SuggestionTable = () => {
     const blob = new Blob([buffer], { type: "application/octet-stream" });
     saveAs(blob, "Suggestions.xlsx");
   };
+
+
+  
 
   return (
     <div className='p-4'>
@@ -101,7 +109,9 @@ const SuggestionTable = () => {
             <th className='px-4 py-2 border'>Name</th>
             <th className='px-4 py-2 border'>Email</th>
             <th className='px-4 py-2 border'>Type</th>
+            <th className='px-4 py-2 border'>Title</th>
             <th className='px-4 py-2 border'>Details</th>
+            <th className='px-4 py-2 border'>Status</th>
             <th className='px-4 py-2 border'>Date</th>
             <th className='px-4 py-2 border'>Action</th>
           </tr>
@@ -113,15 +123,24 @@ const SuggestionTable = () => {
                 <td className='px-4 py-2 border'>{sug.name}</td>
                 <td className='px-4 py-2 border'>{sug.email}</td>
                 <td className='px-4 py-2 border'>{sug.type}</td>
+                <td className='px-4 py-2 border'>{sug.title}</td>
                 <td className='px-4 py-2 border'>{sug.details}</td>
+                <td className='px-4 py-2 border'>{sug.state}</td>
                 <td className='px-4 py-2 border'>{new Date(sug.createdAt).toLocaleString()}</td>
-                <td className='px-4 py-2 border'>
+                <td className='px-4 py-2 border gap-2'>
                   <button
                     className='bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600'
                     onClick={() => deleteSuggestion(sug._id)}
                   >
                     Delete
                   </button>
+                  <Link to={`/UpdateSuggest/${sug._id}`}>
+                  <button
+                    className='bg-green-500 ml-2 text-white px-3 py-1 rounded hover:bg-green-600'
+                  >
+                    Update
+                  </button>
+                  </Link>
                 </td>
               </tr>
             ))

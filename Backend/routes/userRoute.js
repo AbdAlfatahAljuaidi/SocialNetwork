@@ -1,6 +1,6 @@
 const express = require('express');
 const routerUser =require("express").Router()
-const {UserOpinion,ShowOpinions ,SignUpUser, Login ,ProfileInfo,setProfile,getinfo,editProfile,getUser,deleteUser,ResetPassword,showUser,editUser,deleteOpinion,Comment,Like,getAllProfile,search,getUserInfo,follow,activeAccount,deletePost,savePost,showBookmarks,removeBookmark,getUserPosts,deleteComment,submitSuggestion,getSuggestions,getSuggestionsForUser,deleteSuggestion,showFriends,show_active,deleteProfile,deleteAccount,forgetPassword} = require("../controllers/userController")
+const {UserOpinion,ShowOpinions ,SignUpUser, Login ,ProfileInfo,setProfile,getinfo,editProfile,getUser,deleteUser,ResetPassword,showUser,editUser,deleteOpinion,Comment,Like,getAllProfile,search,getUserInfo,follow,activeAccount,deletePost,savePost,showBookmarks,removeBookmark,getUserPosts,deleteComment,submitSuggestion,getSuggestions,getSuggestionsForUser,deleteSuggestion,showFriends,show_active,deleteProfile,deleteAccount,forgetPassword,viewSuggest,updateSuggest,getTopLikedPost,getTopCommentedPost} = require("../controllers/userController")
 const multer = require('multer');
 
 
@@ -43,6 +43,10 @@ routerUser.post("/show_active",show_active)
 routerUser.post("/deleteProfile",deleteProfile)
 routerUser.post("/deleteAccount",deleteAccount)
 routerUser.post("/forgetPassword",forgetPassword)
+routerUser.post("/viewSuggest/:id",viewSuggest)
+routerUser.put("/updateSuggest/:id",updateSuggest)
+routerUser.get("/getTopLikedPost/",getTopLikedPost)
+routerUser.get("/getTopCommentedPost/",getTopCommentedPost)
 
 
 module.exports= routerUser

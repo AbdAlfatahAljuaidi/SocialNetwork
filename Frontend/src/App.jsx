@@ -31,6 +31,9 @@ import TermsConditions from "./components/Home/TermsConditions";
 import ForgetPassword from "./components/Register/ForgetPassword";
 import OfficialPosts from "./components/Index/OfficialPosts";
 import IndexTwo from "./components/Index/FromAdmin"
+import UpdateSuggest from "./components/Dashboard/UpdateSuggest";
+import Top from "./components/Index/Top";
+import TopComment from "./components/Index/TopComment";
 
 
 function App() {
@@ -69,6 +72,9 @@ function App() {
         <Route path="/Friends" element = {user ? <Friends /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Settings" element = {user ? <Settings /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/OfficialPosts" element = {user ? <IndexTwo /> : <Navigate to="/Home/Registration" /> }/>
+        <Route path="/UpdateSuggest/:id" element = {user ? <UpdateSuggest /> : <Navigate to="/Home/Registration" /> }/>
+        <Route path="/Top" element = {user ? <Top /> : <Navigate to="/Home/Registration" /> }/>
+        <Route path="/TopComment" element = {user ? <TopComment /> : <Navigate to="/Home/Registration" /> }/>
         
         <Route path="/activeAccount/:token" element ={<Active />}  />
         <Route path="/PrivacyPolicy" element ={<PrivacyPolicy />}  />

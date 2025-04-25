@@ -9,6 +9,7 @@ const Post = require("../models/Posts");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const sendEmail = require("../utils/sendEmail");
+const suggest = require("../utils/suggest");
 const sendPass = require("../utils/sendPass");
 
 const { Suggest, SuggestValidation } = require("../models/Suggestion");
@@ -297,7 +298,6 @@ const ProfileInfo = async (req, res) => {
 
     // رفع الصورة إلى Cloudinary
     const result = await cloudinary.uploader.upload(req.file.path);
-console.log("done");
 
     // حفظ البيانات في قاعدة البيانات
     const newInfo = await Profile.create({
@@ -338,7 +338,6 @@ const setProfile = async (req, res) => {
     const token = req.headers.authorization.split(" ")[1];
     const data = jwt.verify(token, "dsadsadh");
 
-    console.log(data);
 
     const getProfile = await Profile.find({ userID: data.id });
     console.log(Profile);
@@ -354,18 +353,14 @@ const getinfo = async (req, res) => {
     console.log("test");
 
     const data = req.headers.authorization.split(" ")[1];
-    console.log(data);
+  
 
     const user = jwt.verify(data, "dsadsadh");
 
-    console.log(user);
-    console.log("after user");
     if (!user) {
       return res.status(401).json({ message: "user not authenticated" });
     }
 
-    console.log(user.id);
-    console.log(req.params.id);
 
     const personalInfo = await Profile.findOne({
       userID: user.id,
@@ -646,7 +641,6 @@ const Comment =  async (req, res) => {
       const { id } = req.params;
       const { content, userId ,imageUser} = req.body; 
 
-      console.log(id);
       
 
       const post = await Post.findById(id);
@@ -717,7 +711,7 @@ const Like = async (req, res) => {
     await post.save();
     console.log("Post saved successfully!");
 
-    return res.json({ liked: !hasLiked, likes: post.likes });
+    return res.json({ liked: !hasLiked, likes: post.likes ,likedUsers:post.likedUsers });
   } catch (error) {
     console.error(" Server Error:", error);
     res.status(500).json({ error: "Server error" });
@@ -1052,7 +1046,6 @@ const deleteComment = async (req, res) => {
 
 
 
-// controllers/suggestionController.js
 
 const submitSuggestion = async (req, res) => {
   try {
@@ -1061,10 +1054,24 @@ const submitSuggestion = async (req, res) => {
       return res.status(400).json({ message: error.details[0].message });
     }
 
-    const { type, details ,name,email,state } = req.body;
 
-    const newSuggestion = new Suggest({ type, details ,name,email,state});
+
+    const { type, details ,name,email,state,title } = req.body;
+
+    const newSuggestion = new Suggest({ type, details ,name,email,state,title});
     await newSuggestion.save();
+
+    const user = await SignUp.findOne({Name:name})
+    console.log(user);
+    
+    suggest(
+      user.Email,
+      name,
+      type,
+      "Your Suggestion Was Submitted",
+      "suggest" // اسم قالب handlebars الموجود في views
+    );
+    
 
     res.status(201).json({ message: "Suggestion submitted successfully.", error:false });
   } catch (err) {
@@ -1119,6 +1126,49 @@ const deleteSuggestion = async (req, res) => {
   } catch (error) {
     console.error("Error deleting suggestion:", error);
     res.status(500).json({ success: false, message: "Error deleting suggestion" });
+  }
+};
+
+const viewSuggest = async (req, res) => {
+  try{
+    const {id} = req.params
+    console.log("id =",id);
+    
+    
+    const suggest = await Suggest.findById(id) 
+    console.log("suggest =",suggest);
+  
+    return res.status(200).json({suggest,error:"false"})
+  }catch(error){
+    console.log(error);
+    return res.status(500).json({messge:"Internal server error",error:"true"})
+    
+  }
+}
+
+
+const updateSuggest = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { state } = req.body;
+
+    // البحث عن السجل وتحديثه مباشرة
+    const suggest = await Suggest.findByIdAndUpdate(
+      id,
+      { state },
+      { new: true } // لإرجاع السجل بعد التحديث
+    );
+
+    // في حال لم يتم العثور على السجل
+    if (!suggest) {
+      return res.status(404).json({ message: 'Suggestion not found' });
+    }
+
+    // النجاح
+    res.status(200).json({ message: 'Suggestion updated successfully', suggest });
+  } catch (error) {
+    // في حال حدوث خطأ
+    res.status(500).json({ message: 'Error updating suggestion', error: error.message });
   }
 };
 
@@ -1267,7 +1317,45 @@ const forgetPassword = async (req,res) =>{
 }
 
 
+const getTopLikedPost = async (req, res) => {
+  try {
+    const topPost = await Post.findOne().sort({ likes: -1 }).limit(1).populate('username');
+    if (!topPost) {
+      return res.status(404).json({ message: 'No posts found' });
+    }
+    res.status(200).json(topPost);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching top liked post', error: error.message });
+  }
+};
 
+const getTopCommentedPost = async (req, res) => {
+  try {
+    const topCommentedPost = await Post.aggregate([
+      {
+        $match: { comments: { $exists: true, $not: { $size: 0 } } }  // تأكد من أن البوست يحتوي على تعليقات
+      },
+      {
+        $addFields: {
+          commentCount: { $size: "$comments" }  // إضافة حقل commentCount لحساب عدد التعليقات
+        }
+      },
+      { $sort: { commentCount: -1 } },  // ترتيب حسب عدد التعليقات
+      { $limit: 1 }  // جلب البوست الأول
+    ]);
+
+    if (!topCommentedPost || topCommentedPost.length === 0) {
+      return res.status(404).json({ message: 'No posts found with comments' });
+    }
+
+    // إعادة جلب البيانات كاملة باستخدام _id بعد ما جبنا الـ top post
+    const fullPost = await Post.findById(topCommentedPost[0]._id).populate("username");
+
+    res.status(200).json(fullPost);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching top commented post', error: error.message });
+  }
+};
 
 
 
@@ -1309,5 +1397,9 @@ module.exports = {
   show_active,
   deleteProfile,
   deleteAccount,
-  forgetPassword
+  forgetPassword,
+  viewSuggest,
+  updateSuggest,
+  getTopLikedPost,
+  getTopCommentedPost
 };

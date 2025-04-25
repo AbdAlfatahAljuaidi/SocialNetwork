@@ -79,7 +79,7 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
       <div className="md:flex   items-center mb-3">
     
         <div
-          className="w-14 h-14 bg-blue-50 rounded-full flex items-center  font-bold text-2xl"
+          className="w-14 h-14 bg-blue-50 rounded-full flex justify-center items-center  font-bold text-2xl"
           style={{ color: color }}
         >
           {Profile && Profile.imageUrl ? (
@@ -168,6 +168,8 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
               <span>My Posts</span>
             </li>
           </Link>
+
+         
 
           <Link to="/Theme">
             <li className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200">

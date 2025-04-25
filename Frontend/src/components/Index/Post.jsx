@@ -25,16 +25,26 @@ const Post = () => {
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [openPostOptionsId, setOpenPostOptionsId] = useState(null);
-
+  const [isLiked, setIsLiked] = useState(false);
   const [color, setColor] = useState(
     localStorage.getItem("mainColor") || "#1D4ED8"
   );
+  const [top,setTop] =useState()
+  const [topComment,setTopComment] =useState()
 
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
       try {
         const { data } = await axios.get(`${apiUrl}/api/posts`);
+        console.log(data);
+        
+        if (user && data.likedUsers?.includes(user._id)) {
+          setIsLiked(true);
+        } else {
+          setIsLiked(false);
+        }
+        
         setPosts(data);
       } catch (error) {
         console.error("حدث خطأ أثناء جلب البوستات:", error);
@@ -174,6 +184,7 @@ const Post = () => {
 
   const handleLike = async (postId) => {
     try {
+      
       if (!user || !user.profileImage) {
         toast.error(
          " Please create your profile before liking posts"
@@ -184,13 +195,32 @@ const Post = () => {
       const { data } = await axios.post(`${apiUrl}/Like/${postId}`, {
         userId: user._id,
       });
+      console.log(data);
+      
 
       setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post._id === postId
-            ? { ...post, likes: data.likes, liked: data.liked }
-            : post
-        )
+        prevPosts.map((post) => {
+          if (post._id === postId) {
+            let updatedLikedUsers = [...(post.likedUsers || [])];
+            if (data.liked) {
+              // أضيف المستخدم
+              if (!updatedLikedUsers.includes(user._id)) {
+                updatedLikedUsers.push(user._id);
+              }
+            } else {
+              // إحذف المستخدم
+              updatedLikedUsers = updatedLikedUsers.filter(id => id !== user._id);
+            }
+      
+            return {
+              ...post,
+              likes: data.likes,
+              liked: data.liked,
+              likedUsers: updatedLikedUsers,
+            };
+          }
+          return post;
+        })
       );
     } catch (error) {
       console.error(error);
@@ -304,6 +334,43 @@ const Post = () => {
     };
   }, []);
 
+
+  useEffect(() => {
+    const fetchTopPost = async () => {
+      try {
+        const res = await axios.get(`${apiUrl}/getTopLikedPost`); // غيّر الرابط إذا API مختلف
+        setTop(res.data);
+        console.log("res.comment",res.data);
+        
+      } catch (err) {
+        console.error('Error fetching top post:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTopPost();
+  }, []);
+
+
+
+  useEffect(() => {
+    const fetchTopCommentedPost = async () => {
+      try {
+        const res = await axios.get(`${apiUrl}/getTopCommentedPost`); // استدعاء الـ API الجديد
+        setTopComment(res.data);
+      } catch (err) {
+        console.error('Error fetching top commented post:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTopCommentedPost();
+  }, []);
+
+  
+
   return (
     <div className="w-full mx-auto p-4">
       {/* إدخال بوست جديد */}
@@ -318,7 +385,7 @@ const Post = () => {
           type="file"
           accept="image/*"
           onChange={(e) => setPostImage(e.target.files[0])}
-          className="mb-2"
+          className="mb-2 w-56"
         />
         <button
           onClick={handleFileUpload}
@@ -340,6 +407,85 @@ const Post = () => {
                 </div>
             ))}
         </div> */}
+     <h1 className="font-bold text-2xl text-center my-6">Most Numbers</h1>
+
+<div className="flex flex-col md:flex-row justify-center items-center gap-6 pb-5">
+  {/* Top liked post */}
+  <Link to="/top" className="w-full  md:max-w-xs">
+    {loading ? (
+      <div className="text-center mt-10">Loading...</div>
+    ) : top ? (
+      <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
+        <div className="flex items-center space-x-4 mb-4">
+          <img
+            src={top.ProfileImage || 'https://via.placeholder.com/50'}
+            alt={top.username}
+            className="w-12 h-12 rounded-full object-cover"
+          />
+          <h3 className="text-lg font-semibold">{top.username}</h3>
+        </div>
+
+        {top.text && (
+          <p className="text-sm text-gray-600  mb-2">{top.text}</p>
+        )}
+        {top.imageUrl && (
+          <img
+            src={top.imageUrl}
+            alt="Post"
+            className="w-full h-32 object-cover rounded mb-4"
+          />
+        )}
+
+
+        <div className="text-center text-gray-700">
+          ❤️ <span className="font-medium">{top.likes}</span> Likes
+        </div>
+      </div>
+    ) : (
+      <div className="text-center mt-10">No top post found.</div>
+    )}
+  </Link>
+
+  {/* Top commented post */}
+  <div className="w-full md:max-w-xs">
+  <Link to={"/TopComment"}>
+    {loading ? (
+      <div className="text-center mt-10">Loading...</div>
+    ) : topComment ? (
+      <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
+        
+        <div className="flex items-center space-x-4 mb-4">
+          <img
+            src={topComment.ProfileImage || 'https://via.placeholder.com/50'}
+            alt={topComment.username}
+            className="w-12 h-12 rounded-full object-cover"
+          />
+          <h3 className="text-lg font-semibold">{topComment.username}</h3>
+        </div>
+        {topComment.text && (
+          <p className="text-sm text-gray-600 mb-2">{topComment.text}</p>
+        )}
+        {topComment.imageUrl && (
+          <img
+            src={topComment.imageUrl}
+            alt="Post"
+            className="w-full h-32 object-cover rounded mb-4"
+          />
+        )}
+
+
+       
+        <div className="text-center text-gray-700 mt-1">
+          💬 <span className="font-medium">{topComment.comments.length}</span> Comments
+        </div>
+      </div>
+    ) : (
+      <div className="text-center mt-10">No top post found.</div>
+    )}
+</Link>
+  </div>
+</div>
+
 
       {/* عرض البوستات */}
       <div className="space-y-4">
@@ -418,20 +564,25 @@ const Post = () => {
 
             {/* زر الإعجاب */}
             <div className="flex items-center space-x-2 mt-3">
-              <button
-                onClick={() => handleLike(post._id)}
-                className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                  post.liked
-                    ? "bg-red-500 text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}
-              >
-                {post.liked ? "❤️ Unlike" : "🤍 Like"}
-              </button>
-              <span className="text-lg font-semibold text-gray-700">
-                {post.likes}
-              </span>
-            </div>
+  <button
+    onClick={() => handleLike(post._id)}
+    className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+      post.liked
+        ? "bg-red-500 text-white"
+        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+    }`}
+  >
+  {post.likedUsers.includes(user._id) ? "❤️ " : "🤍"}
+  </button>
+
+  <span className="text-lg font-semibold text-gray-700">
+    {post.likes}
+  </span>
+
+  <span className="text-lg font-semibold text-gray-700">
+</span>
+</div>
+
 
             {/* إدخال التعليق */}
             <div className="mt-4">
