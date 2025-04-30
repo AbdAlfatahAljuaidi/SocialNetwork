@@ -1407,6 +1407,34 @@ const updatePost = async (req, res) => {
   }
 };
 
+
+
+const topUserFriends= async (req, res) => {
+  try {
+    const topUser = await Profile.aggregate([
+      {
+        $project: {
+          imageUrl: 1,
+          major: 1,
+          username: 1, // أو أي معلومات إضافية تريد إرجاعها
+          friendsCount: { $size: '$friends' }
+        }
+      },
+      { $sort: { friendsCount: -1 } },
+      { $limit: 1 }
+    ]);
+
+    if (topUser.length === 0) {
+      return res.status(404).json({ message: 'No users found.' });
+    }
+
+    res.status(200).json(topUser[0]);
+  } catch (error) {
+    console.error('Error fetching top user:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 module.exports = {
   UserOpinion,
   ShowOpinions,
@@ -1450,5 +1478,6 @@ module.exports = {
   getTopLikedPost,
   getTopCommentedPost,
   getPost,
-  updatePost
+  updatePost,
+  topUserFriends
 };

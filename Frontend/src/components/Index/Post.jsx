@@ -31,6 +31,22 @@ const Post = () => {
   const [topComment, setTopComment] = useState();
   const [questionType, setQuestionType] = useState("");
   const [filterType, setFilterType] = useState('');
+  const [topFriend, setTopFriend] = useState(null);
+
+
+  useEffect(() => {
+    const fetchTopUser = async () => {
+      try {
+        const res = await axios.get('/api/profile/top-user-friends'); // تأكد من المسار الصحيح
+        setTop(res.data);
+      } catch (error) {
+        console.error('Error fetching top user:', error);
+      }
+    };
+
+    fetchTopUser();
+  }, []);
+
 
 
   useEffect(() => {
@@ -371,6 +387,26 @@ const Post = () => {
     if (!filterType) return true; // إذا لم يتم تحديد فلتر، يتم عرض جميع البوستات
     return post.questionType === filterType; // تصفية البوستات حسب النوع
   });
+
+
+ 
+
+  useEffect(() => {
+    const fetchTopUser = async () => {
+      try {
+        const res = await axios.post(`${apiUrl}/topUserFriends`); // تأكد من المسار الصحيح
+        setTopFriend(res.data);
+        console.log("datafriend=",res.data);
+        
+      } catch (error) {
+        console.error('Error fetching top user:', error);
+      }
+    };
+
+    fetchTopUser();
+  }, []);
+
+  if (!top) return null;
   return (
     <div className="w-full mx-auto p-4">
       <div className="bg-white shadow-md rounded-lg p-4 mb-4">
@@ -506,6 +542,35 @@ const Post = () => {
                   </div>
                 ) : null}
               </Link>
+            </div>
+
+            {/* top friend */}
+            <div className="w-full md:max-w-xs">
+            <Link to="/TopFriend" className="w-full md:max-w-xs">
+      <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
+        <div className="flex items-center space-x-4 mb-4">
+          <img
+            src={topFriend.imageUrl || "https://via.placeholder.com/50"}
+            alt={topFriend.username}
+            className="w-12 h-12 rounded-full object-cover"
+          />
+          <h3 className="text-lg font-semibold">{topFriend.username}</h3>
+        </div>
+        {topFriend.major && (
+          <p className="text-sm text-gray-600 mb-2">{topFriend.major}</p>
+        )}
+        {topFriend.imageUrl && (
+          <img
+            src={topFriend.imageUrl}
+            alt="Post"
+            className="w-full h-32 object-cover rounded mb-4"
+          />
+        )}
+        <div className="text-center text-gray-700">
+        👥 <span className="font-medium">{topFriend.friendsCount}</span> Friends
+        </div>
+      </div>
+    </Link>
             </div>
           </div>
         </>

@@ -1,6 +1,6 @@
 const express = require('express');
 const routerUser =require("express").Router()
-const {UserOpinion,ShowOpinions ,SignUpUser, Login ,ProfileInfo,setProfile,getinfo,editProfile,getUser,deleteUser,ResetPassword,showUser,editUser,deleteOpinion,Comment,Like,getAllProfile,search,getUserInfo,follow,activeAccount,deletePost,savePost,showBookmarks,removeBookmark,getUserPosts,deleteComment,submitSuggestion,getSuggestions,getSuggestionsForUser,deleteSuggestion,showFriends,show_active,deleteProfile,deleteAccount,forgetPassword,viewSuggest,updateSuggest,getTopLikedPost,getTopCommentedPost,getPost,updatePost} = require("../controllers/userController")
+const {UserOpinion,ShowOpinions ,SignUpUser, Login ,ProfileInfo,setProfile,getinfo,editProfile,getUser,deleteUser,ResetPassword,showUser,editUser,deleteOpinion,Comment,Like,getAllProfile,search,getUserInfo,follow,activeAccount,deletePost,savePost,showBookmarks,removeBookmark,getUserPosts,deleteComment,submitSuggestion,getSuggestions,getSuggestionsForUser,deleteSuggestion,showFriends,show_active,deleteProfile,deleteAccount,forgetPassword,viewSuggest,updateSuggest,getTopLikedPost,getTopCommentedPost,getPost,updatePost,topUserFriends} = require("../controllers/userController")
 const multer = require('multer');
 
 
@@ -49,6 +49,7 @@ routerUser.get("/getTopLikedPost/",getTopLikedPost)
 routerUser.get("/getTopCommentedPost/",getTopCommentedPost)
 routerUser.get("/getPost/:id",getPost)
 routerUser.put('/updatePost/:id', upload.single('file'), updatePost)
+routerUser.post("/topUserFriends",topUserFriends)
 
 
 module.exports= routerUser

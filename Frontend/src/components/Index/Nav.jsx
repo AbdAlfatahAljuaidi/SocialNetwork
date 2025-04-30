@@ -59,7 +59,7 @@ const Nav = ({setActive }) => {
         <Link to={'/Index'}> Ask AAU </Link> 
         </div>
 
-        <div className="flex space-x-2 rtl:space-x-reverse mt-4">
+        {/* <div className="flex space-x-2 rtl:space-x-reverse mt-4">
   <button
     onClick={() => changeLanguage("en")}
     className={`px-4 py-2 rounded-md border transition 
@@ -78,7 +78,7 @@ const Nav = ({setActive }) => {
   >
     العربية
   </button>
-</div>
+</div> */}
         {/* Search */}
         <div className="relative w-full sm:w-auto mb-4 sm:mb-0">
           <input
