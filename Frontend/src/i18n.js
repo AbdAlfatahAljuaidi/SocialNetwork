@@ -7,13 +7,19 @@ i18n.use(initReactI18next).init({
     en: {
       translation: {
         "hello": "Hello",
-        "welcome": "Welcome to our site"
+        "welcome": "Welcome to our site",
+        "Home":"Home",
+        "Most Numbers":"Most Numbers",
+        "Logout":"Logout",
       }
     },
     ar: {
       translation: {
         "hello": "مرحباً",
-        "welcome": "مرحباً بك في موقعنا"
+        "welcome": "مرحباً بك في موقعنا",
+        "Home":"الصفحة الرئيسة",
+        "Most Numbers":"اعلى الارقام",
+        "Logout":"تسجيل الخروج",
       }
     }
   },

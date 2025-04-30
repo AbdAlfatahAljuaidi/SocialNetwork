@@ -2,15 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { FaSearch, FaBars } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import Menu from './Menu';
+
+import { useTranslation } from 'react-i18next';
 import {
  
   FaSignOutAlt,
 } from "react-icons/fa";
 
-const Nav = ({setActive}) => {
+const Nav = ({setActive }) => {
   const [userName, setUserName] = useState('');
   const [username, setUsername] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
+  
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng); // تغيير اللغة عند الضغط على الزر
+  };
+
+
+  // useEffect(() => {
+  //   // تغيير اتجاه الصفحة بناءً على اللغة
+  //   document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  // }, [i18n.language]);
+
 
   const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
 
@@ -30,7 +44,7 @@ const Nav = ({setActive}) => {
   }
 
   return (
-    <>
+    <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
       <div className="sticky top-0 z-50 flex justify-between  items-center py-4 px-8 bg-white shadow-md flex-wrap sm:flex-nowrap">
         {/* زر القائمة (يظهر فقط عند الشاشات الصغيرة) */}
         <button 
@@ -45,6 +59,26 @@ const Nav = ({setActive}) => {
         <Link to={'/Index'}> Ask AAU </Link> 
         </div>
 
+        <div className="flex space-x-2 rtl:space-x-reverse mt-4">
+  <button
+    onClick={() => changeLanguage("en")}
+    className={`px-4 py-2 rounded-md border transition 
+      ${i18n.language === 'en' 
+        ? 'bg-[#0078B8] text-white' 
+        : 'bg-white text-[#0078B8] border-[#0078B8] hover:bg-[#0078B8] hover:text-white'}`}
+  >
+    English
+  </button>
+  <button
+    onClick={() => changeLanguage("ar")}
+    className={`px-4 py-2 rounded-md border transition 
+      ${i18n.language === 'ar' 
+        ? 'bg-[#0078B8] text-white' 
+        : 'bg-white text-[#0078B8] border-[#0078B8] hover:bg-[#0078B8] hover:text-white'}`}
+  >
+    العربية
+  </button>
+</div>
         {/* Search */}
         <div className="relative w-full sm:w-auto mb-4 sm:mb-0">
           <input
@@ -61,7 +95,7 @@ const Nav = ({setActive}) => {
           <button 
             onClick={signout} 
             className="text-white border flex items-center justify-center gap-2 py-2 px-6 rounded-lg  transition-all duration-200 w-full sm:w-auto mb-4 sm:mb-0 sm:px-6 sm:py-2" style={{background:color}}>
-           <FaSignOutAlt />  Logout
+           <FaSignOutAlt />  {t('Logout')}
           </button>
 
 
@@ -88,7 +122,7 @@ const Nav = ({setActive}) => {
           onClick={() => setMenuOpen(false)}
         ></div>
       )}
-    </>
+    </div>
   );
 };
 

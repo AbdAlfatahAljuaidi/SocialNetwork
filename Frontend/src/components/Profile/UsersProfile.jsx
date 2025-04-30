@@ -76,6 +76,12 @@ const UsersProfile = () => {
 
   const isFriend = friends.some(friend => friend.name === user.Name);
 
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+
+  },[])
+
   return (
     <div className="bg-white rounded-lg mx-auto">
       <Nav />

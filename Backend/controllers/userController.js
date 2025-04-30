@@ -1357,8 +1357,55 @@ const getTopCommentedPost = async (req, res) => {
   }
 };
 
+const getPost = async(req,res) => {
+  try{
+    const {id} = req.params
+    const post = await Post.findById(id)
+    return res.status(200).json({error:"false" ,post })
+
+  }catch(error){
+    console.log(error);
+    
+  }
 
 
+
+}
+
+
+const updatePost = async (req, res) => {
+  try {
+    const { text } = req.body;
+    const postId = req.params.id;
+
+    const updateData = { text };
+
+    if (req.file) {
+        const result = await cloudinary.uploader.upload(req.file.path);
+        imageUrl = result.secure_url;
+      updateData.imageUrl = imageUrl;
+    }
+
+    console.log("req.file=",req.file);
+    
+
+    const updatedPost = await Post.findByIdAndUpdate(postId, updateData, { new: true });
+
+    if (!updatedPost) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    console.log("updateData =",updateData);
+    console.log("updatedPost=",updatedPost);
+    
+    
+
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    console.error('Error updating post:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 module.exports = {
   UserOpinion,
@@ -1401,5 +1448,7 @@ module.exports = {
   viewSuggest,
   updateSuggest,
   getTopLikedPost,
-  getTopCommentedPost
+  getTopCommentedPost,
+  getPost,
+  updatePost
 };

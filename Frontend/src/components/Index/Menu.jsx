@@ -17,7 +17,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsFillSignpostSplitFill } from "react-icons/bs";
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
-const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
+import { useTranslation } from 'react-i18next';
+
+const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguage   }) => {
   const [userName, setUserName] = useState("");
   const [Profile, setProfile] = useState();
   const navigate = useNavigate();
@@ -26,6 +28,8 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
   );
   const [isHovered, setIsHovered] = useState(false);
 
+  
+  const { t } = useTranslation();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   useEffect(() => {
@@ -79,7 +83,7 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
       <div className="md:flex   items-center mb-3">
     
         <div
-          className="w-14 h-14 bg-blue-50 rounded-full flex justify-center items-center  font-bold text-2xl"
+          className="w-14 h-14 bg-blue-50 rounded-full flex justify-center items-center mx-auto md:mx-0  font-bold text-2xl"
           style={{ color: color }}
         >
           {Profile && Profile.imageUrl ? (
@@ -93,7 +97,7 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
           )}
         </div>
 
-        <div className="ml-3">
+        <div className="md:ml-3">
           <h1 className="font-semibold text-lg text-center md:text-left">
           {userName.Name || "Username"}
           </h1>
@@ -112,7 +116,7 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky  }) => {
               <div className="text-xl">
                 <FaHome />
               </div>
-              <span>Home</span>
+              <span>{t('Home')}</span>
             </li>
           </Link>
 <Link to={"/index"}>

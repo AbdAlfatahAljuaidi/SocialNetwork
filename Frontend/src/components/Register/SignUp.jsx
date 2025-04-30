@@ -1,7 +1,7 @@
 // SignUp.js
 import React, { useState } from 'react';
 import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
@@ -56,7 +56,7 @@ const SignUp = ({ switchToLogin }) => {
     return (
         <div className='w-full p-10'>
             <div>
-                <h1 className='text-3xl text-center font-extrabold '>Create Your Account on Ask AAU</h1>
+                <h1 className='text-3xl text-center font-extrabold '>Create Account</h1>
                 <div className='relative w-full my-4 md:my-8 mx-0 h-12'>
                     <input
                         className='w-full h-full bg-transparent border-none outline-none placeholder:text-white custom-bg rounded-[40px] text-lg text-white py-5 pr-11 pl-5'
@@ -123,9 +123,22 @@ const SignUp = ({ switchToLogin }) => {
 
 
 
-                <div className='text-sm text-center mt-5 mr-0 ml-4 pb-2'>
-                    <p>Already have an account? <a className='text-white font-semibold hover:underline' href='#' onClick={switchToLogin}>Login</a></p>
-                </div>
+<div className='text-sm text-center mt-5 mr-0 ml-4 pb-2'>
+  <p>
+    Already have an account?{' '}
+    <a className='text-white font-semibold hover:underline' href='#' onClick={switchToLogin}>
+      Login
+    </a>
+  </p>
+  <p className='mt-2'>
+    Having trouble registering?{' '}
+
+    <Link to={"/Video"} className='text-blue-300 font-semibold hover:underline' >
+      Watch the registration guide
+    </Link>
+  </p>
+</div>
+
             </div>
         </div>
     );

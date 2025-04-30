@@ -85,8 +85,30 @@ const Update = () => {
               required
             >
               <option value="">Select Major</option>
-              <option value="Software Engineer">Software Engineer</option>
-              <option value="Law">Law</option>
+              <option value="special_education">Special Education</option>
+    <option value="business_administration">Business Administration</option>
+    <option value="counseling_psychology">Counseling Psychology and Mental Health</option>
+    <option value="educational_administration">Educational Administration and Curriculum</option>
+    <option value="accounting">Accounting</option>
+    <option value="management_information_systems">Management Information Systems</option>
+    <option value="digital_marketing">Digital Marketing</option>
+    <option value="accounting_business_law">Accounting and Business Law</option>
+    <option value="data_science_ai">Data Science and Artificial Intelligence</option>
+    <option value="software_engineering">Software Engineering</option>
+    <option value="cybersecurity">Cybersecurity</option>
+    <option value="computer_science">Computer Science</option>
+    <option value="english_translation">English Language and Translation</option>
+    <option value="arabic_literature">Arabic Language and Literature</option>
+    <option value="jurisprudence">Jurisprudence and its Principles</option>
+    <option value="aircraft_maintenance">Aircraft Maintenance</option>
+    <option value="aviation_electronics">Aviation Electronics Engineering</option>
+ 
+    <option value="architectural_engineering">Architectural Engineering</option>
+    <option value="civil_engineering">Civil Engineering</option>
+    <option value="electrical_engineering">Electrical Engineering</option>
+    <option value="mechatronics_engineering">Mechatronics Engineering</option>
+    <option value="biomedical_engineering">Biomedical Engineering</option>
+    <option value="industrial_engineering">Industrial Engineering</option>
             </select>
           </div>
 

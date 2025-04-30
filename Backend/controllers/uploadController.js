@@ -74,6 +74,7 @@ const uploadImage = async (req, res) => {
             likes: 0,
             username:req.body.username,
             fromAdmin:req.body.fromAdmin,
+            questionType:req.body.questionType,
             ProfileImage: req.body.ProfileImage, // معرف المستخدم
         });
 

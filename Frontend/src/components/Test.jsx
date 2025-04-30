@@ -1,6 +1,7 @@
 // src/App.js
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import Nav from './Index/Nav';
 
 const Test = () => {
   const { t, i18n } = useTranslation();
@@ -11,6 +12,7 @@ const Test = () => {
 
   return (
     <div className="App ">
+      <Nav changeLanguage={changeLanguage} />
       <h1>{t('hello')}</h1>
       <p>{t('welcome')}</p>
 

@@ -18,6 +18,7 @@ const postSchema = new mongoose.Schema({
     likedUsers: { type: [String] },
    username:{type:String},
    ProfileImage:{type:String},
+   questionType:{type:String},
    fromAdmin:{type:Boolean,default: 0},
   }, { timestamps: true });
 

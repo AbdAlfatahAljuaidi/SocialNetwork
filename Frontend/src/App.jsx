@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Registration from "./components/Register/Registration";
@@ -34,11 +34,26 @@ import IndexTwo from "./components/Index/FromAdmin"
 import UpdateSuggest from "./components/Dashboard/UpdateSuggest";
 import Top from "./components/Index/Top";
 import TopComment from "./components/Index/TopComment";
+import { useTranslation } from 'react-i18next';
+import Nav from "./components/Index/Nav";
+import UpdatePost from "./components/Index/UpdatePost";
+import Video from "./components/Help/Video";
 
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   
+  const { i18n } = useTranslation();
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
+  useEffect(() => {
+    // تغيير اتجاه الصفحة بناءً على اللغة
+    document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  }, [i18n.language]);
+
   return (
     <BrowserRouter>
       <ToastContainer />
@@ -46,11 +61,13 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/search/:username" element={<Search />} />
         <Route path="/Home/Registration" element={<Registration setUser={setUser} />} />
+        <Route path="/Home/Registration" element={<Registration setUser={setUser} />} />
         <Route 
           path="/index" 
           element={user ? <Index /> : <Navigate to="/Home/Registration" />} 
         />
         <Route path="/Index/Profile" element = {user ? <Profile /> : <Navigate to="/Home/Registration" /> }/>
+        <Route path="/Nav" element = {user ? <Nav  /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Index/Profile/Update" element = {user ? <Update /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Index/Profile/Edit/:id" element = {user ? <Edit /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Index/Profile/ResetPassword/:id" element = {user ? <ResetPassword /> : <Navigate to="/Home/Registration" /> }/>
@@ -75,6 +92,8 @@ function App() {
         <Route path="/UpdateSuggest/:id" element = {user ? <UpdateSuggest /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Top" element = {user ? <Top /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/TopComment" element = {user ? <TopComment /> : <Navigate to="/Home/Registration" /> }/>
+        <Route path="/UpdatePost/:id" element = {user ? <UpdatePost /> : <Navigate to="/Home/Registration" /> }/>
+        <Route path="/Video" element =  {<Video />}/>
         
         <Route path="/activeAccount/:token" element ={<Active />}  />
         <Route path="/PrivacyPolicy" element ={<PrivacyPolicy />}  />
