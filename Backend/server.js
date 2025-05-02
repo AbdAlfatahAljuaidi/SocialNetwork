@@ -24,7 +24,7 @@ const PORT = 4000;
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // غيّر حسب عنوان React
+    origin: process.env.FRONTEND_URL , // غيّر حسب عنوان React
     methods: ["GET", "POST"],
   },
 });

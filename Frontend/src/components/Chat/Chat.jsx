@@ -6,7 +6,7 @@ import Nav from '../Index/Nav';
 import ItImage from '../../assets/IT.jpeg';
 
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
-const socket = io('http://localhost:4000');
+const socket = io(`${apiUrl}`);
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);

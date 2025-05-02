@@ -522,7 +522,7 @@ const Post = () => {
 {topFriend?.major && (
   <p className="text-sm text-gray-600 mb-2">{topFriend.major}</p>
 )}
-        {topFriend.imageUrl && (
+        {topFriend?.imageUrl && (
           <img
             src={topFriend.imageUrl}
             alt="Post"
@@ -530,7 +530,7 @@ const Post = () => {
           />
         )}
         <div className="text-center text-gray-700">
-        👥 <span className="font-medium">{topFriend.friendsCount}</span> Friends
+        👥 <span className="font-medium">{topFriend?.friendsCount}</span> Friends
         </div>
       </div>
     </Link>
