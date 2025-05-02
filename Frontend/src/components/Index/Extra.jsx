@@ -62,6 +62,8 @@ const Extra = () => {
 
       <div className='flex gap-3 items-center mt-4 border-b border-gray-300 pb-2'>
         <h1 className='text-gray-600 cursor-pointer  font-bold'>Friends</h1>
+        <h1 className='text-gray-600 cursor-pointer  font-bold'>Online</h1>
+        
       </div>
 
       <div className='mt-4 space-y-3 max-h-64 overflow-y-auto pr-2'>

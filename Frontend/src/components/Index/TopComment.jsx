@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Nav from './Nav';
 import Menu from './Menu';
+import { Link } from 'react-router-dom';
 
 const TopComment = () => {
   const [topPost, setTopPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
@@ -39,7 +41,7 @@ const TopComment = () => {
         </div>
         <div className="max-w-3xl mx-auto p-6 mt-10 bg-white shadow rounded-lg">
           <h2 className="text-2xl font-bold mb-4 text-center">🔥 Most Commented Post</h2>
-
+          <Link to={`/index/profile/${topPost.username}/${user.Name}`}>
           <div className="flex items-center space-x-4 mb-4">
             <img
               src={topPost.ProfileImage || 'https://via.placeholder.com/50'} // إذا كانت الصورة غير موجودة
@@ -51,6 +53,7 @@ const TopComment = () => {
               <p className="text-sm text-gray-500">{new Date(topPost.createdAt).toLocaleString()}</p>
             </div>
           </div>
+          </Link>
 
           <p className="text-gray-800 mb-4">{topPost.text}</p>
 

@@ -52,6 +52,7 @@ const UsersProfile = () => {
 
       const { data } = await axios.post(`${apiUrl}/follow/${params.username}`, {
         Name: user.Name
+        
       });
 
       setMessage(data.message);

@@ -101,7 +101,7 @@ const Chat = () => {
       setLoading(false);
       setTimeout(() => {
         setLoadingNotification(false);
-      }, 5500); // الإشعار سيبقى ظاهرًا لمدة 1.5 ثانية
+      }, 3000); // الإشعار سيبقى ظاهرًا لمدة 1.5 ثانية
     }
   };
 

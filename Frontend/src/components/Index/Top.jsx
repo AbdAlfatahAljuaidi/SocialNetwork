@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Nav from './Nav';
 import Menu from './Menu';
+import { Link } from 'react-router-dom';
 
 const Top = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
@@ -36,7 +38,7 @@ const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
         </div>
         <div className="max-w-3xl mx-auto p-6 mt-10 bg-white shadow rounded-lg">
       <h2 className="text-2xl font-bold mb-4 text-center">🔥 Most Liked Post</h2>
-
+      <Link to={`/index/profile/${post.username}/${user.Name}`}>
       <div className="flex items-center space-x-4 mb-4">
         <img
           src={post.ProfileImage}
@@ -48,6 +50,7 @@ const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
           <p className="text-sm text-gray-500">{new Date(post.createdAt).toLocaleString()}</p>
         </div>
       </div>
+      </Link>
 
       <p className="text-gray-800 mb-4">{post.text}</p>
 

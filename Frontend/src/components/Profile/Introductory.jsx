@@ -3,6 +3,8 @@ import Nav from '../Index/Nav';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaCheck } from 'react-icons/fa6';
+import { FaPhone, FaUserGraduate } from 'react-icons/fa';
+import { BsCalendar2DateFill } from 'react-icons/bs';
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 const Introductory = () => {
@@ -99,24 +101,44 @@ const Introductory = () => {
             Profile.map((profile, index) => (
               <div key={index} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <p className="text-sm text-gray-400">Major</p>
-                  <p className="text-lg text-gray-800 font-medium">{profile.major || "N/A"}</p>
+                  <div className='flex items-center'>
+                  <FaUserGraduate />
+                  
+                  <p className="text-lg ml-2 text-black">Major</p>
+                  </div>
+                  <p className="text-md text-gray-400 font-medium">{profile.major || "N/A"}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400">Gender</p>
-                  <p className="text-lg text-gray-800 font-medium">{profile.Gender || "Not specified"}</p>
+                <div className='flex items-center'>
+                  <FaUserGraduate />
+                  
+                  <p className="text-lg ml-2 text-black">Gender</p>
+                  </div>
+                  <p className="text-md text-gray-400 font-medium">{profile.Gender || "Not specified"}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400">Phone</p>
-                  <p className="text-lg text-gray-800 font-medium">{profile.Phone || "N/A"}</p>
+                <div className='flex items-center'>
+                  <FaPhone />
+                  
+                  <p className="text-lg ml-2 text-black">Phone</p>
+                  </div>
+                  <p className="text-md text-gray-400 font-medium">{profile.Phone || "N/A"}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400">Age</p>
-                  <p className="text-lg text-gray-800 font-medium">{profile.Age}</p>
+                <div className='flex items-center'>
+                  <BsCalendar2DateFill />
+                  
+                  <p className="text-lg ml-2 text-black">Age</p>
+                  </div>
+                  <p className="text-md  text-gray-400 font-medium">{profile.Age}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400">First Year</p>
-                  <p className="text-lg text-gray-800 font-medium">{profile.year}</p>
+                <div className='flex items-center'>
+                  <BsCalendar2DateFill />
+                  
+                  <p className="text-lg ml-2 text-black">First Year</p>
+                  </div>
+                  <p className="text-md text-gray-400 font-medium">{profile.year}</p>
                 </div>
               </div>
             ))

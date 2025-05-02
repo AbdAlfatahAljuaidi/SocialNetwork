@@ -3,11 +3,13 @@ import axios from 'axios';
 import Nav from './Nav';
 import Menu from './Menu';
 import { FaUserFriends } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const TopFriend = () => {
   const [topFriend, setTopFriend] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
@@ -40,7 +42,7 @@ const TopFriend = () => {
         </div>
         <div className="max-w-3xl mx-auto p-6 mt-10 bg-white shadow rounded-lg">
           <h2 className="text-2xl font-bold mb-4 text-center">👥 Most Friendly User</h2>
-
+          <Link to={`/index/profile/${topFriend.username}/${user.Name}`}>
           <div className="flex items-center space-x-4 mb-4">
             <img
               src={topFriend.imageUrl || 'https://via.placeholder.com/50'}
@@ -52,6 +54,9 @@ const TopFriend = () => {
               <p className="text-sm text-gray-500">{topFriend.major}</p>
             </div>
           </div>
+          </Link>
+
+
           <div className="text-sm text-gray-600 flex items-center py-2 gap-2 mt-2">
             <FaUserFriends className="text-blue-600 text-xl" />
             <span className="font-medium text-xl">{topFriend.friendsCount}</span> <span className='text-xl'>Friends</span>

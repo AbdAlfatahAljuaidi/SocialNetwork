@@ -63,7 +63,7 @@ const Nav = ({setActive }) => {
   }
 
   return (
-    <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
+    <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'} className='sticky top-0 z-50 ' >
       <div className="sticky top-0 z-50 flex justify-between  items-center py-4 px-8 bg-white shadow-md flex-wrap sm:flex-nowrap">
         {/* زر القائمة (يظهر فقط عند الشاشات الصغيرة) */}
         <button 
