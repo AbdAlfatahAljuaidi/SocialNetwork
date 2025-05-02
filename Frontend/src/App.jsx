@@ -39,6 +39,8 @@ import Nav from "./components/Index/Nav";
 import UpdatePost from "./components/Index/UpdatePost";
 import Video from "./components/Help/Video";
 import TopFriend from "./components/Index/TopFriend";
+import Chat from './components/Chat/Chat'
+import ChatPharmacy from "./components/Chat/ChatPharmacy";
 
 
 function App() {
@@ -96,6 +98,8 @@ function App() {
         <Route path="/UpdatePost/:id" element = {user ? <UpdatePost /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/TopFriend" element = {user ? <TopFriend /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Video" element =  {<Video />}/>
+        <Route path="/Chat" element =  {<Chat />}/>
+        <Route path="/ChatPharmacy" element =  {<ChatPharmacy />}/>
         
         <Route path="/activeAccount/:token" element ={<Active />}  />
         <Route path="/PrivacyPolicy" element ={<PrivacyPolicy />}  />

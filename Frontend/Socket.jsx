@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 
 const Socket = () => {
   useEffect(() => {
-    const socket = io('http://localhost:4000'); // تأكد من استخدام عنوان الخادم الصحيح
+    const socket = io('http://localhost:6000'); // تأكد من استخدام عنوان الخادم الصحيح
     socket.on('new', (data) => {
       alert(data); // عند تلقي الحدث، يتم عرض الإشعار
     });

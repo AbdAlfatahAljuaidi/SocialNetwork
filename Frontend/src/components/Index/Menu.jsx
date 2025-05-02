@@ -14,7 +14,8 @@ import {
 } from "react-icons/fa";
 import { CiViewTable } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
-import { BsFillSignpostSplitFill } from "react-icons/bs";
+import { BsChat, BsFillSignpostSplitFill } from "react-icons/bs";
+import { IoChatbubbleEllipses } from "react-icons/io5";
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 import { useTranslation } from 'react-i18next';
@@ -154,6 +155,15 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguag
               <span>Message</span>
             </li>
           </Link> */}
+ <Link to="/Chat">
+            <li className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200">
+              <div className="text-xl">
+              <IoChatbubbleEllipses />
+              </div>
+              <span>Chat</span>
+            </li>
+          </Link>
+
 
           <Link to="/Bookmarks">
             <li className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200">

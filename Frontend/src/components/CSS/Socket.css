@@ -1,0 +1,50 @@
+.chat-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 1rem;
+}
+
+.message {
+  margin-bottom: 1rem;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.message-time {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: gray;
+}
+
+.specialty {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.message-body {
+  margin-top: 5px;
+}
+
+#form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+#input {
+  flex: 1;
+  padding: 8px;
+}

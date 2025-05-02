@@ -11,6 +11,7 @@ const upload = multer({ dest: "uploads/" });
 const sendEmail = require("../utils/sendEmail");
 const suggest = require("../utils/suggest");
 const sendPass = require("../utils/sendPass");
+const Message = require('../models/Messages.js')
 
 const { Suggest, SuggestValidation } = require("../models/Suggestion");
 
@@ -1435,6 +1436,27 @@ const topUserFriends= async (req, res) => {
   }
 };
 
+
+// messages route (backend)
+const messages = async (req, res) => {
+  const skip = parseInt(req.query.skip) || 0;
+
+  try {
+    const messages = await Message.find({})
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(10);
+
+    res.json(messages); // لاحظ: frontend يعكس الترتيب لاحقًا
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+
+
+
+
 module.exports = {
   UserOpinion,
   ShowOpinions,
@@ -1479,5 +1501,6 @@ module.exports = {
   getTopCommentedPost,
   getPost,
   updatePost,
-  topUserFriends
+  topUserFriends,
+  messages
 };
