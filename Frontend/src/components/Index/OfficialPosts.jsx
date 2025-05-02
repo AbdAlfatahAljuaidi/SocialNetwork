@@ -29,21 +29,6 @@ const OfficialPosts = () => {
 
 
 
-    useEffect(() => {
-      const fetchPosts = async () => {
-        setLoading(true);
-        try {
-          const { data } = await axios.get(`${apiUrl}/api/posts`);
-          setPosts(data);
-        } catch (error) {
-          console.error("حدث خطأ أثناء جلب البوستات:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchPosts();
-    }, []);
-
 
   useEffect(() => {
     const handleClickOutside = (event) => {

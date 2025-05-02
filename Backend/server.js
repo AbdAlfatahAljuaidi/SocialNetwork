@@ -24,9 +24,10 @@ const PORT = 4000;
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL , // غيّر حسب عنوان React
-    methods: ["GET", "POST"],
-  },
+    origin: ["http://localhost:5173", "https://socialnetwork-6vdw.onrender.com"], // سماح بعدة origins
+    methods: ["GET", "POST"]
+  }
+
 });
 
 // إعداد middlewares
@@ -73,6 +74,11 @@ io.on('connection', (socket) => {
 
   socket.on('stop_typing', () => {
     socket.broadcast.emit('clear_typing_status');
+  });
+
+  socket.on('send_Notification', (data) => {
+    // إرسال الإشعار لجميع المستخدمين (بما فيهم المرسل)
+    io.emit('send_Notification_to_all_users', data);
   });
 
   socket.on('disconnect', () => {

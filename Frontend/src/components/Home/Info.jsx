@@ -54,7 +54,7 @@ const Info = () => {
           Join Ask AAU for collaborative learning, where students can share knowledge and engage in meaningful discussions to help each other.
         </p>
         <Link to={"/Home/Registration"} >
-        <button className="bg-white px-6 py-3 mt-6 text-main font-bold rounded-lg shadow-md hover:bg-main hover:text-white transition-all duration-300">
+        <button className="bg-white px-6 py-3 mt-6 text-main font-bold rounded-lg shadow-md hover:bg-main hover:bg-blue-700 hover:text-white transition-all duration-300">
           Join Now
         </button>
         </Link>

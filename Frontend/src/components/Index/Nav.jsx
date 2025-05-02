@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaSearch, FaBars } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import Menu from './Menu';
-
+import { IoIosNotifications } from "react-icons/io";
 import { useTranslation } from 'react-i18next';
 import {
  
@@ -13,12 +13,31 @@ const Nav = ({setActive }) => {
   const [userName, setUserName] = useState('');
   const [username, setUsername] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   
   const { t, i18n } = useTranslation();
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng); // تغيير اللغة عند الضغط على الزر
   };
 
+
+  const notifications = [
+    {
+      id: 1,
+      name: 'Ahmad Khaled',
+      time: 'منذ 5 دقائق',
+      message: 'علق على منشورك.',
+      image: 'https://via.placeholder.com/40', // ضع رابط صورة الشخص
+    },
+    {
+      id: 2,
+      name: 'Sara N.',
+      time: 'منذ ساعة',
+      message: 'أرسلت لك رسالة جديدة.',
+      image: 'https://via.placeholder.com/40',
+    },
+  ];
 
   // useEffect(() => {
   //   // تغيير اتجاه الصفحة بناءً على اللغة
@@ -90,8 +109,44 @@ const Nav = ({setActive }) => {
          <Link to={`/search/${username}`}> <FaSearch className="absolute left-4 top-2/4 transform -translate-y-2/4 text-gray-500" /></Link>
         </div>
 
+      
+
         {/* User Info & Signout */}
         <div className="flex items-center space-x-4 w-full sm:w-auto justify-center sm:justify-start">
+
+  {/* Notification */}
+  <div className="relative">
+      {/* زر الإشعارات */}
+      <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer relative">
+        <IoIosNotifications className="text-2xl text-gray-700" />
+        {notifications.length > 0 && (
+          <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+            {notifications.length}
+          </span>
+        )}
+      </div>
+
+      {/* قائمة الإشعارات */}
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-80 bg-white shadow-lg rounded-lg z-50 max-h-96 overflow-y-auto">
+          <div className="p-4 border-b font-bold text-gray-700">Notifications</div>
+          {notifications.map((notif) => (
+            <div key={notif.id} className="flex items-start gap-3 p-4 border-b hover:bg-gray-50">
+              <img src={notif.image} alt="User" className="w-10 h-10 rounded-full" />
+              <div>
+                <div className="font-semibold">{notif.name}</div>
+                <div className="text-sm text-gray-500">{notif.time}</div>
+                <div className="text-sm text-gray-700">{notif.message}</div>
+              </div>
+            </div>
+          ))}
+          {notifications.length === 0 && (
+            <div className="p-4 text-sm text-gray-500 text-center">No Notifictions yet   </div>
+          )}
+        </div>
+      )}
+    </div>
+
           <button 
             onClick={signout} 
             className="text-white border flex items-center justify-center gap-2 py-2 px-6 rounded-lg  transition-all duration-200 w-full sm:w-auto mb-4 sm:mb-0 sm:px-6 sm:py-2" style={{background:color}}>
