@@ -365,6 +365,8 @@ const Post = () => {
   }, []);
 
   if (!top) return null;
+
+  
   return (
     <div className="w-full mx-auto p-4">
       <div className="bg-white shadow-md rounded-lg p-4 mb-4">

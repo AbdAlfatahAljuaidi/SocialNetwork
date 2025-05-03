@@ -107,7 +107,6 @@ const uploadImage = async (req, res) => {
 const getPost = async (req, res) => {
     try {
         const posts = await Post.find().sort({ createdAt: -1 });
-
         res.status(200).json(posts);
     } catch (error) {
         console.error(error);

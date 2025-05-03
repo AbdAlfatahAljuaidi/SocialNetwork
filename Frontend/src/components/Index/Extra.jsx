@@ -62,7 +62,7 @@ const Extra = () => {
 
       <div className='flex gap-3 items-center mt-4 border-b border-gray-300 pb-2'>
         <h1 className='text-gray-600 cursor-pointer  font-bold'>Friends</h1>
-        <h1 className='text-gray-600 cursor-pointer  font-bold'>Online</h1>
+        {/* <h1 className='text-gray-600 cursor-pointer  font-bold'>Online</h1> */}
         
       </div>
 
