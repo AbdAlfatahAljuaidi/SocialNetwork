@@ -4,7 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Menu from './Menu';
 import { IoIosNotifications } from "react-icons/io";
 import { useTranslation } from 'react-i18next';
-import moment from "moment"; // npm install moment
+
+
 
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 import {
@@ -162,7 +163,12 @@ const Nav = ({setActive }) => {
           <div>
             <div className="font-semibold">{notif.username}</div>
             <div className="text-sm text-gray-500">
-              {moment(notif.createdAt).fromNow()}
+            {new Date(notif.createdAt).toLocaleString('en-US', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+ 
+})}
             </div>
             <div className="text-sm text-gray-700">{notif.message}</div>
           </div>
