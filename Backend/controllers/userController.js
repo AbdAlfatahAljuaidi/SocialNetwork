@@ -12,6 +12,8 @@ const sendEmail = require("../utils/sendEmail");
 const suggest = require("../utils/suggest");
 const sendPass = require("../utils/sendPass");
 const Message = require('../models/Messages.js')
+const Notification = require ("../models/Notification.js");
+const Report = require ("../models/Report.js");
 
 const { Suggest, SuggestValidation } = require("../models/Suggestion");
 
@@ -172,7 +174,7 @@ const SignUpUser = async (req, res) => {
     const newUser = await SignUp.create({
       Name,
       Email,
-      Password: hashedPassword,
+      Password,
       profileImage
     });
 
@@ -242,11 +244,10 @@ if(user.active==0){
 }
 
 
+if (Password !== user.Password) {
+  return res.status(401).json({ error: true, message: "Password not match" });
+}
 
-  const PasswordMatch = await bcrypt.compare(Password, user.Password);
-  if (!PasswordMatch) {
-    return res.status(401).json({ error: true, message: "password not match" });
-  }
 
   const token = jwt.sign({ id: user._id }, "dsadsadh");
 
@@ -1454,7 +1455,73 @@ const messages = async (req, res) => {
 };
 
 
+const getNotifications = async (req, res) => {
+  try {
+    const notifications = await Notification.find().sort({ createdAt: -1 });
+    res.status(200).json({ success: true, notifications });
+  } catch (error) {
+    console.error("❌ Error fetching notifications:", error);
+    res.status(500).json({ success: false, message: "Failed to fetch notifications" });
+  }
+};
 
+
+const readNoti = async (req, res) => {
+  try {
+    await Notification.updateMany({ isRead: false }, { isRead: true });
+    const notifications = await Notification.find().sort({ createdAt: -1 });
+    res.json({ notifications });
+  } catch (error) {
+    res.status(500).json({ error: 'حدث خطأ أثناء تحديث الإشعارات' });
+  }
+};
+
+
+
+
+
+
+ const createReport = async (req, res) => {
+  try {
+    const { reporter, reportedUser, reason } = req.body;
+
+    if (!reporter || !reportedUser || !reason) {
+      return res.status(400).json({ message: "All fields are required." });
+    }
+
+    const newReport = new Report({ reporter, reportedUser, reason });
+    await newReport.save();
+
+    res.status(200).json({ message: "Report submitted successfully." });
+  } catch (error) {
+    console.error("Report creation failed:", error);
+    res.status(500).json({ message: "Server error." });
+  }
+};
+
+
+
+const getReports =  async (req, res) => {
+  try {
+    const reports = await Report.find().sort({ CreatedAt: -1 });
+    res.json({ success: true, reports });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Error fetching reports' });
+  }
+};
+
+
+const deleteReport = async (req, res) => {
+  try {
+    const report = await Report.findByIdAndDelete(req.params.id);
+    if (!report) {
+      return res.status(404).json({ success: false, message: 'Report not found' });
+    }
+    res.json({ success: true, message: 'Report deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Delete failed' });
+  }
+};
 
 
 module.exports = {
@@ -1502,5 +1569,10 @@ module.exports = {
   getPost,
   updatePost,
   topUserFriends,
-  messages
+  messages,
+  getNotifications,
+  readNoti,
+  createReport,
+  getReports,
+  deleteReport
 };

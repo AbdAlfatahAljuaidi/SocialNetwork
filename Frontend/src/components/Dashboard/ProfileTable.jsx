@@ -70,6 +70,33 @@ const ProfileTable = () => {
     saveAs(blob, "Profiles.xlsx");
   };
 
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Profiles Report", 14, 10);
+
+    const tableColumn = ["Username", "Age", "Address", "Phone", "Gender"];
+    const tableRows = [];
+
+    filteredProfiles.forEach(profile => {
+      const profileData = [
+        profile.username,
+        profile.Age,
+        profile.Address,
+        profile.Phone,
+        profile.Gender,
+      ];
+      tableRows.push(profileData);
+    });
+
+    doc.autoTable({
+      head: [tableColumn],
+      body: tableRows,
+      startY: 20,
+    });
+
+    doc.save("Profiles.pdf");
+  };
+
   return (
     <div className='p-4'>
       <div className='flex flex-col md:flex-row justify-between items-center gap-4 mb-4'>
@@ -88,10 +115,14 @@ const ProfileTable = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
         <div className="flex gap-2">
-          <button onClick={exportToExcel} className="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700">
-            Export Excel
-          </button>
-        </div>
+  <button onClick={exportToExcel} className="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700">
+    Export Excel
+  </button>
+  <button onClick={exportToPDF} className="bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700">
+    Export PDF
+  </button>
+</div>
+
       </div>
 
       <table className='min-w-full border border-gray-300 shadow-md rounded-lg overflow-hidden'>

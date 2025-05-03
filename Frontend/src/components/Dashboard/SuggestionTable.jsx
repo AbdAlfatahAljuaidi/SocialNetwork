@@ -75,7 +75,31 @@ const SuggestionTable = () => {
     saveAs(blob, "Suggestions.xlsx");
   };
 
-
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Suggestions Table", 14, 10);
+  
+    const tableColumn = ["Name", "Email", "Type", "Title", "Details", "Status", "Date"];
+    const tableRows = filteredSuggestions.map(sug => [
+      sug.name,
+      sug.email,
+      sug.type,
+      sug.title,
+      sug.details,
+      sug.state,
+      new Date(sug.createdAt).toLocaleString(),
+    ]);
+  
+    doc.autoTable({
+      head: [tableColumn],
+      body: tableRows,
+      startY: 20,
+      styles: { fontSize: 8 }, // لتقليل حجم الخط حتى لا تتزاحم الأعمدة
+    });
+  
+    doc.save("Suggestions.pdf");
+  };
+  
   
 
   return (
@@ -100,6 +124,7 @@ const SuggestionTable = () => {
           <button onClick={exportToExcel} className="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700">
             Export Excel
           </button>
+          <button onClick={exportToPDF} className="bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700">Export PDF</button>
         </div>
       </div>
 
@@ -129,14 +154,14 @@ const SuggestionTable = () => {
                 <td className='px-4 py-2 border'>{new Date(sug.createdAt).toLocaleString()}</td>
                 <td className='px-4 py-2 border gap-2'>
                   <button
-                    className='bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600'
+                    className='bg-red-500 text-white px-3 py-1 w-20 rounded hover:bg-red-600'
                     onClick={() => deleteSuggestion(sug._id)}
                   >
                     Delete
                   </button>
                   <Link to={`/UpdateSuggest/${sug._id}`}>
                   <button
-                    className='bg-green-500 ml-2 text-white px-3 py-1 rounded hover:bg-green-600'
+                    className='bg-green-500  mt-2 text-white px-3 w-20 py-1 rounded hover:bg-green-600'
                   >
                     Update
                   </button>

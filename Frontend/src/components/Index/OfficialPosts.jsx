@@ -8,6 +8,9 @@ import Testt from "../Testt";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'; // مهم لستايل التحميل
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
+import { io } from 'socket.io-client';
+
+const socket = io(`${apiUrl}`);
 
 const OfficialPosts = () => {
   const [postText, setPostText] = useState("");
@@ -22,6 +25,9 @@ const OfficialPosts = () => {
   const [note,setNote] =useState([])
   const [fromAdmin,setFromAdmin] =useState(true)
   const [loading, setLoading] = useState(true);
+  const [notification, setNotification] = useState([]);
+  
+    const [openPostOptionsId, setOpenPostOptionsId] = useState(null);
   
 
 
@@ -97,7 +103,16 @@ const OfficialPosts = () => {
       setPosts((prevPosts) => [newPost, ...prevPosts]);
 
       setPostText(""); // إعادة تعيين النص
-      setPostImage(null); // إعادة تعيين الصورة
+      setPostImage(null);
+      
+      const messageData = {
+        username: user.Name,
+        profileImage: user.profileImage,
+        message: "Admin has been added a post now",
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      };// إعادة تعيين الصورة
+
+      socket.emit('Send_notification',messageData);
       toast.success(data.message)
     } catch (error) {
       console.error("حدث خطأ أثناء تحميل الصورة:", error);
@@ -106,6 +121,26 @@ const OfficialPosts = () => {
   };
   
   
+
+  useEffect(() => {
+    socket.on('connect', () => {
+      console.log('✅ Connected to socket server');
+    });
+
+    socket.on('send_notification_to_all_users', (data) => {
+      setNotification(prev => [...prev, data]);
+      
+      
+    });
+
+    
+  return () => {
+    socket.disconnect();
+  };
+}, []);
+
+
+
 
   const handleCommentSubmit = async (postId) => {
     try {
@@ -319,14 +354,18 @@ const {data} = await axios.post(`${apiUrl}/deletePost`,{
               <div className="relative">
       {/* أيقونة القائمة */}
       <div
-        onClick={() => setShowOptions(!showOptions)}
+        onClick={() =>
+          setOpenPostOptionsId(
+            openPostOptionsId === post._id ? null : post._id
+          )
+        }
         className="cursor-pointer p-2 hover:bg-gray-200 rounded"
       >
         <SlOptionsVertical />
       </div>
 
       {/* قائمة الخيارات */}
-      {showOptions && (
+      {openPostOptionsId === post._id && (
         <div
          
           className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded border p-2"

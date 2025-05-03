@@ -66,6 +66,29 @@ const OpinionTable = () => {
     saveAs(blob, "Opinions.xlsx");
   };
 
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Opinions Report", 14, 15);
+  
+    const tableColumn = ["Name", "Email", "Comment"];
+    const tableRows = [];
+  
+    filteredOpinions.forEach((opinion) => {
+      tableRows.push([opinion.Name, opinion.Email, opinion.Comment]);
+    });
+  
+    doc.autoTable({
+      head: [tableColumn],
+      body: tableRows,
+      startY: 20,
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [41, 128, 185] }
+    });
+  
+    doc.save("Opinions.pdf");
+  };
+  
+
   return (
     <div className='p-4'>
       <div className='flex flex-col md:flex-row justify-between items-center gap-4 mb-4'>
@@ -81,6 +104,10 @@ const OpinionTable = () => {
           <button onClick={exportToExcel} className="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700">
             Export Excel
           </button>
+          <button onClick={exportToPDF} className="bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700">
+  Export PDF
+</button>
+
         </div>
       </div>
 

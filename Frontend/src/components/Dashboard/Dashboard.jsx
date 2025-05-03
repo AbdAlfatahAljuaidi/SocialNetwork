@@ -8,6 +8,7 @@ import PostsTable from "./PostsTable";
 import ProfileTable from "./ProfileTable";
 import SuggestionTable from './SuggestionTable';
 import Nav from '../Index/Nav';
+import ReportTable from './ReportTable';
 
 const Dashboard = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,6 +31,8 @@ const Dashboard = () => {
         return <ProfileTable />;
       case "SuggestionTable":
         return <SuggestionTable />;
+      case "Report":
+        return <ReportTable />;
       default:
         return <Table />;
     }

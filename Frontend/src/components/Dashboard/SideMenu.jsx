@@ -8,12 +8,14 @@ import {
   FaCog,
   FaSignOutAlt,
 } from "react-icons/fa";
+import { MdReportProblem } from "react-icons/md";
 
 const menuItems = [
   { id: "Users", label: "Users", icon: <FaUsers /> },
   { id: "Opinion", label: "Opinion", icon: <FaCommentDots /> },
   { id: "Posts", label: "Posts", icon: <FaPenFancy /> },
   { id: "Profile", label: "Profile", icon: <FaUserCircle /> },
+  { id: "Report", label: "Report", icon: <MdReportProblem /> },
   { id: "SuggestionTable", label: "Suggestion", icon: <FaChartBar /> },
 ];
 

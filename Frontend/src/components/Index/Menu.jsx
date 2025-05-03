@@ -155,14 +155,18 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguag
               <span>Message</span>
             </li>
           </Link> */}
+
+          {user.profileImage && (
  <Link to="/Chat">
-            <li className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200">
-              <div className="text-xl">
-              <IoChatbubbleEllipses />
-              </div>
-              <span>Chat</span>
-            </li>
-          </Link>
+ <li className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200">
+   <div className="text-xl">
+   <IoChatbubbleEllipses />
+   </div>
+   <span>Chat</span>
+ </li>
+</Link>
+          )}
+
 
 
           <Link to="/Bookmarks">

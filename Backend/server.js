@@ -9,6 +9,7 @@ const { join } = require('path');
 const { Server } = require('socket.io');
 const http = require('http');
 const Message = require('./models/Messages')
+const Notification = require('./models/Notification')
 
 // استدعاء الموديلات والروترات
 const { User } = require('./models/Opinion');
@@ -67,6 +68,20 @@ io.on('connection', (socket) => {
       console.error("❌ Error saving message:", err);
     }
   });
+
+  
+  socket.on('Send_notification', async (msgData) => {
+    console.log('📨 Message:', msgData);
+    try {
+      const newNotification = new Notification(msgData);
+      await newNotification.save();
+      io.emit('send_notification_to_all_users', msgData);
+      
+      
+    } catch (err) {
+      console.error("❌ Error saving message:", err);
+    }
+  })
 
   socket.on('typing', () => {
     socket.broadcast.emit('show_typing_status');

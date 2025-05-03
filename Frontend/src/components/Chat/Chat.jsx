@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from 'socket.io-client';
+
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import Nav from '../Index/Nav';
@@ -62,6 +63,8 @@ const Chat = () => {
       };
       socket.emit('chat message', messageData);
       inputRef.current.value = '';
+
+      
   
       // التمرير دائمًا للأسفل بعد الإرسال
       setTimeout(() => {

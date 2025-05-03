@@ -12,7 +12,7 @@ const FromAdmin = () => {
       <Nav setActive={setActiveSection} />
       <div className='flex justify-center'>
         <Menu isSticky={true} />
-       <OfficialPosts />
+       <OfficialPosts  />
         <Extra />
       </div>
     </div>
