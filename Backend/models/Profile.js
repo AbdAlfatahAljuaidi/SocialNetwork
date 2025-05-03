@@ -49,6 +49,11 @@ username:{
 year:{
   type:Number,
   required:true,
+},
+point:{
+  type:Number,
+  required:true,
+
 }
   
 

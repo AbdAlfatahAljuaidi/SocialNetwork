@@ -14,6 +14,7 @@ const Update = () => {
   const [postImage, setPostImage] = useState(null);
   const [year, setYear] = useState();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [point, setPoint] = useState(0);
 
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
@@ -40,6 +41,7 @@ const Update = () => {
       formData.append("major", major);
       formData.append("username", user.Name);
       formData.append("year", year);
+      formData.append("point", point);
       formData.append("file", postImage);
 
       const { data } = await axios.post(`${apiUrl}/User/Profile`, formData, {
@@ -123,14 +125,27 @@ const Update = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
-            <input
-              type="text"
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="New York"
-              className="w-full p-3 border rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
-            />
-          </div>
+  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
+  <select
+    onChange={(e) => setAddress(e.target.value)}
+    className="w-full p-3 border rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+  >
+    <option value="">Select a region</option>
+    <option value="Amman">Amman</option>
+    <option value="Zarqa">Zarqa</option>
+    <option value="Irbid">Irbid</option>
+    <option value="Aqaba">Aqaba</option>
+    <option value="Salt">Salt</option>
+    <option value="Mafraq">Mafraq</option>
+    <option value="Karak">Karak</option>
+    <option value="Tafilah">Tafilah</option>
+    <option value="Ma'an">Ma'an</option>
+    <option value="Jerash">Jerash</option>
+    <option value="Ajloun">Ajloun</option>
+    <option value="Madaba">Madaba</option>
+  </select>
+</div>
+
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone</label>

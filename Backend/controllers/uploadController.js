@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cloudinary = require('../config/cloudinary');
 const Post = require('../models/Posts');
+const { Profile, ProfileValidation } = require("../models/Profile.js");
 
 app.use(express.json());
 
@@ -80,9 +81,13 @@ const uploadImage = async (req, res) => {
 
         await newPost.save();
 
-        
-
-
+    
+        const profile = await Profile.findOne({username:req.body.username})
+    
+        if (profile) {
+          profile.point += 5;
+          await profile.save();
+        }
 
         // console.log("📢 تم نشر بوست جديد، سيتم إرسال الإشعار الآن...");
         // broadcastNewPost(newPost); // ✅ إرسال الإشعار عبر WebSocket

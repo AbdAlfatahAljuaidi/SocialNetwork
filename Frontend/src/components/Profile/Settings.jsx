@@ -115,7 +115,7 @@ const Settings = () => {
                 </div>
 
                 {/* حذف الحساب */}
-                <div className="flex items-center justify-between border-t pt-4 mt-6">
+                {/* <div className="flex items-center justify-between border-t pt-4 mt-6">
                   <p className="text-lg font-medium text-red-600">Delete Account</p>
                   <button
                     onClick={()=>deleteUser()}
@@ -123,7 +123,7 @@ const Settings = () => {
                   >
                     Delete
                   </button>
-                </div>
+                </div> */}
               </div>
             </div>
           ))

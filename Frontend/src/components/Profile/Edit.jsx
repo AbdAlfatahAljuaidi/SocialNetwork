@@ -164,14 +164,27 @@ const Edit = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
-            <input
-              type="text"
-              onChange={(e) => setAddress(e.target.value)}
-              value={Address}
-              className="w-full mt-1 px-4 py-2 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 border"
-            />
-          </div>
+  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
+  <select
+    onChange={(e) => setAddress(e.target.value)}
+    className="w-full p-3 border rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+  >
+    <option value="">Select a region</option>
+    <option value="Amman">Amman</option>
+    <option value="Zarqa">Zarqa</option>
+    <option value="Irbid">Irbid</option>
+    <option value="Aqaba">Aqaba</option>
+    <option value="Salt">Salt</option>
+    <option value="Mafraq">Mafraq</option>
+    <option value="Karak">Karak</option>
+    <option value="Tafilah">Tafilah</option>
+    <option value="Maan">Maan</option>
+    <option value="Jerash">Jerash</option>
+    <option value="Ajloun">Ajloun</option>
+    <option value="Madaba">Madaba</option>
+  </select>
+</div>
+
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Start Year</label>

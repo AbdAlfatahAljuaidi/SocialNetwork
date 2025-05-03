@@ -270,7 +270,7 @@ if (Password !== user.Password) {
 const ProfileInfo = async (req, res) => {
   try {
     // التحقق من البيانات النصية
-    const { userID, Age, Address, Phone, Gender,major ,username, year } = req.body;
+    const { userID, Age, Address, Phone, Gender,major ,username, year ,point } = req.body;
     if (!userID || !Age || !Address || !Phone || !Gender || !major || !username || !year) {
       return res
         .status(400)
@@ -312,6 +312,7 @@ const ProfileInfo = async (req, res) => {
       major,
       username,
       year,
+      point,
     });
 
 
@@ -661,6 +662,13 @@ const Comment =  async (req, res) => {
 
       const comment = post.comments[getComment-1]
 
+      const profile = await Profile.findOne({username:post.username})
+    
+      if (profile) {
+        profile.point += 5;
+        await profile.save();
+      }
+
       console.log(comment);
       
 
@@ -699,15 +707,32 @@ const Like = async (req, res) => {
     // التحقق مما إذا كان المستخدم قد ضغط لايك من قبل
     const hasLiked = post.likedUsers.includes(userId);
 
+
+    const profile = await Profile.findOne({userID:userId})
+    
+
+
     if (!hasLiked) {
       // إضافة اللايك
       post.likes += 1;
       post.likedUsers.push(userId);
+      
+    if (profile) {
+      profile.point += 5;
+      await profile.save();
+    }
     } else {
       // إزالة اللايك
       post.likes = Math.max(0, post.likes - 1); // منع القيم السالبة
       post.likedUsers = post.likedUsers.filter((id) => id !== userId);
+      
+    if (profile) {
+      profile.point -= 5;
+      await profile.save();
     }
+    }
+
+
 
     // حفظ التعديلات
     await post.save();
@@ -891,6 +916,14 @@ const deletePost = async (req, res) => {
     }
 
     await Post.findByIdAndDelete(postid); // حذف المنشور
+    
+    
+    const profile = await Profile.findOne({username:post.username})
+    
+    if (profile) {
+      profile.point -= 5;
+      await profile.save();
+    }
 
     return res.status(200).json({ message: "Post deleted successfully", error: false });
 
@@ -1037,6 +1070,14 @@ const deleteComment = async (req, res) => {
     );
 
     await post.save();
+
+    const profile = await Profile.findOne({username:post.username})
+    
+    if (profile) {
+      profile.point -= 5;
+      await profile.save();
+    }
+    
 
     res.status(200).json({ message: "Comment deleted successfully" });
   } catch (error) {
