@@ -26,7 +26,8 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: ["http://localhost:5173", "https://socialnetwork-6vdw.onrender.com"], // سماح بعدة origins
-    methods: ["GET", "POST"]
+    methods: ["GET", "POST"],
+    credentials: true 
   }
 
 });
