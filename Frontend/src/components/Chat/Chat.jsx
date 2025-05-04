@@ -21,6 +21,8 @@ const Chat = () => {
   const messagesContainerRef = useRef();
   const [profile, setProfile] = useState(null);
   const [loadingOldMessages, setLoadingOldMessages] = useState(false);
+  const [loadingMessages, setLoadingMessages] = useState(true);
+
 
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
@@ -146,14 +148,30 @@ const Chat = () => {
   }, [messages]);
    // تفعيل التمرير عند تغيير الرسائل
    const currentUser = JSON.parse(localStorage.getItem("user")) || { id: "1", username: "Guest" };
+
+useEffect(() => {
+  fetchMessages().then(() => {
+    setLoadingMessages(false);
+  });
+}, []);
+
   
 
   return (
     <div className="flex flex-col h-screen bg-gray-100">
+
     {/* Navbar */}
     <div className="fixed top-0 left-0 w-full z-50">
       <Nav />
     </div>
+
+    {loadingMessages && (
+  <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80 z-50">
+    <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+    <span className="ml-4 text-blue-700 font-medium">Loading messages...</span>
+  </div>
+)}
+
   
     {/* Welcome Header */}
     <div className="fixed md:top-[94px] top-[240px] left-1/2 transform -translate-x-1/2 w-full max-w-[970px] bg-white border border-blue-200 rounded-xl px-4 py-4 flex items-center gap-4 z-40 shadow">

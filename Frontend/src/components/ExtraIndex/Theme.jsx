@@ -20,7 +20,7 @@ export default function Theme() {
       {/* ✅ شريط التنقل في الأعلى */}
       <Nav />
 
-      <div className='flex gap-4 px-6 py-10  mx-auto w-full '>
+      <div className='flex gap-4  py-10  mx-auto w-full '>
       <div className=''>
           <Menu className="w-1/5 min-h-screen border-r border-gray-200" />
         </div>

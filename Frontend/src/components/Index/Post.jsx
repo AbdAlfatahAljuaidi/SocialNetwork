@@ -110,7 +110,10 @@ const Post = () => {
     // التأكد من أن المستخدم لديه صورة للبروفايل
     if (!user || !user.profileImage) {
       toast.error(
-        "You cannot publish a post before creating your own profile."
+        <div>
+        You cannot publish a post before creating your own profile.{" "}
+        <Link to="/index/profile" className="text-blue-500 underline">Go to profile</Link>
+      </div>
       );
       return;
     }
@@ -161,7 +164,14 @@ const Post = () => {
       }
 
       if (!user || !user.profileImage) {
-        toast.error("You cannot comment before creating your own profile");
+        toast.error(
+          
+          <div>
+          You cannot comment before creating your own profile.{" "}
+          <Link to="/index/profile" className="text-blue-500 underline">Go to profile</Link>
+        </div>
+          
+          );
         setIsSubmitting(false);
         return;
       }
@@ -200,7 +210,16 @@ const Post = () => {
   const handleLike = async (postId) => {
     try {
       if (!user || !user.profileImage) {
-        toast.error(" Please create your profile before liking posts");
+        toast.error(
+          
+          
+          <div>
+          Please create your profile before liking posts.{" "}
+          <Link to="/index/profile" className="text-blue-500 underline">Go to profile</Link>
+        </div>
+          
+          );
+
         return;
       }
 

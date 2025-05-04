@@ -345,6 +345,11 @@ const setProfile = async (req, res) => {
     const getProfile = await Profile.find({ userID: data.id });
     console.log(Profile);
 
+    
+if (!getProfile) {
+  return res.status(404).json({ error: true, message: "Profile not found" });
+}
+
     res.status(200).json({ error: false, getProfile });
   } catch (err) {
     console.log(err);

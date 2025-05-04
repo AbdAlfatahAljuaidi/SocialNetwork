@@ -37,12 +37,12 @@ const Analytics = () => {
     <div className="min-h-screen bg-gray-50">
         <Nav />
 
-        <div className='flex gap-4 px-6 py-10  mx-auto '>
+        <div className='flex gap-4  py-10  mx-auto '>
         <div className=''>
           <Menu className="w-2 " />
         </div>
 
-        <div className="max-w-3xl mx-auto p-6">
+        <div className="max-w-3xl mx-auto ">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Your Posts</h1>
 
         {loading ? (
