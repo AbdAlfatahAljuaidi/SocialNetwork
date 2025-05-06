@@ -55,7 +55,7 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguag
         setProfile(data.getProfile[0]); // تخزين أول عنصر فقط لأنه ليس مصفوفة
       } catch (error) {
         console.error("Error fetching profile Info:", error);
-        navigate("/Index/Profile/Update");
+        // navigate("/Index/Profile/Update");
       }
     }
 

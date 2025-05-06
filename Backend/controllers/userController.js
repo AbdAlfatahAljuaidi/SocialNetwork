@@ -564,7 +564,7 @@ const editUser = async (req, res) => {
   try {
     const { id } = req.params; 
   
-    const { Name, Email,admin } = req.body;
+    const { Name, Email,admin,active } = req.body;
   
     if(!Name || !Email){
       return res.status(400).json({error:true, message:"All fields are required"})
@@ -574,7 +574,8 @@ const editUser = async (req, res) => {
       {
         Name ,
         Email,
-        admin
+        admin,
+        active
       },
       {new:true}
     )
@@ -1500,27 +1501,61 @@ const messages = async (req, res) => {
   }
 };
 
-
 const getNotifications = async (req, res) => {
   try {
-    const notifications = await Notification.find().sort({ createdAt: -1 });
+    const { username } = req.body;
+
+    // العثور على البروفايل
+    const profile = await Profile.findOne({ username });
+
+    if (!profile) {
+      return res.status(404).json({ success: false, message: 'البروفايل غير موجود' });
+    }
+
+    // جلب الإشعارات من داخل البروفايل
+    const notifications = profile.notification.sort((a, b) => b.createdAt - a.createdAt);
+
     res.status(200).json({ success: true, notifications });
+
   } catch (error) {
     console.error("❌ Error fetching notifications:", error);
-    res.status(500).json({ success: false, message: "Failed to fetch notifications" });
+    res.status(500).json({ success: false, message: "فشل في جلب الإشعارات" });
   }
 };
+
 
 
 const readNoti = async (req, res) => {
   try {
-    await Notification.updateMany({ isRead: false }, { isRead: true });
-    const notifications = await Notification.find().sort({ createdAt: -1 });
-    res.json({ notifications });
+    const { username } = req.body;
+    const profile = await Profile.findOne({ username });
+
+    if (!profile) {
+      return res.status(404).json({ error: "البروفايل غير موجود" });
+    }
+
+    let updated = false;
+
+    profile.notification = profile.notification.map(noti => {
+      if (!noti.isRead) {
+        updated = true;
+        return { ...noti, isRead: true };
+      }
+      return noti;
+    });
+
+    if (updated) {
+      await profile.save();
+    }
+
+    res.json({ message: "تم تحديث جميع الإشعارات بنجاح" });
   } catch (error) {
-    res.status(500).json({ error: 'حدث خطأ أثناء تحديث الإشعارات' });
+    console.error("❌ خطأ في readNoti:", error.message);
+    console.error(error.stack);
+    res.status(500).json({ error: "حدث خطأ أثناء تحديث الإشعارات" });
   }
 };
+
 
 
 

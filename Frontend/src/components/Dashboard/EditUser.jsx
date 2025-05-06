@@ -8,6 +8,7 @@ const EditUser = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [admin, setAdmin] = useState();
+  const [active, setActive] = useState();
   const { id } = useParams(); // استخراج ID المستخدم من الرابط
   const navigate = useNavigate(); // استخراج ID المستخدم من الرابط
   
@@ -22,6 +23,7 @@ const EditUser = () => {
         setName(data.user.Name || ''); // ضبط الاسم
         setEmail(data.user.Email || ''); // ضبط البريد الإلكتروني
         setAdmin(data.user.admin || ''); 
+        setActive(data.user.active || ''); 
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -43,6 +45,7 @@ const Update = async () => {
       Name: name,  // ضع الاسم الجديد هنا
       Email: email, // ضع الإيميل الجديد هنا
       admin:admin, // ضع الإيميل الجديد هنا
+      active:active, // ضع الإيميل الجديد هنا
     });
 
     console.log("User updated:", data);
@@ -88,6 +91,17 @@ const Update = async () => {
             required
           />
         </div>
+
+        <div className="flex items-center space-x-3">
+  <input
+    id="active"
+    type="checkbox"
+    checked={active}
+    onChange={(e) => setActive(e.target.checked)}
+    className="h-5 w-5"
+  />
+  <label htmlFor="admin" className="text-lg font-medium">active</label>
+</div>
 
         <div className="flex items-center space-x-3">
   <input

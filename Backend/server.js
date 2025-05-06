@@ -10,6 +10,7 @@ const { Server } = require('socket.io');
 const http = require('http');
 const Message = require('./models/Messages')
 const Notification = require('./models/Notification')
+const {Profile} = require('./models/Profile')
 
 // استدعاء الموديلات والروترات
 const { User } = require('./models/Opinion');
@@ -56,10 +57,8 @@ app.get('/', (req, res) => {
 
 // Socket.io أحداث
 io.on('connection', (socket) => {
-  console.log('🟢 User connected:', socket.id);
 
   socket.on('chat message', async (msgData) => {
-    console.log('📨 Message:', msgData);
     
     try {
       const newMessage = new Message(msgData);
@@ -74,9 +73,17 @@ io.on('connection', (socket) => {
   socket.on('Send_notification', async (msgData) => {
     console.log('📨 Message:', msgData);
     try {
-      const newNotification = new Notification(msgData);
-      await newNotification.save();
-      io.emit('send_notification_to_all_users', msgData);
+      await Profile.updateMany({}, {
+        $push: {
+          notification: {
+            username: msgData.username,
+            profileImage: msgData.profileImage,
+            message: msgData.message,
+            isRead: false,
+          }
+        }
+      });
+    
       
       
     } catch (err) {
@@ -98,7 +105,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    console.log('🔴 User disconnected:', socket.id);
   });
 });
 

@@ -16,7 +16,7 @@ const Post = () => {
   const [commentText, setCommentText] = useState({});
   const [showAllComments, setShowAllComments] = useState({});
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
- 
+
   const [showOptions, setShowOptions] = useState(false);
   const optionsRef = useRef(null);
   const [note, setNote] = useState([]);
@@ -30,46 +30,54 @@ const Post = () => {
   const [top, setTop] = useState();
   const [topComment, setTopComment] = useState();
   const [questionType, setQuestionType] = useState("");
-  const [filterType, setFilterType] = useState('');
+  const [filterType, setFilterType] = useState("");
   const [topFriend, setTopFriend] = useState(null);
 
+  const [loadingMessages, setLoadingMessages] = useState(true);
 
   useEffect(() => {
     const fetchTopUser = async () => {
       try {
-        const res = await axios.get('/api/profile/top-user-friends'); // تأكد من المسار الصحيح
+        const res = await axios.get("/api/profile/top-user-friends"); // تأكد من المسار الصحيح
         setTop(res.data);
       } catch (error) {
-        console.error('Error fetching top user:', error);
+        console.error("Error fetching top user:", error);
       }
     };
 
     fetchTopUser();
   }, []);
 
+  const fetchPosts = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(`${apiUrl}/api/posts`);
+      console.log(data);
 
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      try {
-        const { data } = await axios.get(`${apiUrl}/api/posts`);
-        console.log(data);
-
-        if (user && data.likedUsers?.includes(user._id)) {
-          setIsLiked(true);
-        } else {
-          setIsLiked(false);
-        }
-
-        setPosts(data);
-      } catch (error) {
-        console.error("حدث خطأ أثناء جلب البوستات:", error);
-      } finally {
-        setLoading(false);
+      if (user && data.likedUsers?.includes(user._id)) {
+        setIsLiked(true);
+      } else {
+        setIsLiked(false);
       }
-    };
+
+      setPosts(data);
+    } catch (error) {
+      console.error("حدث خطأ أثناء جلب البوستات:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // أول useEffect
+  useEffect(() => {
     fetchPosts();
+  }, []);
+
+  // ثاني useEffect
+  useEffect(() => {
+    fetchPosts().then(() => {
+      setLoadingMessages(false);
+    });
   }, []);
 
   useEffect(() => {
@@ -111,9 +119,11 @@ const Post = () => {
     if (!user || !user.profileImage) {
       toast.error(
         <div>
-        You cannot publish a post before creating your own profile.{" "}
-        <Link to="/index/profile" className="text-blue-500 underline">Go to profile</Link>
-      </div>
+          You cannot publish a post before creating your own profile.{" "}
+          <Link to="/index/profile" className="text-blue-500 underline">
+            Go to profile
+          </Link>
+        </div>
       );
       return;
     }
@@ -165,13 +175,13 @@ const Post = () => {
 
       if (!user || !user.profileImage) {
         toast.error(
-          
           <div>
-          You cannot comment before creating your own profile.{" "}
-          <Link to="/index/profile" className="text-blue-500 underline">Go to profile</Link>
-        </div>
-          
-          );
+            You cannot comment before creating your own profile.{" "}
+            <Link to="/index/profile" className="text-blue-500 underline">
+              Go to profile
+            </Link>
+          </div>
+        );
         setIsSubmitting(false);
         return;
       }
@@ -211,14 +221,13 @@ const Post = () => {
     try {
       if (!user || !user.profileImage) {
         toast.error(
-          
-          
           <div>
-          Please create your profile before liking posts.{" "}
-          <Link to="/index/profile" className="text-blue-500 underline">Go to profile</Link>
-        </div>
-          
-          );
+            Please create your profile before liking posts.{" "}
+            <Link to="/index/profile" className="text-blue-500 underline">
+              Go to profile
+            </Link>
+          </div>
+        );
 
         return;
       }
@@ -359,24 +368,19 @@ const Post = () => {
     fetchTopCommentedPost();
   }, []);
 
-
   const filteredPosts = posts.filter((post) => {
     if (!filterType) return true; // إذا لم يتم تحديد فلتر، يتم عرض جميع البوستات
     return post.questionType === filterType; // تصفية البوستات حسب النوع
   });
-
-
- 
 
   useEffect(() => {
     const fetchTopUser = async () => {
       try {
         const res = await axios.post(`${apiUrl}/topUserFriends`); // تأكد من المسار الصحيح
         setTopFriend(res.data);
-        console.log("datafriend=",res.data);
-        
+        console.log("datafriend=", res.data);
       } catch (error) {
-        console.error('Error fetching top user:', error);
+        console.error("Error fetching top user:", error);
       }
     };
 
@@ -385,9 +389,16 @@ const Post = () => {
 
   if (!top) return null;
 
-  
   return (
     <div className="w-full mx-auto p-4">
+      {loadingMessages && (
+        <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80 z-50">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+          <span className="ml-4 text-blue-700 text-2xl font-medium">
+            Loading...
+          </span>
+        </div>
+      )}
       <div className="bg-white shadow-md rounded-lg p-4 mb-4">
         <textarea
           className="w-full p-2 border rounded mb-2"
@@ -447,9 +458,7 @@ const Post = () => {
                 </div>
             ))}
         </div> */}
-      {loading ? (
-        <div className="text-center mt-10">Loading...</div>
-      ) : top ? (
+      {top ? (
         <>
           <h1 className="font-bold text-xl text-center my-6">Most Numbers</h1>
 
@@ -525,36 +534,47 @@ const Post = () => {
 
             {/* top friend */}
             <div className="w-full md:max-w-xs">
-            <Link to="/TopFriend" className="w-full md:max-w-xs">
-      <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
-      <div className="flex items-center space-x-4 mb-4">
-  {topFriend && (
-    <div className="flex items-center space-x-4">
-      <img
-        src={topFriend.imageUrl || "https://via.placeholder.com/50"}
-        alt={topFriend.username}
-        className="w-12 h-12 rounded-full object-cover"
-      />
-      <h3 className="text-lg font-semibold">{topFriend.username}</h3>
-    </div>
-  )}
-</div>
+              <Link to="/TopFriend" className="w-full md:max-w-xs">
+                <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
+                  <div className="flex items-center space-x-4 mb-4">
+                    {topFriend && (
+                      <div className="flex items-center space-x-4">
+                        <img
+                          src={
+                            topFriend.imageUrl ||
+                            "https://via.placeholder.com/50"
+                          }
+                          alt={topFriend.username}
+                          className="w-12 h-12 rounded-full object-cover"
+                        />
+                        <h3 className="text-lg font-semibold">
+                          {topFriend.username}
+                        </h3>
+                      </div>
+                    )}
+                  </div>
 
-{topFriend?.major && (
-  <p className="text-sm text-gray-600 mb-2">{topFriend.major}</p>
-)}
-        {topFriend?.imageUrl && (
-          <img
-            src={topFriend.imageUrl}
-            alt="Post"
-            className="w-full h-32 object-cover rounded mb-4"
-          />
-        )}
-        <div className="text-center text-gray-700">
-        👥 <span className="font-medium">{topFriend?.friendsCount}</span> Friends
-        </div>
-      </div>
-    </Link>
+                  {topFriend?.major && (
+                    <p className="text-sm text-gray-600 mb-2">
+                      {topFriend.major}
+                    </p>
+                  )}
+                  {topFriend?.imageUrl && (
+                    <img
+                      src={topFriend.imageUrl}
+                      alt="Post"
+                      className="w-full h-32 object-cover rounded mb-4"
+                    />
+                  )}
+                  <div className="text-center text-gray-700">
+                    👥{" "}
+                    <span className="font-medium">
+                      {topFriend?.friendsCount}
+                    </span>{" "}
+                    Friends
+                  </div>
+                </div>
+              </Link>
             </div>
           </div>
         </>
@@ -562,240 +582,243 @@ const Post = () => {
         <div className="text-center mt-10">Nothing to show</div>
       )}
 
-<div className="mb-4 w-72">
-  <label htmlFor="filterType" className="block text-gray-700 font-semibold mb-2">
-    Choose a Question Type
-  </label>
-  <select
-    id="filterType"
-    value={filterType}
-    onChange={(e) => setFilterType(e.target.value)}
-    className="w-full p-3 border rounded-lg bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-  >
-    <option value="">ALL</option>
-    <option value="Educational and Psychological Sciences">
-      Educational and Psychological Sciences
-    </option>
-    <option value="Business">Business</option>
-    <option value="Law">Law</option>
-    <option value="Information Technology">Information Technology</option>
-    <option value="Arts and Sciences">Arts and Sciences</option>
-    <option value="Aviation Sciences">Aviation Sciences</option>
-    <option value="Pharmacy">Pharmacy</option>
-    <option value="Engineering">Engineering</option>
-    <option value="Applied Medical Sciences">Applied Medical Sciences</option>
-    <option value="Sharia">Sharia</option>
-    <option value="Other">Other</option>
-  </select>
-</div>
-
+      <div className="mb-4 w-72">
+        <label
+          htmlFor="filterType"
+          className="block text-gray-700 font-semibold mb-2"
+        >
+          Choose a Question Type
+        </label>
+        <select
+          id="filterType"
+          value={filterType}
+          onChange={(e) => setFilterType(e.target.value)}
+          className="w-full p-3 border rounded-lg bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">ALL</option>
+          <option value="Educational and Psychological Sciences">
+            Educational and Psychological Sciences
+          </option>
+          <option value="Business">Business</option>
+          <option value="Law">Law</option>
+          <option value="Information Technology">Information Technology</option>
+          <option value="Arts and Sciences">Arts and Sciences</option>
+          <option value="Aviation Sciences">Aviation Sciences</option>
+          <option value="Pharmacy">Pharmacy</option>
+          <option value="Engineering">Engineering</option>
+          <option value="Applied Medical Sciences">
+            Applied Medical Sciences
+          </option>
+          <option value="Sharia">Sharia</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
 
       {/* عرض البوستات */}
       <div className="space-y-4">
-  {filteredPosts && filteredPosts.length > 0 ? (
-    filteredPosts.map((post) => (
-      <div key={post._id} className="bg-white shadow-md rounded-lg p-4">
-        <div className="flex justify-between">
-          <div className="flex items-center gap-4">
-            <Link to={`/index/profile/${post.username}/${user.Name}`}>
-              <img
-                src={post.ProfileImage}
-                className="w-16 h-16 rounded-full border border-black"
-                alt="User Profile"
-              />
-            </Link>
-            <div>
-              <Link to={`/index/profile/${post.username}/${user.Name}`}>
-                <h1 className="font-bold text-2xl">{post.username}</h1>
-              </Link>
-              <p className="text-sm text-gray-500">
-                {new Date(post.createdAt).toLocaleString("EG", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  second: "2-digit",
-                  hour12: true,
-                })}
-              </p>
-            </div>
-          </div>
-
-          <div className="relative">
-            {/* أيقونة القائمة */}
-            <div
-              onClick={() =>
-                setOpenPostOptionsId(
-                  openPostOptionsId === post._id ? null : post._id
-                )
-              }
-              className="cursor-pointer p-2 hover:bg-gray-200 rounded"
-            >
-              <SlOptionsVertical />
-            </div>
-
-            {/* قائمة الخيارات */}
-            {openPostOptionsId === post._id && (
-              <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded border p-2">
-                <button
-                  onClick={() => savePost(post._id)}
-                  className="block w-full text-left p-2 hover:bg-gray-100"
-                >
-                  Save Post
-                </button>
-                <Link to={`/UpdatePost/${post._id}`}>
-                  <button
-                    className={`${
-                      user.Name === post.username ? "block" : "hidden"
-                    } w-full text-left p-2 text-green-500 hover:bg-green-100`}
-                  >
-                    Update Post
-                  </button>
-                </Link>
-                <button
-                  className={`${
-                    user.Name === post.username ? "block" : "hidden"
-                  } w-full text-left p-2 text-red-500 hover:bg-red-100`}
-                  onClick={() => deletePost(post._id)}
-                >
-                  Delete Post
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-
-        <p className="text-black mt-3">{post.text}</p>
-        {post.imageUrl && (
-          <img
-            src={post.imageUrl}
-            alt="Post"
-            className="mt-2 w-full h-auto"
-          />
-        )}
-
-        {/* زر الإعجاب */}
-        <div className="flex items-center space-x-2 mt-3">
-          <button
-            onClick={() => handleLike(post._id)}
-            className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-              post.liked
-                ? "bg-red-500 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
-          >
-            {post.likedUsers.includes(user._id) ? "❤️ " : "🤍"}
-          </button>
-
-          <span className="text-lg font-semibold text-gray-700">
-            {post.likes}
-          </span>
-
-          <span className="text-lg font-semibold text-gray-700"></span>
-        </div>
-
-        {/* إدخال التعليق */}
-        <div className="mt-4">
-          <textarea
-            placeholder="Write a Comment..."
-            value={commentText[post._id] || ""}
-            onChange={(e) =>
-              setCommentText({
-                ...commentText,
-                [post._id]: e.target.value,
-              })
-            }
-            className="w-full p-2 border rounded"
-          />
-          <button
-            disabled={isSubmitting}
-            onClick={() => handleCommentSubmit(post._id)}
-            className="mt-2  text-white px-4 py-1 rounded"
-            style={{
-              background: color,
-            }}
-          >
-            {isSubmitting ? "Commenting..." : "Comment"}
-          </button>
-        </div>
-
-        {/* عرض التعليقات */}
-
-        <div className="mt-4 space-y-2">
-          {(showAllComments[post._id]
-            ? post.comments
-            : post.comments.slice(0, 2)
-          ).map((comment, cIndex) => (
-            <div key={cIndex} className="p-2 border rounded bg-gray-100">
-              <div className="flex justify-between items-center">
-                <Link to={`/index/profile/${comment.user}/${user.Name}`}>
-                  <div className="flex gap-4 items-center">
+        {filteredPosts && filteredPosts.length > 0 ? (
+          filteredPosts.map((post) => (
+            <div key={post._id} className="bg-white shadow-md rounded-lg p-4">
+              <div className="flex justify-between">
+                <div className="flex items-center gap-4">
+                  <Link to={`/index/profile/${post.username}/${user.Name}`}>
                     <img
-                      src={comment.imageUser}
-                      className="w-12 h-12 rounded-full"
-                      alt=""
+                      src={post.ProfileImage}
+                      className="w-16 h-16 rounded-full border border-black"
+                      alt="User Profile"
                     />
-                    <div>
-                      <h1>{comment.user}</h1>
-                      <h1 className="text-gray-500">
-                        {" "}
-                        {new Date(comment.createdAt).toLocaleString(
-                          "EG",
-                          {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            second: "2-digit",
-                            hour12: true,
-                          }
-                        )}
-                      </h1>
-                    </div>
-                  </div>
-                </Link>
-                <div>
-                  {" "}
+                  </Link>
                   <div>
-                    {comment.user === user.Name && (
-                      <button
-                        onClick={() =>
-                          removeComment(post._id, comment._id)
-                        }
-                        className="text-red-500 hover:text-red-700"
-                      >
-                        <FaTrash />
-                      </button>
-                    )}
+                    <Link to={`/index/profile/${post.username}/${user.Name}`}>
+                      <h1 className="font-bold text-2xl">{post.username}</h1>
+                    </Link>
+                    <p className="text-sm text-gray-500">
+                      {new Date(post.createdAt).toLocaleString("EG", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: true,
+                      })}
+                    </p>
                   </div>
+                </div>
+
+                <div className="relative">
+                  {/* أيقونة القائمة */}
+                  <div
+                    onClick={() =>
+                      setOpenPostOptionsId(
+                        openPostOptionsId === post._id ? null : post._id
+                      )
+                    }
+                    className="cursor-pointer p-2 hover:bg-gray-200 rounded"
+                  >
+                    <SlOptionsVertical />
+                  </div>
+
+                  {/* قائمة الخيارات */}
+                  {openPostOptionsId === post._id && (
+                    <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded border p-2">
+                      <button
+                        onClick={() => savePost(post._id)}
+                        className="block w-full text-left p-2 hover:bg-gray-100"
+                      >
+                        Save Post
+                      </button>
+                      <Link to={`/UpdatePost/${post._id}`}>
+                        <button
+                          className={`${
+                            user.Name === post.username ? "block" : "hidden"
+                          } w-full text-left p-2 text-green-500 hover:bg-green-100`}
+                        >
+                          Update Post
+                        </button>
+                      </Link>
+                      <button
+                        className={`${
+                          user.Name === post.username ? "block" : "hidden"
+                        } w-full text-left p-2 text-red-500 hover:bg-red-100`}
+                        onClick={() => deletePost(post._id)}
+                      >
+                        Delete Post
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 
-              <p className="mt-3 ">{comment.content}</p>
-            </div>
-          ))}
-          {post.comments.length > 2 && (
-            <button
-              onClick={() =>
-                setShowAllComments((prev) => ({
-                  ...prev,
-                  [post._id]: !prev[post._id],
-                }))
-              }
-            >
-              {showAllComments[post._id] ? "Show Less" : "More"}
-            </button>
-          )}
-        </div>
-      </div>
-    ))
-  ) : (
-    <p>No posts available</p>
-  )}
-</div>
+              <p className="text-black mt-3">{post.text}</p>
+              {post.imageUrl && (
+                <img
+                  src={post.imageUrl}
+                  alt="Post"
+                  className="mt-2 w-full h-auto"
+                />
+              )}
 
+              {/* زر الإعجاب */}
+              <div className="flex items-center space-x-2 mt-3">
+                <button
+                  onClick={() => handleLike(post._id)}
+                  className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+                    post.liked
+                      ? "bg-red-500 text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
+                >
+                  {post.likedUsers.includes(user._id) ? "❤️ " : "🤍"}
+                </button>
+
+                <span className="text-lg font-semibold text-gray-700">
+                  {post.likes}
+                </span>
+
+                <span className="text-lg font-semibold text-gray-700"></span>
+              </div>
+
+              {/* إدخال التعليق */}
+              <div className="mt-4">
+                <textarea
+                  placeholder="Write a Comment..."
+                  value={commentText[post._id] || ""}
+                  onChange={(e) =>
+                    setCommentText({
+                      ...commentText,
+                      [post._id]: e.target.value,
+                    })
+                  }
+                  className="w-full p-2 border rounded"
+                />
+                <button
+                  disabled={isSubmitting}
+                  onClick={() => handleCommentSubmit(post._id)}
+                  className="mt-2  text-white px-4 py-1 rounded"
+                  style={{
+                    background: color,
+                  }}
+                >
+                  {isSubmitting ? "Commenting..." : "Comment"}
+                </button>
+              </div>
+
+              {/* عرض التعليقات */}
+
+              <div className="mt-4 space-y-2">
+                {(showAllComments[post._id]
+                  ? post.comments
+                  : post.comments.slice(0, 2)
+                ).map((comment, cIndex) => (
+                  <div key={cIndex} className="p-2 border rounded bg-gray-100">
+                    <div className="flex justify-between items-center">
+                      <Link to={`/index/profile/${comment.user}/${user.Name}`}>
+                        <div className="flex gap-4 items-center">
+                          <img
+                            src={comment.imageUser}
+                            className="w-12 h-12 rounded-full"
+                            alt=""
+                          />
+                          <div>
+                            <h1>{comment.user}</h1>
+                            <h1 className="text-gray-500">
+                              {" "}
+                              {new Date(comment.createdAt).toLocaleString(
+                                "EG",
+                                {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                  second: "2-digit",
+                                  hour12: true,
+                                }
+                              )}
+                            </h1>
+                          </div>
+                        </div>
+                      </Link>
+                      <div>
+                        {" "}
+                        <div>
+                          {comment.user === user.Name && (
+                            <button
+                              onClick={() =>
+                                removeComment(post._id, comment._id)
+                              }
+                              className="text-red-500 hover:text-red-700"
+                            >
+                              <FaTrash />
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    <p className="mt-3 ">{comment.content}</p>
+                  </div>
+                ))}
+                {post.comments.length > 2 && (
+                  <button
+                    onClick={() =>
+                      setShowAllComments((prev) => ({
+                        ...prev,
+                        [post._id]: !prev[post._id],
+                      }))
+                    }
+                  >
+                    {showAllComments[post._id] ? "Show Less" : "More"}
+                  </button>
+                )}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No posts available</p>
+        )}
+      </div>
     </div>
   );
 };

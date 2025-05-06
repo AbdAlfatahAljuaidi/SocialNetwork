@@ -23,6 +23,8 @@ const Nav = ({setActive }) => {
   
   const [notifications, setNotification] = useState([]);
 
+   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
   
   const { t, i18n } = useTranslation();
   const changeLanguage = (lng) => {
@@ -56,10 +58,18 @@ const Nav = ({setActive }) => {
     setIsOpen(!isOpen);
   
     if (!isOpen) {
+      console.log("الاسم المستخدم لإرسال الطلب:", user.Name);
+
       try {
-        await axios.put(`${apiUrl}/readNoti`);
-        const { data } = await axios.get(`${apiUrl}/notifications`);
+        await axios.put(`${apiUrl}/readNoti`, {
+          username: user.Name,
+        });
+        const { data } = await axios.post(`${apiUrl}/notifications`,{
+          username: user.Name,
+        });
         setNotification(data.notifications);
+        console.log("data.notifications",data.notifications);
+        
       } catch (err) {
         console.error("خطأ أثناء تحديث الإشعارات:", err);
       }
@@ -69,7 +79,9 @@ const Nav = ({setActive }) => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const { data } = await axios.get(`${apiUrl}/notifications`);
+        const { data } = await axios.post(`${apiUrl}/notifications`,{
+          username:user.Name,
+        });
         setNotification(data.notifications);
       } catch (err) {
         console.error("خطأ في جلب الإشعارات:", err);

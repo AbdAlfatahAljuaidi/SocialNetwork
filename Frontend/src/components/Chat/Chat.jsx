@@ -29,7 +29,6 @@ const Chat = () => {
 
   useEffect(() => {
     socket.on('connect', () => {
-      console.log('✅ Connected to socket server');
     });
 
     socket.on('send_messages_to_all_users', (data) => {

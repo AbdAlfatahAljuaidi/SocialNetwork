@@ -1,6 +1,31 @@
 const mongoose = require("mongoose");
 const Joi = require("joi")
 
+
+const NotificationSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,  ref: "User",
+      required: true,
+    },
+    profileImage: {
+      type: String,
+      required: true,
+    },
+    message: {
+      type: String,
+      required: true,
+    },
+ 
+    isRead: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
+
+
 const ProfileSchema = new mongoose.Schema({
 
   userID:{
@@ -54,7 +79,14 @@ point:{
   type:Number,
   required:true,
 
+},
+
+notification:{
+  type:[NotificationSchema],
+  required:true,
+
 }
+
   
 
 
