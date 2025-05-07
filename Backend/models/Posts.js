@@ -7,6 +7,7 @@ const commentSchema = new mongoose.Schema({
   content: { type: String, required: true },
   user: { type:String, required: true },
   imageUser:{type:String},
+  correct:{type:Boolean, default:false},
   createdAt: { type: Date, default: Date.now }
 });
 

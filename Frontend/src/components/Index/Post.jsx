@@ -389,6 +389,50 @@ const Post = () => {
 
   if (!top) return null;
 
+
+
+
+  const handleSelectCorrectAnswer = async (postID, commentID) => {
+    try {
+      const res = await fetch(`${apiUrl}/selectCorrectAnswer`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ postID, commentID }),
+      });
+  
+      const data = await res.json();
+  
+      if (!data.error) {
+        // تحديث الحالة في الواجهة الأمامية بدون reload
+        setPosts((prevPosts) =>
+          prevPosts.map((post) => {
+            if (post._id !== postID) return post;
+  
+            return {
+              ...post,
+              comments: post.comments.map((comment) => ({
+                ...comment,
+                correct:
+                  comment._id === commentID
+                    ? !comment.correct
+                    : false, // تأكد إن الباقي يكون false
+              })),
+            };
+          })
+        );
+      } else {
+        alert(data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("خطأ في الاتصال بالسيرفر");
+    }
+  };
+  
+  
+
   return (
     <div className="w-full mx-auto p-4">
       {loadingMessages && (
@@ -747,73 +791,98 @@ const Post = () => {
               {/* عرض التعليقات */}
 
               <div className="mt-4 space-y-2">
-                {(showAllComments[post._id]
-                  ? post.comments
-                  : post.comments.slice(0, 2)
-                ).map((comment, cIndex) => (
-                  <div key={cIndex} className="p-2 border rounded bg-gray-100">
-                    <div className="flex justify-between items-center">
-                      <Link to={`/index/profile/${comment.user}/${user.Name}`}>
-                        <div className="flex gap-4 items-center">
-                          <img
-                            src={comment.imageUser}
-                            className="w-12 h-12 rounded-full"
-                            alt=""
-                          />
-                          <div>
-                            <h1>{comment.user}</h1>
-                            <h1 className="text-gray-500">
-                              {" "}
-                              {new Date(comment.createdAt).toLocaleString(
-                                "EG",
-                                {
-                                  year: "numeric",
-                                  month: "long",
-                                  day: "numeric",
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  second: "2-digit",
-                                  hour12: true,
-                                }
-                              )}
-                            </h1>
-                          </div>
-                        </div>
-                      </Link>
-                      <div>
-                        {" "}
-                        <div>
-                          {comment.user === user.Name && (
-                            <button
-                              onClick={() =>
-                                removeComment(post._id, comment._id)
-                              }
-                              className="text-red-500 hover:text-red-700"
-                            >
-                              <FaTrash />
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    </div>
+  {(showAllComments[post._id]
+    ? post.comments
+    : post.comments.slice(0, 2)
+  ).map((comment, cIndex) => (
+    <div
+    key={cIndex}
+    className={`p-4 border rounded ${
+      comment.correct
+        ? "bg-green-100 border-green-500"
+        : "bg-gray-100 border-gray-300"
+    }`}
+  >
+    <div className="flex justify-between items-center mb-2">
+      {/* بيانات المستخدم */}
+      <Link to={`/index/profile/${comment.user}/${user.Name}`}>
+        <div className="flex gap-4 items-center">
+          <img
+            src={comment.imageUser}
+            className="w-12 h-12 rounded-full"
+            alt=""
+          />
+          <div>
+            <h1 className="font-semibold">{comment.user}</h1>
+            <h1 className="text-gray-500 text-sm">
+              {new Date(comment.createdAt).toLocaleString("EG", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: true,
+              })}
+            </h1>
+          </div>
+        </div>
+      </Link>
+  
+      {/* أيقونة الحذف والcheckbox */}
+      <div className="flex items-center gap-3">
+        {post.username === user.Name && (
+          <input
+            type="checkbox"
+            checked={comment.correct}
+            onChange={() => handleSelectCorrectAnswer(post._id, comment._id)}
+            className="w-5 h-5 accent-green-600"
+            title="Mark as Correct Answer"
+          />
+        )}
+  
+        {comment.user === user.Name && (
+          <button
+            onClick={() => removeComment(post._id, comment._id)}
+            className="text-red-500 hover:text-red-700"
+          >
+            <FaTrash />
+          </button>
+        )}
+      </div>
+    </div>
+  
+    {/* إذا كان صحيح يظهر علامة ✓ */}
+    {comment.correct && (
+      <div className="mb-2">
+        <span className="text-green-600 font-semibold text-sm">
+          ✓ Correct Answer
+        </span>
+      </div>
+    )}
+  
+    {/* نص التعليق */}
+    <p className="text-gray-800">{comment.content}</p>
+  </div>
+  
+  ))}
 
-                    <p className="mt-3 ">{comment.content}</p>
-                  </div>
-                ))}
-                {post.comments.length > 2 && (
-                  <button
-                    onClick={() =>
-                      setShowAllComments((prev) => ({
-                        ...prev,
-                        [post._id]: !prev[post._id],
-                      }))
-                    }
-                  >
-                    {showAllComments[post._id] ? "Show Less" : "More"}
-                  </button>
-                )}
-              </div>
-            </div>
+  {/* زر إظهار المزيد */}
+  {post.comments.length > 2 && (
+    <button
+      onClick={() =>
+        setShowAllComments((prev) => ({
+          ...prev,
+          [post._id]: !prev[post._id],
+        }))
+      }
+      className="text-blue-600 hover:underline mt-2"
+    >
+      {showAllComments[post._id] ? "Show Less" : "More"}
+    </button>
+  )}
+</div>
+      </div>
           ))
         ) : (
           <p>No posts available</p>

@@ -1604,6 +1604,39 @@ const deleteReport = async (req, res) => {
   }
 };
 
+const selectCorrectAnswer = async (req, res) => {
+  try {
+    const { postID, commentID } = req.body;
+
+    const post = await Post.findById(postID);
+    if (!post) {
+      return res.status(404).json({ error: true, message: "Post Not Found" });
+    }
+
+    const comment = post.comments.id(commentID);
+    if (!comment) {
+      return res.status(404).json({ error: true, message: "Comment Not Found" });
+    }
+
+    // إزالة العلامة عن أي تعليق آخر إن وجد
+    post.comments.forEach((c) => {
+      if (c._id.toString() !== commentID) c.correct = false;
+    });
+
+    // قلب حالة correct
+    comment.correct = !comment.correct;
+
+    await post.save();
+
+    return res.status(200).json({ error: false, message: "Status updated" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: true, message: "Internal Server Error" });
+  }
+};
+
+
+
 
 module.exports = {
   UserOpinion,
@@ -1655,5 +1688,6 @@ module.exports = {
   readNoti,
   createReport,
   getReports,
-  deleteReport
+  deleteReport,
+  selectCorrectAnswer
 };
