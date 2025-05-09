@@ -1,22 +1,30 @@
 import React from "react";
 import cardsData from '../Data/Data';
+import { useTranslation } from 'react-i18next';
 
-const Service = () => {
+const Service = ({ changeLanguage }) => {
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language === "ar";
+
   return (
-    <div className="pt-24 flex flex-col items-center px-6 bg-[#EFF2F7] pb-32" id="Service">
+    <div
+      className={`pt-24 flex flex-col items-center px-6 bg-[#EFF2F7] pb-32 ${isArabic ? "text-right" : "text-left"}`}
+      id="Service"
+    >
       {/* العنوان الرئيسي */}
       <div className="text-center mb-16">
-      <h1 className="text-xl font-semibold uppercase tracking-wide text-blue-600">
-        Services
-      </h1>
-      <h2 className="text-4xl sm:text-5xl font-extrabold mt-4 text-gray-900 leading-snug">
-        Enhancing Student Learning <br />
-        <span className="text-blue-500">with Ask AAU</span>
-      </h2>
-      <p className="text-lg mt-6 text-gray-600 max-w-3xl mx-auto">
-        Ask AAU provides a dynamic platform for students to ask questions, share knowledge, and collaborate effectively to enhance their academic experience.
-      </p>
-    </div>
+        <h1 className={`text-xl font-semibold uppercase tracking-wide text-blue-600`}>
+          {t("services")}
+        </h1>
+        <h2 className="text-4xl sm:text-5xl font-extrabold mt-4 text-gray-900 leading-snug">
+          {t("enhancing_student_learning")} <br />
+          <span className="text-blue-500">{t("with_ask_aau")}</span>
+        </h2>
+        <p className={`text-lg mt-6 text-gray-600 max-w-3xl mx-auto ${isArabic ? "text-right" : "text-left"}`}>
+          {t("ask_aau_description")}
+        </p>
+      </div>
+
       {/* الخط مع الدائرة المتحركة */}
       <div className="flex justify-center items-center relative">
         <div className="w-40 h-1 bg-blue-300 relative">
@@ -36,8 +44,12 @@ const Service = () => {
                 <card.icon />
               </div>
               <div className="text-center">
-                <h2 className="font-bold text-xl mb-2 text-gray-800">{card.title}</h2>
-                <p className="text-base text-gray-600">{card.description}</p>
+                <h2 className="font-bold text-xl mb-2 text-gray-800">
+                  {card.title[isArabic ? "ar" : "en"]}
+                </h2>
+                <p className="text-base text-gray-600">
+                  {card.description[isArabic ? "ar" : "en"]}
+                </p>
               </div>
               <span className="absolute bottom-0 bg-blue-700 h-1 w-[80%] group-hover:w-full rounded-b-lg transition-all duration-300"></span>
             </div>

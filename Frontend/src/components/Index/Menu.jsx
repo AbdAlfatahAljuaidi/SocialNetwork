@@ -30,7 +30,7 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguag
   const [isHovered, setIsHovered] = useState(false);
 
   
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   useEffect(() => {
@@ -67,9 +67,10 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguag
 
   return (
     <div
-      className={`bg-white sticky top-24 mt-5 ml-5 py-4 pr-14 pl-5 rounded-xl shadow-lg h-full sm:h-[80vh] sm:flex flex-col justify-between ${
-        menuOpen ? "block" : "hidden"
-      } relative`}
+    className={`bg-white sticky top-24 mt-5 mx-5 py-4 rounded-xl shadow-lg h-full  sm:flex flex-col justify-between relative
+      ${menuOpen ? "block" : "hidden"}
+      ${i18n.language === 'en' ? "pr-14 pl-5" : "pr-5 pl-14"}`}
+    
     >
       {/* زر الإغلاق (X) */}
       <button
@@ -91,15 +92,15 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguag
             <img
               src={Profile.imageUrl}
               alt=""
-              className="w-full h-full rounded-full object-cover "
+              className="w-full h-full rounded-full object-cover  "
             />
           ) : (
             userName?.Name?.charAt(0)?.toUpperCase() || "U"
           )}
         </div>
 
-        <div className="md:ml-3">
-          <h1 className="font-semibold text-lg text-center md:text-left">
+        <div className="md:ml-3 mx-3">
+          <h1 className="font-semibold text-lg text-center ">
           {userName.Name || "Username"}
           </h1>
           <span className="text-gray-400 block w-fit mx-auto md:mx-0">
@@ -113,33 +114,33 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguag
       <nav>
         <ul className="space-y-2">
           <Link to="/home">
-            <li className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200">
+            <li className="flex items-center space-x-3 text-gray-700  py-2 rounded-lg cursor-pointer transition duration-200">
               <div className="text-xl">
-                <FaHome />
+                <FaHome className="mx-1" />
               </div>
-              <span>{t('Home')}</span>
+              <span className="">{t('Home')}</span>
             </li>
           </Link>
 <Link to={"/index"}>
           <li
-            className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200"
+            className="flex items-center space-x-3 text-gray-700  py-2 rounded-lg cursor-pointer transition duration-200"
           >
             <div className="text-xl">
-              <BsFillSignpostSplitFill />
+              <BsFillSignpostSplitFill className="mx-1" />
             </div>
-            <span>Posts</span>
+            <span>{t('posts')}</span>
           </li>
           </Link>
 
 <Link to={"/OfficialPosts"}>
           <li
          
-            className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200"
+            className="flex items-center space-x-3 text-gray-700  py-2 rounded-lg cursor-pointer transition duration-200"
           >
             <div className="text-xl">
-              <BsFillSignpostSplitFill />
+              <BsFillSignpostSplitFill className="mx-1" />
             </div>
-            <span>Official Posts</span>
+            <span>{t('official_posts')}</span>
           </li>
           </Link>
           {/* <Link to="/Bookmarks">
@@ -158,11 +159,11 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguag
 
           {user.profileImage && (
  <Link to="/Chat">
- <li className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200">
+ <li className="flex items-center space-x-3 text-gray-700  py-2 rounded-lg cursor-pointer transition duration-200">
    <div className="text-xl">
-   <IoChatbubbleEllipses />
+   <IoChatbubbleEllipses className="mx-1" />
    </div>
-   <span>Chat</span>
+   <span>{t('chat')}</span>
  </li>
 </Link>
           )}
@@ -170,68 +171,57 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguag
 
 
           <Link to="/Bookmarks">
-            <li className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200">
+            <li className="flex items-center space-x-3 text-gray-700  py-2 rounded-lg cursor-pointer transition duration-200">
               <div className="text-xl">
-                <FaBookmark />
+                <FaBookmark className="mx-1" />
               </div>
-              <span>Bookmarks</span>
+              <span>{t('bookmarks')}</span>
             </li>
           </Link>
 
           <Link to="/analytics">
-            <li className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200">
+            <li className="flex items-center space-x-3 text-gray-700  py-2 rounded-lg cursor-pointer transition duration-200">
               <div className="text-xl">
-                <FaChartBar />
+                <FaChartBar className="mx-1" />
               </div>
-              <span>My Posts</span>
+              <span>{t('my_posts')}</span>
             </li>
           </Link>
 
          
 
           <Link to="/Theme">
-            <li className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200">
+            <li className="flex items-center space-x-3 text-gray-700  py-2 rounded-lg cursor-pointer transition duration-200">
               <div className="text-xl">
-                <FaPalette />
+                <FaPalette className="mx-1" />
               </div>
-              <span>Theme</span>
+              <span>{t('theme')}</span>
             </li>
           </Link>
 
           <Link to="/Help">
-            <li className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200">
+            <li className="flex items-center space-x-3 text-gray-700  py-2 rounded-lg cursor-pointer transition duration-200">
               <div className="text-xl">
-                <FaHandsHelping />
+                <FaHandsHelping className="mx-1" />
               </div>
-              <span>Help & Feedback</span>
+              <span>{t('help_feedback')}</span>
             </li>
           </Link>
 
           {isDashboardVisible && (
             <Link to="/index/dashboard">
-              <li className="flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200">
+              <li className="flex items-center space-x-3 text-gray-700 py-2 rounded-lg cursor-pointer transition duration-200">
                 <div className="text-xl">
-                  <CiViewTable />
+                  <CiViewTable className="mx-1" />
                 </div>
-                <span>Dashboard</span>
+                <span>{t('dashboard')}</span>
               </li>
             </Link>
           )}
         </ul>
       </nav>
 
-      {/* زر القائمة */}
-      <div
-        className="flex items-center space-x-2 text-white hover:text-white px-4 py-2 rounded-lg  transition duration-200"
-        style={{
-          background: color, // تغيير اللون فقط للعنصر
-        }}
-        onMouseEnter={() => setIsHovered(true)} // تفعيل الـ hover
-        onMouseLeave={() => setIsHovered(false)} // إلغاء التفعيل عند الخروج
-      >
-        <FaBars className="text-xl" />
-        <span>Menu</span>
-      </div>
+     
     </div>
   );
 };

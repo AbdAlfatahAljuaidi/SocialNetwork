@@ -1,18 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import { useTranslation } from 'react-i18next';
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 
 
 
 
-const Friends = () => {
+const Friends = ({changeLanguage}) => {
   const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
   const user = JSON.parse(localStorage.getItem("user"));
   const [friends, setFriends] = useState([]);
   const [Profile, setProfile] = useState({});
-
+  const { t } = useTranslation();
 
 
   
@@ -35,45 +37,47 @@ useEffect(() => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
-      <div className="max-w-4xl mx-auto space-y-8">
-        <div className="bg-white p-8 rounded-2xl shadow">
-          <h1 className="text-3xl font-bold text-gray-800 border-b pb-4 mb-6">Friends</h1>
+    <div className="max-w-4xl mx-auto space-y-8">
+      <div className="bg-white p-8 rounded-2xl shadow">
+        <h1 className="text-3xl font-bold text-gray-800 border-b pb-4 mb-6">
+          {t('friendsProfile.title')}
+        </h1>
 
-          {friends.length > 0 ? (
-  <div className="space-y-4">
-    {friends.map((friend) => (
-      <Link
-        key={friend._id || friend.id}
-        to={`/index/profile/${friend.name}/${user.Name}`}
-        className="block"
-      >
-        <div className="flex items-center gap-4 bg-gray-50 dark:bg-gray-800 p-5 rounded-xl shadow-inner hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-          {friend.image ? (
-            <img
-              src={friend.image}
-              alt={friend.name}
-              className="w-16 h-16 rounded-full object-cover shadow"
-            />
-          ) : (
-            <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
-              No Image
-            </div>
-          )}
-          <div>
-            <p className="text-lg font-semibold text-gray-800 dark:text-white">{friend.name}</p>
-
+        {friends.length > 0 ? (
+          <div className="space-y-4">
+            {friends.map((friend) => (
+              <Link
+                key={friend._id || friend.id}
+                to={`/index/profile/${friend.name}/${user.Name}`}
+                className="block"
+              >
+                <div className="flex items-center gap-4 bg-gray-50 dark:bg-gray-800 p-5 rounded-xl shadow-inner hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                  {friend.image ? (
+                    <img
+                      src={friend.image}
+                      alt={friend.name}
+                      className="w-16 h-16 rounded-full object-cover shadow"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
+                      {t('friendsProfile.noImage')}
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-lg font-semibold text-gray-800 dark:text-white">
+                      {friend.name}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
-        </div>
-      </Link>
-    ))}
-  </div>
-) : (
-  <p className="text-gray-500 dark:text-gray-400">You don't have any friends yet.</p>
-)}
-
-        </div>
+        ) : (
+          <p className="text-gray-500 dark:text-gray-400">{t('friendsProfile.empty')}</p>
+        )}
       </div>
     </div>
+  </div>
   );
 };
 

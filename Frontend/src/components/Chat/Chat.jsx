@@ -9,7 +9,9 @@ import ItImage from '../../assets/IT.jpeg';
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 const socket = io(`${apiUrl}`);
 
-const Chat = () => {
+import { useTranslation } from 'react-i18next';
+
+const Chat = ({changeLanguage}) => {
   const [messages, setMessages] = useState([]);
   const [typing, setTyping] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -23,6 +25,7 @@ const Chat = () => {
   const [loadingOldMessages, setLoadingOldMessages] = useState(false);
   const [loadingMessages, setLoadingMessages] = useState(true);
 
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
@@ -167,7 +170,8 @@ useEffect(() => {
     {loadingMessages && (
   <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80 z-50">
     <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
-    <span className="ml-4 text-blue-700 font-medium">Loading messages...</span>
+    <span className="ml-4 text-blue-700 font-medium">
+{t('loading_messages')}</span>
   </div>
 )}
 
@@ -176,10 +180,10 @@ useEffect(() => {
     <div className="fixed md:top-[94px] top-[240px] left-1/2 transform -translate-x-1/2 w-full max-w-[970px] bg-white border border-blue-200 rounded-xl px-4 py-4 flex items-center gap-4 z-40 shadow">
       <img src={ItImage} alt="Group Chat" className="w-14 h-14 rounded-full object-cover border-2 border-white shadow" />
       <div className="text-sm text-gray-700 leading-snug">
-        <h2 className="text-lg font-bold text-blue-700 mb-1">Welcome to the Chat Room!</h2>
+        <h2 className="text-lg font-bold text-blue-700 mb-1">
+{t('chat_welcome')}</h2>
         <p>
-          A place for students to connect, share knowledge, and support each other.
-          Stay respectful, be kind, and enjoy the chat!
+        {t('chat_description')}
         </p>
       </div>
     </div>
@@ -231,7 +235,7 @@ useEffect(() => {
 
 {typing && (
           <p  className="text-sm text-gray-500 mt-4 transition-opacity duration-300 ease-in-out">
-            📝 Someone is typing...
+            📝    {t('someone_is_typing')}
           </p>
         )}
 
@@ -239,7 +243,8 @@ useEffect(() => {
   
         {loadingNotification && (
           <div className="absolute top-0 left-0 right-0 bg-blue-600 text-white text-center py-2 z-50">
-            <span>Loading more messages...</span>
+            <span> {t('loading_more_messages')}
+         </span>
           </div>
         )}
   
@@ -256,14 +261,16 @@ useEffect(() => {
           autoComplete="off"
           onKeyDown={handleTyping}
           onKeyUp={handleStopTyping}
-          placeholder="Send your message..."
+          placeholder={t('send_your_message')}
+         
           className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
         />
         <button
           type="submit"
           className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
         >
-          Send
+          {t('send')}
+         
         </button>
       </form>
     </div>

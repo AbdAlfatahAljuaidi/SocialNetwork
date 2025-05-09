@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-const Menu = ({ activePage, setActivePage, color }) => {
+const Menu = ({ activePage, setActivePage, color, changeLanguage }) => {
+  const { t } = useTranslation();
+
   const menuItems = [
-    { name: 'Introductory', label: 'My Profile' },
-    { name: 'Notifications', label: 'Suggestions' },
-    { name: 'Friends', label: 'Friends' },
-    { name: 'Settings', label: 'Settings' },
+    { name: 'Introductory', label: t('sidebar.myProfile') },
+    { name: 'Notifications', label: t('sidebar.suggestions') },
+    { name: 'Friends', label: t('sidebar.friends') },
+    { name: 'Settings', label: t('sidebar.settings') },
     // يمكنك إضافة صفحات إضافية هنا
   ];
-
 
   return (
     <aside className="w-full md:w-64 h-full bg-white rounded-2xl shadow-md p-6 mr-4">
@@ -21,7 +23,7 @@ const Menu = ({ activePage, setActivePage, color }) => {
                 className={`block w-full text-left text-lg px-4 py-2 rounded-lg transition 
                   ${activePage === item.name
                     ? `text-white`
-                    : `text-gray-600  hover:bg-blue-400`}`}
+                    : `text-gray-600 hover:bg-blue-400`}`}
                 style={{
                   backgroundColor: activePage === item.name ? color : "transparent"
                 }}

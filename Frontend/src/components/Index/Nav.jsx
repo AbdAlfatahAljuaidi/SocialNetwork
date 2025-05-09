@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaSearch, FaBars } from 'react-icons/fa';
+import { FaSearch, FaBars, FaChevronDown } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import Menu from './Menu';
 import { IoIosNotifications } from "react-icons/io";
@@ -20,6 +20,7 @@ const Nav = ({setActive }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [notificationsToShow, setNotificationsToShow] = useState(5); 
+  const [open, setOpen] = useState(false);
   
   const [notifications, setNotification] = useState([]);
 
@@ -110,34 +111,15 @@ const Nav = ({setActive }) => {
 
         {/* Logo */}
         <div className="font-bold text-2xl  sm:text-3xl w-full sm:w-auto text-center sm:text-left mb-4 sm:mb-0" style={{color:color}}>
-        <Link to={'/Index'}> Ask AAU </Link> 
+        <Link to={'/Index'}> {t('ask_aau')} </Link> 
         </div>
 
-        {/* <div className="flex space-x-2 rtl:space-x-reverse mt-4">
-  <button
-    onClick={() => changeLanguage("en")}
-    className={`px-4 py-2 rounded-md border transition 
-      ${i18n.language === 'en' 
-        ? 'bg-[#0078B8] text-white' 
-        : 'bg-white text-[#0078B8] border-[#0078B8] hover:bg-[#0078B8] hover:text-white'}`}
-  >
-    English
-  </button>
-  <button
-    onClick={() => changeLanguage("ar")}
-    className={`px-4 py-2 rounded-md border transition 
-      ${i18n.language === 'ar' 
-        ? 'bg-[#0078B8] text-white' 
-        : 'bg-white text-[#0078B8] border-[#0078B8] hover:bg-[#0078B8] hover:text-white'}`}
-  >
-    العربية
-  </button>
-</div> */}
+       
         {/* Search */}
         <div className="relative w-full sm:w-auto mb-4 sm:mb-0">
           <input
             type="text"
-            placeholder="Search by poster's name"
+            placeholder={t('search_by_poster_name')}
             onChange={(e)=> setUsername(e.target.value)}
             className="w-full sm:w-80 px-4 py-2 pl-12 text-gray-700 bg-gray-100 border border-gray-300 rounded-full "
           />
@@ -147,8 +129,42 @@ const Nav = ({setActive }) => {
       
 
         {/* User Info & Signout */}
-        <div className="flex md:flex-row flex-row-reverse items-center space-x-6 w-full sm:w-auto justify-center sm:justify-start">
+        <div className="flex md:flex-row flex-row-reverse items-center space-x-4  w-full sm:w-auto justify-center sm:justify-start">
+        <div className="hidden md:inline-block  relative text-left ">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center px-4 py-2  rounded-md  bg-white  transition" style={{color:color}}
+      >
+        {t('language')} <FaChevronDown className="ml-2" />
+      </button>
 
+      {open && (
+        <div className="absolute z-10 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg">
+          <button
+            onClick={() => {
+              changeLanguage('en');
+              setOpen(false);
+            }}
+            className={`block w-full text-left px-4 py-2 text-sm ${
+              i18n.language === 'en' ? 'bg-black text-white' : 'hover:bg-gray-100'
+            }`}
+          >
+            English
+          </button>
+          <button
+            onClick={() => {
+              changeLanguage('ar');
+              setOpen(false);
+            }}
+            className={`block w-full text-left px-4 py-2 text-sm ${
+              i18n.language === 'ar' ? 'bg-black text-white' : 'hover:bg-gray-100'
+            }`}
+          >
+            العربية
+          </button>
+        </div>
+      )}
+    </div>
         <div className="relative  ">
   {/* زر الإشعارات */}
   <div onClick={handleOpen} className="cursor-pointer relative">
@@ -160,10 +176,12 @@ const Nav = ({setActive }) => {
     )}
   </div>
 
+  
+
   {/* قائمة الإشعارات */}
   {isOpen && (
     <div className="absolute mt-2 w-80 max-w-xs bg-white shadow-lg rounded-lg z-50 max-h-96 overflow-y-auto sm:left-0 sm:left-auto right-0">
-      <div className="p-4 border-b font-bold text-gray-700">Notifications</div>
+      <div className="p-4 border-b  font-bold text-gray-700">{t('notifications')}</div>
       {notifications.slice(0, notificationsToShow).map((notif) => (
         <div
           key={notif._id}
@@ -187,14 +205,14 @@ const Nav = ({setActive }) => {
         </div>
       ))}
       {notifications.length === 0 && (
-        <div className="p-4 text-sm text-gray-500 text-center">No notifications yet</div>
+        <div className="p-4 text-sm text-gray-500 text-center">{t('no_notifications_yet')}</div>
       )}
       {notifications.length > notificationsToShow && (
         <button
           onClick={() => setNotificationsToShow(notificationsToShow + 5)}
           className="w-full py-2 bg-blue-500 text-white rounded-b-lg"
         >
-          Show More
+          {t('show_more')}
         </button>
       )}
     </div>

@@ -4,11 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 import { toast } from 'react-toastify';
 
-const Settings = () => {
+import { useTranslation } from 'react-i18next';
+const Settings = ({changeLanguage}) => {
   const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
   const [Profile, setProfile] = useState([]);
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleDeleteAccount = () => {
@@ -76,36 +78,38 @@ const Settings = () => {
         {Profile && Profile.length > 0 ? (
           Profile.map((profile) => (
             <div key={profile._id} className="bg-white p-8 rounded-2xl shadow">
-              <h1 className="text-3xl font-bold text-gray-800 border-b pb-4 mb-6">Settings</h1>
+              <h1 className="text-3xl font-bold text-gray-800 border-b pb-4 mb-6">
+                {t('settings.title')}
+              </h1>
 
               <div className="space-y-6">
                 {/* تعديل البيانات */}
                 <div className="flex items-center justify-between">
-                  <p className="text-lg font-medium text-gray-700">Edit Profile Info</p>
+                  <p className="text-lg font-medium text-gray-700">{t('settings.editInfo')}</p>
                   <button
                     onClick={() => navigate(`/Index/Profile/Edit/${profile._id}`)}
                     className="px-4 py-2 rounded-lg text-white text-sm shadow"
                     style={{ backgroundColor: color }}
                   >
-                    Edit
+                    {t('settings.editButton')}
                   </button>
                 </div>
 
                 {/* تغيير كلمة السر */}
                 <div className="flex items-center justify-between">
-                  <p className="text-lg font-medium text-gray-700">Change Password</p>
+                  <p className="text-lg font-medium text-gray-700">{t('settings.changePassword')}</p>
                   <button
                     onClick={() => navigate(`/Index/Profile/ResetPassword/${profile._id}`)}
                     className="px-4 py-2 rounded-lg text-white text-sm shadow"
                     style={{ backgroundColor: color }}
                   >
-                    Reset Password
+                    {t('settings.resetPasswordButton')}
                   </button>
                 </div>
 
                 {/* تغيير اللون */}
                 <div className="flex items-center justify-between">
-                  <p className="text-lg font-medium text-gray-700">Change Main Color</p>
+                  <p className="text-lg font-medium text-gray-700">{t('settings.changeColor')}</p>
                   <input
                     type="color"
                     value={color}
@@ -114,21 +118,21 @@ const Settings = () => {
                   />
                 </div>
 
-                {/* حذف الحساب */}
+                {/* حذف الحساب (معلّق) */}
                 {/* <div className="flex items-center justify-between border-t pt-4 mt-6">
-                  <p className="text-lg font-medium text-red-600">Delete Account</p>
+                  <p className="text-lg font-medium text-red-600">{t('settings.deleteAccount')}</p>
                   <button
-                    onClick={()=>deleteUser()}
+                    onClick={() => deleteUser()}
                     className="px-4 py-2 rounded-lg text-white text-sm shadow bg-red-600 hover:bg-red-700"
                   >
-                    Delete
+                    {t('settings.deleteButton')}
                   </button>
                 </div> */}
               </div>
             </div>
           ))
         ) : (
-          <p className="text-gray-500">Loading profile...</p>
+          <p className="text-gray-500">{t('settings.loading')}</p>
         )}
       </div>
     </div>

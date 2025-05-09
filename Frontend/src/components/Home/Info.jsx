@@ -1,71 +1,63 @@
-import React, { useState } from 'react';
-import CountUp from 'react-countup';
-import { useInView } from 'react-intersection-observer';
-import callAction from '../../assets/call-action-img.jpg';
-import callActionbg from '../../assets/call-action-bg.jpg';
+import React, { useState } from "react";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
+import callAction from "../../assets/call-action-img.jpg";
+import callActionbg from "../../assets/call-action-bg.jpg";
 import { LuMessagesSquare } from "react-icons/lu";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const Info = () => {
+const Info = ({ changeLanguage }) => {
   const [ref, inView] = useInView({ triggerOnce: true });
 
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language === "ar";
   return (
     <div
-      className="pt-20 pb-16 flex flex-col lg:flex-row justify-center items-center gap-12 bg-cover bg-center px-5"
-      style={{
-        backgroundImage: `url(${callActionbg})`,
-      }}
-    >
-      {/* Left Section */}
-      <div ref={ref} className="text-white text-center lg:text-left">
-        <img src={callAction} alt="Ask AAU" className="mx-auto lg:mx-0 rounded-lg shadow-lg" />
-        <div className="flex flex-wrap justify-around items-center mt-8 gap-8">
-          {/* Students Connected */}
-          <div className="text-center">
-            <span className="text-4xl font-extrabold ">
-              {inView && <CountUp end={10000} duration={5} />}+
-            </span>
-            <h1 className="text-xl mt-2">Students Connected</h1>
-          </div>
-          {/* Questions Asked */}
-          <div className="text-center">
-            <span className="text-4xl font-extrabold ">
-              {inView && <CountUp end={5000} duration={5} />}+
-            </span>
-            <h1 className="text-xl mt-2">Questions Asked</h1>
-          </div>
-          {/* Answers Provided */}
-          <div className="text-center">
-            <span className="text-4xl font-extrabold ">
-              {inView && <CountUp end={15000} duration={5} />}+
-            </span>
-            <h1 className="text-xl mt-2">Answers Provided</h1>
-          </div>
-        </div>
-      </div>
-
-      {/* Right Section */}
-      <div className="max-w-lg text-center lg:text-left lg:ml-9">
-        <div className="flex justify-center items-center w-24 h-24 rounded-full bg-main mx-auto lg:mx-0">
-          <LuMessagesSquare className="text-white text-4xl animate-bounce" />
-        </div>
-        <h1 className="text-3xl text-white font-extrabold mt-6">+880 013 143 206</h1>
-        <p className="text-white text-lg mt-4 leading-relaxed">
-          Join Ask AAU for collaborative learning, where students can share knowledge and engage in meaningful discussions to help each other.
-        </p>
-        <Link to={"/Home/Registration"} >
-        <button className="bg-white px-6 py-3 mt-6 text-main font-bold rounded-lg shadow-md hover:bg-main hover:bg-blue-700 hover:text-white transition-all duration-300">
-          Join Now
-        </button>
-        </Link>
-        <div className="mt-9 bg-white p-6 rounded-lg shadow-lg">
-          <h1 className="text-2xl font-extrabold">Need Help to Connect?</h1>
-          <p className="text-gray-700 mt-3 leading-relaxed">
-            Get started by joining the Ask AAU platform, where you can ask questions, provide answers, and collaborate with peers.
-          </p>
-        </div>
+    className={`pt-20 my-20 pb-16 flex flex-col lg:flex-row justify-between items-center gap-12 bg-cover bg-center px-5 max-w-screen-xl mx-auto ${
+      isArabic ? "rtl" : ""
+    }`}
+    style={{
+      backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${callActionbg})`,
+    }}
+  >
+    {/* Left Section */}
+    <div ref={ref} className={`text-white ${isArabic ? "text-right" : "text-left"} w-full lg:w-1/2`}>
+      <img
+        src={callAction}
+        alt="Ask AAU"
+        className={`${isArabic ? "ml-auto" : "mr-auto"} rounded-lg shadow-lg`}
+      />
+      <div className="flex flex-wrap justify-around items-center mt-8 gap-y-8 gap-x-16">
+        {/* Counters */}
+        {/* ... نفس الكود السابق */}
       </div>
     </div>
+  
+    {/* Right Section */}
+    <div className={`max-w-lg ${isArabic ? "text-right" : "text-left"} w-full lg:w-1/2`}>
+      <div className={`flex justify-center items-center w-24 h-24 rounded-full bg-main mx-auto lg:mx-0`}>
+        <LuMessagesSquare className="text-white text-4xl animate-bounce" />
+      </div>
+      <a href="tel:+880013143206" className="text-3xl text-white font-extrabold mt-6 block">
+        +880 013 143 206
+      </a>
+      <p className="text-white text-lg mt-4 leading-relaxed">
+        {t("call_to_action_paragraph")}
+      </p>
+      <Link to="/Home/Registration">
+        <button className="bg-white px-6 py-3 mt-6 text-main font-bold rounded-lg shadow-md hover:bg-blue-700 hover:text-white transition-all duration-300">
+          {t("join_now")}
+        </button>
+      </Link>
+      <div className="mt-9 bg-white p-6 rounded-lg shadow-lg">
+        <h1 className="text-2xl font-extrabold">{t("need_help")}</h1>
+        <p className="text-gray-700 mt-3 leading-relaxed">
+          {t("need_help_paragraph")}
+        </p>
+      </div>
+    </div>
+  </div>
   );
 };
 

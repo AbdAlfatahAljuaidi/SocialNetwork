@@ -3,9 +3,10 @@ import Nav from '../Index/Nav'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+import { useTranslation } from "react-i18next"; // ✅ إضافة i18n
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
-const Help = () => {
+const Help = ({changeLanguage}) => {
   const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
 
   const [type, setType] = useState("");
@@ -14,6 +15,7 @@ const Help = () => {
   const [state, setstate] = useState("Pending ");
   const [isSubmitting, setIsSubmitting] = useState(false); // ✅ حالة جديدة
 
+  const { t } = useTranslation();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const Suggest = async () => {
@@ -48,11 +50,11 @@ const Help = () => {
     <div>
       <Nav />
       <div className="p-8">
-        <h2 className="text-2xl font-semibold mb-4">Suggestion and Complaint Form</h2>
+        <h2 className="text-2xl font-semibold mb-4">{t('suggestion_complaint_form')}</h2>
         <div className="space-y-4">
           {/* Issue type */}
           <div>
-            <label htmlFor="type" className="block text-lg font-medium">Issue Type</label>
+            <label htmlFor="type" className="block text-lg font-medium">{t('issue_type')}</label>
             <select
               id="type"
               name="type"
@@ -61,31 +63,31 @@ const Help = () => {
               className="w-full p-3 border rounded"
               required
             >
-              <option value="">Select Issue Type</option>
-              <option value="Suggestion">Suggestion</option>
-              <option value="Complaint">Complaint</option>
+              <option value="">{t('select_issue_type')}</option>
+              <option value="Suggestion">{t('suggestion')}</option>
+              <option value="Complaint">{t('complaint')}</option>
             </select>
           </div>
 
-             {/* Title */}
-             <div>
-            <label htmlFor="details" className="block text-lg font-medium">Title</label>
+          {/* Title */}
+          <div>
+            <label htmlFor="title" className="block text-lg font-medium">{t('title')}</label>
             <input
               id="title"
-              type='text'
+              type="text"
               name="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className="w-full p-3 border rounded"
               rows="4"
-              placeholder="Enter your details here..."
+              placeholder={t('enter_title_here')}
               required
-            ></input>
+            />
           </div>
 
           {/* Details */}
           <div>
-            <label htmlFor="details" className="block text-lg font-medium">Details</label>
+            <label htmlFor="details" className="block text-lg font-medium">{t('details')}</label>
             <textarea
               id="details"
               name="details"
@@ -93,7 +95,7 @@ const Help = () => {
               onChange={(e) => setDetails(e.target.value)}
               className="w-full p-3 border rounded"
               rows="4"
-              placeholder="Enter your details here..."
+              placeholder={t('enter_details_here')}
               required
             ></textarea>
           </div>
@@ -107,7 +109,7 @@ const Help = () => {
               className="px-6 py-3 text-white rounded-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ background: color }}
             >
-              {isSubmitting ? "Submitting..." : "Submit"}
+              {isSubmitting ? t('submitting') : t('submit')}
             </button>
           </div>
         </div>

@@ -116,30 +116,30 @@ const Edit = () => {
               className="w-full mt-1 px-4 py-2 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 border"
             >
                 <option value="">Select Major</option>
-              <option value="special_education">Special Education</option>
-    <option value="business_administration">Business Administration</option>
-    <option value="counseling_psychology">Counseling Psychology and Mental Health</option>
-    <option value="educational_administration">Educational Administration and Curriculum</option>
-    <option value="accounting">Accounting</option>
-    <option value="management_information_systems">Management Information Systems</option>
-    <option value="digital_marketing">Digital Marketing</option>
-    <option value="accounting_business_law">Accounting and Business Law</option>
-    <option value="data_science_ai">Data Science and Artificial Intelligence</option>
-    <option value="software_engineering">Software Engineering</option>
-    <option value="cybersecurity">Cybersecurity</option>
-    <option value="computer_science">Computer Science</option>
-    <option value="english_translation">English Language and Translation</option>
-    <option value="arabic_literature">Arabic Language and Literature</option>
-    <option value="jurisprudence">Jurisprudence and its Principles</option>
-    <option value="aircraft_maintenance">Aircraft Maintenance</option>
-    <option value="aviation_electronics">Aviation Electronics Engineering</option>
- 
-    <option value="architectural_engineering">Architectural Engineering</option>
-    <option value="civil_engineering">Civil Engineering</option>
-    <option value="electrical_engineering">Electrical Engineering</option>
-    <option value="mechatronics_engineering">Mechatronics Engineering</option>
-    <option value="biomedical_engineering">Biomedical Engineering</option>
-    <option value="industrial_engineering">Industrial Engineering</option>
+                <option value="Special Education">Special Education</option>
+<option value="Business Administration">Business Administration</option>
+<option value="Counseling Psychology And Mental Health">Counseling Psychology and Mental Health</option>
+<option value="Educational Administration And Curriculum">Educational Administration and Curriculum</option>
+<option value="Accounting">Accounting</option>
+<option value="Management Information Systems">Management Information Systems</option>
+<option value="Digital Marketing">Digital Marketing</option>
+<option value="Accounting And Business Law">Accounting and Business Law</option>
+<option value="Data Science And Artificial Intelligence">Data Science and Artificial Intelligence</option>
+<option value="Software Engineering">Software Engineering</option>
+<option value="Cybersecurity">Cybersecurity</option>
+<option value="Computer Science">Computer Science</option>
+<option value="English Language And Translation">English Language and Translation</option>
+<option value="Arabic Language And Literature">Arabic Language and Literature</option>
+<option value="Jurisprudence And Its Principles">Jurisprudence and its Principles</option>
+<option value="Aircraft Maintenance">Aircraft Maintenance</option>
+<option value="Aviation Electronics Engineering">Aviation Electronics Engineering</option>
+<option value="Architectural Engineering">Architectural Engineering</option>
+<option value="Civil Engineering">Civil Engineering</option>
+<option value="Electrical Engineering">Electrical Engineering</option>
+<option value="Mechatronics Engineering">Mechatronics Engineering</option>
+<option value="Biomedical Engineering">Biomedical Engineering</option>
+<option value="Industrial Engineering">Industrial Engineering</option>
+
             </select>
           </div>
 

@@ -5,11 +5,16 @@ import { Link } from 'react-router-dom';
 import { FaUserFriends } from 'react-icons/fa';
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
-const Extra = () => {
+import { useTranslation } from 'react-i18next';
+
+const Extra = ({changeLanguage}) => {
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState("");
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [search, setSearch] = useState(""); // ✅ حالة البحث
+
+  
+    const { t } = useTranslation();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -43,9 +48,9 @@ const Extra = () => {
   ) || [];
 
   return (
-    <div className='bg-white sticky top-24 w-96 h-full mt-5 mr-5 p-5 rounded-xl shadow-lg hidden sm:flex flex-col'>
+    <div className='bg-white sticky top-24 w-96 h-full mt-5 mx-5 p-5 rounded-xl shadow-lg hidden sm:flex flex-col'>
       <div className='flex justify-between items-center mb-4'>
-        <h1 className='text-xl font-bold text-gray-800'>Friends</h1>
+        <h1 className='text-xl font-bold text-gray-800'>{t('friends')}</h1>
         <FaUserFriends  className='text-2xl text-gray-600 hover:text-gray-800 cursor-pointer' />
       </div>
 
@@ -53,7 +58,7 @@ const Extra = () => {
         <input 
           className='w-full p-2 pl-10 bg-gray-100 rounded-full outline-none border border-gray-300 focus:border-blue-500'
           type='text' 
-          placeholder='Search friend' 
+          placeholder={t('search_friend')} 
           value={search} // ✅ ربط المدخل بالحالة
           onChange={(e) => setSearch(e.target.value)} // ✅ تحديث حالة البحث
         />
@@ -61,7 +66,7 @@ const Extra = () => {
       </div>
 
       <div className='flex gap-3 items-center mt-4 border-b border-gray-300 pb-2'>
-        <h1 className='text-gray-600 cursor-pointer  font-bold'>Friends</h1>
+        <h1 className='text-gray-600 cursor-pointer  font-bold'>{t('friends')}</h1>
         {/* <h1 className='text-gray-600 cursor-pointer  font-bold'>Online</h1> */}
         
       </div>
@@ -82,13 +87,13 @@ const Extra = () => {
         />
         <div>
           <h1 className="font-semibold text-gray-800 dark:text-white">{friend.name}</h1>
-          <span className="text-sm text-gray-500 dark:text-gray-400">In your circle</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">{t('in_your_circle')}</span>
         </div>
       </div>
     </Link>
   ))
 ) : (
-  <p className="text-sm text-gray-500 dark:text-gray-400">No friends yet</p>
+  <p className="text-sm text-gray-500 dark:text-gray-400">{t('no_friends_yet')}</p>
 )}
 
 </div>  </div>

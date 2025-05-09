@@ -9,7 +9,9 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css"; // مهم لستايل التحميل
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
-const Post = () => {
+import { useTranslation } from 'react-i18next';
+
+const Post = ({changeLanguage}) => {
   const [postText, setPostText] = useState("");
   const [postImage, setPostImage] = useState(null);
   const [posts, setPosts] = useState([]);
@@ -35,7 +37,11 @@ const Post = () => {
 
   const [loadingMessages, setLoadingMessages] = useState(true);
 
+
+  const { t } = useTranslation();
   useEffect(() => {
+
+    
     const fetchTopUser = async () => {
       try {
         const res = await axios.get("/api/profile/top-user-friends"); // تأكد من المسار الصحيح
@@ -439,14 +445,15 @@ const Post = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80 z-50">
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
           <span className="ml-4 text-blue-700 text-2xl font-medium">
-            Loading...
+          {t('loading')}
+
           </span>
         </div>
       )}
       <div className="bg-white shadow-md rounded-lg p-4 mb-4">
         <textarea
           className="w-full p-2 border rounded mb-2"
-          placeholder="What's on your mind?"
+          placeholder={t('whats_on_your_mind')}
           value={postText}
           onChange={(e) => setPostText(e.target.value)}
         />
@@ -457,22 +464,22 @@ const Post = () => {
           onChange={(e) => setQuestionType(e.target.value)}
           className="w-full p-2 border rounded mb-2"
         >
-          <option value="">Select question type</option>
+          <option value="">{t('select_question_type')}</option>
           <option value="Educational and Psychological Sciences">
-            Educational and Psychological Sciences
+          {t('educational_psychological_sciences')}
           </option>
-          <option value="Business">Business</option>
-          <option value="Law">Law</option>
-          <option value="Information Technology">Information Technology</option>
-          <option value="Arts and Sciences">Arts and Sciences</option>
-          <option value="Arts and Sciences">Aviation Sciences</option>
-          <option value="Pharmacy">Pharmacy</option>
-          <option value="Engineering">Engineering</option>
+          <option value="Business">{t('business')}</option>
+          <option value="Law">{t('law')}</option>
+          <option value="Information Technology">{t('information_technology')}</option>
+          <option value="Arts and Sciences">{t('arts_sciences')}</option>
+          <option value="Arts and Sciences">{t('aviation_sciences')}</option>
+          <option value="Pharmacy">{t('pharmacy')}</option>
+          <option value="Engineering">{t('engineering')}</option>
           <option value="Applied Medical Sciences">
-            Applied Medical Sciences
+          {t('applied_medical_sciences')}
           </option>
-          <option value="Sharia">Sharia</option>
-          <option value="Other">Other</option>
+          <option value="Sharia">{t('sharia')}</option>
+          <option value="Other">{t('other')}</option>
         </select>
 
         <input
@@ -487,7 +494,7 @@ const Post = () => {
           className="text-white px-4 py-2 rounded"
           style={{ background: color }}
         >
-          Post
+          {t('post')}
         </button>
       </div>
 
@@ -504,7 +511,7 @@ const Post = () => {
         </div> */}
       {top ? (
         <>
-          <h1 className="font-bold text-xl text-center my-6">Most Numbers</h1>
+          <h1 className="font-bold text-xl text-center my-6">{t('most_numbers')}</h1>
 
           <div className="flex flex-col md:flex-row justify-center items-center gap-6 pb-5">
             {/* Top liked post */}
@@ -514,7 +521,7 @@ const Post = () => {
                   <img
                     src={top.ProfileImage || "https://via.placeholder.com/50"}
                     alt={top.username}
-                    className="w-12 h-12 rounded-full object-cover"
+                    className="w-12 h-12 rounded-full object-cover mx-2"
                   />
                   <h3 className="text-lg font-semibold">{top.username}</h3>
                 </div>
@@ -529,7 +536,7 @@ const Post = () => {
                   />
                 )}
                 <div className="text-center text-gray-700">
-                  ❤️ <span className="font-medium">{top.likes}</span> Likes
+                  ❤️ <span className="font-medium">{top.likes}</span> {t('likes')}
                 </div>
               </div>
             </Link>
@@ -546,7 +553,7 @@ const Post = () => {
                           "https://via.placeholder.com/50"
                         }
                         alt={topComment.username}
-                        className="w-12 h-12 rounded-full object-cover"
+                        className="w-12 h-12 rounded-full object-cover mx-2"
                       />
                       <h3 className="text-lg font-semibold">
                         {topComment.username}
@@ -569,7 +576,7 @@ const Post = () => {
                       <span className="font-medium">
                         {topComment.comments.length}
                       </span>{" "}
-                      Comments
+                      {t('comments')}
                     </div>
                   </div>
                 ) : null}
@@ -580,18 +587,18 @@ const Post = () => {
             <div className="w-full md:max-w-xs">
               <Link to="/TopFriend" className="w-full md:max-w-xs">
                 <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
-                  <div className="flex items-center space-x-4 mb-4">
+                  <div className="flex items-center mx-5 mb-4">
                     {topFriend && (
-                      <div className="flex items-center space-x-4">
+                      <div className="flex items-center space-x-4 ">
                         <img
                           src={
                             topFriend.imageUrl ||
                             "https://via.placeholder.com/50"
                           }
                           alt={topFriend.username}
-                          className="w-12 h-12 rounded-full object-cover"
+                          className="w-12 h-12 rounded-full object-cover mx-2"
                         />
-                        <h3 className="text-lg font-semibold">
+                        <h3 className="text-lg font-semibold mx-2">
                           {topFriend.username}
                         </h3>
                       </div>
@@ -607,7 +614,7 @@ const Post = () => {
                     <img
                       src={topFriend.imageUrl}
                       alt="Post"
-                      className="w-full h-32 object-cover rounded mb-4"
+                      className="w-full h-32 object-cover rounded mb-4 "
                     />
                   )}
                   <div className="text-center text-gray-700">
@@ -615,7 +622,8 @@ const Post = () => {
                     <span className="font-medium">
                       {topFriend?.friendsCount}
                     </span>{" "}
-                    Friends
+                    {t('friends')}
+
                   </div>
                 </div>
               </Link>
@@ -623,7 +631,9 @@ const Post = () => {
           </div>
         </>
       ) : (
-        <div className="text-center mt-10">Nothing to show</div>
+        <div className="text-center mt-10">
+        {t('nothing_to_show')}
+       </div>
       )}
 
       <div className="mb-4 w-72">
@@ -631,7 +641,7 @@ const Post = () => {
           htmlFor="filterType"
           className="block text-gray-700 font-semibold mb-2"
         >
-          Choose a Question Type
+        {t('choose_question_type')}
         </label>
         <select
           id="filterType"
@@ -639,22 +649,22 @@ const Post = () => {
           onChange={(e) => setFilterType(e.target.value)}
           className="w-full p-3 border rounded-lg bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">ALL</option>
+          <option value=""> {t('all')}</option>
           <option value="Educational and Psychological Sciences">
-            Educational and Psychological Sciences
+          {t('educational_psychological_sciences')}
           </option>
-          <option value="Business">Business</option>
-          <option value="Law">Law</option>
-          <option value="Information Technology">Information Technology</option>
-          <option value="Arts and Sciences">Arts and Sciences</option>
-          <option value="Aviation Sciences">Aviation Sciences</option>
-          <option value="Pharmacy">Pharmacy</option>
-          <option value="Engineering">Engineering</option>
+          <option value="Business">{t('business')}</option>
+          <option value="Law">{t('law')}</option>
+          <option value="Information Technology">{t('information_technology')}</option>
+          <option value="Arts and Sciences">{t('arts_sciences')}</option>
+          <option value="Aviation Sciences">{t('aviation_sciences')}</option>
+          <option value="Pharmacy">{t('pharmacy')}</option>
+          <option value="Engineering">{t('engineering')}</option>
           <option value="Applied Medical Sciences">
-            Applied Medical Sciences
+          {t('applied_medical_sciences')}
           </option>
-          <option value="Sharia">Sharia</option>
-          <option value="Other">Other</option>
+          <option value="Sharia">{t('sharia')}</option>
+          <option value="Other">{t('other')}</option>
         </select>
       </div>
 
@@ -747,7 +757,7 @@ const Post = () => {
               <div className="flex items-center space-x-2 mt-3">
                 <button
                   onClick={() => handleLike(post._id)}
-                  className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+                  className={`px-4 py-2 rounded-lg transition-all mx-2 duration-300 ${
                     post.liked
                       ? "bg-red-500 text-white"
                       : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -756,7 +766,7 @@ const Post = () => {
                   {post.likedUsers.includes(user._id) ? "❤️ " : "🤍"}
                 </button>
 
-                <span className="text-lg font-semibold text-gray-700">
+                <span className="text-lg font-semibold text-gray-700 mx-2">
                   {post.likes}
                 </span>
 
@@ -766,7 +776,7 @@ const Post = () => {
               {/* إدخال التعليق */}
               <div className="mt-4">
                 <textarea
-                  placeholder="Write a Comment..."
+                  placeholder={t('write_a_comment')}
                   value={commentText[post._id] || ""}
                   onChange={(e) =>
                     setCommentText({
@@ -784,7 +794,7 @@ const Post = () => {
                     background: color,
                   }}
                 >
-                  {isSubmitting ? "Commenting..." : "Comment"}
+                  {isSubmitting ? t('commenting') : t('comment')}
                 </button>
               </div>
 
@@ -856,7 +866,7 @@ const Post = () => {
     {comment.correct && (
       <div className="mb-2">
         <span className="text-green-600 font-semibold text-sm">
-          ✓ Correct Answer
+          ✓ {t('correct_answer')}
         </span>
       </div>
     )}
