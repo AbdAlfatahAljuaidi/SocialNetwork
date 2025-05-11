@@ -2,7 +2,7 @@ const { createTransport } = require("nodemailer");
 const path = require("path");
 const hbs = require("nodemailer-express-handlebars");
 require("dotenv").config();
-module.exports = async (to, name,token, subject, template) => {
+module.exports = async (to, name,link, subject, template) => {
   try {
     const transporter = createTransport({
       host: process.env.HOST,
@@ -37,7 +37,7 @@ module.exports = async (to, name,token, subject, template) => {
       template: template,
       context: {
         name,
-        token,
+        link,
       },
     };
     return transporter.sendMail(mailOptions);

@@ -182,13 +182,13 @@ const SignUpUser = async (req, res) => {
     const token = jwt.sign({ id: newUser._id }, "dsadsadh");
 
 
-
+    const link = `https://socialnetwork-6vdw.onrender.com/${token}`;
 
 await sendEmail(
   Email,
   SignUp.Name,
-  token,
-  "Active Acoount",
+  link,
+  "Activation Account",
   "activeAccount",
 
 
