@@ -541,7 +541,7 @@ i18n.use(initReactI18next).init({
       }
     }
   },
-  lng: "ar", // اللغة الافتراضية
+  lng: "en", // اللغة الافتراضية
   fallbackLng: "en", // في حال لم تكن اللغة موجودة
   interpolation: {
     escapeValue: false // React already safes from xss

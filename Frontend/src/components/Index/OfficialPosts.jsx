@@ -210,25 +210,23 @@ const OfficialPosts = () => {
 
 
   const deletePost = async (postid) => {
-    try{
-    
-      
-const {data} = await axios.post(`${apiUrl}/deletePost`,{
-  postid:  postid , })
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
+    if (!confirmDelete) return;
 
+    try {
+      const { data } = await axios.post(`${apiUrl}/deletePost`, {
+        postid: postid,
+      });
 
-
- toast.success(data.message)
- setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postid));
-
-    }                                                       
-
-    catch(error){
-      console.log(error.reponse);
-      toast.error(error.response)
-      
+      toast.success(data.message);
+      setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postid));
+    } catch (error) {
+      console.log(error.response);
+      toast.error("Failed to delete post");
     }
-  } 
+  };
 
 
 
@@ -253,27 +251,40 @@ const {data} = await axios.post(`${apiUrl}/deletePost`,{
 
   const removeComment = async (postId, commentId) => {
     try {
-      const response = await axios.post(`${apiUrl}/deleteComment/${postId}/${commentId}`);
-   
-  
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete this comment?"
+      );
+      if (!confirmDelete) return;
+
+      const response = await axios.post(
+        `${apiUrl}/deleteComment/${postId}/${commentId}`
+      );
+
       // تحديث التعليقات بإزالة التعليق المحذوف
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
           post._id === postId
             ? {
                 ...post,
-                comments: post.comments.filter((comment) => comment._id !== commentId)
+                comments: post.comments.filter(
+                  (comment) => comment._id !== commentId
+                ),
               }
             : post
         )
       );
-  
+
       // مسح نص التعليق (ما إلها علاقة بالحذف، لكن بنخليها لو كان فيه input مفتوح)
       setCommentText((prev) => ({ ...prev, [postId]: "" }));
+      toast.success("Comment has been deleted successfully");
     } catch (error) {
-      console.error("Failed to delete comment:", error.response?.data?.message || error.message);
+      console.error(
+        "Failed to delete comment:",
+        error.response?.data?.message || error.message
+      );
     }
   };
+
 
   
 
