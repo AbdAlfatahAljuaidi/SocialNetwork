@@ -101,7 +101,7 @@ const Footer = ({changeLanguage}) => {
             <FaLocationDot className="text-xl mx-2" />
             <div className="">
               <h1 className="text-gray-300">{t('footer.location')}</h1>
-              <p className="text-gray-400 text-sm">55 Main Street, New York.</p>
+              <p className="text-gray-400 text-sm">Jordan Amman.</p>
             </div>
           </div>
           <div className="flex items-center space-x-4 ">

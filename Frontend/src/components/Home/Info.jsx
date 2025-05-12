@@ -39,8 +39,8 @@ const Info = ({ changeLanguage }) => {
       <div className={`flex justify-center items-center w-24 h-24 rounded-full bg-main mx-auto lg:mx-0`}>
         <LuMessagesSquare className="text-white text-4xl animate-bounce" />
       </div>
-      <a href="tel:+880013143206" className="text-3xl text-white font-extrabold mt-6 block">
-        +880 013 143 206
+      <a href="tel:+962782407533" className="text-3xl text-white font-extrabold mt-6 block">
+      +962782407533
       </a>
       <p className="text-white text-lg mt-4 leading-relaxed">
         {t("call_to_action_paragraph")}

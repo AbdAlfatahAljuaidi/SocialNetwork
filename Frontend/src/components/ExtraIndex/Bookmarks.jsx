@@ -82,7 +82,7 @@ const Bookmarks = ({changeLanguage}) => {
             {error}
           </div>
         ) : bookmarks.length > 0 ? (
-          <div className="space-y-6">
+          <div className="space-y-6 md:w-[900px] mx-2">
             {bookmarks.map((post, index) => (
               <div key={index} className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
                 <div className="flex justify-between">

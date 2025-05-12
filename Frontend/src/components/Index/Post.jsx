@@ -509,132 +509,111 @@ const Post = ({changeLanguage}) => {
                 </div>
             ))}
         </div> */}
-      {top ? (
-        <>
-          <h1 className="font-bold text-xl text-center my-6">{t('most_numbers')}</h1>
+      {top && topComment && topFriend ? (
+  <>
+    <h1 className="font-bold text-xl text-center my-6">{t('most_numbers')}</h1>
 
-          <div className="flex flex-col md:flex-row justify-center items-center gap-6 pb-5">
-            {/* Top liked post */}
-            <Link to="/top" className="w-full md:max-w-xs">
-              <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
-                <div className="flex items-center space-x-4 mb-4">
-                  <img
-                    src={top.ProfileImage || "https://via.placeholder.com/50"}
-                    alt={top.username}
-                    className="w-12 h-12 rounded-full object-cover mx-2"
-                  />
-                  <h3 className="text-lg font-semibold">{top.username}</h3>
-                </div>
-                {top.text && (
-                  <p className="text-sm text-gray-600 mb-2">{top.text}</p>
-                )}
-                {top.imageUrl && (
-                  <img
-                    src={top.imageUrl}
-                    alt="Post"
-                    className="w-full h-32 object-cover rounded mb-4"
-                  />
-                )}
-                <div className="text-center text-gray-700">
-                  ❤️ <span className="font-medium">{top.likes}</span> {t('likes')}
-                </div>
-              </div>
-            </Link>
-
-            {/* Top commented post */}
-            <div className="w-full md:max-w-xs">
-              <Link to="/TopComment">
-                {topComment ? (
-                  <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
-                    <div className="flex items-center space-x-4 mb-4">
-                      <img
-                        src={
-                          topComment.ProfileImage ||
-                          "https://via.placeholder.com/50"
-                        }
-                        alt={topComment.username}
-                        className="w-12 h-12 rounded-full object-cover mx-2"
-                      />
-                      <h3 className="text-lg font-semibold">
-                        {topComment.username}
-                      </h3>
-                    </div>
-                    {topComment.text && (
-                      <p className="text-sm text-gray-600 mb-2">
-                        {topComment.text}
-                      </p>
-                    )}
-                    {topComment.imageUrl && (
-                      <img
-                        src={topComment.imageUrl}
-                        alt="Post"
-                        className="w-full h-32 object-cover rounded mb-4"
-                      />
-                    )}
-                    <div className="text-center text-gray-700 mt-1">
-                      💬{" "}
-                      <span className="font-medium">
-                        {topComment.comments.length}
-                      </span>{" "}
-                      {t('comments')}
-                    </div>
-                  </div>
-                ) : null}
-              </Link>
+    <div className="flex flex-col md:flex-row justify-center items-center gap-6 pb-5">
+      
+      {/* Top liked post */}
+      {top && (
+        <Link to="/top" className="w-full md:max-w-xs">
+          <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
+            <div className="flex items-center space-x-4 mb-4">
+              <img
+                src={top.ProfileImage || "https://via.placeholder.com/50"}
+                alt={top.username}
+                className="w-12 h-12 rounded-full object-cover mx-2"
+              />
+              <h3 className="text-lg font-semibold">{top.username}</h3>
             </div>
-
-            {/* top friend */}
-            <div className="w-full md:max-w-xs">
-              <Link to="/TopFriend" className="w-full md:max-w-xs">
-                <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
-                  <div className="flex items-center mx-5 mb-4">
-                    {topFriend && (
-                      <div className="flex items-center space-x-4 ">
-                        <img
-                          src={
-                            topFriend.imageUrl ||
-                            "https://via.placeholder.com/50"
-                          }
-                          alt={topFriend.username}
-                          className="w-12 h-12 rounded-full object-cover mx-2"
-                        />
-                        <h3 className="text-lg font-semibold mx-2">
-                          {topFriend.username}
-                        </h3>
-                      </div>
-                    )}
-                  </div>
-
-                  {topFriend?.major && (
-                    <p className="text-sm text-gray-600 mb-2">
-                      {topFriend.major}
-                    </p>
-                  )}
-                  {topFriend?.imageUrl && (
-                    <img
-                      src={topFriend.imageUrl}
-                      alt="Post"
-                      className="w-full h-32 object-cover rounded mb-4 "
-                    />
-                  )}
-                  <div className="text-center text-gray-700">
-                    👥{" "}
-                    <span className="font-medium">
-                      {topFriend?.friendsCount}
-                    </span>{" "}
-                    {t('friends')}
-
-                  </div>
-                </div>
-              </Link>
+            {top.text && (
+              <p className="text-sm text-gray-600 mb-2">{top.text}</p>
+            )}
+            {top.imageUrl && (
+              <img
+                src={top.imageUrl}
+                alt="Post"
+                className="w-full h-32 object-cover rounded mb-4"
+              />
+            )}
+            <div className="text-center text-gray-700">
+              ❤️ <span className="font-medium">{top.likes}</span> {t('likes')}
             </div>
           </div>
-        </>
-      ) : (
-        <div className="text-center mt-10">
-        {t('nothing_to_show')}
-       </div>
+        </Link>
       )}
+
+      {/* Top commented post */}
+      {topComment && (
+        <div className="w-full md:max-w-xs">
+          <Link to="/TopComment">
+            <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
+              <div className="flex items-center space-x-4 mb-4">
+                <img
+                  src={topComment.ProfileImage || "https://via.placeholder.com/50"}
+                  alt={topComment.username}
+                  className="w-12 h-12 rounded-full object-cover mx-2"
+                />
+                <h3 className="text-lg font-semibold">{topComment.username}</h3>
+              </div>
+              {topComment.text && (
+                <p className="text-sm text-gray-600 mb-2">{topComment.text}</p>
+              )}
+              {topComment.imageUrl && (
+                <img
+                  src={topComment.imageUrl}
+                  alt="Post"
+                  className="w-full h-32 object-cover rounded mb-4"
+                />
+              )}
+              <div className="text-center text-gray-700 mt-1">
+                💬 <span className="font-medium">{topComment.comments.length}</span> {t('comments')}
+              </div>
+            </div>
+          </Link>
+        </div>
+      )}
+
+      {/* Top friend */}
+      {topFriend && (
+        <div className="w-full md:max-w-xs">
+          <Link to="/TopFriend">
+            <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
+              <div className="flex items-center mx-5 mb-4">
+                <div className="flex items-center space-x-4">
+                  <img
+                    src={topFriend.imageUrl || "https://via.placeholder.com/50"}
+                    alt={topFriend.username}
+                    className="w-12 h-12 rounded-full object-cover mx-2"
+                  />
+                  <h3 className="text-lg font-semibold mx-2">{topFriend.username}</h3>
+                </div>
+              </div>
+              {topFriend.major && (
+                <p className="text-sm text-gray-600 mb-2">{topFriend.major}</p>
+              )}
+              {topFriend.imageUrl && (
+                <img
+                  src={topFriend.imageUrl}
+                  alt="Post"
+                  className="w-full h-32 object-cover rounded mb-4"
+                />
+              )}
+              <div className="text-center text-gray-700">
+                👥 <span className="font-medium">{topFriend.friendsCount}</span> {t('friends')}
+              </div>
+            </div>
+          </Link>
+        </div>
+      )}
+    </div>
+  </>
+) : (
+  <div className="text-center mt-10">
+    {t('nothing_to_show')}
+  </div>
+)}
 
       <div className="mb-4 w-72">
         <label

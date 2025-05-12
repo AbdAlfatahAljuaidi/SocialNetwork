@@ -167,19 +167,19 @@ const Nav = ({setActive }) => {
     </div>
         <div className="relative  ">
   {/* زر الإشعارات */}
-  <div onClick={handleOpen} className="cursor-pointer relative">
+  {/* <div onClick={handleOpen} className="cursor-pointer relative">
     <IoIosNotifications className="text-2xl text-gray-700 ml-4" />
     {unreadCount > 0 && (
       <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
         {unreadCount}
       </span>
     )}
-  </div>
+  </div> */}
 
   
 
   {/* قائمة الإشعارات */}
-  {isOpen && (
+  {/* {isOpen && (
     <div className="absolute mt-2 w-80 max-w-xs bg-white shadow-lg rounded-lg z-50 max-h-96 overflow-y-auto sm:left-0 sm:left-auto right-0">
       <div className="p-4 border-b  font-bold text-gray-700">{t('notifications')}</div>
       {notifications.slice(0, notificationsToShow).map((notif) => (
@@ -216,7 +216,7 @@ const Nav = ({setActive }) => {
         </button>
       )}
     </div>
-  )}
+  )} */}
 </div>
 
           <button 

@@ -141,44 +141,45 @@ const OfficialPosts = () => {
 
 
 
-
-  const handleCommentSubmit = async (postId) => {
-    try {
-
-      if (!user || !user.profileImage) {
-        toast.error("You cannot publish the post before creating your own profile.");
-        return;
-      }
-
-
-      const { data } = await axios.post(
-        `${apiUrl}/comment/${postId}`,
-        {
-          content: commentText[postId] || "",
-          userId: user.Name,
-          imageUser:user.profileImage,
-        }
-      );
-  
-      // تأكد من أن البيانات التي تستقبلها تحتوي على user و content
-    
-  
-      // تحديث الـ posts بالـ comment الجديد
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post._id === postId
-            ? { ...post, comments: [{ user: user.Name, content: commentText[postId],imageUser:user.profileImage,createdAt:new Date().toISOString() }, ...post.comments] }
-            : post
-        )
-      );
-  
-      // مسح محتوى التعليق بعد الإرسال
-      setCommentText((prev) => ({ ...prev, [postId]: "" }));
-    } catch (error) {
-      console.log(error);
+const handleCommentSubmit = async (postId) => {
+  try {
+    if (!user || !user.profileImage) {
+      toast.error("You cannot publish the post before creating your own profile.");
+      return;
     }
-  };
-  
+
+    // إرسال التعليق للسيرفر
+    const { data } = await axios.post(`${apiUrl}/comment/${postId}`, {
+      content: commentText[postId] || "",
+      userId: user.Name,
+      imageUser: user.profileImage,
+    });
+
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post._id === postId
+          ? { ...post, comments: [data.comment, ...post.comments] }
+          : post
+      )
+    );
+
+    // مسح محتوى خانة التعليق
+    setCommentText((prev) => ({ ...prev, [postId]: "" }));
+
+    // data.comment يجب أن يحتوي على التعليق الجديد من السيرفر
+    if (!data || !data.comment) {
+      toast.error("لم يتم استلام التعليق من السيرفر.");
+      return;
+    }
+
+    // تحديث حالة البوست بالتعليق الجديد
+ 
+  } catch (error) {
+    console.error(error);
+    toast.error("Something went wrong");
+  }
+};
+
 
   const handleLike = async (postId) => {
     try {

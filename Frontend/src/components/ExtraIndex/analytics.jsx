@@ -59,7 +59,7 @@ const Analytics = ({changeLanguage}) => {
               {error}
             </div>
           ) : posts.length > 0 ? (
-            <div className="space-y-6">
+            <div className="space-y-6 md:w-[900px] mx-2">
               {posts.map((post, index) => (
                 <div key={index} className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
                   <div className="flex items-center mb-2">

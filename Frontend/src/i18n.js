@@ -14,7 +14,7 @@ i18n.use(initReactI18next).init({
         "notifications": "Notifications",
         "no_notifications_yet": "No notifications yet",
         "show_more": "Show More",
-        "ask_aau": "Ask AAU",
+        "ask_aau": "Ask Students",
          "search_by_poster_name": "Search by poster's name",
          "friends": "Friends",
          "in_your_circle": "In your circle",
@@ -22,7 +22,7 @@ i18n.use(initReactI18next).init({
           "search_friend": "Search friend",
           "posts": "Posts",
           "official_posts": "Official Posts",
-          "chat": "Chat",
+          "chat": "Group Chat",
           "bookmarks": "Bookmarks",
           "my_posts": "My Posts",
           "theme": "Theme",
@@ -80,11 +80,11 @@ i18n.use(initReactI18next).init({
    "enter_details_here": "Enter your details here...",
    "submitting": "Submitting...",
    "submit": "Submit",
-   "about_image_alt": "About Ask AAU",
-   "about_ask_aau": "About Ask AAU",
+   "about_image_alt": "About Ask Students",
+   "about_ask_aau": "About Ask Students",
    "empowering_students": "Empowering Students Through",
    "knowledge_collaboration": "Knowledge & Collaboration.",
-   "platform_description": "Ask AAU is a platform designed to facilitate student discussions, knowledge sharing, and academic support, making university life more engaging and collaborative.",
+   "platform_description": "Ask Students is a platform designed to facilitate student discussions, knowledge sharing, and academic support, making university life more engaging and collaborative.",
    "connect_students": "Connect Students",
    "peer_learning": "Peer Learning",
    "simplify_interaction": "Simplify Interaction",
@@ -96,24 +96,24 @@ i18n.use(initReactI18next).init({
    "questions_asked": "Questions Asked",
    "answers_provided": "Answers Provided",
    "join_now": "Join Now",
-   "call_to_action_paragraph": "Join the Ask AAU platform for collaborative learning, where students can share knowledge and engage in meaningful discussions.",
+   "call_to_action_paragraph": "Join the Ask Students platform for collaborative learning, where students can share knowledge and engage in meaningful discussions.",
    "need_help": "Need Help to Join?",
-   "need_help_paragraph": "Get started now by joining the Ask AAU platform, where you can ask questions, provide answers, and collaborate with your peers."
+   "need_help_paragraph": "Get started now by joining the Ask Students platform, where you can ask questions, provide answers, and collaborate with your peers."
  ,
    "slide1": {
-    "title": "ASK AAU Platform",
+    "title": "ASK Students Platform",
     "heading": "Collaboration empowers students",
     "subtitle": "We provide the best platform for university discussions",
     "button": "Learn More"
   },
   "slide2": {
-    "title": "ASK AAU Community",
+    "title": "ASK Students Community",
     "heading": "Engage, Learn, and Grow",
     "subtitle": "A platform for students to share and gain knowledge",
     "button": "Learn More"
   },
   "slide3": {
-    "title": "ASK AAU Network",
+    "title": "ASK Students Network",
     "heading": "Connect, Ask, Succeed",
     "subtitle": "Your gateway to student collaboration and insights",
     "button": "Learn More"
@@ -131,18 +131,18 @@ i18n.use(initReactI18next).init({
 
   "services": "Services",
   "enhancing_student_learning": "Enhancing Student Learning",
-  "with_ask_aau": "with Ask AAU",
-  "ask_aau_description": "Ask AAU provides a dynamic platform for students to ask questions, share knowledge, and collaborate effectively to enhance their academic experience.",
+  "with_ask_aau": "with Ask Students",
+  "ask_aau_description": "Ask Students provides a dynamic platform for students to ask questions, share knowledge, and collaborate effectively to enhance their academic experience.",
   "our_approach": "Our Approach",
 "step_by_step_process": "Step-by-Step Process",
-"approach_description": "At Ask AAU, we follow a clear and structured process to connect students and enhance learning.",
+"approach_description": "At Ask Students, we follow a clear and structured process to connect students and enhance learning.",
 "post_question": "Post Your Question",
 "post_question_description": "Students can post their academic questions on the platform, ensuring a space for collaborative learning.",
 "collaborate_learn": "Collaborate & Learn",
 "collaborate_learn_description": "Engage with other students' questions, share knowledge, and help others solve academic challenges.",
 "gain_knowledge": "Gain Knowledge",
 "gain_knowledge_description": "Access valuable insights from your peers, enriching your academic journey with practical answers.",
-"why_choose": "Why Choose Ask AAU?",
+"why_choose": "Why Choose Ask Students?",
 "enhancing": "Enhancing",
 "your_learning_experience": "Your Learning Experience",
 "ask_answer_title": "Ask & Answer",
@@ -150,7 +150,7 @@ i18n.use(initReactI18next).init({
 
 "step_by_step": "Step-by-Step",
 "process": "Process",
-"approach_desc": "At Ask AAU, we follow a clear and structured process to connect students and enhance learning.",
+"approach_desc": "At Ask Students, we follow a clear and structured process to connect students and enhance learning.",
 "step1_title": "Post Your Question",
 "step1_desc": "Students can post their academic questions on the platform, ensuring a space for collaborative learning.",
 "step2_title": "Collaborate & Learn",
@@ -158,7 +158,7 @@ i18n.use(initReactI18next).init({
 "step3_title": "Gain Knowledge",
 "step3_desc": "Access valuable insights from your peers, enriching your academic journey with practical answers.",
 
-"why_choose_desc": "Ask AAU provides a collaborative space where students can engage, learn, and share knowledge effortlessly.",
+"why_choose_desc": "Ask Students provides a collaborative space where students can engage, learn, and share knowledge effortlessly.",
 "card1_title": "Ask & Answer",
 "card1_desc": "Engage with a community of students to ask questions and provide answers in a supportive environment.",
 "card2_title": "Collaborate & Learn",
@@ -174,7 +174,7 @@ i18n.use(initReactI18next).init({
 "contact_section_main_title": "You can contact us through",
 "contact_description": "We always listen to your suggestions, and if you have any complaints, we will definitely work on resolving them because your opinion matters to us.",
 "contact_address_label": "Office Address",
-"contact_address_value": "Amman Arab University",
+"contact_address_value": "Jordan Amman",
 "contact_email_label": "Email Address",
 "contact_email_value": "abdalfatah.aljuaidi@gmail.com",
 "contact_phone_label": "Phone Number",
@@ -217,7 +217,7 @@ i18n.use(initReactI18next).init({
 },
 
 "footer": {
-  "askAAU": "Ask AAU",
+  "askAAU": "Ask Students",
   "description": "A platform for students to ask and answer academic questions, fostering interaction and support.",
   "followUs": "Follow Us",
   "quickLinks": "Quick Links",
@@ -231,6 +231,30 @@ i18n.use(initReactI18next).init({
   "copyright": "© 2022 All Rights Reserved.",
   "busTimes": "What are the bus times?",
   "lectureDates": "When are the lecture dates?"
+},
+
+
+"login": {
+  "title": "Login",
+  "email": "Email",
+  "password": "Password",
+  "remember": "Remember me",
+  "forgot": "Forgot Password?",
+  "login": "Login",
+  "logging": "Logging in...",
+  "noAccount": "Don't have an account?",
+  "register": "Register"
+},
+
+"register": {
+  "title": "Create Account",
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "register": "Register",
+  "registering": "Registering...",
+  "alreadyHaveAccount": "Already have an account?",
+  "login": "Login"
 },
 
 "settings": {
@@ -282,7 +306,7 @@ i18n.use(initReactI18next).init({
         "notifications": "الإشعارات",
         "no_notifications_yet": "لا توجد إشعارات بعد",
         "show_more": "عرض المزيد",
-        "ask_aau": "اسأل AAU",
+        "ask_aau": "اسأل Students",
         "search_by_poster_name": "البحث باسم الناشر",
         "friends": "الأصدقاء",
         "in_your_circle": "ضمن دائرتك",
@@ -290,7 +314,7 @@ i18n.use(initReactI18next).init({
         "search_friend": "البحث عن صديق",
         "posts": "المنشورات",
         "official_posts": "المنشورات الرسمية",
-        "chat": "الدردشة",
+        "chat": "  الدردشة الجماعية ",
         "bookmarks": "المحفوظات",
         "my_posts": "منشوراتي",
         "theme": "السمة",
@@ -347,11 +371,11 @@ i18n.use(initReactI18next).init({
    "enter_details_here": "أدخل التفاصيل هنا...",
    "submitting": "جاري التقديم...",
    "submit": "تقديم",
-   "about_image_alt": "عن منصة Ask AAU",
-   "about_ask_aau": "عن منصة Ask AAU",
+   "about_image_alt": "عن منصة Ask Students",
+   "about_ask_aau": "عن منصة Ask Students",
    "empowering_students": "تمكين الطلاب من خلال",
    "knowledge_collaboration": "المعرفة والتعاون.",
-   "platform_description": "منصة Ask AAU مصممة لتسهيل مناقشات الطلاب، ومشاركة المعرفة، والدعم الأكاديمي، مما يجعل الحياة الجامعية أكثر تفاعلاً وتعاوناً.",
+   "platform_description": "منصة Ask Students مصممة لتسهيل مناقشات الطلاب، ومشاركة المعرفة، والدعم الأكاديمي، مما يجعل الحياة الجامعية أكثر تفاعلاً وتعاوناً.",
    "connect_students": "ربط الطلاب",
    "peer_learning": "التعلم بين الأقران",
    "simplify_interaction": "تبسيط التفاعل",
@@ -361,19 +385,19 @@ i18n.use(initReactI18next).init({
    "learn_more": "اعرف المزيد",
 
    "slide1": {
-    "title": "منصة ASK AAU",
+    "title": "منصة ASK Students",
     "heading": "التعاون يمكّن الطلاب",
     "subtitle": "نوفر أفضل منصة للنقاشات الجامعية",
     "button": "تعرف على المزيد"
   },
   "slide2": {
-    "title": "مجتمع ASK AAU",
+    "title": "مجتمع ASK Students",
     "heading": "شارك، تعلّم، وتطوّر",
     "subtitle": "منصة للطلاب لتبادل واكتساب المعرفة",
     "button": "تعرف على المزيد"
   },
   "slide3": {
-    "title": "شبكة ASK AAU",
+    "title": "شبكة ASK Students",
     "heading": "تواصل، اسأل، وانجح",
     "subtitle": "بوابتك للتعاون الطلابي والمشاركة",
     "button": "تعرف على المزيد"
@@ -389,34 +413,46 @@ i18n.use(initReactI18next).init({
     "register": "تسجيل"
   },
 
+  "login": {
+    "title": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "remember": "تذكرني",
+    "forgot": "نسيت كلمة المرور؟",
+    "login": "تسجيل الدخول",
+    "logging": "جارٍ تسجيل الدخول...",
+    "noAccount": "ليس لديك حساب؟",
+    "register": "إنشاء حساب"
+  },
+
   "students_connected": "طلاب متصلين",
   "questions_asked": "أسئلة مطروحة",
   "answers_provided": "إجابات مقدمة",
   "join_now": "انضم الآن",
-  "call_to_action_paragraph": "انضم إلى منصة Ask AAU للتعلم التعاوني، حيث يمكن للطلاب مشاركة المعرفة والمشاركة في نقاشات مفيدة.",
+  "call_to_action_paragraph": "انضم إلى منصة Ask Students للتعلم التعاوني، حيث يمكن للطلاب مشاركة المعرفة والمشاركة في نقاشات مفيدة.",
   "need_help": "تحتاج إلى مساعدة للانضمام؟",
-  "need_help_paragraph": "ابدأ الآن من خلال الانضمام إلى منصة Ask AAU، حيث يمكنك طرح الأسئلة وتقديم الإجابات والتعاون مع زملائك.",
+  "need_help_paragraph": "ابدأ الآن من خلال الانضمام إلى منصة Ask Students، حيث يمكنك طرح الأسئلة وتقديم الإجابات والتعاون مع زملائك.",
   "services": "الخدمات",
   "enhancing_student_learning": "تعزيز تعلم الطلاب",
-  "with_ask_aau": "مع Ask AAU",
-  "ask_aau_description": "يوفر Ask AAU منصة ديناميكية للطلاب لطرح الأسئلة، ومشاركة المعرفة، والتعاون بشكل فعال لتعزيز تجربتهم الأكاديمية.",
+  "with_ask_aau": "مع Ask Students",
+  "ask_aau_description": "يوفر Ask Students منصة ديناميكية للطلاب لطرح الأسئلة، ومشاركة المعرفة، والتعاون بشكل فعال لتعزيز تجربتهم الأكاديمية.",
   "our_approach": "نهجنا",
 "step_by_step_process": "عملية خطوة بخطوة",
-"approach_description": "في Ask AAU، نتبع عملية واضحة ومنظمة لربط الطلاب وتعزيز التعلم.",
+"approach_description": "في Ask Students، نتبع عملية واضحة ومنظمة لربط الطلاب وتعزيز التعلم.",
 "post_question": "اطرح سؤالك",
 "post_question_description": "يمكن للطلاب نشر أسئلتهم الأكاديمية على المنصة لضمان بيئة تعلم تعاوني.",
 "collaborate_learn": "تعاون وتعلم",
 "collaborate_learn_description": "شارك في أسئلة الطلاب الآخرين، وشارك المعرفة، وساعد في حل التحديات الأكاديمية.",
 "gain_knowledge": "اكتسب المعرفة",
 "gain_knowledge_description": "احصل على رؤى قيمة من زملائك، تعزز رحلتك الأكاديمية بإجابات عملية.",
-"why_choose": "لماذا تختار Ask AAU؟",
+"why_choose": "لماذا تختار Ask Students؟",
 "enhancing": "تعزيز",
 "your_learning_experience": "تجربتك التعليمية",
 "ask_answer_title": "اسأل وأجب",
 "ask_answer_desc": "تفاعل مع مجتمع الطلاب لطرح الأسئلة وتقديم الإجابات في بيئة داعمة.",
 "step_by_step": "خطوة بخطوة",
 "process": "العملية",
-"approach_desc": "في Ask AAU، نتبع عملية واضحة ومنظمة لربط الطلاب وتعزيز التعلم.",
+"approach_desc": "في Ask Students، نتبع عملية واضحة ومنظمة لربط الطلاب وتعزيز التعلم.",
 "step1_title": "انشر سؤالك",
 "step1_desc": "يمكن للطلاب نشر أسئلتهم الأكاديمية على المنصة، مما يوفر مساحة للتعلم التعاوني.",
 "step2_title": "تعاون وتعلم",
@@ -424,7 +460,7 @@ i18n.use(initReactI18next).init({
 "step3_title": "اكسب المعرفة",
 "step3_desc": "احصل على رؤى قيمة من زملائك الطلاب، وطور تجربتك الأكاديمية من خلال إجابات عملية.",
 
-"why_choose_desc": "يوفر Ask AAU مساحة تعاونية يمكن للطلاب من خلالها التفاعل، والتعلم، ومشاركة المعرفة بسهولة.",
+"why_choose_desc": "يوفر Ask Students مساحة تعاونية يمكن للطلاب من خلالها التفاعل، والتعلم، ومشاركة المعرفة بسهولة.",
 "card1_title": "اسأل وأجب",
 "card1_desc": "تفاعل مع مجتمع من الطلاب لطرح الأسئلة وتقديم الإجابات في بيئة داعمة.",
 "card2_title": "تعاون وتعلم",
@@ -458,7 +494,7 @@ i18n.use(initReactI18next).init({
 "send_button": "إرسال",
 
 "footer": {
-  "askAAU": "اسأل AAU",
+  "askAAU": "اسأل Students",
   "description": "منصة للطلاب لطرح والإجابة على الأسئلة الأكاديمية، مما يعزز التفاعل والدعم.",
   "followUs": "تابعنا",
   "quickLinks": "روابط سريعة",
@@ -522,6 +558,17 @@ i18n.use(initReactI18next).init({
   "empty": "ليس لديك أصدقاء بعد."
 },
 
+"register": {
+  "title": "إنشاء حساب",
+  "username": "اسم المستخدم",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "register": "تسجيل",
+  "registering": "جارٍ التسجيل...",
+  "alreadyHaveAccount": "هل لديك حساب؟",
+  "login": "تسجيل الدخول"
+},
+
 
 "suggestions": {
   "title": "الاقتراحات والشكاوى",
@@ -541,7 +588,7 @@ i18n.use(initReactI18next).init({
       }
     }
   },
-  lng: "en", // اللغة الافتراضية
+  lng: "ar", // اللغة الافتراضية
   fallbackLng: "en", // في حال لم تكن اللغة موجودة
   interpolation: {
     escapeValue: false // React already safes from xss
