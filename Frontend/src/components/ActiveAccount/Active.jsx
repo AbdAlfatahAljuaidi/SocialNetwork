@@ -61,7 +61,7 @@ const Active = ({changeLanguage}) => {
   <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80 z-50">
     <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
     <span className="ml-4 text-blue-700 font-medium">
-{t('loading_messages')}</span>
+جاري التحميل </span>
   </div>
 )}
     <div className="flex items-center justify-center min-h-screen">
