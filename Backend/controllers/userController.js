@@ -148,6 +148,11 @@ const SignUpUser = async (req, res) => {
     console.log(Password);
 
     const IfExist = await SignUp.findOne({ Email });
+if(IfExist && IfExist.active == false){
+  return res.status(401).json({error:true, message:"Your account has been registered. Please activate it via email."})
+
+}
+
 
     if (IfExist) {
       return res

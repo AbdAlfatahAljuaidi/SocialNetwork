@@ -24,6 +24,8 @@ const Chat = ({changeLanguage}) => {
   const [profile, setProfile] = useState(null);
   const [loadingOldMessages, setLoadingOldMessages] = useState(false);
   const [loadingMessages, setLoadingMessages] = useState(true);
+  
+    const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
 
   const { t } = useTranslation();
 
@@ -180,7 +182,8 @@ useEffect(() => {
     <div className="fixed md:top-[94px] top-[240px] left-1/2 transform -translate-x-1/2 w-full max-w-[970px] bg-white border border-blue-200 rounded-xl px-4 py-4 flex items-center gap-4 z-40 shadow">
       <img src={ItImage} alt="Group Chat" className="w-14 h-14 rounded-full object-cover border-2 border-white shadow" />
       <div className="text-sm text-gray-700 leading-snug">
-        <h2 className="text-lg font-bold text-blue-700 mb-1">
+        <h2 className="text-lg font-bold mb-1" style={{color:color}}>
+          
 {t('chat_welcome')}</h2>
         <p>
         {t('chat_description')}
@@ -267,7 +270,8 @@ useEffect(() => {
         />
         <button
           type="submit"
-          className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+          className=" text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+          style={{background:color}}
         >
           {t('send')}
          

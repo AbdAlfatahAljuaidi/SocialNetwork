@@ -38,7 +38,8 @@ const SignUp = ({ switchToLogin ,changeLanguage }) => {
             toast.success("New user created now you should go to your email to activate it");
           }
         } catch (error) {
-          console.log(error.response);
+          console.log(error.response.data.message);
+          toast.error(error.response.data.message)
           if (
             error.response?.data?.message.includes("fails to match the required pattern")
           ) {
