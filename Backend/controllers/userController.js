@@ -193,7 +193,7 @@ await sendEmail(
   Email,
   SignUp.Name,
   link,
-  "Activation Account",
+  "Activate Your Account",
   "activeAccount",
 
 
