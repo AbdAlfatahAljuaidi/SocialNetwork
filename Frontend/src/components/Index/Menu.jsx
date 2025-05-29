@@ -132,7 +132,7 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguag
           </li>
           </Link>
 
-{/* <Link to={"/OfficialPosts"}>
+<Link to={"/OfficialPosts"}>
           <li
          
             className="flex items-center space-x-3 text-gray-700  py-2 rounded-lg cursor-pointer transition duration-200"
@@ -142,7 +142,7 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguag
             </div>
             <span>{t('official_posts')}</span>
           </li>
-          </Link> */}
+          </Link>
           {/* <Link to="/Bookmarks">
             <li className='flex items-center space-x-3 text-gray-700 px-4 py-2 rounded-lg cursor-pointer transition duration-200'>
               <div className='text-xl'><FaBell /></div>

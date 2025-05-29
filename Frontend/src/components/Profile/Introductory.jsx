@@ -90,7 +90,7 @@ const { t } = useTranslation();
                   </p>
                   <div className="flex items-center justify-center md:justify-start mt-2">
                     <FaUserGraduate className="" />
-                    <p className="text-gray-600 ml-2 mx-2">{profile.major}</p>
+                    <p className="text-gray-600 ml-2 text-center mx-2">{profile.major}</p>
                   </div>
                   <div className="flex items-center justify-center md:justify-start">
                     <FaLocationDot />

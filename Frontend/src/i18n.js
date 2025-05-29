@@ -287,7 +287,9 @@ i18n.use(initReactI18next).init({
   },
   "status": {
     "Pending": "Pending",
+    "In Progress": "In Progress",
     "Resolved": "Resolved",
+    "Completed": "Completed",
     "Rejected": "Rejected"
   }
 },

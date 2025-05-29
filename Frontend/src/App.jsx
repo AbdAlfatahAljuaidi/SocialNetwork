@@ -42,6 +42,7 @@ import TopFriend from "./components/Index/TopFriend";
 import Chat from './components/Chat/Chat'
 import ChatPharmacy from "./components/Chat/ChatPharmacy";
 import Report from "./components/Profile/Report";
+import ChatFriend from "./components/Profile/ChatFriend";
 
 
 function App() {
@@ -100,6 +101,7 @@ function App() {
         <Route path="/TopFriend" element = {user ? <TopFriend /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Report/:reportedPerson" element = {user ? <Report /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Chat" element = {user ? <Chat /> : <Navigate to="/Home/Registration" /> }/>
+        <Route path="/ChatFriend/:username" element = {user ? <ChatFriend /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Video" element =  {<Video />}/>
         <Route path="/Chat" element =  {<Chat />}/>
         <Route path="/ChatPharmacy" element =  {<ChatPharmacy />}/>

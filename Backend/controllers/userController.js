@@ -16,6 +16,7 @@ const Notification = require ("../models/Notification.js");
 const Report = require ("../models/Report.js");
 
 const { Suggest, SuggestValidation } = require("../models/Suggestion");
+const PrivateMessage = require("../models/PrivateMessage.js");
 
 
 
@@ -1111,8 +1112,9 @@ const submitSuggestion = async (req, res) => {
 
 
     const { type, details ,name,email,state,title } = req.body;
+   const solution="There is no solution yet"
 
-    const newSuggestion = new Suggest({ type, details ,name,email,state,title});
+    const newSuggestion = new Suggest({ type, details ,name,email,state,title,solution});
     await newSuggestion.save();
 
     const user = await SignUp.findOne({Name:name})
@@ -1125,7 +1127,8 @@ const submitSuggestion = async (req, res) => {
       "Your Suggestion Was Submitted",
       "suggest" // اسم قالب handlebars الموجود في views
     );
-    
+    console.log("Saved Suggestion:", newSuggestion);
+
 
     res.status(201).json({ message: "Suggestion submitted successfully.", error:false });
   } catch (err) {
@@ -1204,12 +1207,12 @@ const viewSuggest = async (req, res) => {
 const updateSuggest = async (req, res) => {
   try {
     const { id } = req.params;
-    const { state } = req.body;
+    const { state ,solution } = req.body;
 
     // البحث عن السجل وتحديثه مباشرة
     const suggest = await Suggest.findByIdAndUpdate(
       id,
-      { state },
+      { state ,solution },
       { new: true } // لإرجاع السجل بعد التحديث
     );
 
@@ -1506,6 +1509,37 @@ const messages = async (req, res) => {
   }
 };
 
+
+// messages route (backend)
+const getPrivateMessage = async (req, res) => {
+  const skip = parseInt(req.query.skip) || 0;
+  const sender = req.query.sender;
+  const receiver = req.params.receiver;
+
+  if (!sender || !receiver) {
+    return res.status(400).json({ error: 'Missing sender or receiver' });
+  }
+
+  try {
+    const messages = await PrivateMessage.find({
+      $or: [
+        { senderName: sender, receiverName: receiver },
+        { senderName: receiver, receiverName: sender },
+      ]
+    })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(10);
+
+    res.json(messages);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+
+
 const getNotifications = async (req, res) => {
   try {
     const { username } = req.body;
@@ -1694,5 +1728,6 @@ module.exports = {
   createReport,
   getReports,
   deleteReport,
-  selectCorrectAnswer
+  selectCorrectAnswer,
+  getPrivateMessage
 };

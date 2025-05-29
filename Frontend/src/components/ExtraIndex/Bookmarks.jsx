@@ -90,7 +90,7 @@ const Bookmarks = ({changeLanguage}) => {
                     <img
                       src={post.ProfileImage || 'https://via.placeholder.com/50'}
                       alt={post.author}
-                      className="w-12 h-12 rounded-full mr-3"
+                      className="w-12 h-12 rounded-full mx-3"
                     />
                     <div>
                       <h2 className="text-lg font-bold text-gray-700">{post.username}</h2>
@@ -111,15 +111,14 @@ const Bookmarks = ({changeLanguage}) => {
                     <FaTrash />
                   </button>
                 </div>
-                <p className="text-gray-400 pb-2">{post.text}</p>
+                <p className=" mx-3 pb-2">{post.text}</p>
                 <img
                   src={post.imageUrl}
                   alt={post.title}
                   className="w-full h-full object-cover rounded-lg mb-4 shadow-sm"
                 />
-                <h2 className="text-2xl font-semibold text-gray-900 mb-2">{post.title}</h2>
-                <p className="text-gray-700 mb-4">{post.content}</p>
-                <div className="flex items-center justify-between text-gray-600">
+               
+                <div className="flex mx-3 items-center justify-between text-gray-600">
                   <div className="flex items-center space-x-2">
                     <FaHeart className="text-red-500 text-lg" />
                     <span>{post.likes}</span>

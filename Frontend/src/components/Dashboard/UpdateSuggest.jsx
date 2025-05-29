@@ -10,6 +10,7 @@ const UpdateSuggest = () => {
   const { id } = useParams();
   const [suggestion, setSuggestion] = useState({});
   const [state, setState] = useState("");
+  const [solution, setSolution] = useState("");
   
   const color = localStorage.getItem("mainColor") || "#1D4ED8";
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const UpdateSuggest = () => {
         console.log("data.suggest.state = ",data.suggest.state);
         
         setState(data.suggest.state?.trim() || ""); // إذا كان فيه قيمة state موجودة
+        setSolution(data.suggest.solution?.trim() || ""); // إذا كان فيه قيمة state موجودة
       } catch (err) {
         console.error("Error fetching suggestion:", err);
       }
@@ -33,7 +35,7 @@ const UpdateSuggest = () => {
 
   const handleUpdate = async (id) => {
     try {
-      await axios.put(`${apiUrl}/updateSuggest/${id}`, { state });
+      await axios.put(`${apiUrl}/updateSuggest/${id}`, { state ,solution });
       toast.success("Status has been changed successfully")
       
     navigate("/Index/Dashboard");
@@ -99,6 +101,11 @@ const UpdateSuggest = () => {
               <option value="Completed">Completed</option>
               <option value="Rejected">Rejected</option>
             </select>
+          </div>
+
+          <div>
+            <label htmlFor="">Solution</label>
+            <textarea className='w-full border' value={solution}   onChange={(e) => setSolution(e.target.value)} name="" id=""></textarea>
           </div>
 
           <div className="text-center mt-6">

@@ -124,11 +124,20 @@ const UsersProfile = () => {
               </div>
             </div>
             <div className="mx-auto md:mx-0 mt-7 md:mt-0">
+
+            <Link to={`/ChatFriend/${params.username}`} className="mx-2">
+            <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-300">
+  Message
+</button>
+</Link>
+
               <Link to={`/Report/${params.username}`}>
             <button className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300">
   Report
 </button>
 </Link>
+
+
 
             </div>
           </div>

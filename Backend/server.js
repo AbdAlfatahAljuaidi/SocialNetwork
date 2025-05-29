@@ -11,6 +11,7 @@ const http = require('http');
 const Message = require('./models/Messages')
 const Notification = require('./models/Notification')
 const {Profile} = require('./models/Profile')
+const PrivateMessage = require("./models/PrivateMessage")
 
 // استدعاء الموديلات والروترات
 const { User } = require('./models/Opinion');
@@ -68,6 +69,18 @@ io.on('connection', (socket) => {
       console.error("❌ Error saving message:", err);
     }
   });
+
+
+    socket.on('join_room', (roomId) => {
+      socket.join(roomId);
+    });
+
+    socket.on('private_message', async ({ roomId, messageData }) => {
+      io.to(roomId).emit('receive_private_message', messageData);
+      // ممكن تخزين الرسالة في قاعدة البيانات هنا أيضًا
+      const newMessage = new PrivateMessage(messageData);
+      await newMessage.save();
+    });
 
   
   socket.on('Send_notification', async (msgData) => {

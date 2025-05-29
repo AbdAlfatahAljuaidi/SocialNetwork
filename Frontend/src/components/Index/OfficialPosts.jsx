@@ -10,9 +10,11 @@ import 'react-loading-skeleton/dist/skeleton.css'; // مهم لستايل الت
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 import { io } from 'socket.io-client';
 
+import { useTranslation } from 'react-i18next';
+
 const socket = io(`${apiUrl}`);
 
-const OfficialPosts = () => {
+const OfficialPosts = ({changeLanguage}) => {
   const [postText, setPostText] = useState("");
   const [postImage, setPostImage] = useState(null);
   const [posts, setPosts] = useState([]);
@@ -24,12 +26,17 @@ const OfficialPosts = () => {
   const optionsRef = useRef(null);
   const [note,setNote] =useState([])
   const [fromAdmin,setFromAdmin] =useState(true)
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
+  
+    const [isLiked, setIsLiked] = useState(false);
   const [notification, setNotification] = useState([]);
   
     const [openPostOptionsId, setOpenPostOptionsId] = useState(null);
   
 
+    const { t } = useTranslation();
 
     const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
 
@@ -119,7 +126,35 @@ const OfficialPosts = () => {
       toast.error(error.response.data.message);
     }
   };
+
+
   
+  const fetchPosts = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(`${apiUrl}/api/posts`);
+      console.log(data);
+
+      const adminPosts = data.filter(post => post.fromAdmin === true);
+
+      if (user && data.likedUsers?.includes(user._id)) {
+        setIsLiked(true);
+      } else {
+        setIsLiked(false);
+      }
+
+      setPosts(adminPosts);
+    } catch (error) {
+      console.error("حدث خطأ أثناء جلب البوستات:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+
+    useEffect(() => {
+      fetchPosts();
+    }, []);
   
 
   useEffect(() => {
@@ -148,6 +183,14 @@ const handleCommentSubmit = async (postId) => {
       return;
     }
 
+    setIsSubmitting(true);
+
+    if(commentText[postId] === ""){
+      setIsSubmitting(false);
+      console.log("test");
+      
+    }
+
     // إرسال التعليق للسيرفر
     const { data } = await axios.post(`${apiUrl}/comment/${postId}`, {
       content: commentText[postId] || "",
@@ -166,6 +209,9 @@ const handleCommentSubmit = async (postId) => {
     // مسح محتوى خانة التعليق
     setCommentText((prev) => ({ ...prev, [postId]: "" }));
 
+    
+    setIsSubmitting(false);
+
     // data.comment يجب أن يحتوي على التعليق الجديد من السيرفر
     if (!data || !data.comment) {
       toast.error("لم يتم استلام التعليق من السيرفر.");
@@ -181,33 +227,57 @@ const handleCommentSubmit = async (postId) => {
 };
 
 
-  const handleLike = async (postId) => {
-    try {
-
-      if (!user || !user.profileImage) {
-        toast.error("You cannot publish the post before creating your own profile.");
-        return;
-      }
-
-
-      const { data } = await axios.post(
-        `${apiUrl}/Like/${postId}`,
-        {
-          userId: user._id,
-        }
+  
+const handleLike = async (postId) => {
+  try {
+    if (!user || !user.profileImage) {
+      toast.error(
+        <div>
+          Please create your profile before liking posts.{" "}
+          <Link to="/index/profile" className="text-blue-500 underline">
+            Go to profile
+          </Link>
+        </div>
       );
 
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post._id === postId
-            ? { ...post, likes: data.likes, liked: data.liked }
-            : post
-        )
-      );
-    } catch (error) {
-      console.error(error);
+      return;
     }
-  };
+
+    const { data } = await axios.post(`${apiUrl}/Like/${postId}`, {
+      userId: user._id,
+    });
+    console.log(data);
+
+    setPosts((prevPosts) =>
+      prevPosts.map((post) => {
+        if (post._id === postId) {
+          let updatedLikedUsers = [...(post.likedUsers || [])];
+          if (data.liked) {
+            // أضيف المستخدم
+            if (!updatedLikedUsers.includes(user._id)) {
+              updatedLikedUsers.push(user._id);
+            }
+          } else {
+            // إحذف المستخدم
+            updatedLikedUsers = updatedLikedUsers.filter(
+              (id) => id !== user._id
+            );
+          }
+
+          return {
+            ...post,
+            likes: data.likes,
+            liked: data.liked,
+            likedUsers: updatedLikedUsers,
+          };
+        }
+        return post;
+      })
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 
   const deletePost = async (postid) => {
@@ -297,7 +367,7 @@ const handleCommentSubmit = async (postId) => {
   <div className="bg-white shadow-md rounded-lg p-4 mb-4">
     <textarea
       className="w-full p-2 border rounded mb-2"
-      placeholder="What's on your mind?"
+      placeholder={t('whats_on_your_mind')}
       value={postText}
       onChange={(e) => setPostText(e.target.value)}
     />
@@ -312,7 +382,7 @@ const handleCommentSubmit = async (postId) => {
       className="text-white px-4 py-2 rounded"
       style={{ background: color }}
     >
-      Post
+       {t('post')}
     </button>
   </div>
 )}
@@ -413,28 +483,31 @@ onClick={()=> deletePost(post._id)}
               )}
           
 
-            {/* زر الإعجاب */}
-            <div className="flex items-center space-x-2 mt-3">
-              <button
-                onClick={() => handleLike(post._id)}
-                className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                  post.liked
-                    ? "bg-red-500 text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}
-              >
-                {post.liked ? "❤️ Unlike" : "🤍 Like"}
-              </button>
-              <span className="text-lg font-semibold text-gray-700">
-                {post.likes}
-              </span>
-            </div>
+           {/* زر الإعجاب */}
+           <div className="flex items-center space-x-2 mt-3">
+                <button
+                  onClick={() => handleLike(post._id)}
+                  className={`px-4 py-2 rounded-lg transition-all mx-2 duration-300 ${
+                    post.liked
+                      ? "bg-red-500 text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
+                >
+                  {post.likedUsers.includes(user._id) ? "❤️ " : "🤍"}
+                </button>
+
+                <span className="text-lg font-semibold text-gray-700 mx-2">
+                  {post.likes}
+                </span>
+
+                <span className="text-lg font-semibold text-gray-700"></span>
+              </div>
 
             {/* إدخال التعليق */}
             <div className="mt-4">
               <input
                 type="text"
-                placeholder="Write a Comment..."
+                placeholder={t('write_a_comment')}
                 value={commentText[post._id] || ""}
                 onChange={(e) =>
                   setCommentText({ ...commentText, [post._id]: e.target.value })
@@ -442,13 +515,14 @@ onClick={()=> deletePost(post._id)}
                 className="w-full p-2 border rounded"
               />
               <button
+                disabled={isSubmitting}
                 onClick={() => handleCommentSubmit(post._id)}
                 className="mt-2  text-white px-4 py-1 rounded"
                 style={{
                   background:color
                 }}
               >
-                Comment
+                 {isSubmitting ? t('commenting') : t('comment')}
               </button>
             </div>
 

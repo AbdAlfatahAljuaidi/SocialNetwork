@@ -68,8 +68,11 @@ const Notifications = ({changeLanguage}) => {
                   </span>
                 </div>
 
-                <p className="text-gray-700 mb-1">
+                <p className="text-gray-700 mb-1 font-bold">
                   {suggest.details}
+                </p>
+                <p className="text-gray-700 mb-1">
+                  {suggest.solution}
                 </p>
 
                 <p className="text-sm text-gray-400">

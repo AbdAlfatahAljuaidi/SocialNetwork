@@ -66,7 +66,7 @@ const Analytics = ({changeLanguage}) => {
                     <img
                       src={post.ProfileImage || 'https://via.placeholder.com/50'}
                       alt={post.author}
-                      className="w-12 h-12 rounded-full mr-3"
+                      className="w-12 h-12 rounded-full mx-3"
                     />
                     <div>
                       <h2 className="text-lg font-bold text-gray-700">{post.username}</h2>
@@ -83,10 +83,10 @@ const Analytics = ({changeLanguage}) => {
                       </p>
                     </div>
                   </div>
-                  <p>{post.text}</p>
+                  <p className='mx-3'>{post.text}</p>
                   <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover rounded-lg mb-4 shadow-sm" />
 
-                  <div className="flex items-center justify-between text-gray-600">
+                  <div className="flex mx-3 items-center justify-between text-gray-600">
                     <div className="flex items-center space-x-2">
                       <FaHeart className="text-red-500 text-lg" />
                       <span>{post.likes}</span>
