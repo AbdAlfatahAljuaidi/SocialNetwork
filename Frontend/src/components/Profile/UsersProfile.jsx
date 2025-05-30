@@ -17,12 +17,15 @@ import { toast } from "react-toastify";
 import Nav from "../Index/Nav";
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
-const UsersProfile = () => {
+import { useTranslation } from 'react-i18next';
+
+const UsersProfile = ({changeLanguage}) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const userData = JSON.parse(localStorage.getItem("userData"));
   const [color, setColor] = useState(
     localStorage.getItem("mainColor") || "#1D4ED8"
   );
+  const { t } = useTranslation();
   const [Profile, setProfile] = useState({});
   const [friends, setFriends] = useState([]);
   const params = useParams();
@@ -93,7 +96,7 @@ const UsersProfile = () => {
       <Nav />
 
       <div className="p-8 shadow-lg w-[85%] mt-10 mx-auto">
-        <h1 className="text-4xl font-bold text-gray-800">Profile</h1>
+        <h1 className="text-4xl font-bold text-gray-800  ">{t('Profile')}</h1>
 
         {Profile ? (
           <div className="flex flex-wrap  justify-between pb-8 mt-9 shadow-md p-6 rounded-lg bg-gray-50">
@@ -107,7 +110,7 @@ const UsersProfile = () => {
                 }}
               />
               <div>
-                <h1 className="text-4xl font-extrabold text-gray-800 text-center md:text-left">
+                <h1 className="text-4xl font-extrabold text-gray-800 text-center md:text-start ">
                   {Profile.username || "Unknown"}
                 </h1>
                 <p className="flex items-center justify-center text-lg text-gray-600 mt-2 w-fit mx-auto md:mx-0">
@@ -116,7 +119,7 @@ const UsersProfile = () => {
                 </p>
 
                 <h2
-                  className="font-medium text-lg mt-2 text-center md:text-left"
+                  className="font-medium text-lg mt-2 text-center "
                   style={{ color: color }}
                 >
                   {Profile.major || "Software Engineer"}
@@ -127,13 +130,13 @@ const UsersProfile = () => {
 
             <Link to={`/ChatFriend/${params.username}`} className="mx-2">
             <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-300">
-  Message
+  {t('privteChat')}
 </button>
 </Link>
 
               <Link to={`/Report/${params.username}`}>
             <button className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300">
-  Report
+  {t('Report')}
 </button>
 </Link>
 
@@ -148,52 +151,52 @@ const UsersProfile = () => {
         {Profile ? (
           <div className="mt-8 shadow-md p-6 rounded-lg bg-gray-50">
             <h2 className="text-2xl font-bold text-gray-700 border-b pb-4">
-              Personal Info
+             {t('Personal_Info')}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 mt-6 text-lg">
               <div className="flex items-center">
-                <FaPhone className="mr-3 " style={{ color: color }} size={24} />
-                <span className="text-gray-700 w-24 font-medium">Phone:</span>
+                <FaPhone className="mx-3 " style={{ color: color }} size={24} />
+                <span className="text-gray-700 w-24 font-medium">{t('contact_phone_label')}:</span>
                 <span className="text-gray-600">{Profile.Phone}</span>
               </div>
 
               <div className="flex items-center">
                 <FaLocationDot
-                  className="mr-3"
+                  className="mx-3"
                   style={{ color: color }}
                   size={24}
                 />
-                <span className="font-medium text-gray-700 w-24">Address:</span>
-                <span className="text-gray-600">{Profile.Address}</span>
+                <span className="font-medium text-gray-700"> {t('Address')} :</span>
+                <span className="text-gray-600 ">{Profile.Address}</span>
               </div>
               <div className="flex items-center">
                 <BsCalendar2DateFill
-                  className="mr-3"
+                  className="mx-3"
                   style={{ color: color }}
                   size={24}
                 />
-                <span className="font-medium text-gray-700 w-24">Age:</span>
-                <span className="text-gray-600">{Profile.Age}</span>
+                <span className="font-medium text-gray-700"> {t('age_placeholder')} :</span>
+                <span className="text-gray-600 mx-1">{Profile.Age}</span>
               </div>
               <div className="flex items-center">
                 <BsCalendar2DateFill
-                  className="mr-3"
+                  className="mx-3"
                   style={{ color: color }}
                   size={24}
                 />
-                <span className="font-medium text-gray-700 w-24">
+                <span className="font-medium text-gray-700">
                   First Year:
                 </span>
-                <span className="text-gray-600">{Profile.year}</span>
+                <span className="text-gray-600 mx-1">{Profile.year}</span>
               </div>
               <div className="flex items-center">
                 <FaTransgender
-                  className="mr-3"
+                  className="mx-3"
                   style={{ color: color }}
                   size={24}
                 />
-                <span className="font-medium text-gray-700 w-24">Gender:</span>
-                <span className="text-gray-600">{Profile.Gender}</span>
+                <span className="font-medium text-gray-700 ">{t('profile.gender')}:</span>
+                <span className="text-gray-600 text-start w-full  mx-1">{Profile.Gender}</span>
               </div>
             </div>
           </div>
@@ -208,7 +211,7 @@ const UsersProfile = () => {
               className="flex items-center text-white px-6 py-3 text-lg rounded-lg shadow-lg hover:bg-green-600 transition"
               style={{ background: color }}
             >
-              <FaUserPlus className="mr-3" />
+              <FaUserPlus className="mx-3" />
               {isFriend ? "Unfollow" : "Follow"}
             </button>
           </div>
@@ -216,7 +219,7 @@ const UsersProfile = () => {
 
         <div className="mt-10">
           <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 border-b pb-3">
-            Friends
+            {t('friends')}
           </h2>
 
           {friends.length > 0 ? (
@@ -239,7 +242,7 @@ const UsersProfile = () => {
                       className="mt-4 px-6 text-lg py-1 bg-blue-600 text-white rounded-md text-sm transition"
                       style={{ background: color }}
                     >
-                      View Profile
+                       {t('View_Profile')}
                     </button>
                   </Link>
                 </div>
@@ -247,7 +250,7 @@ const UsersProfile = () => {
             </div>
           ) : (
             <p className="text-gray-500 dark:text-gray-400 mt-4">
-              No friends yet.
+             {t('no_friends_yet')}
             </p>
           )}
         </div>

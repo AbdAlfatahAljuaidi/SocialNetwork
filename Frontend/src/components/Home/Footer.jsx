@@ -11,7 +11,7 @@ import { MdEmail } from "react-icons/md";
 import crypto from "../../assets/crypto.jpg";
 import foot from "../../assets/footer.jpg";
 import { Link } from "react-router-dom";
-import logo from '../../assets/Logo.png'
+import logo from '../../assets/WhiteLogo-removebg-preview.png'
 import { useTranslation } from 'react-i18next';
 
 const Footer = ({changeLanguage}) => {
@@ -32,12 +32,7 @@ const Footer = ({changeLanguage}) => {
         <h1 className="text-2xl font-bold mb-4">{t('footer.askAAU')}</h1>
         <p className="mb-6 text-gray-300">{t('footer.description')}</p>
 
-        <h2 className="text-xl font-semibold mb-3">{t('footer.followUs')}</h2>
-        <div className="flex space-x-4">
-          <a target="_blank" href="https://www.facebook.com/aau.edu.jordan/"> 
-            <FaFacebook className="text-xl cursor-pointer hover:text-blue-500" />
-          </a>
-        </div>
+     
       </div>
 
       {/* Column 2: Quick Links */}
@@ -68,11 +63,7 @@ const Footer = ({changeLanguage}) => {
         <h1 className="text-2xl font-bold mb-4">{t('footer.popularPost')}</h1>
         <div className="space-y-6">
           <div className="flex items-center space-x-4">
-            <img
-              src={logo}
-              alt="Post"
-              className="w-28 object-contain rounded-md mx-2"
-            />
+         
             <div>
               <h1 className="text-gray-300 text-sm">{t('footer.busTimes')}</h1>
               <p className="text-gray-400 text-xs">April 20, 2025</p>
@@ -80,11 +71,7 @@ const Footer = ({changeLanguage}) => {
           </div>
 
           <div className="flex items-center space-x-4 ">
-            <img
-              src={logo}
-              alt="Post"
-              className="w-28 object-contain rounded-md mx-2"
-            />
+          
             <div>
               <h1 className="text-gray-300 text-sm">{t('footer.lectureDates')}</h1>
               <p className="text-gray-400 text-xs">April 29, 2025</p>

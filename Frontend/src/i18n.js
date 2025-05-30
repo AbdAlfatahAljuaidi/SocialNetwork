@@ -39,6 +39,7 @@ i18n.use(initReactI18next).init({
            "information_technology": "Information Technology",
            "arts_sciences": "Arts and Sciences",
            "aviation_sciences": "Aviation Sciences",
+           "View_Profile":"View Profile",
            "pharmacy": "Pharmacy",
            "engineering": "Engineering",
            "applied_medical_sciences": "Applied Medical Sciences",
@@ -53,6 +54,7 @@ i18n.use(initReactI18next).init({
            "all": "All",
              "write_a_comment": "Write a Comment...",
   "comment": "Comment",
+  "privteChat": "privteChat",
    "commenting": "Commenting...",
    "correct_answer": "Correct Answer",
    "chat_description": "A place for students to connect, share knowledge, and support each other. Stay respectful, be kind, and enjoy the chat!",
@@ -174,13 +176,15 @@ i18n.use(initReactI18next).init({
 "contact_section_main_title": "You can contact us through",
 "contact_description": "We always listen to your suggestions, and if you have any complaints, we will definitely work on resolving them because your opinion matters to us.",
 "contact_address_label": "Office Address",
+"Address":"Address",
 "contact_address_value": "Jordan Amman",
 "contact_email_label": "Email Address",
 "contact_email_value": "abdalfatah.aljuaidi@gmail.com",
 "contact_phone_label": "Phone Number",
 "contact_phone_value": "+962-78240-7533",
+"Personal_Info":"Personal Info",
 
-
+"Report":"Report",
 
 "send_opinion_title":  "Send your opinion",
 "name_placeholder": "Name",
@@ -229,8 +233,8 @@ i18n.use(initReactI18next).init({
   "privacyPolicy": "Privacy Policy",
   "termsAndConditions": "Terms & Conditions",
   "copyright": "© 2022 All Rights Reserved.",
-  "busTimes": "What are the bus times?",
-  "lectureDates": "When are the lecture dates?"
+  "busTimes": "how can i improve me programing skills ",
+  "lectureDates": "what is the best way to study"
 },
 
 
@@ -308,7 +312,7 @@ i18n.use(initReactI18next).init({
         "notifications": "الإشعارات",
         "no_notifications_yet": "لا توجد إشعارات بعد",
         "show_more": "عرض المزيد",
-        "ask_aau": "اسأل Students",
+        "ask_aau": "اسأل طلاب ",
         "search_by_poster_name": "البحث باسم الناشر",
         "friends": "الأصدقاء",
         "in_your_circle": "ضمن دائرتك",
@@ -346,6 +350,8 @@ i18n.use(initReactI18next).init({
          "all": "الكل",
            "write_a_comment": "اكتب تعليق...",
   "comment": "تعليق",
+  "privteChat":"محادثة",
+  "Report":"ابلاغ",
    "commenting": "جاري إرسال التعليق...",
    "correct_answer": "الإجابة الصحيحة",
    "chat_description": "مكان للطلاب للتواصل، وتبادل المعرفة، ودعم بعضهم البعض. كن محترمًا، لطيفًا، واستمتع بالدردشة!",
@@ -367,6 +373,7 @@ i18n.use(initReactI18next).init({
    "select_issue_type": "حدد نوع المشكلة",
    "suggestion": "اقتراح",
    "complaint": "شكوى",
+   "View_Profile":"عرض الملف الشخصي ",
    "title": "العنوان",
    "enter_title_here": "أدخل العنوان هنا...",
    "details": "التفاصيل",
@@ -469,7 +476,7 @@ i18n.use(initReactI18next).init({
 "card2_desc": "اعمل مع زملائك الطلاب في المشاريع والواجبات والمناقشات الأكاديمية.",
 "card3_title": "ابقَ على اتصال",
 "card3_desc": "كوّن شبكة أكاديمية قوية وابقَ على اطلاع بأحدث المناقشات والمواضيع.",
-
+"Address":"العنوان",
 "client_reviews": "مراجعات العملاء",
 "what_students": "ماذا يظن",
 "think_about_us": "الطلاب عنا",
@@ -485,7 +492,7 @@ i18n.use(initReactI18next).init({
 "contact_address_value": "جامعة عمان العربية",
 "contact_email_label": "البريد الإلكتروني",
 "contact_email_value": "abdalfatah.aljuaidi@gmail.com",
-"contact_phone_label": "رقم الهاتف",
+"contact_phone_label": "رقم الموبايل",
 "contact_phone_value": "+962-78240-7533",
 "send_opinion_title": "أرسل رأيك",
 "name_placeholder": "الاسم",
@@ -494,6 +501,8 @@ i18n.use(initReactI18next).init({
 "age_placeholder": "العمر",
 "comment_placeholder": "رسالتك",
 "send_button": "إرسال",
+"Profile":"الملف الشخصي",
+"Personal_Info":"معلومات شخصية",
 
 "footer": {
   "askAAU": "اسأل Students",
@@ -508,8 +517,8 @@ i18n.use(initReactI18next).init({
   "privacyPolicy": "سياسة الخصوصية",
   "termsAndConditions": "الشروط والأحكام",
   "copyright": "© 2022 جميع الحقوق محفوظة.",
-    "busTimes": "ما هي مواعيد الحافلات؟",
-    "lectureDates": "متى هي تواريخ المحاضرات؟",
+    "busTimes": " كيف ممكن اطور حالي بالبرمجة",
+    "lectureDates": "ايش افضل طريقة للدراسة",
   
 },
 

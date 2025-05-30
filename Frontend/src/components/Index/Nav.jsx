@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Menu from './Menu';
 import { IoIosNotifications } from "react-icons/io";
 import { useTranslation } from 'react-i18next';
+import Logo from '../../assets/AskLogo.png'
 
 
 
@@ -99,7 +100,7 @@ const Nav = ({setActive }) => {
   const unreadCount = notifications.filter(n => !n.isRead).length;
 
   return (
-    <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'} className='sticky top-0 z-50 ' >
+    <div  className='sticky top-0 z-50 ' >
       <div className="sticky top-0 z-50 flex justify-between  items-center py-4 px-8 bg-white shadow-md flex-wrap sm:flex-nowrap">
         {/* زر القائمة (يظهر فقط عند الشاشات الصغيرة) */}
         <button 
@@ -111,7 +112,9 @@ const Nav = ({setActive }) => {
 
         {/* Logo */}
         <div className="font-bold text-2xl  sm:text-3xl w-full sm:w-auto text-center sm:text-left mb-4 sm:mb-0" style={{color:color}}>
-        <Link to={'/Index'}> {t('ask_aau')} </Link> 
+        <Link to={'/Index'}> 
+        <img width={125} src={Logo} alt=""  className='mx-auto md:mx-0'  />
+         </Link> 
         </div>
 
        

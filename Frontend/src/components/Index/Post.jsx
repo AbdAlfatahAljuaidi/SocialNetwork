@@ -8,6 +8,7 @@ import Testt from "../Testt";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css"; // مهم لستايل التحميل
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
+import { MdOutlineSportsScore } from "react-icons/md";
 
 import { useTranslation } from 'react-i18next';
 
@@ -31,6 +32,7 @@ const Post = ({changeLanguage}) => {
   );
   const [top, setTop] = useState();
   const [topComment, setTopComment] = useState();
+  const [topPoints, setTopPoints] = useState();
   const [questionType, setQuestionType] = useState("");
   const [filterType, setFilterType] = useState("");
   const [topFriend, setTopFriend] = useState(null);
@@ -374,6 +376,22 @@ const Post = ({changeLanguage}) => {
     fetchTopCommentedPost();
   }, []);
 
+
+  useEffect(() => {
+    const fetchTopPoints = async () => {
+      try {
+        const res = await axios.get(`${apiUrl}/mostPoints`); // استدعاء الـ API الجديد
+        setTopPoints(res.data);
+      } catch (err) {
+        console.error("Error fetching top Points post:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTopPoints();
+  }, []);
+
   const filteredPosts = posts.filter((post) => {
     if (!filterType) return true; // إذا لم يتم تحديد فلتر، يتم عرض جميع البوستات
     return post.questionType === filterType; // تصفية البوستات حسب النوع
@@ -443,8 +461,11 @@ const Post = ({changeLanguage}) => {
     <div className="w-full mx-auto p-4">
       {loadingMessages && (
         <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80 z-50">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
-          <span className="ml-4 text-blue-700 text-2xl font-medium">
+          <div className="animate-spin rounded-full h-12 w-12 border-4  border-t-transparent"  style={{
+      borderColor: color,
+      borderTopColor: "transparent",
+    }}></div>
+          <span className="ml-4  text-2xl font-medium" style={{color:color}}> 
           {t('loading')}
 
           </span>
@@ -498,18 +519,8 @@ const Post = ({changeLanguage}) => {
         </button>
       </div>
 
-      {/* <div>
-            <h1>📢 المنشورات</h1>
-            {note.length === 0 && <p>لا توجد منشورات بعد...</p>}
-            {note.map((post, index) => (
-                <div key={index} style={{ border: "1px solid #ddd", padding: "10px", marginBottom: "10px" }}>
-                    <h3>{post.username}</h3>
-                    <p>{post.text}</p>
-                    {post.imageUrl && <img src={post.imageUrl} alt="Post" style={{ maxWidth: "100%", height: "auto" }} />}
-                </div>
-            ))}
-        </div> */}
-      {top && topComment && topFriend ? (
+   
+      {top  && topFriend ? (
   <>
     <h1 className="font-bold text-xl text-center my-6">{t('most_numbers')}</h1>
 
@@ -544,31 +555,33 @@ const Post = ({changeLanguage}) => {
         </Link>
       )}
 
-      {/* Top commented post */}
-      {topComment && (
+      {/* Top topPoints */}
+      {topPoints && (
         <div className="w-full md:max-w-xs">
-          <Link to="/TopComment">
+          <Link to={`/index/profile/${topPoints.username}/${user.Name}`}>
             <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
               <div className="flex items-center space-x-4 mb-4">
                 <img
-                  src={topComment.ProfileImage || "https://via.placeholder.com/50"}
-                  alt={topComment.username}
+                  src={topPoints.imageUrl || "https://via.placeholder.com/50"}
+                  alt={topPoints.username}
                   className="w-12 h-12 rounded-full object-cover mx-2"
                 />
-                <h3 className="text-lg font-semibold">{topComment.username}</h3>
+                <h3 className="text-lg font-semibold">{topPoints.username}</h3>
               </div>
-              {topComment.text && (
-                <p className="text-sm text-gray-600 mb-2">{topComment.text}</p>
+              <p className="text-sm text-gray-600 mb-2">{topFriend.major}</p>
+              {topPoints.text && (
+                <p className="text-sm text-gray-600 mb-2">{topPoints.text}</p>
               )}
-              {topComment.imageUrl && (
+              {topPoints.imageUrl && (
                 <img
-                  src={topComment.imageUrl}
+                  src={topPoints.imageUrl}
                   alt="Post"
                   className="w-full h-32 object-cover rounded mb-4"
                 />
               )}
-              <div className="text-center text-gray-700 mt-1">
-                💬 <span className="font-medium">{topComment.comments.length}</span> {t('comments')}
+              <div className="text-center w-fit mx-auto flex items-center text-gray-700 mt-1">
+              <MdOutlineSportsScore className="mx-2" />
+              <span className="font-medium">{topPoints.point}</span> {t('profile.points')}
               </div>
             </div>
           </Link>
@@ -578,7 +591,7 @@ const Post = ({changeLanguage}) => {
       {/* Top friend */}
       {topFriend && (
         <div className="w-full md:max-w-xs">
-          <Link to="/TopFriend">
+          <Link to={`/index/profile/${topFriend.username}/${user.Name}`}>
             <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
               <div className="flex items-center mx-5 mb-4">
                 <div className="flex items-center space-x-4">
@@ -865,8 +878,10 @@ const Post = ({changeLanguage}) => {
           [post._id]: !prev[post._id],
         }))
       }
-      className="text-blue-600 hover:underline mt-2"
+      className=" hover:underline mt-2"
+      style={{color:color}}
     >
+     
       {showAllComments[post._id] ? "Show Less" : "More"}
     </button>
   )}

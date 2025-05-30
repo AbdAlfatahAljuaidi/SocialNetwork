@@ -61,7 +61,7 @@ const { t } = useTranslation();
                 className="flex items-center text-white px-4 py-2 text-sm rounded-lg shadow mt-5 md:mt-0"
                 style={{ background: color }}
               >
-                <FaCheck className="mr-2 " />
+                <FaCheck className="mx-2 mt-1 " />
                 {t("profile.edit")}
               </Link>
             ))}

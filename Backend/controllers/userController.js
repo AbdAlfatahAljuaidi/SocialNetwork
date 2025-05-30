@@ -1675,6 +1675,23 @@ const selectCorrectAnswer = async (req, res) => {
 };
 
 
+const mostPoints = async (req, res) => {
+  try {
+    const profile = await Profile.findOne().sort({ point: -1 });
+
+    if (!profile) {
+      return res.status(404).json({ message: "لا يوجد ملفات تعريف" });
+    }
+
+    res.status(200).json(profile);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "حدث خطأ في الخادم" });
+  }
+};
+
+
+
 
 
 module.exports = {
@@ -1729,5 +1746,6 @@ module.exports = {
   getReports,
   deleteReport,
   selectCorrectAnswer,
-  getPrivateMessage
+  getPrivateMessage,
+  mostPoints
 };

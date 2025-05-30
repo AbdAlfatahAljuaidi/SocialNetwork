@@ -76,9 +76,7 @@ const Login = ({ switchToRegister, setUser ,changeLanguage }) => {
   
           {/* Remember & Forgot Password */}
           <div className='flex justify-between text-sm mt-5 mr-0 ml-4'>
-            <label>
-              <input className='mr-1' type='checkbox' />{t('login.remember')}
-            </label>
+          
             <Link to="/ForgetPassword">
               <span className='text-white hover:underline'>{t('login.forgot')}</span>
             </Link>

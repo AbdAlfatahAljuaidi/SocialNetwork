@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import Logo from '../../assets/AskLogo.png'
 
 const Navbar = ({changeLanguage}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,11 +13,11 @@ const Navbar = ({changeLanguage}) => {
   
   const { t ,i18n } = useTranslation();
   return (
-    <div className="sticky top-0 z-50 flex justify-around items-center py-8 px-4 bg-white shadow-md">
+    <div className="sticky top-0 z-50 flex justify-around items-center py-4 px-4 bg-white shadow-md">
       {/* الشعار */}
       <div>
         <h1 className="text-main text-2xl font-bold cursor-pointer">
-          {t('ask_aau')} <span className="text-black"></span>
+         <img width={130} src={Logo} alt="" />
         </h1>
       </div>
 

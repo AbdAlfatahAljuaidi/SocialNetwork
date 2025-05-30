@@ -10,9 +10,9 @@ const Header = () => {
     <div className='flex justify-around bg-main p-4 hidden md:flex ' id='Home'>
         <div className='flex justify-center'>
           
-            <h6 className='flex items-center text-white text-sm'><MdEmail className='mr-1 text-base' />abdalfatah.aljuaidi@gmail.com</h6>
-            <h6 className='flex items-center text-white ml-4 text-sm'><FaMap className='mr-1 text-base' />Amman Jordan</h6>
-            <h6 className='flex items-center text-white ml-4 text-sm'><FaPhoneAlt className='mr-1 text-base' />+962-78-2407533</h6>
+            <h6 className='flex items-center text-white text-sm'><MdEmail className='mx-1 text-base' />abdalfatah.aljuaidi@gmail.com</h6>
+            <h6 className='flex items-center text-white ml-4 text-sm'><FaMap className='mx-1 text-base' />Amman Jordan</h6>
+            <h6 className='flex items-center text-white ml-4 text-sm'><FaPhoneAlt className='mx-1 text-base' />+962-78-2407533</h6>
         
         </div>
         <div className='flex justify-around text-white'>
