@@ -26,6 +26,8 @@ const Settings = ({changeLanguage}) => {
     const newColor = e.target.value;
     setColor(newColor);
     localStorage.setItem("mainColor", newColor); // حفظ اللون في localStorage
+    
+    location.reload()
   };
 
   const deleteUser = async ()=> {

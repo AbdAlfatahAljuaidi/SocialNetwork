@@ -19,6 +19,7 @@ i18n.use(initReactI18next).init({
          "friends": "Friends",
          "in_your_circle": "In your circle",
          "no_friends_yet": "No friends yet",
+         "friend_is_typing": "  Your friend iss typing now",
           "search_friend": "Search friend",
           "posts": "Posts",
           "official_posts": "Official Posts",
@@ -54,7 +55,16 @@ i18n.use(initReactI18next).init({
            "all": "All",
              "write_a_comment": "Write a Comment...",
   "comment": "Comment",
-  "privteChat": "privteChat",
+  "privteChat": "Private Chat",
+  
+    "reportUser": "Report User",
+    "yourName": "Your Name",
+    "reportedPerson": "Reported Person",
+    "reason": "Reason",
+    "reasonPlaceholder": "Explain the reason for reporting",
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+  
    "commenting": "Commenting...",
    "correct_answer": "Correct Answer",
    "chat_description": "A place for students to connect, share knowledge, and support each other. Stay respectful, be kind, and enjoy the chat!",
@@ -171,7 +181,7 @@ i18n.use(initReactI18next).init({
 "what_students": "What Students",
 "think_about_us": "Think About Us",
 "reviews_description": "Explore our Students' honest opinions about the services we offer. Your satisfaction is our priority!",
-
+"posting":"posting",
 "contact_section_small_title": "For complaints and suggestions",
 "contact_section_main_title": "You can contact us through",
 "contact_description": "We always listen to your suggestions, and if you have any complaints, we will definitely work on resolving them because your opinion matters to us.",
@@ -232,7 +242,7 @@ i18n.use(initReactI18next).init({
   "phone": "Phone",
   "privacyPolicy": "Privacy Policy",
   "termsAndConditions": "Terms & Conditions",
-  "copyright": "© 2022 All Rights Reserved.",
+  "copyright": "© 2025 All Rights Reserved.",
   "busTimes": "how can i improve me programing skills ",
   "lectureDates": "what is the best way to study"
 },
@@ -282,6 +292,71 @@ i18n.use(initReactI18next).init({
 },
 
 
+  "privacy_policy": "Privacy Policy",
+  "privacy_description": "We value your trust. This policy explains how we handle your personal data on ASK Students to ensure your privacy and safety.",
+  "back_to_home": "Back to Home",
+  
+  "1. Information We Collect": "1. Information We Collect",
+  "Personal details (name, email, profile info).": "Personal details (name, email, profile info).",
+  "User-generated content (questions, answers, comments).": "User-generated content (questions, answers, comments).",
+  "Technical data (IP address, browser info, device type).": "Technical data (IP address, browser info, device type).",
+
+  "2. How We Use Your Information": "2. How We Use Your Information",
+  "Match users for educational support.": "Match users for educational support.",
+  "Improve platform performance and experience.": "Improve platform performance and experience.",
+  "Analyze user behavior for insights and enhancements.": "Analyze user behavior for insights and enhancements.",
+
+  "3. Data Security": "3. Data Security",
+  "All data is encrypted during storage and transmission.": "All data is encrypted during storage and transmission.",
+  "Only authorized personnel have access to your information.": "Only authorized personnel have access to your information.",
+  "Regular system audits and vulnerability checks are conducted.": "Regular system audits and vulnerability checks are conducted.",
+
+  "4. Your Rights": "4. Your Rights",
+  "Access or modify your data anytime.": "Access or modify your data anytime.",
+  "Request data deletion at your convenience.": "Request data deletion at your convenience.",
+  "Download a copy of your stored information.": "Download a copy of your stored information.",
+
+  "5. Third-Party Services": "5. Third-Party Services",
+  "Some features may use external services (e.g. authentication).": "Some features may use external services (e.g. authentication).",
+  "Each third party has its own privacy terms.": "Each third party has its own privacy terms.",
+  "We advise reading third-party policies before use.": "We advise reading third-party policies before use.",
+
+  "6. Contact Us": "6. Contact Us",
+  "For questions or concerns, contact our support team.": "For questions or concerns, contact our support team.",
+  "Email: support@askaau.com": "Email: support@askaau.com",
+
+
+  
+    "terms_conditions": "Terms and Conditions",
+    "Please read the following terms carefully before using ASK Students. Your use of our platform implies agreement to these conditions.": "Please read the following terms carefully before using ASK Students. Your use of our platform implies agreement to these conditions.",
+  
+    "1. Acceptance of Terms": "1. Acceptance of Terms",
+    "By using ASK AAU, you agree to comply with these terms.": "By using ASK Students, you agree to comply with these terms.",
+    "You must be a registered university student to participate.": "You must be a registered university student to participate.",
+  
+    "2. User Responsibilities": "2. User Responsibilities",
+    "Provide accurate information in your profile.": "Provide accurate information in your profile.",
+    "Respect other users and avoid offensive content.": "Respect other users and avoid offensive content.",
+    "Use the platform for educational purposes only.": "Use the platform for educational purposes only.",
+  
+    "3. Prohibited Activities": "3. Prohibited Activities",
+    "No spamming, harassment, or abusive behavior.": "No spamming, harassment, or abusive behavior.",
+    "No posting of false, misleading, or illegal content.": "No posting of false, misleading, or illegal content.",
+    "Avoid impersonating others or using fake identities.": "Avoid impersonating others or using fake identities.",
+  
+    "4. Content Ownership": "4. Content Ownership",
+    "You retain ownership of content you post.": "You retain ownership of content you post.",
+    "ASK AAU may use content for academic insights.": "ASK Students may use content for academic insights.",
+    "You grant ASK AAU a license to display your content.": "You grant ASK Students a license to display your content.",
+  
+    "5. Modifications to Terms": "5. Modifications to Terms",
+    "Terms may be updated at any time.": "Terms may be updated at any time.",
+    "Users will be notified of significant changes.": "Users will be notified of significant changes.",
+    "Continued use means acceptance of new terms.": "Continued use means acceptance of new terms.",
+  
+  
+  
+
 "suggestions": {
   "title": "Suggestions and Complaints",
   "empty": "No suggestions or complaints yet.",
@@ -289,6 +364,7 @@ i18n.use(initReactI18next).init({
     "suggestion": "Suggestion",
     "complaint": "Complaint"
   },
+  
   "status": {
     "Pending": "Pending",
     "In Progress": "In Progress",
@@ -334,7 +410,7 @@ i18n.use(initReactI18next).init({
          "educational_psychological_sciences": "العلوم التربوية والنفسية",
          "business": "الأعمال",
          "law": "القانون",
-         "information_technology": "تقنية المعلومات",
+         "information_technology": "تكنولوجيا المعلومات",
          "arts_sciences": "الآداب والعلوم",
          "aviation_sciences": "علوم الطيران",
          "pharmacy": "الصيدلة",
@@ -343,6 +419,17 @@ i18n.use(initReactI18next).init({
          "sharia": "الشريعة",
          "other": "أخرى",
          "post": "نشر",
+         
+          "reportUser": "الإبلاغ عن مستخدم",
+          "yourName": "اسمك",
+          "reportedPerson": "الشخص المُبلّغ عنه",
+          "reason": "السبب",
+          "reasonPlaceholder": "اشرح سبب الإبلاغ",
+          "submit": "إرسال البلاغ",
+          "submitting": "جارٍ الإرسال...",
+        
+        
+         "posting":"يتم نشر البوست",
          "most_numbers": "أعلى الأرقام",
          "likes": "الإعجابات",
          "comments": "التعليقات",  "choose_question_type": "اختر نوع السؤال",
@@ -361,6 +448,7 @@ i18n.use(initReactI18next).init({
    "send": "إرسال",
    "loading_more_messages": "جارٍ تحميل المزيد من الرسائل...",
    "someone_is_typing": "شخص ما يكتب...",
+   "friend_is_typing": "صديقك يكتب الان",
    "customize_theme": "خصص المظهر",
    "color_preview_text": "النص سيتغير حسب اللون المختار.",
    "go_back_with_style": "العودة بالأناقة",
@@ -489,7 +577,7 @@ i18n.use(initReactI18next).init({
 "contact_section_main_title": "يمكنك التواصل معنا من خلال",
 "contact_description": "نحن دائمًا نستمع إلى اقتراحاتكم، وإذا كانت لديكم أي شكاوى، فسنعمل بالتأكيد على حلها لأن رأيكم يهمنا.",
 "contact_address_label": "عنوان المكتب",
-"contact_address_value": "جامعة عمان العربية",
+"contact_address_value": "الاردن عمان   ",
 "contact_email_label": "البريد الإلكتروني",
 "contact_email_value": "abdalfatah.aljuaidi@gmail.com",
 "contact_phone_label": "رقم الموبايل",
@@ -504,6 +592,35 @@ i18n.use(initReactI18next).init({
 "Profile":"الملف الشخصي",
 "Personal_Info":"معلومات شخصية",
 
+  
+"terms_conditions": "الشروط والأحكام",
+"Please read the following terms carefully before using ASK AAU. Your use of our platform implies agreement to these conditions.": "يرجى قراءة الشروط التالية بعناية قبل استخدام منصة ASK Students. إن استخدامك لمنصتنا يعني موافقتك على هذه الشروط.",
+
+"1. Acceptance of Terms": "1. قبول الشروط",
+"By using ASK AAU, you agree to comply with these terms.": "باستخدامك ASK Students فإنك توافق على الالتزام بهذه الشروط.",
+"You must be a registered university student to participate.": "يجب أن تكون طالبًا مسجلاً في الجامعة للمشاركة.",
+
+"2. User Responsibilities": "2. مسؤوليات المستخدم",
+"Provide accurate information in your profile.": "تقديم معلومات دقيقة في ملفك الشخصي.",
+"Respect other users and avoid offensive content.": "احترام المستخدمين الآخرين وتجنب المحتوى المسيء.",
+"Use the platform for educational purposes only.": "استخدام المنصة لأغراض تعليمية فقط.",
+
+"3. Prohibited Activities": "3. الأنشطة المحظورة",
+"No spamming, harassment, or abusive behavior.": "ممنوع إرسال الرسائل المزعجة أو المضايقة أو السلوك المسيء.",
+"No posting of false, misleading, or illegal content.": "ممنوع نشر محتوى كاذب أو مضلل أو غير قانوني.",
+"Avoid impersonating others or using fake identities.": "تجنب انتحال شخصية الآخرين أو استخدام هويات مزيفة.",
+
+"4. Content Ownership": "4. ملكية المحتوى",
+"You retain ownership of content you post.": "تحتفظ بملكية المحتوى الذي تنشره.",
+"ASK AAU may use content for academic insights.": "يجوز لـ ASK Students استخدام المحتوى لأغراض أكاديمية.",
+"You grant ASK AAU a license to display your content.": "تمنح ASK Students ترخيصًا لعرض محتواك.",
+
+"5. Modifications to Terms": "5. تعديل الشروط",
+"Terms may be updated at any time.": "يجوز تحديث الشروط في أي وقت.",
+"Users will be notified of significant changes.": "سيتم إخطار المستخدمين بأي تغييرات جوهرية.",
+"Continued use means acceptance of new terms.": "الاستمرار في الاستخدام يعني قبول الشروط الجديدة.",
+
+
 "footer": {
   "askAAU": "اسأل Students",
   "description": "منصة للطلاب لطرح والإجابة على الأسئلة الأكاديمية، مما يعزز التفاعل والدعم.",
@@ -516,7 +633,7 @@ i18n.use(initReactI18next).init({
   "phone": "الهاتف",
   "privacyPolicy": "سياسة الخصوصية",
   "termsAndConditions": "الشروط والأحكام",
-  "copyright": "© 2022 جميع الحقوق محفوظة.",
+  "copyright": "© 2025 جميع الحقوق محفوظة.",
     "busTimes": " كيف ممكن اطور حالي بالبرمجة",
     "lectureDates": "ايش افضل طريقة للدراسة",
   
@@ -580,6 +697,40 @@ i18n.use(initReactI18next).init({
   "login": "تسجيل الدخول"
 },
 
+  "privacy_policy": "سياسة الخصوصية",
+  "privacy_description": "نحن نقدر ثقتك. توضح هذه السياسة كيف نتعامل مع بياناتك الشخصية على ASK Students لضمان الخصوصية والأمان.",
+  "back_to_home": "العودة إلى الصفحة الرئيسية",
+  
+  "1. Information We Collect": "1. المعلومات التي نجمعها",
+  "Personal details (name, email, profile info).": "تفاصيل شخصية (الاسم، البريد الإلكتروني، معلومات الملف الشخصي).",
+  "User-generated content (questions, answers, comments).": "المحتوى الذي ينشئه المستخدم (الأسئلة، الإجابات، التعليقات).",
+  "Technical data (IP address, browser info, device type).": "البيانات التقنية (عنوان IP، معلومات المتصفح، نوع الجهاز).",
+
+  "2. How We Use Your Information": "2. كيف نستخدم معلوماتك",
+  "Match users for educational support.": "مطابقة المستخدمين للدعم التعليمي.",
+  "Improve platform performance and experience.": "تحسين أداء المنصة وتجربة المستخدم.",
+  "Analyze user behavior for insights and enhancements.": "تحليل سلوك المستخدم للحصول على رؤى وتحسينات.",
+
+  "3. Data Security": "3. أمان البيانات",
+  "All data is encrypted during storage and transmission.": "يتم تشفير جميع البيانات أثناء التخزين والنقل.",
+  "Only authorized personnel have access to your information.": "فقط الموظفون المصرح لهم يمكنهم الوصول إلى معلوماتك.",
+  "Regular system audits and vulnerability checks are conducted.": "يتم إجراء تدقيقات منتظمة على النظام وفحوصات للثغرات.",
+
+  "4. Your Rights": "4. حقوقك",
+  "Access or modify your data anytime.": "يمكنك الوصول إلى بياناتك أو تعديلها في أي وقت.",
+  "Request data deletion at your convenience.": "طلب حذف البيانات متى ما أردت.",
+  "Download a copy of your stored information.": "تحميل نسخة من معلوماتك المخزنة.",
+
+  "5. Third-Party Services": "5. خدمات الجهات الخارجية",
+  "Some features may use external services (e.g. authentication).": "قد تستخدم بعض الميزات خدمات خارجية (مثل المصادقة).",
+  "Each third party has its own privacy terms.": "لكل طرف ثالث شروط خصوصية خاصة به.",
+  "We advise reading third-party policies before use.": "ننصح بقراءة سياسات الجهات الخارجية قبل الاستخدام.",
+
+  "6. Contact Us": "6. اتصل بنا",
+  "For questions or concerns, contact our support team.": "لأي أسئلة أو استفسارات، تواصل مع فريق الدعم.",
+  "Email: support@askaau.com": "البريد الإلكتروني: support@askaau.com",
+
+
 
 "suggestions": {
   "title": "الاقتراحات والشكاوى",
@@ -591,10 +742,11 @@ i18n.use(initReactI18next).init({
   "status": {
     "Pending": "قيد المراجعة",
     "Resolved": "تم الحل",
+    "In Progress": "في تقدم",
+    "Completed": "تم الحل",
     "Rejected": "مرفوض"
   }
 },
-
 
       }
     }

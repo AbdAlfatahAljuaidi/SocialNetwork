@@ -32,7 +32,7 @@ const Notifications = ({changeLanguage}) => {
   const getStatusStyle = (state) => {
     switch (state) {
       case 'Pending':
-        return 'bg-blue-100 text-white';
+        return 'bg-blue-500 text-white';
       case 'In Progress':
         return 'bg-yellow-100 text-yellow-800';
       case 'Completed':

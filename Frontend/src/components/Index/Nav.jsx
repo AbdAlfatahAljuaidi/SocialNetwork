@@ -148,8 +148,10 @@ const Nav = ({setActive }) => {
               changeLanguage('en');
               setOpen(false);
             }}
+            style={{ backgroundColor: i18n.language === 'en' ? color : undefined }}
+
             className={`block w-full text-left px-4 py-2 text-sm ${
-              i18n.language === 'en' ? 'bg-black text-white' : 'hover:bg-gray-100'
+              i18n.language === 'en' ? ' text-white' : 'hover:bg-gray-100'
             }`}
           >
             English
@@ -159,8 +161,9 @@ const Nav = ({setActive }) => {
               changeLanguage('ar');
               setOpen(false);
             }}
+            style={{ backgroundColor: i18n.language === 'ar' ? color : undefined }}
             className={`block w-full text-left px-4 py-2 text-sm ${
-              i18n.language === 'ar' ? 'bg-black text-white' : 'hover:bg-gray-100'
+              i18n.language === 'ar' ? ' text-white' : 'hover:bg-gray-100'
             }`}
           >
             العربية
@@ -168,7 +171,10 @@ const Nav = ({setActive }) => {
         </div>
       )}
     </div>
-        <div className="relative  ">
+
+
+
+    <div className="relative  ">
   {/* زر الإشعارات */}
   <div onClick={handleOpen} className="cursor-pointer relative">
     <IoIosNotifications className="text-2xl text-gray-700 ml-4" />
@@ -183,7 +189,10 @@ const Nav = ({setActive }) => {
 
   {/* قائمة الإشعارات */}
   {isOpen && (
-    <div  className="  absolute mt-2 w-80 max-w-xs bg-white shadow-lg rounded-lg z-50 max-h-96 overflow-y-auto sm:left-0 sm:left-auto right-0">
+   <div
+   className={`absolute mt-2 w-80 max-w-xs bg-white shadow-lg rounded-lg z-50 max-h-96 overflow-y-auto right-[10px] md:left-0 `}
+ >
+ 
       <div className="p-4 border-b  font-bold text-gray-700">{t('notifications')}</div>
       {notifications.slice(0, notificationsToShow).map((notif) => (
         <div
@@ -221,6 +230,7 @@ const Nav = ({setActive }) => {
     </div>
   )}
 </div>
+    
 
           <button 
             onClick={signout} 
@@ -237,7 +247,11 @@ const Nav = ({setActive }) => {
             {userName && userName.Name ? userName.Name[0].toUpperCase() : 'U'}
           </div>
            </Link> 
+
+           
         </div>
+
+        
       </div>
 
       {/* القائمة الجانبية */}

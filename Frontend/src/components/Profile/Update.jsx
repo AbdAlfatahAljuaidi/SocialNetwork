@@ -153,13 +153,13 @@ const Update = () => {
             <input
               type="text"
               onChange={(e) => setPhone(e.target.value)}
-              placeholder="+123 344 676"
+              placeholder="123 344 676"
               className="w-full p-3 border rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">First Year</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">First Year in university</label>
             <input
               type="number"
               onChange={(e) => setYear(e.target.value)}

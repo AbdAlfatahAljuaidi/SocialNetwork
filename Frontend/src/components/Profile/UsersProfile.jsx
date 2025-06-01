@@ -119,7 +119,7 @@ const UsersProfile = ({changeLanguage}) => {
                 </p>
 
                 <h2
-                  className="font-medium text-lg mt-2 text-center "
+                  className="font-medium text-lg mt-2 text-center md:text-start "
                   style={{ color: color }}
                 >
                   {Profile.major || "Software Engineer"}

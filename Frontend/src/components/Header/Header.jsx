@@ -15,11 +15,7 @@ const Header = () => {
             <h6 className='flex items-center text-white ml-4 text-sm'><FaPhoneAlt className='mx-1 text-base' />+962-78-2407533</h6>
         
         </div>
-        <div className='flex justify-around text-white'>
-           <a target='_blank' href="https://www.instagram.com/ab00d_aljaidi?igsh=NHgyZWhtYno3ZGV0"><FaInstagram className='ml-3 cursor-pointer'  /></a> 
-        
-
-        </div>
+      
         
     </div>
   )

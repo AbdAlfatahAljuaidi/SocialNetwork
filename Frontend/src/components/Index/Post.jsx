@@ -25,6 +25,7 @@ const Post = ({changeLanguage}) => {
   const [note, setNote] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmittingPost, setIsSubmittingPost] = useState(false);
   const [openPostOptionsId, setOpenPostOptionsId] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [color, setColor] = useState(
@@ -123,6 +124,8 @@ const Post = ({changeLanguage}) => {
     //   return;
     // }
 
+    setIsSubmittingPost(true);
+
     // التأكد من أن المستخدم لديه صورة للبروفايل
     if (!user || !user.profileImage) {
       toast.error(
@@ -137,6 +140,7 @@ const Post = ({changeLanguage}) => {
     }
 
     if (questionType == "") {
+      setIsSubmittingPost(false);
       toast.error("You must select question type");
       return;
     }
@@ -164,6 +168,7 @@ const Post = ({changeLanguage}) => {
       setQuestionType("");
       setPostText(""); // إعادة تعيين النص
       setPostImage(null); // إعادة تعيين الصورة
+      setIsSubmittingPost(false);
       toast.success("Post added successfully");
     } catch (error) {
       console.error("حدث خطأ أثناء تحميل الصورة:", error);
@@ -514,8 +519,10 @@ const Post = ({changeLanguage}) => {
           onClick={handleFileUpload}
           className="text-white px-4 py-2 rounded"
           style={{ background: color }}
+          disabled={isSubmittingPost}
         >
-          {t('post')}
+        
+          {isSubmittingPost ? t('posting') : t('post')}
         </button>
       </div>
 
@@ -707,7 +714,7 @@ const Post = ({changeLanguage}) => {
 
                   {/* قائمة الخيارات */}
                   {openPostOptionsId === post._id && (
-                    <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded border p-2">
+                    <div className="absolute right-0 z-50 mt-2 w-40 bg-white shadow-lg rounded border p-2">
                       <button
                         onClick={() => savePost(post._id)}
                         className="block w-full text-left p-2 hover:bg-gray-100"

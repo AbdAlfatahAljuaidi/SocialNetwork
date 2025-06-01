@@ -205,13 +205,14 @@ useEffect(() => {
             alt="profile"
             className="w-10 h-10 rounded-full object-cover border"
           />
-          <div
-            className={`rounded-xl p-4 shadow min-w-44 ${
-              isMe
-                ? 'bg-blue-500 text-white'  // رسائلك على اليسار مع خلفية زرقاء
-                : 'bg-white text-gray-800 border border-gray-200'  // رسائل الآخرين على اليمين مع خلفية بيضاء
-            }`}
-          >
+  <div
+  className={`rounded-xl p-4 shadow min-w-44 ${
+    isMe
+      ? 'text-white'
+      : 'bg-white text-gray-800 border border-gray-200'
+  }`}
+  style={isMe ? { backgroundColor: color } : {}}
+>
             <div className="flex justify-between">
               <div>
               <div className="font-semibold">{msg.username}</div>
@@ -245,7 +246,7 @@ useEffect(() => {
       
   
         {loadingNotification && (
-          <div className="absolute top-0 left-0 right-0 bg-blue-600 text-white text-center py-2 z-50">
+          <div className="absolute top-0 left-0 right-0  text-white text-center py-2 z-50" style={{background:color}}>
             <span> {t('loading_more_messages')}
          </span>
           </div>

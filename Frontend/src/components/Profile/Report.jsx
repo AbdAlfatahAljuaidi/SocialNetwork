@@ -3,11 +3,11 @@ import Nav from '../Index/Nav'
 import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
+import { useTranslation } from 'react-i18next';
 const Report = () => {
   const [reason, setReason] = useState('')
   const [loading, setLoading] = useState(false); // ✅ حالة التحميل
-  
+  const { t } = useTranslation();
   const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
   const params = useParams();
   const user = JSON.parse(localStorage.getItem("user"));
@@ -48,10 +48,10 @@ const Report = () => {
     <div className="min-h-screen bg-gray-100 pb-9">
       <Nav />
       <div className="max-w-md mx-auto bg-white p-6 mt-9 md:mt-20 rounded-lg shadow">
-        <h2 className="text-2xl font-semibold mb-4">Report User</h2>
+        <h2 className="text-2xl font-semibold mb-4">{t("reportUser")}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block mb-1 font-medium">Your Name</label>
+            <label className="block mb-1 font-medium">{t("yourName")}</label>
             <input
               type="text"
               value={user.Name}
@@ -60,7 +60,7 @@ const Report = () => {
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium">Reported Person</label>
+            <label className="block mb-1 font-medium">{t("reportedPerson")}</label>
             <input
               type="text"
               value={params.reportedPerson}
@@ -69,24 +69,24 @@ const Report = () => {
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium">Reason</label>
+            <label className="block mb-1 font-medium">{t("reason")}</label>
             <textarea
               value={reason}
               onChange={(e) => setReason(e.target.value)}
               className="w-full border border-gray-300 p-2 rounded h-28"
-              placeholder="Explain the reason for reporting"
+              placeholder={t("reasonPlaceholder")}
             ></textarea>
           </div>
           <button
             type="submit"
-            disabled={loading} // ✅ تعطيل الزر أثناء التحميل
+            disabled={loading}
             className={`w-full py-2 rounded transition duration-300 ${
               loading
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-red-600 hover:bg-red-700 text-white"
             }`}
           >
-            {loading ? "Submitting..." : "Submit Report"} {/* ✅ تغيير النص */}
+            {loading ? t("submitting") : t("submit")}
           </button>
         </form>
       </div>

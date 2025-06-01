@@ -18,6 +18,7 @@ export default function Theme({changeLanguage}) {
 
   const handleChange = (e) => {
     setColor(e.target.value);
+    location.reload()
   };
 
   return (

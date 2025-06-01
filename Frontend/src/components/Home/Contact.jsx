@@ -35,7 +35,7 @@ const Contact = ({changeLanguage}) => {
         <div className="flex justify-center items-center bg-main w-12 h-12 rounded-full text-white">
           <FaLocationDot size={24} />
         </div>
-        <div className="ml-4">
+        <div className="mx-4">
           <h1 className="text-black font-semibold">{t('contact_address_label')}</h1>
           <h2 className="text-gray-500">{t('contact_address_value')}</h2>
         </div>
@@ -45,17 +45,17 @@ const Contact = ({changeLanguage}) => {
         <div className="flex justify-center items-center bg-main w-12 h-12 rounded-full text-white">
           <MdOutlineMailOutline size={24} />
         </div>
-        <div className="ml-4">
+        <div className="mx-4">
           <h1 className="text-black font-semibold">{t('contact_email_label')}</h1>
           <h2 className="text-gray-500">{t('contact_email_value')}</h2>
         </div>
       </div>
 
       <div className="flex justify-center items-center bg-white px-6 py-6 rounded-lg shadow-lg">
-        <div className="flex justify-center items-center bg-main w-12 h-12 rounded-full text-white">
-          <FaPhoneAlt size={24} />
+        <div className="flex justify-center items-center bg-main w-12 h-12 rounded-full text-white ">
+          <FaPhoneAlt size={24}   />
         </div>
-        <div className="ml-4">
+        <div className="mx-4">
           <h1 className="text-black font-semibold">{t('contact_phone_label')}</h1>
           <h2 className="text-gray-500">{t('contact_phone_value')}</h2>
         </div>

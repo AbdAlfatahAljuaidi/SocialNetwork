@@ -1112,7 +1112,7 @@ const submitSuggestion = async (req, res) => {
 
 
     const { type, details ,name,email,state,title } = req.body;
-   const solution="There is no solution yet"
+   const solution=""
 
     const newSuggestion = new Suggest({ type, details ,name,email,state,title,solution});
     await newSuggestion.save();

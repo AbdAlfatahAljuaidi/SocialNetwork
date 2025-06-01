@@ -12,7 +12,7 @@ const Help = ({changeLanguage}) => {
   const [type, setType] = useState("");
   const [details, setDetails] = useState("");
   const [title, setTitle] = useState("");
-  const [state, setstate] = useState("Pending ");
+  const [state, setstate] = useState("Pending");
   const [isSubmitting, setIsSubmitting] = useState(false); // ✅ حالة جديدة
 
   const { t } = useTranslation();
@@ -38,6 +38,7 @@ const Help = ({changeLanguage}) => {
         setDetails("");
         setTitle("");
       }
+      
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message || "Something went wrong");
