@@ -21,7 +21,6 @@ const PrivateMessage = require("../models/PrivateMessage.js");
 
 
 
-
 /**
  * @description Show Users
  * @route Index/Users
@@ -1690,6 +1689,76 @@ const mostPoints = async (req, res) => {
   }
 };
 
+const SharePost = async (req, res) => {
+  try {
+    const { postId } = req.params;
+
+    // التحقق من وجود postId
+    if (!postId) {
+      return res.status(400).json({ message: "Post ID is required" });
+    }
+
+    // جلب المنشور من قاعدة البيانات
+    const post = await Post.findById(postId);
+
+    // التحقق مما إذا كان المنشور موجودًا
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    // إرجاع المنشور إذا تم العثور عليه
+    return res.status(200).json({
+      post,
+      message: "Post retrieved successfully",
+    });
+
+  } catch (error) {
+    console.error("Error retrieving post:", error);
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+};
+
+
+
+
+const ShowChat = async (req, res) => {
+  try {
+    const { userName, friendName } = req.params;
+
+    if (!userName || !friendName) {
+      return res.status(400).json({ message: "userName and friendName are required" });
+    }
+
+    const userProfile = await Profile.findOne({ username: userName });
+    const friendProfile = await Profile.findOne({ username: friendName });
+
+    if (!userProfile || !friendProfile) {
+      return res.status(404).json({ message: "One or both users not found" });
+    }
+
+    // تأكد أن كل واحد ضايف الثاني في قائمة الأصدقاء
+    const userHasFriend = userProfile.friends.some(friend => friend.name === friendName);
+    const friendHasUser = friendProfile.friends.some(friend => friend.name === userName);
+
+    if (!userHasFriend || !friendHasUser) {
+      return res.status(403).json({ message: "Users are not mutual friends" });
+    }
+
+    // إذا أصدقاء فعليًا، يمكنك الآن إرجاع المحادثة أو بيانات أخرى
+    return res.status(200).json({ message: "Users are mutual friends" ,error:false });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+ 
+ 
+  
 
 
 
@@ -1747,5 +1816,7 @@ module.exports = {
   deleteReport,
   selectCorrectAnswer,
   getPrivateMessage,
-  mostPoints
+  mostPoints,
+  SharePost,
+  ShowChat
 };

@@ -5,7 +5,8 @@ import { toast } from 'react-toastify';
 
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
-const Edit = () => {
+import { useTranslation } from 'react-i18next';
+const Edit = ({changeLanguage}) => {
   const [Age, setAge] = useState("");
   const [Address, setAddress] = useState("");
   const [Phone, setPhone] = useState("");
@@ -15,7 +16,11 @@ const Edit = () => {
   const [major, setMajor] = useState("");
   const [username, setUsername] = useState("");
   const [year, setYear] = useState();
+   const [isSubmitting, setIsSubmitting] = useState(false);
 
+
+  
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
   const user = JSON.parse(localStorage.getItem("user"));
@@ -42,6 +47,9 @@ const Edit = () => {
 
   async function submitForm() {
     try {
+      if (isSubmitting) return;
+      setIsSubmitting(true);
+
       const formData = new FormData();
       formData.append("userID", user._id);
       formData.append("Age", Age);
@@ -68,6 +76,7 @@ const Edit = () => {
         let userData = user || {};
         userData.profileImage = data.updateProfile.imageUrl;
         localStorage.setItem('user', JSON.stringify(userData));
+        setIsSubmitting(false);
         toast.success(data.message);
         navigate(`/Index/Profile`);
       }
@@ -109,42 +118,42 @@ const Edit = () => {
         
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Major</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('majorf')}</label>
             <select
               onChange={(e) => setMajor(e.target.value)}
               value={major}
               className="w-full mt-1 px-4 py-2 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 border"
             >
-                <option value="">Select Major</option>
-                <option value="Special Education">Special Education</option>
-<option value="Business Administration">Business Administration</option>
-<option value="Counseling Psychology And Mental Health">Counseling Psychology and Mental Health</option>
-<option value="Educational Administration And Curriculum">Educational Administration and Curriculum</option>
-<option value="Accounting">Accounting</option>
-<option value="Management Information Systems">Management Information Systems</option>
-<option value="Digital Marketing">Digital Marketing</option>
-<option value="Accounting And Business Law">Accounting and Business Law</option>
-<option value="Data Science And Artificial Intelligence">Data Science and Artificial Intelligence</option>
-<option value="Software Engineering">Software Engineering</option>
-<option value="Cybersecurity">Cybersecurity</option>
-<option value="Computer Science">Computer Science</option>
-<option value="English Language And Translation">English Language and Translation</option>
-<option value="Arabic Language And Literature">Arabic Language and Literature</option>
-<option value="Jurisprudence And Its Principles">Jurisprudence and its Principles</option>
-<option value="Aircraft Maintenance">Aircraft Maintenance</option>
-<option value="Aviation Electronics Engineering">Aviation Electronics Engineering</option>
-<option value="Architectural Engineering">Architectural Engineering</option>
-<option value="Civil Engineering">Civil Engineering</option>
-<option value="Electrical Engineering">Electrical Engineering</option>
-<option value="Mechatronics Engineering">Mechatronics Engineering</option>
-<option value="Biomedical Engineering">Biomedical Engineering</option>
-<option value="Industrial Engineering">Industrial Engineering</option>
+                <option value="">{t('selectMajor')}</option>
+              <option value="Special Education">{t("major.specialEducation")}</option>
+<option value="Business Administration">{t("major.businessAdministration")}</option>
+<option value="Counseling Psychology And Mental Health">{t("major.counselingPsychology")}</option>
+<option value="Educational Administration And Curriculum">{t("major.educationalAdmin")}</option>
+<option value="Accounting">{t("major.accounting")}</option>
+<option value="Management Information Systems">{t("major.mis")}</option>
+<option value="Digital Marketing">{t("major.digitalMarketing")}</option>
+<option value="Accounting And Business Law">{t("major.accountingBusinessLaw")}</option>
+<option value="Data Science And Artificial Intelligence">{t("major.dataScienceAI")}</option>
+<option value="Software Engineering">{t("major.softwareEngineering")}</option>
+<option value="Cybersecurity">{t("major.cybersecurity")}</option>
+<option value="Computer Science">{t("major.computerScience")}</option>
+<option value="English Language And Translation">{t("major.englishTranslation")}</option>
+<option value="Arabic Language And Literature">{t("major.arabicLiterature")}</option>
+<option value="Jurisprudence And Its Principles">{t("major.jurisprudence")}</option>
+<option value="Aircraft Maintenance">{t("major.aircraftMaintenance")}</option>
+<option value="Aviation Electronics Engineering">{t("major.aviationElectronics")}</option>
+<option value="Architectural Engineering">{t("major.architecturalEngineering")}</option>
+<option value="Civil Engineering">{t("major.civilEngineering")}</option>
+<option value="Electrical Engineering">{t("major.electricalEngineering")}</option>
+<option value="Mechatronics Engineering">{t("major.mechatronicsEngineering")}</option>
+<option value="Biomedical Engineering">{t("major.biomedicalEngineering")}</option>
+<option value="Industrial Engineering">{t("major.industrialEngineering")}</option>
 
             </select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Age</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('age')}</label>
             <input
               type="number"
               onChange={(e) => setAge(e.target.value)}
@@ -164,30 +173,30 @@ const Edit = () => {
           </div>
 
           <div>
-  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
+  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('address')}</label>
   <select
     onChange={(e) => setAddress(e.target.value)}
     className="w-full p-3 border rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
   >
-    <option value="">Select a region</option>
-    <option value="Amman">Amman</option>
-    <option value="Zarqa">Zarqa</option>
-    <option value="Irbid">Irbid</option>
-    <option value="Aqaba">Aqaba</option>
-    <option value="Salt">Salt</option>
-    <option value="Mafraq">Mafraq</option>
-    <option value="Karak">Karak</option>
-    <option value="Tafilah">Tafilah</option>
-    <option value="Maan">Maan</option>
-    <option value="Jerash">Jerash</option>
-    <option value="Ajloun">Ajloun</option>
-    <option value="Madaba">Madaba</option>
+   <option value="">{t('selectRegion')}</option>
+    <option value="Amman">{t("city.amman")}</option>
+<option value="Zarqa">{t("city.zarqa")}</option>
+<option value="Irbid">{t("city.irbid")}</option>
+<option value="Aqaba">{t("city.aqaba")}</option>
+<option value="Salt">{t("city.salt")}</option>
+<option value="Mafraq">{t("city.mafraq")}</option>
+<option value="Karak">{t("city.karak")}</option>
+<option value="Tafilah">{t("city.tafilah")}</option>
+<option value="Ma'an">{t("city.maan")}</option>
+<option value="Jerash">{t("city.jerash")}</option>
+<option value="Ajloun">{t("city.ajloun")}</option>
+<option value="Madaba">{t("city.madaba")}</option>
   </select>
 </div>
 
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Start Year</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('year')}</label>
             <input
               type="number"
               onChange={(e) => setYear(e.target.value)}
@@ -197,15 +206,15 @@ const Edit = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Gender</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('gender')}</label>
             <select
               onChange={(e) => setGender(e.target.value)}
               value={Gender}
               className="w-full mt-1 px-4 py-2 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 border"
             >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
+            <option value="">{t('selectGender')}</option>
+              <option value="Male">{t('male')}</option>
+              <option value="Female">{t('female')}</option>
             </select>
           </div>
         </div>
@@ -216,7 +225,7 @@ const Edit = () => {
             style={{ backgroundColor: color }}
             className="px-8 py-3 text-white text-lg font-semibold rounded-xl shadow-md hover:opacity-90 transition"
           >
-            Save Changes
+            {isSubmitting ? t('saving') : t('saveChanges')}
           </button>
         </div>
       </div>

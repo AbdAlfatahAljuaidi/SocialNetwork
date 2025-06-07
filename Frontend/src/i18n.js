@@ -72,6 +72,23 @@ i18n.use(initReactI18next).init({
    "loading_messages": "Loading messages...",
    "send_your_message": "Send your message...",
    "send": "Send",
+   "male":"Male",
+   "female":"Female",
+   "city": {
+  "amman": "Amman",
+  "zarqa": "Zarqa",
+  "irbid": "Irbid",
+  "aqaba": "Aqaba",
+  "salt": "Salt",
+  "mafraq": "Mafraq",
+  "karak": "Karak",
+  "tafilah": "Tafilah",
+  "maan": "Ma'an",
+  "jerash": "Jerash",
+  "ajloun": "Ajloun",
+  "madaba": "Madaba"
+},
+
    "loading_more_messages": "Loading more messages...",
    "someone_is_typing": "Someone is typing...",
    "customize_theme": "Customize Your Theme",
@@ -292,6 +309,48 @@ i18n.use(initReactI18next).init({
 },
 
 
+"updateProfile": "Update Profile",
+"major": "Major",
+"age": "Age",
+"address": "Address",
+"phone": "Phone",
+"year": "First Year in university",
+"gender": "Gender",
+"uploadImage": "Upload New Profile Image",
+"saveChanges": "Save Changes",
+"saving": "Saving...",
+"selectMajor": "Select Major",
+"selectRegion": "Select a region",
+"selectGender": "Select Gender",
+
+"major": {
+  "specialEducation": "Special Education",
+  "businessAdministration": "Business Administration",
+  "counselingPsychology": "Counseling Psychology and Mental Health",
+  "educationalAdmin": "Educational Administration and Curriculum",
+  "accounting": "Accounting",
+  "mis": "Management Information Systems",
+  "digitalMarketing": "Digital Marketing",
+  "accountingBusinessLaw": "Accounting and Business Law",
+  "dataScienceAI": "Data Science and Artificial Intelligence",
+  "softwareEngineering": "Software Engineering",
+  "cybersecurity": "Cybersecurity",
+  "computerScience": "Computer Science",
+  "englishTranslation": "English Language and Translation",
+  "arabicLiterature": "Arabic Language and Literature",
+  "jurisprudence": "Jurisprudence and its Principles",
+  "aircraftMaintenance": "Aircraft Maintenance",
+  "aviationElectronics": "Aviation Electronics Engineering",
+  "architecturalEngineering": "Architectural Engineering",
+  "civilEngineering": "Civil Engineering",
+  "electricalEngineering": "Electrical Engineering",
+  "mechatronicsEngineering": "Mechatronics Engineering",
+  "biomedicalEngineering": "Biomedical Engineering",
+  "industrialEngineering": "Industrial Engineering",
+  "medicine": "Medicine"
+
+},
+
   "privacy_policy": "Privacy Policy",
   "privacy_description": "We value your trust. This policy explains how we handle your personal data on ASK Students to ensure your privacy and safety.",
   "back_to_home": "Back to Home",
@@ -419,7 +478,53 @@ i18n.use(initReactI18next).init({
          "sharia": "الشريعة",
          "other": "أخرى",
          "post": "نشر",
-         
+
+"major": {
+  "specialEducation": "التربية الخاصة",
+  "businessAdministration": "إدارة الأعمال",
+  "counselingPsychology": "الإرشاد النفسي والصحة النفسية",
+  "educationalAdmin": "الإدارة التربوية والمناهج",
+  "accounting": "المحاسبة",
+  "mis": "نظم المعلومات الإدارية",
+  "digitalMarketing": "التسويق الرقمي",
+  "accountingBusinessLaw": "المحاسبة وقانون الأعمال",
+  "dataScienceAI": "علم البيانات والذكاء الاصطناعي",
+  "softwareEngineering": "هندسة البرمجيات",
+  "cybersecurity": "الأمن السيبراني",
+  "computerScience": "علوم الحاسوب",
+  "englishTranslation": "اللغة الإنجليزية والترجمة",
+  "arabicLiterature": "اللغة العربية وآدابها",
+  "jurisprudence": "الفقه وأصوله",
+  "aircraftMaintenance": "صيانة الطائرات",
+  "aviationElectronics": "هندسة إلكترونيات الطيران",
+  "architecturalEngineering": "الهندسة المعمارية",
+  "civilEngineering": "الهندسة المدنية",
+  "electricalEngineering": "الهندسة الكهربائية",
+  "mechatronicsEngineering": "هندسة الميكاترونيكس",
+  "biomedicalEngineering": "الهندسة الطبية الحيوية",
+  "industrialEngineering": "الهندسة الصناعية",
+  "medicine": "الطب"
+
+},
+
+
+         "updateProfile": "عمل الملف الشخصي",
+         "majorf": "التخصص",
+         "age": "العمر",
+         "address": "العنوان",
+         "phone": "رقم الهاتف",
+         "year": "سنة البدء في الجامعة",
+         "gender": "الجنس",
+         "uploadImage": "تحميل صورة الملف الشخصي",
+         "saveChanges": "حفظ التغييرات",
+         "saving": "جارٍ الحفظ...",
+         "selectMajor": "اختر التخصص",
+         "selectRegion": "اختر المنطقة",
+         "selectGender": "اختر الجنس",
+         "male":"ذكر",
+         "female":"انثى",
+
+
           "reportUser": "الإبلاغ عن مستخدم",
           "yourName": "اسمك",
           "reportedPerson": "الشخص المُبلّغ عنه",
@@ -428,7 +533,21 @@ i18n.use(initReactI18next).init({
           "submit": "إرسال البلاغ",
           "submitting": "جارٍ الإرسال...",
         
-        
+        "city": {
+  "amman": "عمان",
+  "zarqa": "الزرقاء",
+  "irbid": "إربد",
+  "aqaba": "العقبة",
+  "salt": "السلط",
+  "mafraq": "المفرق",
+  "karak": "الكرك",
+  "tafilah": "الطفيلة",
+  "maan": "معان",
+  "jerash": "جرش",
+  "ajloun": "عجلون",
+  "madaba": "مادبا"
+},
+
          "posting":"يتم نشر البوست",
          "most_numbers": "أعلى الأرقام",
          "likes": "الإعجابات",
@@ -507,7 +626,7 @@ i18n.use(initReactI18next).init({
     "approach": "المنهج",
     "opinion": "الآراء",
     "contact": "اتصل بنا",
-    "register": "تسجيل"
+    "register": "تسجيل الدخول"
   },
 
   "login": {

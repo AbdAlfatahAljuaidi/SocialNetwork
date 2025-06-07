@@ -48,7 +48,7 @@ const Extra = ({changeLanguage}) => {
   ) || [];
 
   return (
-    <div className='bg-white sticky top-24 w-96 h-full mt-5 mx-5 p-5 rounded-xl shadow-lg hidden sm:flex flex-col'>
+    <div className='bg-white sticky top-36 w-96 h-full mt-5 mx-5 p-5 rounded-xl shadow-lg hidden sm:flex flex-col'>
       <div className='flex justify-between items-center mb-4'>
         <h1 className='text-xl font-bold text-gray-800'>{t('friends')}</h1>
         <FaUserFriends  className='text-2xl text-gray-600 hover:text-gray-800 cursor-pointer' />

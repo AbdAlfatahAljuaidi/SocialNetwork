@@ -33,6 +33,7 @@ const UsersProfile = ({changeLanguage}) => {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState("");
   const [isOwnProfile, setIsOwnProfile] = useState(false);
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
     async function sendReq() {
@@ -91,6 +92,23 @@ const UsersProfile = ({changeLanguage}) => {
     window.scrollTo(0, 0);
   }, []);
 
+  const {username,Name} = useParams()
+
+  
+
+
+  useEffect(()=> {
+    const ShowChat = async () => {
+      const {data} = await axios.get(`${apiUrl}/ShowChat/${username}/${Name}`)
+      if(data.error==false){
+        console.log("done done");
+        
+        setShowChat(true)
+      }
+    }
+    ShowChat()
+  },[])
+
   return (
     <div className="bg-white rounded-lg mx-auto">
       <Nav />
@@ -128,14 +146,15 @@ const UsersProfile = ({changeLanguage}) => {
             </div>
             <div className="mx-auto md:mx-0 mt-7 md:mt-0">
 
-            <Link to={`/ChatFriend/${params.username}`} className="mx-2">
+            <Link to={`/ChatFriend/${params.username}`} className={`mx-2 ${showChat ? '' : 'hidden'}`}>
+
             <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-300">
   {t('privteChat')}
 </button>
 </Link>
 
-              <Link to={`/Report/${params.username}`}>
-            <button className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300">
+              <Link to={`/Report/${params.username}`} className="mx-2 ">
+            <button className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300 mt-2 md:mt-0 w-[77px]">
   {t('Report')}
 </button>
 </Link>

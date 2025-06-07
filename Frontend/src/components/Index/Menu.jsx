@@ -67,7 +67,7 @@ const Menu = ({ menuOpen, setMenuOpen, setActiveSection, isSticky ,changeLanguag
 
   return (
     <div
-    className={`bg-white sticky top-24 mt-5 mx-5 py-4 rounded-xl shadow-lg h-full  sm:flex flex-col justify-between relative
+    className={`bg-white sticky top-36  mt-5 mx-5 py-4 rounded-xl shadow-lg h-full  sm:flex flex-col justify-between relative
       ${menuOpen ? "block" : "hidden"}
       ${i18n.language === 'en' ? "pr-14 pl-5" : "pr-5 pl-14"}`}
     

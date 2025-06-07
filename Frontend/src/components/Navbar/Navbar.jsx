@@ -90,7 +90,7 @@ const Navbar = ({changeLanguage}) => {
               <li className="py-2 hover:text-blue-700">
                 <a href="#Contact" onClick={toggleMenu}>{t('navbar.contact')}</a>
               </li>
-              <li className="py-2 hover:text-blue-700">
+              <li className="py-2  text-white bg-blue-700">
                 <Link to="/Home/Registration">
                   <span onClick={toggleMenu}>{t('navbar.register')}</span>
                 </Link>

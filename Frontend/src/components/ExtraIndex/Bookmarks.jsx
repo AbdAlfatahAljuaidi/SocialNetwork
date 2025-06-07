@@ -64,7 +64,7 @@ const Bookmarks = ({changeLanguage}) => {
     <div className="min-h-screen bg-gray-50">
     <Nav />
     <div className='flex gap-4 py-10 mx-auto'>
-      <div>
+      <div className='self-start'>
         <Menu className="w-2 " />
       </div>
 
@@ -120,11 +120,11 @@ const Bookmarks = ({changeLanguage}) => {
                
                 <div className="flex mx-3 items-center justify-between text-gray-600">
                   <div className="flex items-center space-x-2">
-                    <FaHeart className="text-red-500 text-lg" />
+                    <FaHeart className="text-red-500 text-lg mx-1" />
                     <span>{post.likes}</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <FaComment className="text-blue-500 text-lg" />
+                    <FaComment className="text-blue-500 text-lg mx-1" />
                     <span>{post.comments.length}</span>
                   </div>
                 </div>

@@ -38,6 +38,9 @@ const Post = ({changeLanguage}) => {
   const [filterType, setFilterType] = useState("");
   const [topFriend, setTopFriend] = useState(null);
 
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+
   const [loadingMessages, setLoadingMessages] = useState(true);
 
 
@@ -58,18 +61,28 @@ const Post = ({changeLanguage}) => {
   }, []);
 
   const fetchPosts = async () => {
+    if (loading || !hasMore) return;
     setLoading(true);
+
     try {
-      const { data } = await axios.get(`${apiUrl}/api/posts`);
+      const { data } = await axios.get(`${apiUrl}/api/posts?page=${page}`);
       console.log(data);
 
-      if (user && data.likedUsers?.includes(user._id)) {
+      // Check if the user liked any of the new posts (optional logic)
+      if (user && data.some(post => post.likedUsers?.includes(user._id))) {
         setIsLiked(true);
       } else {
         setIsLiked(false);
       }
 
-      setPosts(data);
+      setPosts(prev => [...prev, ...data]);
+
+      // إذا عدد النتائج أقل من 5، معناها ما في بوستات أكثر
+      if (data.length < 5) {
+        setHasMore(false);
+      } else {
+        setPage(prev => prev + 1);
+      }
     } catch (error) {
       console.error("حدث خطأ أثناء جلب البوستات:", error);
     } finally {
@@ -77,17 +90,25 @@ const Post = ({changeLanguage}) => {
     }
   };
 
-  // أول useEffect
   useEffect(() => {
     fetchPosts();
   }, []);
 
-  // ثاني useEffect
+
   useEffect(() => {
-    fetchPosts().then(() => {
-      setLoadingMessages(false);
-    });
-  }, []);
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 &&
+        !loading
+      ) {
+        fetchPosts();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [loading, hasMore]);
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -128,6 +149,7 @@ const Post = ({changeLanguage}) => {
 
     // التأكد من أن المستخدم لديه صورة للبروفايل
     if (!user || !user.profileImage) {
+     
       toast.error(
         <div>
           You cannot publish a post before creating your own profile.{" "}
@@ -171,6 +193,7 @@ const Post = ({changeLanguage}) => {
       setIsSubmittingPost(false);
       toast.success("Post added successfully");
     } catch (error) {
+      setIsSubmittingPost(false);
       console.error("حدث خطأ أثناء تحميل الصورة:", error);
       toast.error(error.response.data.message);
     }
@@ -355,6 +378,8 @@ const Post = ({changeLanguage}) => {
       try {
         const res = await axios.get(`${apiUrl}/getTopLikedPost`); // غيّر الرابط إذا API مختلف
         setTop(res.data);
+        console.log("tiop",res.data);
+        
         console.log("res.comment", res.data);
       } catch (err) {
         console.error("Error fetching top post:", err);
@@ -460,22 +485,33 @@ const Post = ({changeLanguage}) => {
     }
   };
   
-  
+  const handleCopyLink = (postId) => {
+    const postLink =`http://localhost:5173/SharePost/${postId}`;
+    navigator.clipboard.writeText(postLink)
+      .then(() => {
+        alert('تم نسخ الرابط بنجاح!');
+      })
+      .catch(err => {
+        console.error('فشل النسخ: ', err);
+      });
+  };
 
   return (
-    <div className="w-full mx-auto p-4">
-      {loadingMessages && (
-        <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80 z-50">
-          <div className="animate-spin rounded-full h-12 w-12 border-4  border-t-transparent"  style={{
-      borderColor: color,
-      borderTopColor: "transparent",
-    }}></div>
-          <span className="ml-4  text-2xl font-medium" style={{color:color}}> 
-          {t('loading')}
 
-          </span>
-        </div>
-      )}
+    
+   <div className="w-full mx-auto p-4 mt-5">
+  {loading && (
+    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80 z-50">
+      <div
+        className="animate-spin rounded-full h-12 w-12 border-4 border-t-transparent"
+        style={{
+          borderColor: color,
+          borderTopColor: "transparent",
+        }}
+      ></div>
+    </div>
+  )}
+
       <div className="bg-white shadow-md rounded-lg p-4 mb-4">
         <textarea
           className="w-full p-2 border rounded mb-2"
@@ -497,6 +533,7 @@ const Post = ({changeLanguage}) => {
           <option value="Business">{t('business')}</option>
           <option value="Law">{t('law')}</option>
           <option value="Information Technology">{t('information_technology')}</option>
+          <option value="Medicine">{t("major.medicine")}</option>
           <option value="Arts and Sciences">{t('arts_sciences')}</option>
           <option value="Arts and Sciences">{t('aviation_sciences')}</option>
           <option value="Pharmacy">{t('pharmacy')}</option>
@@ -545,12 +582,12 @@ const Post = ({changeLanguage}) => {
               />
               <h3 className="text-lg font-semibold">{top.username}</h3>
             </div>
-            {top.text && (
-              <p className="text-sm text-gray-600 mb-2">{top.text}</p>
+            {top.questionType && (
+              <p className="text-sm text-gray-600 mb-2">{top.questionType}</p>
             )}
-            {top.imageUrl && (
+            {top.ProfileImage && (
               <img
-                src={top.imageUrl}
+                src={top.ProfileImage}
                 alt="Post"
                 className="w-full h-32 object-cover rounded mb-4"
               />
@@ -730,6 +767,12 @@ const Post = ({changeLanguage}) => {
                           Update Post
                         </button>
                       </Link>
+                      <button
+                        className={"w-full text-left p-2 text-blue-500 hover:bg-blue-100"}
+                        onClick={() => handleCopyLink(post._id)}
+                      >
+                        Share Post
+                      </button>
                       <button
                         className={`${
                           user.Name === post.username ? "block" : "hidden"

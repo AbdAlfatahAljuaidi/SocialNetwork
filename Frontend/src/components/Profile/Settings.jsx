@@ -3,14 +3,21 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 import { toast } from 'react-toastify';
+import { FaSearch, FaBars, FaChevronDown } from 'react-icons/fa';
 
 import { useTranslation } from 'react-i18next';
-const Settings = ({changeLanguage}) => {
+const Settings = () => {
   const [color, setColor] = useState(localStorage.getItem("mainColor") || "#1D4ED8");
   const [Profile, setProfile] = useState([]);
+   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  const { t } = useTranslation();
+ 
+   const { t, i18n } = useTranslation();
+
+   const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng); // تغيير اللغة عند الضغط على الزر
+  };
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleDeleteAccount = () => {
@@ -97,6 +104,8 @@ const Settings = ({changeLanguage}) => {
                   </button>
                 </div>
 
+
+ 
                 {/* تغيير كلمة السر */}
                 <div className="flex items-center justify-between">
                   <p className="text-lg font-medium text-gray-700">{t('settings.changePassword')}</p>
@@ -120,6 +129,46 @@ const Settings = ({changeLanguage}) => {
                   />
                 </div>
 
+
+                <div className="hidden md:inline-block  relative text-left ">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center px-4 py-2  rounded-md  bg-white  transition" style={{color:color}}
+      >
+        {t('language')} <FaChevronDown className="ml-2" />
+      </button>
+
+      {open && (
+        <div className="absolute z-10 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg">
+          <button
+            onClick={() => {
+              changeLanguage('en');
+              setOpen(false);
+            }}
+            style={{ backgroundColor: i18n.language === 'en' ? color : undefined }}
+
+            className={`block w-full text-left px-4 py-2 text-sm ${
+              i18n.language === 'en' ? ' text-white' : 'hover:bg-gray-100'
+            }`}
+          >
+            English
+          </button>
+          <button
+            onClick={() => {
+              changeLanguage('ar');
+              setOpen(false);
+            }}
+            style={{ backgroundColor: i18n.language === 'ar' ? color : undefined }}
+            className={`block w-full text-left px-4 py-2 text-sm ${
+              i18n.language === 'ar' ? ' text-white' : 'hover:bg-gray-100'
+            }`}
+          >
+            العربية
+          </button>
+        </div>
+      )}
+    </div>
+                
                 {/* حذف الحساب (معلّق) */}
                 {/* <div className="flex items-center justify-between border-t pt-4 mt-6">
                   <p className="text-lg font-medium text-red-600">{t('settings.deleteAccount')}</p>

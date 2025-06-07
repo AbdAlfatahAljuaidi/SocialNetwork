@@ -4,54 +4,22 @@ const cloudinary = require('../config/cloudinary');
 const Post = require('../models/Posts');
 const { Profile, ProfileValidation } = require("../models/Profile.js");
 
+
+const fs = require('fs');
+const path = require('path');
 app.use(express.json());
 
 
-// const WebSocket = require("ws");
-// const http = require("http");
-// const server = http.createServer(app);
 
-// // إنشاء WebSocket Server وربطه مع HTTP Server
-// const wss = new WebSocket.Server({ server });
+// تحميل قائمة الكلمات غير اللائقة
+const badWordsJson = JSON.parse(fs.readFileSync(path.join(__dirname, '../utils/listEng.json'), 'utf8'));
+const badWordsList = badWordsJson.words;
 
-// // تخزين جميع العملاء المتصلين
-// const clients = new Set();
 
-// wss.on("connection", (ws) => {
-//     console.log("🔗 عميل جديد متصل عبر WebSocket");
+const badWordsArabJson = JSON.parse(fs.readFileSync(path.join(__dirname, '../utils/listArab.json'), 'utf8'));
+const badWordsListArab = badWordsArabJson.words;
 
-//     // إضافة العميل إلى القائمة
-//     clients.add(ws);
 
-//     // عند استقبال رسالة من العميل
-//     ws.on("message", (message) => {
-//         console.log("📩 رسالة من العميل:", message.toString());
-//     });
-
-//     // عند انقطاع الاتصال
-//     ws.on("close", () => {
-//         console.log("❌ عميل قطع الاتصال");
-//         clients.delete(ws);
-//     });
-// });
-
-// // وظيفة لإرسال إشعار للجميع عند نشر بوست
-// function broadcastNewPost(post) {
-//     const message = JSON.stringify({ type: "NEW_POST", post });
-//     console.log("🚀 إرسال إشعار للعميل:", message); // ✅ تحقق من الإرسال
-    
-//     clients.forEach((client) => {
-//         if (client.readyState === WebSocket.OPEN) {
-//             client.send(message);
-//         }
-//     });
-// }
-
-// // تشغيل السيرفر
-// const PORT = 60002;
-// server.listen(PORT, () => {
-//     console.log(`🚀 Server running on http://localhost:${PORT}`);
-// });
 
 // ✅ API لتحميل صورة ونشر بوست
 const uploadImage = async (req, res) => {
@@ -66,6 +34,24 @@ const uploadImage = async (req, res) => {
            return  res.status(500).json({ message: 'A question must be added' });
           }
       
+
+          // التحقق من الكلمات البذيئة
+const containsBadWord = badWordsList.some(badWord =>
+    req.body.text.toLowerCase().includes(badWord.toLowerCase())
+);
+
+if (containsBadWord) {
+    return res.status(400).json({ message: 'المنشور يحتوي على كلمات غير لائقة' });
+}
+
+const containsBadWordArab = badWordsListArab.some(badWord =>
+    req.body.text.toLowerCase().includes(badWord.toLowerCase())
+);
+
+if (containsBadWordArab) {
+    return res.status(400).json({ message: 'المنشور يحتوي على كلمات غير لائقة' });
+}
+
         // رفع الصورة إلى Cloudinary
 
         // إنشاء وحفظ المنشور في قاعدة البيانات
@@ -105,21 +91,22 @@ const uploadImage = async (req, res) => {
 
 // ✅ API لجلب كل المنشورات
 const getPost = async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
     try {
-        const posts = await Post.find().sort({ createdAt: -1 });
+        const posts = await Post.find()
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(limit);
+
         res.status(200).json(posts);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'حدث خطأ أثناء جلب البوستات' });
     }
 };
-
-
-
-  
-  
-
-
 
 
 // تصدير الوظائف

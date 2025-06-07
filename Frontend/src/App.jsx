@@ -43,6 +43,7 @@ import Chat from './components/Chat/Chat'
 import ChatPharmacy from "./components/Chat/ChatPharmacy";
 import Report from "./components/Profile/Report";
 import ChatFriend from "./components/Profile/ChatFriend";
+import SharePost from "./components/Index/SharePost";
 
 
 function App() {
@@ -102,6 +103,7 @@ function App() {
         <Route path="/Report/:reportedPerson" element = {user ? <Report /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Chat" element = {user ? <Chat /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/ChatFriend/:username" element = {user ? <ChatFriend /> : <Navigate to="/Home/Registration" /> }/>
+        <Route path="/SharePost/:postId" element = {user ? <SharePost /> : <Navigate to="/Home/Registration" /> }/>
         <Route path="/Video" element =  {<Video />}/>
         <Route path="/Chat" element =  {<Chat />}/>
         <Route path="/ChatPharmacy" element =  {<ChatPharmacy />}/>
