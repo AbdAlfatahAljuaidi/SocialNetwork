@@ -10,6 +10,8 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const sendEmail = require("../utils/sendEmail");
 const suggest = require("../utils/suggest");
+const commentEmail = require("../utils/CommentEmail");
+const friendEmail = require("../utils/FriendEmail");
 const sendPass = require("../utils/sendPass");
 const Message = require('../models/Messages.js')
 const Notification = require ("../models/Notification.js");
@@ -485,64 +487,40 @@ const editProfile = async (req, res) => {
     res.status(500).json({ error: "true", message: "Internal Server Error" });
   }
 };
-
 const ResetPassword = async (req, res) => {
   try {
     const { oldPassword, newPassword, confirmPass } = req.body;
+    const { id } = req.params;
 
     if (!oldPassword || !newPassword || !confirmPass) {
-      return res
-        .status(400)
-        .json({ error: true, message: "All fields are required" });
+      return res.status(400).json({ error: true, message: "All fields are required" });
     }
-    console.log("1");
 
-    // استخراج بيانات المستخدم من التوكن
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) {
-      return res
-        .status(401)
-        .json({ error: true, message: "Unauthorized access" });
-    }
-    console.log("2");
-    const decoded = jwt.verify(token, "dsadsadh");
-    const user = await SignUp.findById(decoded.id);
+    const user = await SignUp.findById(id); // أضف await هنا
 
     if (!user) {
       return res.status(404).json({ error: true, message: "User not found" });
     }
 
-    console.log("3");
-
-    // التحقق من أن كلمة المرور القديمة صحيحة
-    const isMatch = await bcrypt.compare(oldPassword, user.Password);
-    if (!isMatch) {
-      return res
-        .status(400)
-        .json({ error: true, message: "Wrong old password, please try again" });
+    // التحقق من أن كلمة المرور القديمة صحيحة (بدون تشفير)
+    if (user.Password !== oldPassword) {
+      return res.status(400).json({ error: true, message: "Wrong old password, please try again" });
     }
-    console.log("4");
+
     // التحقق من تطابق كلمتي المرور الجديدتين
     if (newPassword !== confirmPass) {
-      return res
-        .status(400)
-        .json({ error: true, message: "Passwords do not match" });
+      return res.status(400).json({ error: true, message: "Passwords do not match" });
     }
-    console.log("5");
-    // تشفير كلمة المرور الجديدة
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-    // تحديث كلمة المرور في قاعدة البيانات
-    await SignUp.findByIdAndUpdate(user._id, { Password: hashedPassword });
-    console.log("6");
-    res
-      .status(200)
-      .json({ success: true, message: "Password updated successfully" });
+    // تحديث كلمة المرور مباشرة
+    user.Password = newPassword;
+    await user.save();
+
+    res.status(200).json({ success: true, message: "Password updated successfully" });
+
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ error: true, message: "Server error, please try again later" });
+    res.status(500).json({ error: true, message: "Server error, please try again later" });
   }
 };
 
@@ -647,47 +625,60 @@ const getAllProfile = async (req,res) => {
   
 }
 
-
-
-
-const Comment =  async (req, res) => {
+const Comment = async (req, res) => {
   try {
-      const { id } = req.params;
-      const { content, userId ,imageUser} = req.body; 
+    const { id } = req.params;
+    const { content, userId, imageUser } = req.body;
 
-      
+    if (!userId) return res.status(400).json({ message: "userId is required" });
 
-      const post = await Post.findById(id);
-      if (!post) return res.status(404).json({ message: 'Post not found' });
+    const post = await Post.findById(id);
+    if (!post) return res.status(404).json({ message: 'Post not found' });
 
+    post.comments.push({ content, user: userId, imageUser });
+    const comment = post.comments[post.comments.length - 1];
+    await post.save();
 
+    const profile = await Profile.findOne({ username: post.username });
+    if (profile) {
+      profile.point += 5;
+      await profile.save();
+    }
 
-     const getComment = post.comments.push({ content, user: userId , imageUser:imageUser });
+    const user = await SignUp.findOne({ Name: profile.username });
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-     console.log("comment=", getComment);
-     
+    console.log("Sending email to:", user.Email);
+    console.log("Post owner username:", profile.username);
 
-      
+    commentEmail(
+      user.Email,
+      profile.username,
+      "A comment was made on your post.",
+      "CommentEmail"
+    );
 
-      await post.save();
+    // ✅ إنشاء إشعار جديد
+    const commenter = await SignUp.findById(userId); // احضر بيانات المستخدم المعلق
 
-      const comment = post.comments[getComment-1]
+    if (commenter) {
+      await Notification.create({
+        username: profile.username, // صاحب المنشور
+        profileImage: commenter.ImageUser || "", // صورة من قام بالتعليق
+        message: `${commenter.Name} commented on your post`,
+      });
+    }
 
-      const profile = await Profile.findOne({username:post.username})
-    
-      if (profile) {
-        profile.point += 5;
-        await profile.save();
-      }
+    return res.status(201).json({ error: false, post, comment });
 
-      console.log(comment);
-      
-
-      res.status(201).json({error:false, post,comment});
   } catch (error) {
-      res.status(500).json({ message: error.message });
+    console.error("Comment Error:", error);
+    return res.status(500).json({ message: error.message });
   }
 };
+
+
+
 
 const Like = async (req, res) => {
   const { id } = req.params;
@@ -869,6 +860,14 @@ const follow = async (req, res) => {
       });
 
       await profile.save();
+
+
+      friendEmail(
+        user.Email,
+        Name,
+        "You have been followed on the platform Ask Students.",
+        "FriendEmail"
+      );
 
       return res.status(200).json({
         error: false,
@@ -1755,6 +1754,7 @@ const ShowChat = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 
  
  

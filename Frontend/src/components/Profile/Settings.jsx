@@ -110,7 +110,7 @@ const Settings = () => {
                 <div className="flex items-center justify-between">
                   <p className="text-lg font-medium text-gray-700">{t('settings.changePassword')}</p>
                   <button
-                    onClick={() => navigate(`/Index/Profile/ResetPassword/${profile._id}`)}
+                    onClick={() => navigate(`/Index/Profile/ResetPassword/${user._id}`)}
                     className="px-4 py-2 rounded-lg text-white text-sm shadow"
                     style={{ backgroundColor: color }}
                   >

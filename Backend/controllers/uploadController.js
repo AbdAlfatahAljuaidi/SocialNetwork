@@ -75,6 +75,9 @@ if (containsBadWordArab) {
           await profile.save();
         }
 
+
+         
+
         // console.log("📢 تم نشر بوست جديد، سيتم إرسال الإشعار الآن...");
         // broadcastNewPost(newPost); // ✅ إرسال الإشعار عبر WebSocket
 
@@ -92,7 +95,7 @@ if (containsBadWordArab) {
 // ✅ API لجلب كل المنشورات
 const getPost = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
-    const limit = 10;
+    const limit = 5;
     const skip = (page - 1) * limit;
 
     try {

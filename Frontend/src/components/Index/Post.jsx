@@ -37,6 +37,7 @@ const Post = ({changeLanguage}) => {
   const [questionType, setQuestionType] = useState("");
   const [filterType, setFilterType] = useState("");
   const [topFriend, setTopFriend] = useState(null);
+  
 
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -75,7 +76,12 @@ const Post = ({changeLanguage}) => {
         setIsLiked(false);
       }
 
-      setPosts(prev => [...prev, ...data]);
+      setPosts(prev => {
+        const existingIds = new Set(prev.map(p => p._id));
+        const newPosts = data.filter(p => !existingIds.has(p._id));
+        return [...prev, ...newPosts];
+      });
+      
 
       // إذا عدد النتائج أقل من 5، معناها ما في بوستات أكثر
       if (data.length < 5) {
@@ -98,16 +104,18 @@ const Post = ({changeLanguage}) => {
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 &&
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 &&
+        hasMore &&
         !loading
       ) {
         fetchPosts();
       }
     };
-
+  
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [loading, hasMore]);
+  }, [loading, hasMore, page]);
+  
 
 
   useEffect(() => {

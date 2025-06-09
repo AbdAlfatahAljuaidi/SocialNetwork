@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تعليق جديد على منشورك</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      direction: rtl;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      font-size: 24px;
+      color: #17a2b8;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+    .content {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: right;
+    }
+    .post-preview {
+      background-color: #f8f9fa;
+      border-right: 4px solid #17a2b8;
+      padding: 10px;
+      margin: 15px 0;
+      font-style: italic;
+      color: #555;
+    }
+    .button {
+      display: inline-block;
+      background: #007bff;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .button:hover {
+      background: #0056b3;
+    }
+    .footer {
+      font-size: 14px;
+      color: #888;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">🗨️ تم التعليق على منشورك</div>
+    <div class="content">
+      مرحبًا <strong>{{name}}</strong>،<br><br>
+      لقد قام أحد المستخدمين بكتابة تعليق على منشورك :
+      يمكنك تسجيل الدخول إلى المنصة لعرض التعليق والتفاعل معه.
+    </div>
+    <a href="https://socialnetwork-6vdw.onrender.com" class="button">عرض المنشور</a>
+    <div class="footer">فريق Ask Students يتمنى لك يومًا موفقًا 💙</div>
+  </div>
+</body>
+</html>
