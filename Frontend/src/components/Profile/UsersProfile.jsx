@@ -74,7 +74,7 @@ const UsersProfile = ({changeLanguage}) => {
 
       if (!alreadyFriend) {
         setFriends([...friends, { name: user.Name, image: user.profileImage }]);
-        toast.success(data.message);
+        toast.success("تم اضافة الصديق بنجاح ");
       } else {
         setFriends(friends.filter((friend) => friend.name !== user.Name));
         toast.info("Friend removed");

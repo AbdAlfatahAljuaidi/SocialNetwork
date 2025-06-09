@@ -191,6 +191,7 @@ const Edit = ({changeLanguage}) => {
 <option value="Jerash">{t("city.jerash")}</option>
 <option value="Ajloun">{t("city.ajloun")}</option>
 <option value="Madaba">{t("city.madaba")}</option>
+<option value="Balqa">{t("city.balqa")}</option>
   </select>
 </div>
 

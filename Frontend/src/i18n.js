@@ -86,7 +86,8 @@ i18n.use(initReactI18next).init({
   "maan": "Ma'an",
   "jerash": "Jerash",
   "ajloun": "Ajloun",
-  "madaba": "Madaba"
+  "madaba": "Madaba",
+  "balqa": "Balqa"
 },
 
    "loading_more_messages": "Loading more messages...",
@@ -545,7 +546,8 @@ i18n.use(initReactI18next).init({
   "maan": "معان",
   "jerash": "جرش",
   "ajloun": "عجلون",
-  "madaba": "مادبا"
+  "madaba": "مادبا",
+  "balqa": "بلقاء"
 },
 
          "posting":"يتم نشر البوست",

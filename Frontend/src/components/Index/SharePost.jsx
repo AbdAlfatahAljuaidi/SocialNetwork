@@ -40,7 +40,7 @@ const { postId } = useParams();
         <div className=''>
           <Menu className="w-2 " />
         </div>
-        <div className="max-w-3xl mx-auto p-6 mt-10 bg-white shadow rounded-lg">
+        <div className="w-full mx-auto p-6 mt-10 bg-white shadow rounded-lg">
       <h2 className="text-2xl font-bold mb-4 text-center">🔥 Most Liked Post</h2>
       <Link to={`/index/profile/${post.username}/${user.Name}`}>
       <div className="flex items-center space-x-4 mb-4">

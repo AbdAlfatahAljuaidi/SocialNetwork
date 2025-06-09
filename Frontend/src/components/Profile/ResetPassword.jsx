@@ -39,7 +39,7 @@ const ResetPassword = () => {
 
       if (data.success) {
         setError("");
-        toast.success("Password updated successfully!")
+        toast.success("تم تغيير كلمة السر بنجاح ")
         setTimeout(() => navigate("/Index/Profile"), 2000); // إعادة التوجيه بعد النجاح
       }
     } catch (error) {

@@ -450,7 +450,7 @@ const handleLike = async (postId) => {
       {openPostOptionsId === post._id && (
         <div
          
-          className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded border p-2"
+          className="absolute z-50 right-0 mt-2 w-40 bg-white shadow-lg rounded border p-2"
         >
           <button
          onClick={() => savePost(post._id)}

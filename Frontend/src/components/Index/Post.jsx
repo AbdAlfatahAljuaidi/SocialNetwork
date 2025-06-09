@@ -157,12 +157,12 @@ const Post = ({changeLanguage}) => {
 
     // التأكد من أن المستخدم لديه صورة للبروفايل
     if (!user || !user.profileImage) {
-     
+      setIsSubmittingPost(false);
       toast.error(
         <div>
-          You cannot publish a post before creating your own profile.{" "}
+          لا يمكنك نشر منشور قبل إنشاء ملفك الشخصي   {" "}
           <Link to="/index/profile" className="text-blue-500 underline">
-            Go to profile
+           انتقل إلى الملف الشخصي
           </Link>
         </div>
       );
@@ -171,7 +171,7 @@ const Post = ({changeLanguage}) => {
 
     if (questionType == "") {
       setIsSubmittingPost(false);
-      toast.error("You must select question type");
+      toast.error("يجب عليك تحديد نوع السؤال");
       return;
     }
 
@@ -199,7 +199,7 @@ const Post = ({changeLanguage}) => {
       setPostText(""); // إعادة تعيين النص
       setPostImage(null); // إعادة تعيين الصورة
       setIsSubmittingPost(false);
-      toast.success("Post added successfully");
+      toast.success("تم نشر البوست بنجاح");
     } catch (error) {
       setIsSubmittingPost(false);
       console.error("حدث خطأ أثناء تحميل الصورة:", error);
@@ -323,7 +323,7 @@ const Post = ({changeLanguage}) => {
         postid: postid,
       });
 
-      toast.success(data.message);
+      toast.success("تم حذف البوست بنجاح");
       setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postid));
     } catch (error) {
       console.log(error.response);
@@ -338,7 +338,7 @@ const Post = ({changeLanguage}) => {
         userId: user._id,
       });
 
-      toast.success(data.message);
+      toast.success("تم حفظ المنشور بنجاح");
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
@@ -348,7 +348,7 @@ const Post = ({changeLanguage}) => {
   const removeComment = async (postId, commentId) => {
     try {
       const confirmDelete = window.confirm(
-        "Are you sure you want to delete this comment?"
+        "هل أنت متأكد أنك تريد حذف هذا التعليق؟"
       );
       if (!confirmDelete) return;
 
@@ -372,7 +372,7 @@ const Post = ({changeLanguage}) => {
 
       // مسح نص التعليق (ما إلها علاقة بالحذف، لكن بنخليها لو كان فيه input مفتوح)
       setCommentText((prev) => ({ ...prev, [postId]: "" }));
-      toast.success("Comment has been deleted successfully");
+      toast.success("تم حذف التعليق بنجاح");
     } catch (error) {
       console.error(
         "Failed to delete comment:",

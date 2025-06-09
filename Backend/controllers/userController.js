@@ -151,7 +151,7 @@ const SignUpUser = async (req, res) => {
 
     const IfExist = await SignUp.findOne({ Email });
 if(IfExist && IfExist.active == false){
-  return res.status(401).json({error:true, message:"Your account has been registered. Please activate it via email."})
+  return res.status(401).json({error:true, message:"تم تسجيل حسابك. يُرجى تفعيله عبر البريد الإلكتروني."})
 
 }
 
@@ -159,7 +159,7 @@ if(IfExist && IfExist.active == false){
     if (IfExist) {
       return res
         .status(401)
-        .json({ error: true, message: "User Already Exist" });
+        .json({ error: true, message: "المستخدم موجود بالفعل" });
     }
 
     const IfExistName = await SignUp.findOne({ Name });
@@ -167,7 +167,7 @@ if(IfExist && IfExist.active == false){
     if (IfExistName) {
       return res
         .status(401)
-        .json({ error: true, message: "Name Already Exist" });
+        .json({ error: true, message: "الاسم موجود بالفعل" });
     }
 
 
@@ -239,7 +239,7 @@ const Login = async (req, res) => {
   if (!user) {
     return res
       .status(404)
-      .json({ error: true, message: "Email doesnot exist " });
+      .json({ error: true, message: "البريد الإلكتروني غير موجود " });
   }
 
   console.log(user);
@@ -247,12 +247,12 @@ const Login = async (req, res) => {
 
 
 if(user.active==0){
-  return res.status(403).json({message:"you did not active your account"})
+  return res.status(403).json({message:"لم تقم بتفعيل حسابك"})
 }
 
 
 if (Password !== user.Password) {
-  return res.status(401).json({ error: true, message: "Password not match" });
+  return res.status(401).json({ error: true, message: "كلمة المرور غير متطابقة" });
 }
 
 
@@ -281,27 +281,27 @@ const ProfileInfo = async (req, res) => {
     if (!userID || !Age || !Address || !Phone || !Gender || !major || !username || !year) {
       return res
         .status(400)
-        .json({ error: true, message: "All Fields Required" });
+        .json({ error: true, message: "جميع الحقول مطلوبة" });
     }
 
     if (isNaN(Phone)) {
       return res.status(400).json({
         error: true,
-        message: "Phone must be a number",
+        message: "يجب أن يكون الهاتف رقمًا",
       });
     }
 
     if (isNaN(year)) {
       return res.status(400).json({
         error: true,
-        message: "First year must be a number",
+        message: "السنة الأولى يجب أن تكون رقمًا",
       });
     }
     
 
     // التحقق من وجود الملف
     if (!req.file) {
-      return res.status(400).json({ message: "No file uploaded    " });
+      return res.status(400).json({ message: "يرجى اضافة صورة شخصية   " });
     }
 
 
@@ -333,7 +333,7 @@ const ProfileInfo = async (req, res) => {
     const user = await SignUp.findById(userID)
 
     if (!updatedUser) {
-      return res.status(404).json({ error: true, message: "User Not Found" });
+      return res.status(404).json({ error: true, message: "لم يتم العثور على المستخدم" });
     }
 
     res.status(200).json({ error: false, message: "تم تحميل البيانات بنجاح", user , profileImage:result.secure_url });
@@ -354,7 +354,7 @@ const setProfile = async (req, res) => {
 
     
 if (!getProfile) {
-  return res.status(404).json({ error: true, message: "Profile not found" });
+  return res.status(404).json({ error: true, message: "لم يتم العثور على الملف الشخصي" });
 }
 
     res.status(200).json({ error: false, getProfile });
@@ -373,7 +373,7 @@ const getinfo = async (req, res) => {
     const user = jwt.verify(data, "dsadsadh");
 
     if (!user) {
-      return res.status(401).json({ message: "user not authenticated" });
+      return res.status(401).json({ message: "لم تتم مصادقة المستخدم" });
     }
 
 
@@ -399,12 +399,12 @@ const editProfile = async (req, res) => {
     // استخراج بيانات المستخدم من التوكن
     const data = req.headers.authorization?.split(" ")[1];
     if (!data) {
-      return res.status(401).json({ error: "true", message: "Missing token" });
+      return res.status(401).json({ error: "true", message: "رمز مفقود" });
     }
 
     const user = jwt.verify(data, "dsadsadh");
     if (!user) {
-      return res.status(401).json({ error: "true", message: "Invalid token" });
+      return res.status(401).json({ error: "true", message: "رمز غير صالح" });
     }
 
     console.log("Decoded User:", user);
@@ -412,12 +412,12 @@ const editProfile = async (req, res) => {
     // البحث عن الملف الشخصي
     const profile = await Profile.findById(req.params.id);
     if (!profile) {
-      return res.status(404).json({ message: "Profile not found" });
+      return res.status(404).json({ message: "لم يتم العثور على الملف الشخصي" });
     }
 
     // التحقق من ملكية الحساب
     if (profile.userID.toString() !== user.id) {
-      return res.status(403).json({ message: "You are not authorized" });
+      return res.status(403).json({ message: " غير مصرح لك" });
     }
 
 
@@ -493,30 +493,30 @@ const ResetPassword = async (req, res) => {
     const { id } = req.params;
 
     if (!oldPassword || !newPassword || !confirmPass) {
-      return res.status(400).json({ error: true, message: "All fields are required" });
+      return res.status(400).json({ error: true, message: "جميع الحقول مطلوبة" });
     }
 
     const user = await SignUp.findById(id); // أضف await هنا
 
     if (!user) {
-      return res.status(404).json({ error: true, message: "User not found" });
+      return res.status(404).json({ error: true, message: "لم يتم العثور على المستخدم" });
     }
 
     // التحقق من أن كلمة المرور القديمة صحيحة (بدون تشفير)
     if (user.Password !== oldPassword) {
-      return res.status(400).json({ error: true, message: "Wrong old password, please try again" });
+      return res.status(400).json({ error: true, message: "كلمة المرور القديمة خاطئة، يرجى المحاولة مرة أخرى" });
     }
 
     // التحقق من تطابق كلمتي المرور الجديدتين
     if (newPassword !== confirmPass) {
-      return res.status(400).json({ error: true, message: "Passwords do not match" });
+      return res.status(400).json({ error: true, message: "كلمات المرور غير متطابقة" });
     }
 
     // تحديث كلمة المرور مباشرة
     user.Password = newPassword;
     await user.save();
 
-    res.status(200).json({ success: true, message: "Password updated successfully" });
+    res.status(200).json({ success: true, message: "تم تحديث كلمة المرور بنجاح" });
 
   } catch (error) {
     console.error(error);
@@ -530,7 +530,7 @@ const showUser = async (req, res) => {
     const user = await SignUp.findById(userID);
 
     if (!user) {
-      return res.status(404).json({ error: true, message: "User not found" });
+      return res.status(404).json({ error: true, message: "لم يتم العثور على المستخدم" });
     }
 
     res.status(200).json({ error: false, user });
@@ -550,7 +550,7 @@ const editUser = async (req, res) => {
     const { Name, Email,admin,active } = req.body;
   
     if(!Name || !Email){
-      return res.status(400).json({error:true, message:"All fields are required"})
+      return res.status(400).json({error:true, message:"جميع الحقول مطلوبة"})
     }
   
     const updateUser = await SignUp.findByIdAndUpdate(id,
@@ -658,16 +658,6 @@ const Comment = async (req, res) => {
       "CommentEmail"
     );
 
-    // ✅ إنشاء إشعار جديد
-    const commenter = await SignUp.findById(userId); // احضر بيانات المستخدم المعلق
-
-    if (commenter) {
-      await Notification.create({
-        username: profile.username, // صاحب المنشور
-        profileImage: commenter.ImageUser || "", // صورة من قام بالتعليق
-        message: `${commenter.Name} commented on your post`,
-      });
-    }
 
     return res.status(201).json({ error: false, post, comment });
 

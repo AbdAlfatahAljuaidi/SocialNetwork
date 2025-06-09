@@ -26,7 +26,7 @@ const Active = ({changeLanguage}) => {
       setMessage(response.data.message);
       if(message==""){
         setLoadingMessages(false);
-        toast.success("Your account has been activated")
+        toast.success("لقد تم تفعيل حسابك")
       }
       navigate("/Home/Registration")
     } catch (err) {

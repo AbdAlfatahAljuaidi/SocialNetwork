@@ -3,6 +3,8 @@ const app = express();
 const cloudinary = require('../config/cloudinary');
 const Post = require('../models/Posts');
 const { Profile, ProfileValidation } = require("../models/Profile.js");
+const { SignUp, SignUpValidation } = require("../models/SignUp");
+const adminPost = require('../utils/AdminPost')
 
 
 const fs = require('fs');
@@ -75,8 +77,18 @@ if (containsBadWordArab) {
           await profile.save();
         }
 
-
-         
+        if (req.body.fromAdmin) {
+            const allUsers = await SignUp.find({}, 'Email Name'); // جلب الإيميل واسم المستخدم فقط
+      
+            for (const user of allUsers) {
+              adminPost(
+                user.Email,
+                user.Name,
+                'منشور جديد من إدارة المنصة. يمكنك التفاعل معه الآن.',
+                'AdminPost'
+              );
+            }
+          }     
 
         // console.log("📢 تم نشر بوست جديد، سيتم إرسال الإشعار الآن...");
         // broadcastNewPost(newPost); // ✅ إرسال الإشعار عبر WebSocket

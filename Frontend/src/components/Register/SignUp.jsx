@@ -35,18 +35,19 @@ const SignUp = ({ switchToLogin ,changeLanguage }) => {
             "new user created now you should go to your email to activate it"
           ) {
             console.log("user signup success");
-            toast.success("New user created now you should go to your email to activate it");
+            toast.success("تم إنشاء مستخدم جديد الآن يجب عليك الذهاب إلى بريدك الإلكتروني لتفعيله");
           }
         } catch (error) {
           console.log(error.response.data.message);
-          toast.error(error.response.data.message)
-          if (
-            error.response?.data?.message.includes("fails to match the required pattern")
-          ) {
+          if(error.response.data.message=="fails to match the required pattern"){
             toast.error(
-              "Password must include uppercase and lowercase letters, numbers, and symbols."
+              "يجب أن تتضمن كلمة المرور أحرفًا كبيرة وصغيرة وأرقامًا ورموزًا."
             );
+
           }
+
+          toast.error(error.response.data.message);
+        
           
         } finally {
           setIsSubmitting(false);
