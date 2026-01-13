@@ -2,9 +2,9 @@ const cloudinary = require('cloudinary').v2;  // استيراد مكتبة Cloud
 
 // إعدادات Cloudinary باستخدام البيانات التي حصلت عليها من لوحة التحكم
 cloudinary.config({
-  cloud_name: 'danvxvhvq',  // اسم السحابة الخاصة بك
-  api_key: '159292142687481',  // مفتاح API
-  api_secret: 'l5sz-EDILaVTduJ8tQnyTrX_NMc',  // السر الخاص بـ API
+  cloud_name: process.env.CLOUD_NAME,  // اسم السحابة الخاصة بك
+  api_key: process.env.API_KEY,  // مفتاح API
+  api_secret: process.env.API_SECRET,  // السر الخاص بـ API
 });
 
 module.exports = cloudinary;  // تصدير إعدادات Cloudinary لاستخدامها في الملفات الأخرى
